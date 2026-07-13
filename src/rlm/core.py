@@ -2,7 +2,7 @@
 
 import asyncio
 import re
-from typing import Optional, Dict, Any, List
+from typing import Optional, Dict, Any, List, cast
 
 import litellm
 
@@ -10,20 +10,24 @@ from .types import Message
 from .repl import REPLExecutor, REPLError
 from .prompts import build_system_prompt
 from .parser import parse_response, is_final
+from .stats import UsageTracker
 
 
 class RLMError(Exception):
     """Base error for RLM."""
+
     pass
 
 
 class MaxIterationsError(RLMError):
     """Max iterations exceeded."""
+
     pass
 
 
 class MaxDepthError(RLMError):
     """Max recursion depth exceeded."""
+
     pass
 
 
@@ -39,7 +43,8 @@ class RLM:
         max_depth: int = 5,
         max_iterations: int = 30,
         _current_depth: int = 0,
-        **llm_kwargs: Any
+        _usage_tracker: Optional[UsageTracker] = None,
+        **llm_kwargs: Any,
     ):
         """
         Initialize RLM.
@@ -52,6 +57,7 @@ class RLM:
             max_depth: Maximum recursion depth
             max_iterations: Maximum REPL iterations per call
             _current_depth: Internal current depth tracker
+            _usage_tracker: Internal statistics shared by recursive calls
             **llm_kwargs: Additional LiteLLM parameters
         """
         self.model = model
@@ -61,6 +67,7 @@ class RLM:
         self.max_depth = max_depth
         self.max_iterations = max_iterations
         self._current_depth = _current_depth
+        self._usage_tracker = _usage_tracker or UsageTracker()
         self.llm_kwargs = llm_kwargs
 
         self.repl = REPLExecutor()
@@ -69,12 +76,7 @@ class RLM:
         self._llm_calls = 0
         self._iterations = 0
 
-    def complete(
-        self,
-        query: str = "",
-        context: str = "",
-        **kwargs: Any
-    ) -> str:
+    def complete(self, query: str = "", context: str = "", **kwargs: Any) -> str:
         """
         Sync wrapper for acomplete.
 
@@ -103,12 +105,7 @@ class RLM:
 
         return asyncio.run(self.acomplete(query, context, **kwargs))
 
-    async def acomplete(
-        self,
-        query: str = "",
-        context: str = "",
-        **kwargs: Any
-    ) -> str:
+    async def acomplete(self, query: str = "", context: str = "", **kwargs: Any) -> str:
         """
         Main async complete method.
 
@@ -148,12 +145,13 @@ class RLM:
         system_prompt = build_system_prompt(len(context), self._current_depth)
         messages: List[Message] = [
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": query}
+            {"role": "user", "content": query},
         ]
 
         # Main loop
         for iteration in range(self.max_iterations):
             self._iterations = iteration + 1
+            self._usage_tracker.record_iteration()
 
             # Call LLM
             response = await self._call_llm(messages, **kwargs)
@@ -176,15 +174,9 @@ class RLM:
             messages.append({"role": "assistant", "content": response})
             messages.append({"role": "user", "content": exec_result})
 
-        raise MaxIterationsError(
-            f"Max iterations ({self.max_iterations}) exceeded without FINAL()"
-        )
+        raise MaxIterationsError(f"Max iterations ({self.max_iterations}) exceeded without FINAL()")
 
-    async def _call_llm(
-        self,
-        messages: List[Message],
-        **kwargs: Any
-    ) -> str:
+    async def _call_llm(self, messages: List[Message], **kwargs: Any) -> str:
         """
         Call LLM API.
 
@@ -201,24 +193,48 @@ class RLM:
         default_model = self.model if self._current_depth == 0 else self.recursive_model
 
         # Allow override via kwargs
-        model = kwargs.pop('model', default_model)
+        model = kwargs.pop("model", default_model)
+        self._usage_tracker.record_call(model, self._current_depth)
 
         # Merge kwargs
         call_kwargs = {**self.llm_kwargs, **kwargs}
         if self.api_base:
-            call_kwargs['api_base'] = self.api_base
+            call_kwargs["api_base"] = self.api_base
         if self.api_key:
-            call_kwargs['api_key'] = self.api_key
+            call_kwargs["api_key"] = self.api_key
 
         # Call LiteLLM
-        response = await litellm.acompletion(
-            model=model,
-            messages=messages,
-            **call_kwargs
+        response = await litellm.acompletion(model=model, messages=messages, **call_kwargs)
+
+        self._usage_tracker.record_response(
+            model,
+            response,
+            self._get_response_cost(response),
         )
 
         # Extract text
-        return response.choices[0].message.content
+        content = response.choices[0].message.content
+        if content is None:
+            raise RLMError("LLM response did not contain text content")
+        return cast(str, content)
+
+    @staticmethod
+    def _get_response_cost(response: Any) -> Optional[float]:
+        """Return LiteLLM's best-effort response cost without affecting completion."""
+        hidden_params = getattr(response, "_hidden_params", None)
+        if isinstance(hidden_params, dict):
+            response_cost = hidden_params.get("response_cost")
+            if isinstance(response_cost, (int, float)):
+                return float(response_cost)
+
+        try:
+            response_cost = litellm.completion_cost(completion_response=response)
+        except Exception:
+            return None
+
+        if isinstance(response_cost, (int, float)):
+            return float(response_cost)
+        return None
 
     def _build_repl_env(self, query: str, context: str) -> Dict[str, Any]:
         """
@@ -232,10 +248,10 @@ class RLM:
             Environment dict
         """
         env: Dict[str, Any] = {
-            'context': context,
-            'query': query,
-            'recursive_llm': self._make_recursive_fn(),
-            're': re,  # Whitelist re module
+            "context": context,
+            "query": query,
+            "recursive_llm": self._make_recursive_fn(),
+            "re": re,  # Whitelist re module
         }
         return env
 
@@ -246,6 +262,7 @@ class RLM:
         Returns:
             Async function that can be called from REPL
         """
+
         async def recursive_llm(sub_query: str, sub_context: str) -> str:
             """
             Recursively process sub-context.
@@ -269,7 +286,8 @@ class RLM:
                 max_depth=self.max_depth,
                 max_iterations=self.max_iterations,
                 _current_depth=self._current_depth + 1,
-                **self.llm_kwargs
+                _usage_tracker=self._usage_tracker,
+                **self.llm_kwargs,
             )
 
             return await sub_rlm.acomplete(sub_query, sub_context)
@@ -279,15 +297,13 @@ class RLM:
             """Sync wrapper for recursive_llm."""
             # Check if we're in an async context
             try:
-                loop = asyncio.get_running_loop()
+                asyncio.get_running_loop()
                 # We're in async context, but REPL is sync
                 # Create a new thread to run async code
                 import concurrent.futures
+
                 with concurrent.futures.ThreadPoolExecutor() as executor:
-                    future = executor.submit(
-                        asyncio.run,
-                        recursive_llm(sub_query, sub_context)
-                    )
+                    future = executor.submit(asyncio.run, recursive_llm(sub_query, sub_context))
                     return future.result()
             except RuntimeError:
                 # No running loop, safe to use asyncio.run
@@ -296,10 +312,10 @@ class RLM:
         return sync_recursive_llm
 
     @property
-    def stats(self) -> Dict[str, int]:
-        """Get execution statistics."""
-        return {
-            'llm_calls': self._llm_calls,
-            'iterations': self._iterations,
-            'depth': self._current_depth,
-        }
+    def stats(self) -> Dict[str, Any]:
+        """Get aggregate statistics for the full recursion tree."""
+        stats = self._usage_tracker.snapshot()
+        # Keep the original per-instance fields for backwards compatibility.
+        stats["iterations"] = self._iterations
+        stats["depth"] = self._current_depth
+        return stats
