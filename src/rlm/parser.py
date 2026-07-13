@@ -1,5 +1,6 @@
-"""Parse FINAL() and FINAL_VAR() statements from LLM responses."""
+"""Parse standalone FINAL() and FINAL_VAR() protocol directives."""
 
+import ast
 import re
 from typing import Optional, Dict, Any
 
@@ -14,18 +15,17 @@ def extract_final(response: str) -> Optional[str]:
     Returns:
         Extracted answer or None if not found
     """
-    # Look for FINAL("answer") or FINAL('answer')
-    patterns = [
-        r'FINAL\s*\(\s*"""(.*)"""',  # FINAL("""answer""") - triple double quotes
-        r"FINAL\s*\(\s*'''(.*)'''",  # FINAL('''answer''') - triple single quotes
-        r'FINAL\s*\(\s*"([^"]*)"',  # FINAL("answer") - double quotes
-        r"FINAL\s*\(\s*'([^']*)'",  # FINAL('answer') - single quotes
-    ]
+    match = re.fullmatch(r"\s*FINAL\s*\((.*)\)\s*", response, re.DOTALL)
+    if not match:
+        return None
 
-    for pattern in patterns:
-        match = re.search(pattern, response, re.DOTALL)
-        if match:
-            return match.group(1).strip()
+    try:
+        value = ast.literal_eval(match.group(1).strip())
+    except (SyntaxError, ValueError):
+        return None
+
+    if isinstance(value, str):
+        return value.strip()
 
     return None
 
@@ -42,7 +42,7 @@ def extract_final_var(response: str, env: Dict[str, Any]) -> Optional[str]:
         Variable value as string or None if not found
     """
     # Look for FINAL_VAR(var_name)
-    match = re.search(r'FINAL_VAR\s*\(\s*(\w+)\s*\)', response)
+    match = re.fullmatch(r"\s*FINAL_VAR\s*\(\s*(\w+)\s*\)\s*", response)
     if not match:
         return None
 
@@ -58,7 +58,7 @@ def extract_final_var(response: str, env: Dict[str, Any]) -> Optional[str]:
 
 def is_final(response: str) -> bool:
     """
-    Check if response contains FINAL() or FINAL_VAR().
+    Check if response is a standalone FINAL() or FINAL_VAR() directive.
 
     Args:
         response: LLM response text
@@ -66,7 +66,10 @@ def is_final(response: str) -> bool:
     Returns:
         True if response contains final statement
     """
-    return 'FINAL(' in response or 'FINAL_VAR(' in response
+    return bool(
+        re.fullmatch(r"\s*FINAL\s*\(.*\)\s*", response, re.DOTALL)
+        or re.fullmatch(r"\s*FINAL_VAR\s*\(\s*\w+\s*\)\s*", response)
+    )
 
 
 def parse_response(response: str, env: Dict[str, Any]) -> Optional[str]:

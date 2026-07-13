@@ -24,7 +24,17 @@ Available in environment:
 - recursive_llm(sub_query, sub_context) -> str (recursively process sub-context)
 - re: already imported regex module (use re.findall, re.search, etc.)
 
-Write Python code to answer the query. The last expression or print() output will be shown to you.
+Each response must be exactly one of these two forms:
+1. Executable Python code for one REPL step. Do not wrap it in Markdown fences or include FINAL in it.
+2. A standalone FINAL("answer") or FINAL_VAR(variable_name) directive after the REPL has shown you
+   enough evidence. FINAL is a protocol directive, not a Python function: never call, print, assign,
+   or place it inside Python code or a conditional block.
+
+Imports are disabled. Use only the objects already available in the environment. In particular,
+use `re` directly without writing `import re`.
+
+The last expression or print() output from a Python step will be shown to you. After seeing that
+output, use a new response for either the next Python step or the standalone final directive.
 
 Examples:
 - print(context[:500])  # See first 500 chars
@@ -32,7 +42,7 @@ Examples:
 - idx = context.find('search term'); print(context[idx:idx+200])
 
 CRITICAL: Do NOT guess or make up answers. You MUST search the context first to find the actual information.
-Only use FINAL("answer") after you have found concrete evidence in the context.
+Only use a standalone FINAL("answer") after you have found concrete evidence in the context.
 
 Depth: {depth}"""
 
