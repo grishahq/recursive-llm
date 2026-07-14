@@ -56,6 +56,12 @@ def extract_final_var(response: str, env: Dict[str, Any]) -> Optional[str]:
     return None
 
 
+def extract_final_var_name(response: str) -> Optional[str]:
+    """Return the variable name from a standalone FINAL_VAR directive."""
+    match = re.fullmatch(r"\s*FINAL_VAR\s*\(\s*(\w+)\s*\)\s*", response)
+    return match.group(1) if match else None
+
+
 def is_final(response: str) -> bool:
     """
     Check if response is a standalone FINAL() or FINAL_VAR() directive.

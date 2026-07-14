@@ -32,6 +32,7 @@ class UsageTracker:
         self._llm_calls = 0
         self._root_calls = 0
         self._recursive_calls = 0
+        self._leaf_calls = 0
         self._total_iterations = 0
         self._max_depth_reached = 0
         self._prompt_tokens = 0
@@ -61,7 +62,7 @@ class UsageTracker:
         with self._lock:
             self._total_iterations += 1
 
-    def record_call(self, model: str, depth: int) -> None:
+    def record_call(self, model: str, depth: int, *, is_leaf: bool = False) -> None:
         """Record an attempted model call."""
         with self._lock:
             self._llm_calls += 1
@@ -69,6 +70,8 @@ class UsageTracker:
                 self._root_calls += 1
             else:
                 self._recursive_calls += 1
+            if is_leaf:
+                self._leaf_calls += 1
             self._max_depth_reached = max(self._max_depth_reached, depth)
 
             model_stats = self._by_model.setdefault(model, self._empty_model_stats())
@@ -129,6 +132,7 @@ class UsageTracker:
                 "llm_calls": self._llm_calls,
                 "root_calls": self._root_calls,
                 "recursive_calls": self._recursive_calls,
+                "leaf_calls": self._leaf_calls,
                 "total_iterations": self._total_iterations,
                 "max_depth_reached": self._max_depth_reached,
                 "prompt_tokens": self._prompt_tokens,

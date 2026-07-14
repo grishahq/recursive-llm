@@ -96,6 +96,7 @@ def run_task(
     *,
     max_iterations: int,
     max_tokens: int,
+    trace: bool = False,
 ) -> Dict[str, Any]:
     """Run a task using the same model at every recursion depth."""
     rlm = RLM(
@@ -106,6 +107,15 @@ def run_task(
         max_tokens=max_tokens,
         num_retries=0,
     )
+    if trace:
+        original_call = rlm._call_llm
+
+        async def traced_call(messages: List[Dict[str, str]], **kwargs: Any) -> str:
+            response = await original_call(messages, **kwargs)
+            print(f"\n[depth={rlm._current_depth} response]\n{response}\n", flush=True)
+            return response
+
+        rlm._call_llm = traced_call  # type: ignore[method-assign]
 
     started = time.perf_counter()
     try:
@@ -137,12 +147,26 @@ def main() -> None:
         action="store_true",
         help="run the slower two-task suite instead of the default smoke test",
     )
+    parser.add_argument(
+        "--task",
+        choices=[task.name for task in FULL_TASKS],
+        help="run one named full-suite task",
+    )
+    parser.add_argument(
+        "--trace",
+        action="store_true",
+        help="print root-model responses for protocol debugging",
+    )
     args = parser.parse_args()
 
     load_dotenv()
-    tasks = FULL_TASKS if args.full else SMOKE_TASKS
-    max_iterations = 6 if args.full else 4
-    max_tokens = 2_000 if args.full else 1_000
+    if args.task:
+        tasks = tuple(task for task in FULL_TASKS if task.name == args.task)
+    else:
+        tasks = FULL_TASKS if args.full else SMOKE_TASKS
+    use_full_limits = args.full or args.task is not None
+    max_iterations = 6 if use_full_limits else 4
+    max_tokens = 4_000 if use_full_limits else 1_000
     results: List[Dict[str, Any]] = []
     for task in tasks:
         print(f"Running {args.model}: {task.name}", flush=True)
@@ -151,6 +175,7 @@ def main() -> None:
             task,
             max_iterations=max_iterations,
             max_tokens=max_tokens,
+            trace=args.trace,
         )
         results.append(result)
         print(
@@ -167,6 +192,7 @@ def main() -> None:
         "elapsed_seconds": round(sum(result["elapsed_seconds"] for result in results), 3),
         "llm_calls": sum(result["stats"]["llm_calls"] for result in results),
         "recursive_calls": sum(result["stats"]["recursive_calls"] for result in results),
+        "leaf_calls": sum(result["stats"].get("leaf_calls", 0) for result in results),
         "prompt_tokens": sum(result["stats"]["prompt_tokens"] for result in results),
         "completion_tokens": sum(result["stats"]["completion_tokens"] for result in results),
         "estimated_cost_usd": round(

@@ -2,7 +2,7 @@
 
 Python implementation of Recursive Language Models for processing unbounded context lengths.
 
-**Based on [the paper](https://alexzhang13.github.io/blog/2025/rlm/) by Alex Zhang and Omar Khattab (MIT, 2025)** | [arXiv](https://arxiv.org/abs/2512.24601)
+**Based on the [RLM paper](https://arxiv.org/abs/2512.24601) by Alex L. Zhang, Tim Kraska, and Omar Khattab** | [Official implementation](https://github.com/alexzhang13/rlm)
 
 
 ## What is RLM?
@@ -34,7 +34,7 @@ The LM can then peek, search, and recursively process the context adaptively.
 
 ```bash
 # Clone the repository
-git clone https://github.com/ysz/recursive-llm.git
+git clone https://github.com/grishahq/recursive-llm.git
 cd recursive-llm
 
 # Install in editable mode
@@ -57,16 +57,24 @@ pip install -e ".[dev]"
 ```python
 from rlm import RLM
 
-# Initialize with any LLM
-rlm = RLM(model="gpt-5-mini")
+def main():
+    # Initialize with any LLM
+    rlm = RLM(model="gpt-5-mini")
 
-# Process long context
-result = rlm.complete(
-    query="What are the main themes in this document?",
-    context=long_document
-)
-print(result)
+    # Process long context
+    result = rlm.complete(
+        query="What are the main themes in this document?",
+        context=long_document,
+    )
+    print(result)
+
+if __name__ == "__main__":
+    main()
 ```
+
+RLM uses a spawned worker process for isolated REPL execution. Executable Python scripts must use
+the standard `if __name__ == "__main__":` entry-point guard, as shown above. This is required by
+Python multiprocessing on spawn-based platforms; all repository examples follow this pattern.
 
 ### Usage and Cost Statistics
 
@@ -86,6 +94,7 @@ print(rlm.stats)
 #     "llm_calls": 11,
 #     "root_calls": 3,
 #     "recursive_calls": 8,
+#     "leaf_calls": 4,
 #     "prompt_tokens": 12500,
 #     "completion_tokens": 3200,
 #     "cached_tokens": 6000,
@@ -97,6 +106,7 @@ print(rlm.stats)
 # }
 ```
 
+Statistics are reset when a new root completion starts, so they describe the latest recursion tree.
 `estimated_cost_usd` is `None` when LiteLLM has no pricing metadata for any completed call. Compare
 `priced_calls` with `llm_calls` before treating the estimate as the full run cost.
 
@@ -190,7 +200,8 @@ async def main():
     result = await rlm.acomplete(query, context)
     print(result)
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
 ```
 
 ### Configuration
@@ -198,10 +209,50 @@ asyncio.run(main())
 ```python
 rlm = RLM(
     model="gpt-5-mini",
-    max_depth=5,         # Maximum recursion depth
-    max_iterations=20,   # Maximum REPL iterations
+    max_depth=2,                 # One child RLM level, then a plain-LM fallback
+    max_iterations=20,           # Maximum REPL iterations per RLM
+    repl_timeout=5,              # Hard timeout for each local Python step
+    max_output_chars=2000,       # Observation truncation limit
+    max_concurrent_subcalls=4,   # Bound batch concurrency
     # Optional LiteLLM params: temperature, timeout, etc.
 )
+```
+
+`max_depth` is an explicit constructor option so that runs remain reproducible. It is not read from
+an environment variable by the library. Applications may map their own configuration or environment
+variables to this argument.
+
+| `max_depth` | Behavior |
+| ---: | --- |
+| `0` | Root RLM and REPL only; no LM subcalls |
+| `1` (default) | Root RLM may call a plain LM |
+| `2` | Root RLM may create one child RLM; the child falls back to a plain LM |
+| `n` | Adds one child RLM level for every increment above `1` |
+
+This follows the paper's capability-based depth convention. The root RLM itself is depth `0` and is
+still valid when `max_depth=0`.
+
+### REPL Subcall API
+
+The model can use these functions from its persistent REPL:
+
+```python
+# One plain LM call, without another REPL loop
+llm_query("Extract the date", context[1000:2000])
+
+# Child RLM when depth permits; otherwise one plain-LM boundary call
+rlm_query("Analyze this section", context[2000:8000])
+
+# Ordered parallel calls, limited by max_concurrent_subcalls
+results = llm_query_batched(queries, chunks)
+```
+
+`recursive_llm` remains as a backward-compatible alias for `rlm_query`. A step can finish directly
+through `FINAL(...)`, `FINAL_VAR(...)`, or the mutable `answer` object:
+
+```python
+answer["content"] = result
+answer["ready"] = True
 ```
 
 ## How It Works
@@ -214,13 +265,19 @@ rlm = RLM(
    context[:1000]
 
    # Search with regex
-   import re
    re.findall(r'pattern', context)
 
-   # Recursive processing
-   recursive_llm("extract dates", context[1000:2000])
+   # Recursive processing with a plain-LM boundary fallback
+   rlm_query("extract dates", context[1000:2000])
    ```
-4. **Returns final answer** via `FINAL(answer)` statement
+4. **Returns the final answer** via a standalone `FINAL("answer")`, `FINAL_VAR(name)`, or `answer`
+   publication
+
+REPL variables persist between iterations. Each local step executes in an isolated subprocess, its
+final expression is evaluated exactly once, print output is isolated per step, and non-terminating
+local code is terminated by `repl_timeout`. Time spent waiting for model subcalls is not charged to
+the local Python timeout. Imports are limited to the already exposed `re`, `json`, `math`,
+`datetime`, and `collections` helpers; arbitrary modules remain blocked.
 
 ## Examples
 
@@ -250,43 +307,31 @@ On OOLONG benchmark (132k tokens):
 - GPT-5: baseline
 - RLM(GPT-5-Mini): **33% better than GPT-5** at similar cost
 
-### Our Benchmark Results
+### Reproducible Project Benchmark
 
-Tested with GPT-5-Mini on structured data queries (counting, filtering) across 5 different test cases:
-
-**60k token contexts:**
-- **RLM**: 80% accurate (4/5 correct)
-- **Direct OpenAI**: 0% accurate (0/5 correct, all returned approximations)
-
-RLM wins on accuracy. Both complete requests, but only RLM gives correct answers.
-
-**150k+ token contexts:**
-- **Direct OpenAI**: Fails (rate limit errors)
-- **RLM**: Works (processes 1M+ tokens successfully)
-
-**Token efficiency:** RLM uses ~2-3k tokens per query vs 95k+ for direct approach, since context is stored as a variable instead of being sent in prompts.
+`benchmarks/compare_same_model.py` contains deterministic structured contexts with exact expected
+answers. Use `--full` to run both tasks. Model outputs remain stochastic, so compare several runs
+before drawing quality conclusions; the script reports accuracy, latency, calls, tokens, and
+best-effort cost for every run.
 
 ## Development
 
 ```bash
 # Clone repository
-git clone https://github.com/ysz/recursive-llm.git
+git clone https://github.com/grishahq/recursive-llm.git
 cd recursive-llm
 
 # Install with dev dependencies
 pip install -e ".[dev]"
 
-# Run tests
-pytest tests/ -v
-
-# Run tests with coverage
-pytest tests/ -v --cov=src/rlm --cov-report=term-missing
+# Run tests, branch coverage, and the enforced coverage gate
+pytest
 
 # Type checking
 mypy src/rlm
 
 # Linting
-ruff check src/rlm
+ruff check src tests benchmarks examples
 
 # Format code
 black src/rlm tests examples
@@ -297,7 +342,7 @@ black src/rlm tests examples
 ```
 RLM
 ├── Core (async completion logic)
-├── REPL Executor (safe code execution via RestrictedPython)
+├── REPL Executor (restricted subprocess, persistent state, hard step timeout)
 ├── Prompt Builder (system prompts)
 └── Parser (extract FINAL() answers)
 ```
@@ -306,7 +351,7 @@ Built on top of LiteLLM for universal LLM support.
 
 ## Limitations
 
-- REPL execution is sequential (no parallel code execution yet)
+- Python REPL steps are sequential; explicit batched LM/RLM subcalls can run concurrently
 - No prefix caching (future enhancement)
 - Recursion depth is limited (configurable via `max_depth`)
 - No streaming support yet
@@ -346,7 +391,7 @@ Contributions welcome! Please:
 
 ## Citation
 
-This implementation is based on the RLM paper by Alex Zhang and Omar Khattab.
+This implementation is based on the RLM paper by Alex L. Zhang, Tim Kraska, and Omar Khattab.
 
 **To cite this implementation:**
 ```bibtex
@@ -354,7 +399,7 @@ This implementation is based on the RLM paper by Alex Zhang and Omar Khattab.
   title = {recursive-llm: Python Implementation of Recursive Language Models},
   author = {Gvadzabia, Grisha},
   year = {2025},
-  url = {https://github.com/ysz/recursive-llm}
+  url = {https://github.com/grishahq/recursive-llm}
 }
 ```
 
@@ -362,10 +407,9 @@ This implementation is based on the RLM paper by Alex Zhang and Omar Khattab.
 ```bibtex
 @misc{zhang2025rlm,
   title = {Recursive Language Models},
-  author = {Zhang, Alex and Khattab, Omar},
+  author = {Zhang, Alex L. and Kraska, Tim and Khattab, Omar},
   year = {2025},
-  month = {October},
-  url = {https://alexzhang13.github.io/blog/2025/rlm/},
+  url = {https://arxiv.org/abs/2512.24601},
   eprint = {2512.24601},
   archivePrefix = {arXiv}
 }
@@ -377,15 +421,16 @@ MIT License - see LICENSE file for details
 
 ## Acknowledgments
 
-Based on the Recursive Language Models paper by Alex Zhang and Omar Khattab from MIT CSAIL.
+Based on the Recursive Language Models paper by Alex L. Zhang, Tim Kraska, and Omar Khattab.
 
 Built using:
 - LiteLLM for universal LLM API support
-- RestrictedPython for safe code execution
+- RestrictedPython for restricted code execution
 
 ## Links
 
 - **Paper**: https://alexzhang13.github.io/blog/2025/rlm/
 - **arXiv**: https://arxiv.org/abs/2512.24601
+- **Official implementation**: https://github.com/alexzhang13/rlm
 - **LiteLLM Docs**: https://docs.litellm.ai/
-- **Issues**: https://github.com/ysz/recursive-llm/issues
+- **Issues**: https://github.com/grishahq/recursive-llm/issues

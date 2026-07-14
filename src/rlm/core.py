@@ -1,38 +1,49 @@
-"""Core RLM implementation."""
+"""Core Recursive Language Model implementation."""
+
+from __future__ import annotations
 
 import asyncio
+import concurrent.futures
 import re
-from typing import Optional, Dict, Any, List, cast
+from typing import Any, Callable, Coroutine, Dict, List, Optional, Sequence, TypeVar, cast
 
 import litellm
 
-from .types import Message
-from .repl import REPLExecutor, REPLError
+from .parser import extract_final, extract_final_var_name
 from .prompts import build_system_prompt
-from .parser import parse_response, is_final
+from .repl import REPLError, REPLExecutor
 from .stats import UsageTracker
+from .types import Message
 
 
 class RLMError(Exception):
     """Base error for RLM."""
 
-    pass
-
 
 class MaxIterationsError(RLMError):
-    """Max iterations exceeded."""
-
-    pass
+    """Maximum root or child RLM iterations exceeded."""
 
 
 class MaxDepthError(RLMError):
-    """Max recursion depth exceeded."""
+    """An invalid internal RLM depth was requested."""
 
-    pass
+
+T = TypeVar("T")
+
+
+def _run_sync(awaitable: Coroutine[Any, Any, T]) -> T:
+    """Run an awaitable from synchronous code, including inside a running loop."""
+    try:
+        asyncio.get_running_loop()
+    except RuntimeError:
+        return asyncio.run(awaitable)
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+        return executor.submit(lambda: asyncio.run(awaitable)).result()
 
 
 class RLM:
-    """Recursive Language Model."""
+    """Recursive Language Model with paper-aligned depth semantics."""
 
     def __init__(
         self,
@@ -40,179 +51,210 @@ class RLM:
         recursive_model: Optional[str] = None,
         api_base: Optional[str] = None,
         api_key: Optional[str] = None,
-        max_depth: int = 5,
+        max_depth: int = 1,
         max_iterations: int = 30,
+        repl_timeout: float = 5,
+        max_output_chars: int = 2000,
+        max_concurrent_subcalls: int = 4,
         _current_depth: int = 0,
         _usage_tracker: Optional[UsageTracker] = None,
         **llm_kwargs: Any,
-    ):
-        """
-        Initialize RLM.
+    ) -> None:
+        """Initialize an RLM.
 
-        Args:
-            model: Model name (e.g., "gpt-4o", "claude-sonnet-4", "ollama/llama3.2")
-            recursive_model: Optional cheaper model for recursive calls
-            api_base: Optional API base URL
-            api_key: Optional API key
-            max_depth: Maximum recursion depth
-            max_iterations: Maximum REPL iterations per call
-            _current_depth: Internal current depth tracker
-            _usage_tracker: Internal statistics shared by recursive calls
-            **llm_kwargs: Additional LiteLLM parameters
+        ``max_depth`` describes available subcall capability, not the number of
+        RLM objects. At depth 0 the root has a REPL but no subcalls. At depth 1
+        it can call a plain LM. At depth 2 it can create one child RLM, whose
+        boundary falls back to a plain LM call.
         """
+        if max_depth < 0:
+            raise ValueError("max_depth must be zero or greater")
+        if max_iterations <= 0:
+            raise ValueError("max_iterations must be greater than zero")
+        if repl_timeout <= 0:
+            raise ValueError("repl_timeout must be greater than zero")
+        if max_output_chars <= 0:
+            raise ValueError("max_output_chars must be greater than zero")
+        if max_concurrent_subcalls <= 0:
+            raise ValueError("max_concurrent_subcalls must be greater than zero")
+        if _current_depth < 0:
+            raise ValueError("_current_depth must be zero or greater")
+
         self.model = model
         self.recursive_model = recursive_model or model
         self.api_base = api_base
         self.api_key = api_key
         self.max_depth = max_depth
         self.max_iterations = max_iterations
+        self.repl_timeout = repl_timeout
+        self.max_output_chars = max_output_chars
+        self.max_concurrent_subcalls = max_concurrent_subcalls
         self._current_depth = _current_depth
         self._usage_tracker = _usage_tracker or UsageTracker()
         self.llm_kwargs = llm_kwargs
+        self._active_loop: Optional[asyncio.AbstractEventLoop] = None
 
-        self.repl = REPLExecutor()
-
-        # Stats
         self._llm_calls = 0
         self._iterations = 0
 
     def complete(self, query: str = "", context: str = "", **kwargs: Any) -> str:
-        """
-        Sync wrapper for acomplete.
-
-        Args:
-            query: User query (optional if query is in context)
-            context: Context to process (optional, can pass query here)
-            **kwargs: Additional LiteLLM parameters
-
-        Returns:
-            Final answer string
-
-        Examples:
-            # Standard usage
-            rlm.complete(query="Summarize this", context=document)
-
-            # Query in context (RLM will extract task)
-            rlm.complete(context="Summarize this document: ...")
-
-            # Single string (treat as context)
-            rlm.complete("Process this text and extract dates")
-        """
-        # If only one argument provided, treat it as context
-        if query and not context:
-            context = query
-            query = ""
-
-        return asyncio.run(self.acomplete(query, context, **kwargs))
+        """Synchronously complete a query over an external context."""
+        return _run_sync(self.acomplete(query, context, **kwargs))
 
     async def acomplete(self, query: str = "", context: str = "", **kwargs: Any) -> str:
-        """
-        Main async complete method.
-
-        Args:
-            query: User query (optional if query is in context)
-            context: Context to process (optional, can pass query here)
-            **kwargs: Additional LiteLLM parameters
-
-        Returns:
-            Final answer string
-
-        Raises:
-            MaxIterationsError: If max iterations exceeded
-            MaxDepthError: If max recursion depth exceeded
-
-        Examples:
-            # Explicit query and context
-            await rlm.acomplete(query="What is this?", context=doc)
-
-            # Query embedded in context
-            await rlm.acomplete(context="Extract all dates from: ...")
-
-            # LLM will figure out the task
-            await rlm.acomplete(context=document_with_instructions)
-        """
-        # If only query provided, treat it as context
+        """Complete a query through the root or a child RLM loop."""
         if query and not context:
             context = query
             query = ""
-        if self._current_depth >= self.max_depth:
-            raise MaxDepthError(f"Max recursion depth ({self.max_depth}) exceeded")
 
-        # Initialize REPL environment
+        if self._current_depth > 0 and self._current_depth >= self.max_depth:
+            raise MaxDepthError(
+                f"RLM depth {self._current_depth} is not available with max_depth={self.max_depth}"
+            )
+
+        if self._current_depth == 0:
+            self._usage_tracker = UsageTracker()
+            self._llm_calls = 0
+            self._iterations = 0
+
+        self._active_loop = asyncio.get_running_loop()
         repl_env = self._build_repl_env(query, context)
-
-        # Build initial messages
-        system_prompt = build_system_prompt(len(context), self._current_depth)
+        repl = REPLExecutor(timeout=self.repl_timeout, max_output_chars=self.max_output_chars)
+        system_prompt = build_system_prompt(
+            len(context),
+            depth=self._current_depth,
+            max_depth=self.max_depth,
+        )
         messages: List[Message] = [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": query},
         ]
 
-        # Main loop
-        for iteration in range(self.max_iterations):
-            self._iterations = iteration + 1
-            self._usage_tracker.record_iteration()
+        try:
+            for iteration in range(self.max_iterations):
+                self._iterations = iteration + 1
+                self._usage_tracker.record_iteration()
+                response = await self._call_llm(messages, **kwargs)
 
-            # Call LLM
-            response = await self._call_llm(messages, **kwargs)
+                if not response.strip():
+                    messages.append({"role": "assistant", "content": response})
+                    messages.append(
+                        {
+                            "role": "user",
+                            "content": (
+                                "Your response was empty. Return one short executable Python step "
+                                "or a standalone final directive."
+                            ),
+                        }
+                    )
+                    continue
 
-            # Check for FINAL
-            if is_final(response):
-                answer = parse_response(response, repl_env)
-                if answer is not None:
-                    return answer
+                direct_answer = extract_final(response)
+                if direct_answer is not None:
+                    return direct_answer
 
-            # Execute code in REPL
-            try:
-                exec_result = self.repl.execute(response, repl_env)
-            except REPLError as e:
-                exec_result = f"Error: {str(e)}"
-            except Exception as e:
-                exec_result = f"Unexpected error: {str(e)}"
+                final_var_name = extract_final_var_name(response)
+                if final_var_name is not None:
+                    try:
+                        found, value = await asyncio.to_thread(
+                            repl.get_variable, final_var_name
+                        )
+                    except REPLError:
+                        if final_var_name in repl_env:
+                            return str(repl_env[final_var_name])
+                    else:
+                        if found:
+                            return str(value)
+                    messages.append({"role": "assistant", "content": response})
+                    messages.append(
+                        {
+                            "role": "user",
+                            "content": f"Error: variable {final_var_name!r} was not found",
+                        }
+                    )
+                    continue
 
-            # Add to conversation
-            messages.append({"role": "assistant", "content": response})
-            messages.append({"role": "user", "content": exec_result})
+                try:
+                    exec_result = await asyncio.to_thread(repl.execute, response, repl_env)
+                    published_answer = repl.pop_final_answer()
+                    if published_answer is not None:
+                        return published_answer
+                except REPLError as exc:
+                    exec_result = f"Error: {exc}"
+                except Exception as exc:
+                    exec_result = f"Unexpected error: {exc}"
 
-        raise MaxIterationsError(f"Max iterations ({self.max_iterations}) exceeded without FINAL()")
+                messages.append({"role": "assistant", "content": response})
+                messages.append({"role": "user", "content": exec_result})
+        finally:
+            await asyncio.to_thread(repl.close)
+            self._active_loop = None
+
+        raise MaxIterationsError(
+            f"Max iterations ({self.max_iterations}) exceeded without a final answer"
+        )
 
     async def _call_llm(self, messages: List[Message], **kwargs: Any) -> str:
-        """
-        Call LLM API.
-
-        Args:
-            messages: Conversation messages
-            **kwargs: Additional parameters (can override model here)
-
-        Returns:
-            LLM response text
-        """
+        """Call the root or child RLM model and record its usage."""
         self._llm_calls += 1
-
-        # Choose model based on depth
         default_model = self.model if self._current_depth == 0 else self.recursive_model
-
-        # Allow override via kwargs
-        model = kwargs.pop("model", default_model)
+        model = cast(str, kwargs.get("model", default_model))
+        call_overrides = dict(kwargs)
+        call_overrides.pop("model", None)
         self._usage_tracker.record_call(model, self._current_depth)
+        response = await litellm.acompletion(
+            model=model,
+            messages=messages,
+            **self._completion_kwargs(call_overrides),
+        )
+        self._record_response(model, response)
+        return self._response_text(response)
 
-        # Merge kwargs
-        call_kwargs = {**self.llm_kwargs, **kwargs}
+    async def _call_leaf(
+        self,
+        sub_query: str,
+        sub_context: str = "",
+        model: Optional[str] = None,
+    ) -> str:
+        """Call a plain LM without creating another REPL loop."""
+        selected_model = model or self.recursive_model
+        user_content = sub_query
+        if sub_context:
+            user_content = f"Task:\n{sub_query}\n\nContext:\n{sub_context}"
+        messages: List[Message] = [
+            {
+                "role": "system",
+                "content": (
+                    "Answer the subproblem using only the supplied context. "
+                    "Return the answer directly and do not emit REPL code or FINAL directives."
+                ),
+            },
+            {"role": "user", "content": user_content},
+        ]
+        call_depth = self._current_depth + 1
+        self._usage_tracker.record_call(selected_model, call_depth, is_leaf=True)
+        response = await litellm.acompletion(
+            model=selected_model,
+            messages=messages,
+            **self._completion_kwargs({}),
+        )
+        self._record_response(selected_model, response)
+        return self._response_text(response)
+
+    def _completion_kwargs(self, overrides: Dict[str, Any]) -> Dict[str, Any]:
+        """Merge common provider arguments for one LiteLLM request."""
+        call_kwargs = {**self.llm_kwargs, **overrides}
         if self.api_base:
             call_kwargs["api_base"] = self.api_base
         if self.api_key:
             call_kwargs["api_key"] = self.api_key
+        return call_kwargs
 
-        # Call LiteLLM
-        response = await litellm.acompletion(model=model, messages=messages, **call_kwargs)
+    def _record_response(self, model: str, response: Any) -> None:
+        self._usage_tracker.record_response(model, response, self._get_response_cost(response))
 
-        self._usage_tracker.record_response(
-            model,
-            response,
-            self._get_response_cost(response),
-        )
-
-        # Extract text
+    @staticmethod
+    def _response_text(response: Any) -> str:
         content = response.choices[0].message.content
         if content is None:
             raise RLMError("LLM response did not contain text content")
@@ -226,96 +268,126 @@ class RLM:
             response_cost = hidden_params.get("response_cost")
             if isinstance(response_cost, (int, float)):
                 return float(response_cost)
-
         try:
             response_cost = litellm.completion_cost(completion_response=response)
         except Exception:
             return None
-
         if isinstance(response_cost, (int, float)):
             return float(response_cost)
         return None
 
     def _build_repl_env(self, query: str, context: str) -> Dict[str, Any]:
-        """
-        Build REPL environment.
-
-        Args:
-            query: User query
-            context: Context string
-
-        Returns:
-            Environment dict
-        """
+        """Build the names exposed to restricted Python code."""
         env: Dict[str, Any] = {
             "context": context,
             "query": query,
-            "recursive_llm": self._make_recursive_fn(),
-            "re": re,  # Whitelist re module
+            "answer": {"content": "", "ready": False},
+            "re": re,
         }
+        if self.max_depth == 0:
+            return env
+
+        llm_query = self._make_llm_query()
+        rlm_query = self._make_rlm_query()
+        env.update(
+            {
+                "llm_query": llm_query,
+                "rlm_query": rlm_query,
+                "recursive_llm": rlm_query,
+                "llm_query_batched": self._make_batched_query(llm_query),
+                "rlm_query_batched": self._make_batched_query(rlm_query),
+            }
+        )
         return env
 
-    def _make_recursive_fn(self) -> Any:
-        """
-        Create recursive LLM function for REPL.
+    def _make_llm_query(self) -> Callable[..., str]:
+        """Create the direct plain-LM function exposed in the REPL."""
 
-        Returns:
-            Async function that can be called from REPL
-        """
+        def llm_query(
+            sub_query: str,
+            sub_context: str = "",
+            model: Optional[str] = None,
+        ) -> str:
+            return self._run_callback(self._call_leaf(sub_query, sub_context, model))
 
-        async def recursive_llm(sub_query: str, sub_context: str) -> str:
-            """
-            Recursively process sub-context.
+        return llm_query
 
-            Args:
-                sub_query: Query for sub-context
-                sub_context: Sub-context to process
+    def _make_rlm_query(self) -> Callable[[str, str], str]:
+        """Create the recursive function with a plain-LM boundary fallback."""
 
-            Returns:
-                Answer from recursive call
-            """
+        async def call(sub_query: str, sub_context: str = "") -> str:
             if self._current_depth + 1 >= self.max_depth:
-                return f"Max recursion depth ({self.max_depth}) reached"
+                return await self._call_leaf(sub_query, sub_context)
 
-            # Create sub-RLM with increased depth
-            sub_rlm = RLM(
+            child = RLM(
                 model=self.recursive_model,
                 recursive_model=self.recursive_model,
                 api_base=self.api_base,
                 api_key=self.api_key,
                 max_depth=self.max_depth,
                 max_iterations=self.max_iterations,
+                repl_timeout=self.repl_timeout,
+                max_output_chars=self.max_output_chars,
+                max_concurrent_subcalls=self.max_concurrent_subcalls,
                 _current_depth=self._current_depth + 1,
                 _usage_tracker=self._usage_tracker,
                 **self.llm_kwargs,
             )
+            return await child.acomplete(sub_query, sub_context)
 
-            return await sub_rlm.acomplete(sub_query, sub_context)
+        def rlm_query(sub_query: str, sub_context: str = "") -> str:
+            return self._run_callback(call(sub_query, sub_context))
 
-        # Wrap in sync function for REPL compatibility
-        def sync_recursive_llm(sub_query: str, sub_context: str) -> str:
-            """Sync wrapper for recursive_llm."""
-            # Check if we're in an async context
-            try:
-                asyncio.get_running_loop()
-                # We're in async context, but REPL is sync
-                # Create a new thread to run async code
-                import concurrent.futures
+        return rlm_query
 
-                with concurrent.futures.ThreadPoolExecutor() as executor:
-                    future = executor.submit(asyncio.run, recursive_llm(sub_query, sub_context))
-                    return future.result()
-            except RuntimeError:
-                # No running loop, safe to use asyncio.run
-                return asyncio.run(recursive_llm(sub_query, sub_context))
+    def _make_batched_query(
+        self,
+        query_fn: Callable[[str, str], str],
+    ) -> Callable[[Sequence[str], Optional[Sequence[str]]], List[str]]:
+        """Create an ordered, bounded-concurrency batch wrapper."""
 
-        return sync_recursive_llm
+        async def run_batch(
+            queries: Sequence[str],
+            contexts: Optional[Sequence[str]],
+        ) -> List[str]:
+            query_list = list(queries)
+            context_list = list(contexts) if contexts is not None else [""] * len(query_list)
+            if len(query_list) != len(context_list):
+                raise ValueError("queries and contexts must have the same length")
+            semaphore = asyncio.Semaphore(self.max_concurrent_subcalls)
+
+            async def run_one(item_query: str, item_context: str) -> str:
+                async with semaphore:
+                    try:
+                        return await asyncio.to_thread(query_fn, item_query, item_context)
+                    except Exception as exc:
+                        return f"Error: {exc}"
+
+            return await asyncio.gather(
+                *(run_one(item_query, item_context) for item_query, item_context in zip(
+                    query_list, context_list
+                ))
+            )
+
+        def batched(
+            queries: Sequence[str],
+            contexts: Optional[Sequence[str]] = None,
+        ) -> List[str]:
+            return self._run_callback(run_batch(queries, contexts))
+
+        return batched
+
+    def _run_callback(self, awaitable: Coroutine[Any, Any, T]) -> T:
+        """Run a REPL callback on its owning completion loop when available."""
+        loop = self._active_loop
+        if loop is not None and loop.is_running():
+            return asyncio.run_coroutine_threadsafe(awaitable, loop).result()
+        return _run_sync(awaitable)
 
     @property
     def stats(self) -> Dict[str, Any]:
-        """Get aggregate statistics for the full recursion tree."""
+        """Return aggregate statistics for the latest full recursion tree."""
         stats = self._usage_tracker.snapshot()
-        # Keep the original per-instance fields for backwards compatibility.
         stats["iterations"] = self._iterations
         stats["depth"] = self._current_depth
         return stats
