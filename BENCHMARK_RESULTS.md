@@ -32,6 +32,84 @@ One live exact-grader smoke run per previously tested model also passed without 
 These smoke runs verify provider integration after retry accounting changed; they are not a new
 quality comparison because model trajectories are stochastic and each model ran only once.
 
+## Multi-document candidate experiments
+
+Three proposed changes were evaluated on July 17, 2026 with DeepSeek V4 Flash. The two model-facing
+candidates used the same three tasks, model, `max_depth=2`, 20-iteration limit, 24-call tree limit,
+300-second limit, and three repetitions per task. The baseline and each model-facing candidate
+therefore contain nine exact-graded runs. This sample is useful for rejecting clear regressions; it
+is not large enough to claim a universal model-quality improvement. The non-raising result API was
+evaluated separately because it does not change model behavior.
+
+The corpora were independently sourced and distributed the required evidence across each document:
+
+| Corpus | Prepared size | DeepSeek tokens | Task |
+| --- | ---: | ---: | --- |
+| Project Gutenberg *War and Peace* | 3,227,519 characters | 777,114 | Five facts from Petya's final-night sequence |
+| Official 9/11 Commission Report | 1,986,811 characters | 472,370 | Six facts split between the preface and intelligence reform section |
+| Official Python 3.14 text documentation | 14,626,944 characters | 3,479,078 | Four API facts from separate documentation files |
+
+| Configuration | Passed | p50 latency | Mean calls | Mean tokens | Mean cost | Verdict |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| Existing baseline | 6/9 | 62.686 s | 16.11 | 59,033 | $0.0024388 | Retained |
+| Bounded Unicode-aware search helper | 4/9 | 53.602 s | 16.33 | 70,741 | $0.0022753 | Reverted |
+| Repetition and near-budget progress guard | 4/9 | 65.269 s | 16.22 | 60,898 | $0.0024707 | Reverted |
+
+The search helper cut median latency but reduced the exact pass count from six to four and increased
+mean model-token use by 19.8%. A content-bearing diagnostic trace showed that the model first guessed
+the helper's result keys incorrectly, then replaced compact REPL searches with many small helper
+calls. The API was computationally fast after indexing—repeat searches took 0.4 to 5.8
+milliseconds—but the model interaction was worse, so the feature was not retained.
+
+The progress guard occasionally shortened successful runs to five or six calls, but it reduced the
+overall pass count from six to four, increased median latency by 4.1%, and increased mean token use
+by 3.2%. It was also reverted. These results argue for improving task planning or training data
+before adding generic model-facing controls.
+
+The third proposal, structured failed-run results, does not alter prompts, tools, or model control
+flow. It was retained because it turns the same failure into inspectable data without changing the
+quality path. Twenty paired samples of 5,000 mocked successful runs measured a median difference of
+-0.149 microseconds per run between `atry_complete_result` and `acomplete_result`, inside a measured
+noise range of -3.543 to +6.509 microseconds. Three live, deliberately one-iteration runs—one per
+corpus—each returned a typed `MaxIterationsError` record with exactly one counted provider call and
+continued to the next task.
+
+### Multi-document reproduction
+
+The inputs were fetched on July 17, 2026. The benchmark refuses artifacts whose hashes do not match
+the pinned values in `benchmarks/multi_document.py`.
+
+```bash
+mkdir -p /tmp/rlm-multi-document
+
+curl -L https://www.gutenberg.org/files/2600/2600-0.txt \
+  -o /tmp/rlm-multi-document/war-and-peace.txt
+
+curl -L https://www.govinfo.gov/content/pkg/GPO-911REPORT/pdf/GPO-911REPORT.pdf \
+  -o /tmp/rlm-multi-document/911-commission-report.pdf
+pdftotext -layout /tmp/rlm-multi-document/911-commission-report.pdf \
+  /tmp/rlm-multi-document/911-commission-report.txt
+
+curl -L https://docs.python.org/3.14/archives/python-3.14-docs-text.zip \
+  -o /tmp/rlm-multi-document/python-3.14-docs-text.zip
+
+python benchmarks/multi_document.py deepseek/deepseek-v4-flash \
+  /tmp/rlm-multi-document --runs 3 --label baseline --jsonl results.jsonl
+```
+
+Pinned prepared-artifact hashes are:
+
+```text
+war-and-peace.txt              e4bcf9042609b62c7de72a6f1b311f54c412943a9d641b7efcf79a464b5f31c8
+911-commission-report.pdf      657d41475eb3a9a5e3e87a6c7c51ac1dfbe1af7566d1abff7bf7286e7e1c0e1b
+911-commission-report.txt      33e5f373e542c58a872dde753caaf80e3c60c2b98c29c18898ae4590c9f4cfbe
+python-3.14-docs-text.zip      c8ee0347f282f97e5a57f0b010cecd441464db9fe679862f51aeda0dad12ab47
+```
+
+The PDF has 585 pages. Pages 1, 15, 429, and 432 were rendered and visually compared with the
+extracted text used by the grader. Poppler versions can produce different whitespace; if the text
+hash differs, inspect the extraction before deliberately updating the pin.
+
 ## Reproduction
 
 ```bash

@@ -134,12 +134,29 @@ character counts by default. Set `capture_trajectory_content=True` only when the
 allowed to contain that data. An optional `event_handler` receives events as they occur; handler
 failures do not interrupt model completion.
 
-If a completion raises an exception, `rlm.stats` and the read-only `rlm.trajectory` snapshot retain
-partial diagnostics for the latest run, including its terminal `run_error` event. As with
-`rlm.stats`, use a separate `RLM` instance per concurrent run when latest-run attribution matters.
+Use the non-raising result API when failed runs must be persisted or compared alongside successful
+runs:
 
-JSONL records always contain the returned final answer. Query, context, intermediate model
-responses, code, and REPL output follow the same redaction setting as the in-memory trajectory.
+```python
+run = rlm.try_complete_result(query="Summarize this", context=document)
+if run.succeeded:
+    print(run.answer)
+else:
+    print(run.error_type, run.error)
+
+# Success and failure records share the same versioned JSONL schema.
+run.write_jsonl("runs.jsonl")
+```
+
+`atry_complete_result` is the asynchronous equivalent. Ordinary run failures return a
+`FailedCompletionResult` with exact per-run statistics, secret-free configuration, and the complete
+partial trajectory, including its terminal `run_error` event. Cancellation and other process-control
+exceptions are not converted. The existing `complete`, `acomplete`, `complete_result`, and
+`acomplete_result` APIs keep their exception behavior.
+
+Completed JSONL records contain the final answer; failed records contain `answer: null` and a typed
+error. Query, context, intermediate model responses, code, and REPL output follow the same redaction
+setting as the in-memory trajectory.
 
 ### Live Model Comparison
 
@@ -176,6 +193,12 @@ python benchmarks/war_and_peace.py gpt-5-mini /tmp/war-and-peace-2600-0.txt
 python benchmarks/war_and_peace.py deepseek/deepseek-v4-flash \
     /tmp/war-and-peace-2600-0.txt
 ```
+
+`benchmarks/multi_document.py` extends this to three independently sourced large corpora: *War and
+Peace*, the official 9/11 Commission Report, and the official Python 3.14 text documentation. It
+verifies every prepared artifact by SHA-256 and uses exact labeled-field graders. Download and PDF
+extraction commands, hashes, task definitions, and measured candidate results are in
+[`BENCHMARK_RESULTS.md`](BENCHMARK_RESULTS.md).
 
 ## API Keys Setup
 

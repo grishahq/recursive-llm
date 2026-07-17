@@ -137,6 +137,7 @@ Thumbs.db
 benchmarks/*
 !benchmarks/compare_same_model.py
 !benchmarks/generated_long_context.py
+!benchmarks/multi_document.py
 !benchmarks/war_and_peace.py
 
 # Internal documentation (development notes, not for distribution)

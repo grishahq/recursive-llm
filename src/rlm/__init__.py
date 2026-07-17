@@ -10,7 +10,7 @@ from .errors import (
     RLMError,
 )
 from .repl import REPLError, REPLTimeoutError, WorkerResourceLimits
-from .results import CompletionResult, TrajectoryEvent
+from .results import CompletionResult, FailedCompletionResult, RunResult, TrajectoryEvent
 
 __version__ = "0.2.0"
 
@@ -23,6 +23,8 @@ __all__ = [
     "ProviderResponseError",
     "RunBudget",
     "CompletionResult",
+    "FailedCompletionResult",
+    "RunResult",
     "TrajectoryEvent",
     "REPLError",
     "REPLTimeoutError",

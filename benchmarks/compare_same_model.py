@@ -19,12 +19,12 @@ import statistics
 import time
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Callable, Dict, Iterable, List, Optional, Sequence, Tuple, cast
+from typing import Any, Callable, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple, cast
 
 import litellm
 from dotenv import load_dotenv
 
-from rlm import RLM
+from rlm import FailedCompletionResult, RLM
 from rlm.stats import UsageTracker
 
 try:
@@ -227,10 +227,26 @@ def run_task(
     max_elapsed_seconds: float,
     mode: str = "rlm",
     trace: bool = False,
+    rlm_options: Optional[Mapping[str, Any]] = None,
 ) -> Dict[str, Any]:
     """Run and deterministically grade one same-model RLM task."""
     if mode not in {"rlm", "direct"}:
         raise ValueError("mode must be 'rlm' or 'direct'")
+    controlled_options = {
+        "model",
+        "max_depth",
+        "max_iterations",
+        "max_total_calls",
+        "max_elapsed_seconds",
+        "capture_trajectory_content",
+        "max_retries",
+        "timeout",
+        "max_tokens",
+    }
+    conflicting_options = controlled_options.intersection(rlm_options or {})
+    if conflicting_options:
+        names = ", ".join(sorted(conflicting_options))
+        raise ValueError(f"rlm_options cannot override benchmark-controlled options: {names}")
     rlm: Optional[RLM] = None
     if mode == "rlm":
         rlm = RLM(
@@ -243,17 +259,23 @@ def run_task(
             max_retries=0,
             timeout=60,
             max_tokens=max_tokens,
+            **dict(rlm_options or {}),
         )
 
     started = time.perf_counter()
     trajectory: List[Dict[str, Any]] = []
     try:
         if rlm is not None:
-            completion = rlm.complete_result(query=task.query, context=task.context)
-            answer = completion.answer
+            completion = rlm.try_complete_result(query=task.query, context=task.context)
             stats = completion.stats
             if trace:
                 trajectory = [event.to_dict() for event in completion.trajectory]
+            if isinstance(completion, FailedCompletionResult):
+                answer = ""
+                error = f"{completion.error_type}: {completion.error}"
+            else:
+                answer = completion.answer
+                error = None
         else:
             answer, stats = _run_direct(
                 model,
@@ -261,7 +283,7 @@ def run_task(
                 max_tokens=max_tokens,
                 timeout=min(60.0, max_elapsed_seconds),
             )
-        error = None
+            error = None
     except Exception as exc:  # Keep later repetitions running after one failure.
         answer = ""
         stats = rlm.stats if rlm is not None else _empty_direct_stats()

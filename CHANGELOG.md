@@ -16,6 +16,10 @@ All notable changes to this project are documented in this file.
 - A SHA-pinned real-document benchmark over the public-domain English translation of *War and
   Peace*, with exact graders for structure, distant retrieval, and narrative evidence synthesis.
 - A read-only `RLM.trajectory` snapshot that preserves partial events from failed runs.
+- Non-raising `try_complete_result` and `atry_complete_result` APIs with typed, versioned failure
+  records and exact per-run diagnostics.
+- A SHA-pinned three-document benchmark covering a 3.2M-character novel, a 2.0M-character official
+  report, and a 14.6M-character documentation corpus.
 
 ### Changed
 
@@ -23,6 +27,7 @@ All notable changes to this project are documented in this file.
   explicit errors for malformed provider response structures.
 - Disabled hidden LiteLLM retries so every real retry is governed by tree-wide budgets.
 - Preserved content-bearing benchmark trajectories when a traced run raises an exception.
+- Updated the benchmark runner to consume success and failure results through one structured API.
 
 ## [0.2.0] - 2026-07-15
 

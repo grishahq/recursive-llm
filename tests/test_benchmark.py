@@ -19,7 +19,7 @@ from benchmarks.compare_same_model import (
     validate_incident_filter,
     validate_largest_value,
 )
-from rlm import CompletionResult
+from rlm import CompletionResult, FailedCompletionResult
 
 
 @pytest.mark.parametrize(
@@ -130,7 +130,7 @@ def test_run_task_uses_structured_result_and_task_specific_grader() -> None:
             self.kwargs = kwargs
             self.stats = {"llm_calls": 1, "estimated_cost_usd": 0.0}
 
-        def complete_result(self, **_kwargs):
+        def try_complete_result(self, **_kwargs):
             return CompletionResult(
                 answer="INC-003, INC-007, INC-009",
                 stats=self.stats,
@@ -152,6 +152,37 @@ def test_run_task_uses_structured_result_and_task_specific_grader() -> None:
 
     assert not result["passed"]
     assert result["validation_failures"] == ["missing explicit incident count 3"]
+
+
+def test_run_task_serializes_a_structured_failure() -> None:
+    """Expected RLM failures should become benchmark records without an exception fallback."""
+
+    class FakeRLM:
+        def __init__(self, **_kwargs):
+            self.stats = {"llm_calls": 99, "estimated_cost_usd": 99.0}
+
+        def try_complete_result(self, **_kwargs):
+            return FailedCompletionResult(
+                error_type="MaxIterationsError",
+                error="limit reached",
+                stats={"llm_calls": 3, "estimated_cost_usd": 0.1},
+                trajectory=(),
+            )
+
+    with patch("benchmarks.compare_same_model.RLM", FakeRLM):
+        result = run_task(
+            "model",
+            SMOKE_TASKS[0],
+            run_index=1,
+            max_depth=2,
+            max_iterations=4,
+            max_tokens=100,
+            max_total_calls=8,
+            max_elapsed_seconds=30,
+        )
+
+    assert result["error"] == "MaxIterationsError: limit reached"
+    assert result["stats"] == {"llm_calls": 3, "estimated_cost_usd": 0.1}
 
 
 def test_direct_mode_is_a_single_long_context_call() -> None:
@@ -180,6 +211,22 @@ def test_direct_mode_is_a_single_long_context_call() -> None:
     direct_prompt = call.call_args.kwargs["messages"][1]["content"]
     assert "ITEM-C value=11" in direct_prompt
     assert "recursive_llm" not in direct_prompt
+
+
+def test_run_task_rejects_overrides_of_controlled_options() -> None:
+    """Benchmark variants must not silently change common run limits."""
+    with pytest.raises(ValueError, match="benchmark-controlled options: max_depth"):
+        run_task(
+            "model",
+            SMOKE_TASKS[0],
+            run_index=1,
+            max_depth=2,
+            max_iterations=4,
+            max_tokens=1_000,
+            max_total_calls=24,
+            max_elapsed_seconds=300,
+            rlm_options={"max_depth": 3},
+        )
 
 
 def test_validation_result_is_immutable_and_tuple_backed() -> None:

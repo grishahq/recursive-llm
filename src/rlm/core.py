@@ -33,7 +33,7 @@ from .errors import (
 from .parser import extract_final, extract_final_var_name
 from .prompts import build_system_prompt
 from .repl import REPLError, REPLExecutor, WorkerResourceLimits
-from .results import CompletionResult, TrajectoryEvent
+from .results import CompletionResult, FailedCompletionResult, RunResult, TrajectoryEvent
 from .run_state import RunState
 from .stats import UsageTracker
 from .types import FinalAnswerValidator, Message
@@ -152,6 +152,10 @@ class RLM:
         """Synchronously return an answer with exact stats and trajectory."""
         return _run_sync(self.acomplete_result(query, context, **kwargs))
 
+    def try_complete_result(self, query: str = "", context: str = "", **kwargs: Any) -> RunResult:
+        """Synchronously return structured diagnostics for success or failure."""
+        return _run_sync(self.atry_complete_result(query, context, **kwargs))
+
     async def acomplete(self, query: str = "", context: str = "", **kwargs: Any) -> str:
         """Complete a query and return only its answer for compatibility."""
         result = await self.acomplete_result(query, context, **kwargs)
@@ -161,6 +165,24 @@ class RLM:
         self, query: str = "", context: str = "", **kwargs: Any
     ) -> CompletionResult:
         """Complete a query and return structured per-run diagnostics."""
+        result = await self._run_result(query, context, kwargs, return_failure=False)
+        return cast(CompletionResult, result)
+
+    async def atry_complete_result(
+        self, query: str = "", context: str = "", **kwargs: Any
+    ) -> RunResult:
+        """Complete a query without raising ordinary run failures."""
+        return await self._run_result(query, context, kwargs, return_failure=True)
+
+    async def _run_result(
+        self,
+        query: str,
+        context: str,
+        kwargs: Dict[str, Any],
+        *,
+        return_failure: bool,
+    ) -> RunResult:
+        """Execute one run and optionally convert ordinary failures to results."""
         if query and not context:
             context = query
             query = ""
@@ -202,6 +224,14 @@ class RLM:
                     node_id,
                     error_type=type(exc).__name__,
                     error=str(exc),
+                )
+            if return_failure and isinstance(exc, Exception):
+                return FailedCompletionResult(
+                    error_type=type(exc).__name__,
+                    error=str(exc),
+                    stats=self._stats_snapshot(run_state),
+                    trajectory=run_state.trajectory(),
+                    config=self._result_config(),
                 )
             raise
         else:

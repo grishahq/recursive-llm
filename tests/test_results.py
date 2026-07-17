@@ -6,7 +6,13 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from rlm import CompletionResult, MaxIterationsError, RLM, TrajectoryEvent
+from rlm import (
+    CompletionResult,
+    FailedCompletionResult,
+    MaxIterationsError,
+    RLM,
+    TrajectoryEvent,
+)
 
 
 class MockResponse:
@@ -178,6 +184,85 @@ async def test_latest_trajectory_includes_failed_run_events() -> None:
 
 
 @pytest.mark.asyncio
+async def test_try_result_returns_a_versioned_failed_run_without_raising(tmp_path) -> None:
+    """Ordinary run failures should preserve exact diagnostics in the common result API."""
+    rlm = RLM(model="test-model", max_iterations=1)
+
+    with patch("rlm.core.litellm.acompletion", return_value=MockResponse("print(context[:3])")):
+        result = await rlm.atry_complete_result("Sensitive query", "Sensitive context")
+
+    assert isinstance(result, FailedCompletionResult)
+    assert not result.succeeded
+    assert result.answer is None
+    assert result.error_type == "MaxIterationsError"
+    assert result.error == "Max iterations (1) exceeded without a final answer"
+    assert result.stats["llm_calls"] == 1
+    assert result.config["model"] == "test-model"
+    assert result.trajectory[-1].kind == "run_error"
+
+    output = tmp_path / "failed-runs.jsonl"
+    result.write_jsonl(output)
+    record = json.loads(output.read_text(encoding="utf-8"))
+    assert record["schema_version"] == 1
+    assert record["termination_reason"] == "failed"
+    assert record["answer"] is None
+    assert record["error"] == {
+        "type": "MaxIterationsError",
+        "message": "Max iterations (1) exceeded without a final answer",
+    }
+    serialized = json.dumps(record)
+    assert "Sensitive query" not in serialized
+    assert "Sensitive context" not in serialized
+
+
+@pytest.mark.asyncio
+async def test_try_result_preserves_the_success_result_type() -> None:
+    """The non-raising API should return the existing success type unchanged."""
+    with patch("rlm.core.litellm.acompletion", return_value=MockResponse('FINAL("answer")')):
+        result = await RLM(model="test-model").atry_complete_result("Test", "Context")
+
+    assert isinstance(result, CompletionResult)
+    assert result.succeeded
+    assert result.answer == "answer"
+
+
+@pytest.mark.asyncio
+async def test_try_result_does_not_convert_cancellation() -> None:
+    """Process-control exceptions must retain normal asyncio cancellation semantics."""
+    with patch(
+        "rlm.core.litellm.acompletion",
+        side_effect=asyncio.CancelledError,
+    ):
+        with pytest.raises(asyncio.CancelledError):
+            await RLM(model="test-model").atry_complete_result("Test", "Context")
+
+
+@pytest.mark.asyncio
+async def test_concurrent_try_results_keep_failure_stats_per_run() -> None:
+    """Concurrent success and failure results must not read the latest shared state."""
+
+    async def completion(*, messages, **_kwargs):
+        await asyncio.sleep(0.01)
+        if messages[1]["content"] == "fail":
+            return MockResponse("print(context[:1])")
+        return MockResponse('FINAL("ok")')
+
+    with patch("rlm.core.litellm.acompletion", side_effect=completion):
+        rlm = RLM(model="test-model", max_iterations=1)
+        failed, completed = await asyncio.gather(
+            rlm.atry_complete_result("fail", "Context"),
+            rlm.atry_complete_result("pass", "Context"),
+        )
+
+    assert isinstance(failed, FailedCompletionResult)
+    assert isinstance(completed, CompletionResult)
+    assert failed.stats["llm_calls"] == 1
+    assert completed.stats["llm_calls"] == 1
+    assert failed.trajectory[-1].kind == "run_error"
+    assert completed.trajectory[-1].kind == "run_end"
+
+
+@pytest.mark.asyncio
 async def test_concurrent_structured_results_have_exact_per_run_stats() -> None:
     """Structured results remove ambiguity from the latest-run stats property."""
 
@@ -208,3 +293,11 @@ def test_sync_structured_result_api_preserves_string_api() -> None:
 
     assert result.answer == "answer"
     assert answer == "answer"
+
+
+def test_sync_try_result_returns_a_failed_result() -> None:
+    """The synchronous non-raising wrapper should mirror the async API."""
+    with patch("rlm.core.litellm.acompletion", return_value=MockResponse("print(context[:1])")):
+        result = RLM(model="test-model", max_iterations=1).try_complete_result("Test", "Context")
+
+    assert isinstance(result, FailedCompletionResult)
