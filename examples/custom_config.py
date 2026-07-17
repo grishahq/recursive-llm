@@ -69,12 +69,12 @@ def custom_params_example():
         model="gpt-5-mini",
         max_iterations=15,
         max_depth=3,
+        max_retries=2,
         # Custom LiteLLM parameters
         temperature=0.8,
         max_tokens=500,
         top_p=0.9,
         timeout=30,
-        num_retries=2,
     )
 
     query = "Describe the storage configuration across all servers"

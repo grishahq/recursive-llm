@@ -2,7 +2,13 @@
 
 from .budget import RunBudget
 from .core import RLM
-from .errors import BudgetExceededError, MaxDepthError, MaxIterationsError, RLMError
+from .errors import (
+    BudgetExceededError,
+    MaxDepthError,
+    MaxIterationsError,
+    ProviderResponseError,
+    RLMError,
+)
 from .repl import REPLError, REPLTimeoutError, WorkerResourceLimits
 from .results import CompletionResult, TrajectoryEvent
 
@@ -14,6 +20,7 @@ __all__ = [
     "MaxIterationsError",
     "MaxDepthError",
     "BudgetExceededError",
+    "ProviderResponseError",
     "RunBudget",
     "CompletionResult",
     "TrajectoryEvent",

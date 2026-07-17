@@ -2,7 +2,7 @@
 
 import pytest
 from unittest.mock import MagicMock, patch
-from rlm import RLM, MaxIterationsError, MaxDepthError
+from rlm import MaxDepthError, MaxIterationsError, ProviderResponseError, RLM, RLMError
 
 
 class MockResponse:
@@ -349,6 +349,8 @@ def test_negative_max_depth_is_rejected(max_depth):
         {"repl_timeout": 0},
         {"max_output_chars": 0},
         {"max_concurrent_subcalls": 0},
+        {"max_retries": -1},
+        {"retry_backoff_seconds": -1},
         {"_current_depth": -1},
     ],
 )
@@ -401,12 +403,132 @@ def test_batched_queries_reject_mismatched_contexts():
         batched(["one", "two"], ["context"])
 
 
-def test_response_without_text_is_rejected():
-    """Test provider responses that contain no textual choice content."""
+def test_none_response_content_is_normalized():
+    """Test that a provider's null text content becomes an empty response."""
     response = MockResponse(None)
 
-    with pytest.raises(Exception, match="did not contain text"):
+    assert RLM._response_text(response) == ""
+
+
+@pytest.mark.parametrize(
+    "response",
+    [
+        {},
+        {"choices": []},
+        {"choices": [{}]},
+        {"choices": [{"message": {"content": 42}}]},
+    ],
+)
+def test_malformed_provider_responses_are_rejected(response):
+    """Test clear failures for provider payloads outside the text contract."""
+    with pytest.raises(ProviderResponseError):
         RLM._response_text(response)
+
+
+@pytest.mark.asyncio
+async def test_final_answer_validator_rejects_then_accepts(mock_litellm):
+    """Validator feedback should let the model repair a direct final answer."""
+    mock_litellm.side_effect = [MockResponse('FINAL("bad")'), MockResponse('FINAL("good")')]
+
+    def validator(answer):
+        return None if answer == "good" else "Answer must equal 'good'."
+
+    result = await RLM(
+        model="test-model",
+        final_answer_validator=validator,
+    ).acomplete_result("Test", "Context")
+
+    assert result.answer == "good"
+    assert result.stats["llm_calls"] == 2
+    second_messages = mock_litellm.call_args_list[1].kwargs["messages"]
+    assert "Answer must equal 'good'." in second_messages[-1]["content"]
+    kinds = [event.kind for event in result.trajectory]
+    assert "final_answer_rejected" in kinds
+    assert "final_answer_validated" in kinds
+    rejected = next(event for event in result.trajectory if event.kind == "final_answer_rejected")
+    assert "answer" not in rejected.data
+    assert rejected.data["answer_chars"] == 3
+    assert rejected.data["reason_chars"] == 25
+
+
+@pytest.mark.asyncio
+async def test_final_answer_validator_handles_worker_variables(mock_litellm):
+    """FINAL_VAR answers should use the same validation and repair loop."""
+    mock_litellm.side_effect = [
+        MockResponse("value = 'bad'"),
+        MockResponse("FINAL_VAR(value)"),
+        MockResponse("value = 'good'"),
+        MockResponse("FINAL_VAR(value)"),
+    ]
+
+    result = await RLM(
+        model="test-model",
+        final_answer_validator=lambda answer: None if answer == "good" else "Use good.",
+    ).acomplete_result("Test", "Context")
+
+    assert result.answer == "good"
+    assert result.stats["llm_calls"] == 4
+
+
+@pytest.mark.asyncio
+async def test_final_answer_validator_resets_rejected_answer_object(mock_litellm):
+    """A rejected answer publication must not remain ready in the REPL worker."""
+    mock_litellm.side_effect = [
+        MockResponse("answer['content'] = 'bad'; answer['ready'] = True"),
+        MockResponse("answer['content'] = 'good'; answer['ready'] = True"),
+    ]
+
+    result = await RLM(
+        model="test-model",
+        final_answer_validator=lambda answer: None if answer == "good" else "Use good.",
+    ).acomplete_result("Test", "Context")
+
+    assert result.answer == "good"
+    assert result.stats["llm_calls"] == 2
+
+
+@pytest.mark.asyncio
+async def test_final_answer_validator_failure_aborts_the_run(mock_litellm):
+    """Application validator bugs should be explicit rather than model feedback."""
+    mock_litellm.return_value = MockResponse('FINAL("answer")')
+
+    def validator(_answer):
+        raise RuntimeError("validator unavailable")
+
+    with pytest.raises(RLMError, match="validator failed"):
+        await RLM(model="test-model", final_answer_validator=validator).acomplete("Test", "Context")
+
+
+@pytest.mark.asyncio
+async def test_final_answer_validator_requires_actionable_feedback(mock_litellm):
+    """Validator return values must be unambiguous and useful to the model."""
+    mock_litellm.return_value = MockResponse('FINAL("answer")')
+
+    with pytest.raises(RLMError, match="non-empty string"):
+        await RLM(model="test-model", final_answer_validator=lambda _answer: "").acomplete(
+            "Test", "Context"
+        )
+
+
+@pytest.mark.asyncio
+async def test_root_final_answer_validator_is_not_inherited_by_child_rlms(mock_litellm):
+    """Root answer rules must not constrain differently shaped child answers."""
+    mock_litellm.side_effect = [
+        MockResponse("child = rlm_query('Child task', context)"),
+        MockResponse('FINAL("child answer")'),
+        MockResponse('FINAL("root answer")'),
+    ]
+
+    result = await RLM(
+        model="test-model",
+        max_depth=2,
+        final_answer_validator=lambda answer: (
+            None if answer == "root answer" else "Expected the root answer."
+        ),
+    ).acomplete_result("Test", "Context")
+
+    assert result.answer == "root answer"
+    assert result.stats["llm_calls"] == 3
 
 
 @pytest.mark.asyncio

@@ -123,6 +123,9 @@ print(result.answer)
 print(result.stats)
 for event in result.trajectory:
     print(event.kind, event.depth, event.node_id, event.parent_id)
+
+# Append one complete, versioned run record for later comparison
+result.write_jsonl("runs.jsonl")
 ```
 
 `acomplete_result` is the asynchronous equivalent. Trajectories include the complete root, child
@@ -130,6 +133,13 @@ RLM, and leaf-call tree. Query, context, model response, code, and output conten
 character counts by default. Set `capture_trajectory_content=True` only when the resulting logs are
 allowed to contain that data. An optional `event_handler` receives events as they occur; handler
 failures do not interrupt model completion.
+
+If a completion raises an exception, `rlm.stats` and the read-only `rlm.trajectory` snapshot retain
+partial diagnostics for the latest run, including its terminal `run_error` event. As with
+`rlm.stats`, use a separate `RLM` instance per concurrent run when latest-run attribution matters.
+
+JSONL records always contain the returned final answer. Query, context, intermediate model
+responses, code, and REPL output follow the same redaction setting as the in-memory trajectory.
 
 ### Live Model Comparison
 
@@ -155,6 +165,17 @@ best-effort cost. Task-specific graders require exact IDs, numeric boundaries, a
 counts rather than accepting arbitrary substrings. Live benchmarks make paid API calls and require
 the corresponding provider keys. `--trace` includes sensitive content-bearing trajectories in the
 JSON output and should be used deliberately.
+
+The repository also includes a SHA-pinned real-document benchmark over the public-domain English
+translation of *War and Peace*. The book itself is downloaded separately and is not committed:
+
+```bash
+curl -L https://www.gutenberg.org/files/2600/2600-0.txt \
+    -o /tmp/war-and-peace-2600-0.txt
+python benchmarks/war_and_peace.py gpt-5-mini /tmp/war-and-peace-2600-0.txt
+python benchmarks/war_and_peace.py deepseek/deepseek-v4-flash \
+    /tmp/war-and-peace-2600-0.txt
+```
 
 ## API Keys Setup
 
@@ -251,6 +272,8 @@ rlm = RLM(
     max_total_tokens=100_000,    # Stop after reported usage crosses this value
     max_total_cost_usd=0.10,     # Stop after reported cost crosses this value
     max_elapsed_seconds=300,     # Deadline shared by root and child calls
+    max_retries=2,                # Retry transient provider failures; default is 0
+    retry_backoff_seconds=1.0,   # Exponential retry delay; Retry-After is respected
     # Optional LiteLLM params: temperature, timeout, etc.
 )
 ```
@@ -260,6 +283,34 @@ subcalls. Token and cost limits are evaluated after each response because provid
 those values after generation; the crossing response is included in partial statistics attached to
 `BudgetExceededError`. A deadline also bounds in-flight provider requests. All limits are optional
 and are reset for each root completion.
+
+Retries are opt-in and share the same call and elapsed-time budgets as the rest of the recursion
+tree. Every retry is counted as a provider call and recorded in statistics and trajectories.
+RLM disables hidden LiteLLM retries to preserve exact accounting; configure `max_retries` on `RLM`
+instead of passing `num_retries` or `max_retries` as a LiteLLM option. Null provider content is
+normalized to an empty response so the existing repair iteration can recover, while malformed
+response structures fail with `ProviderResponseError` or use the bounded retry path when enabled.
+
+### Final Answer Validation
+
+Applications can reject a syntactically valid final answer and give deterministic feedback to the
+model without leaving the bounded run:
+
+```python
+def validate_answer(answer: str):
+    if not answer.startswith("count="):
+        return "Answer must start with 'count='."
+    return None
+
+rlm = RLM(
+    model="gpt-5-mini",
+    final_answer_validator=validate_answer,
+)
+```
+
+The validator returns `None` to accept an answer or a non-empty error string to reject it. Rejected
+answers and feedback are represented by lengths in redacted trajectories and by content only when
+`capture_trajectory_content=True`. Validator exceptions abort the run as application errors.
 
 `max_depth` is an explicit constructor option so that runs remain reproducible. It is not read from
 an environment variable by the library. Applications may map their own configuration or environment
@@ -373,6 +424,9 @@ answers. `benchmarks/generated_long_context.py` creates byte-reproducible transa
 seed, SHA-256 identity, and a computed answer key. Model outputs remain stochastic, so use `--runs`
 and compare pass rate plus p50/p95 latency before drawing quality conclusions. See
 [BENCHMARK_RESULTS.md](BENCHMARK_RESULTS.md) for the latest checked-in live comparison.
+
+`benchmarks/war_and_peace.py` adds exact chapter counting, distant fact retrieval, and narrative
+evidence synthesis over a verified 3.2-million-character real document.
 
 ## Development
 

@@ -2,6 +2,28 @@
 
 All notable changes to this project are documented in this file.
 
+## [Unreleased]
+
+### Added
+
+- Opt-in, budget-aware retries for transient provider failures with exponential backoff,
+  `Retry-After` support, exact retry statistics, and trajectory events.
+- Versioned JSONL export for structured completion results with secret-free run configuration.
+- Final-answer validation with deterministic model feedback and support for directives, REPL
+  variables, and mutable answer publication.
+- A reproducible 1M-character scale check with exact grading and live GPT-5 mini and DeepSeek V4
+  Flash results.
+- A SHA-pinned real-document benchmark over the public-domain English translation of *War and
+  Peace*, with exact graders for structure, distant retrieval, and narrative evidence synthesis.
+- A read-only `RLM.trajectory` snapshot that preserves partial events from failed runs.
+
+### Changed
+
+- Normalized null provider text content into the existing empty-response repair path and added
+  explicit errors for malformed provider response structures.
+- Disabled hidden LiteLLM retries so every real retry is governed by tree-wide budgets.
+- Preserved content-bearing benchmark trajectories when a traced run raises an exception.
+
 ## [0.2.0] - 2026-07-15
 
 ### Migration notes

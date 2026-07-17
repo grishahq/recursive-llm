@@ -2,9 +2,15 @@
 
 from __future__ import annotations
 
+import json
 from copy import deepcopy
-from dataclasses import dataclass
-from typing import Any, Dict, Tuple
+from dataclasses import dataclass, field
+from os import PathLike
+from pathlib import Path
+from typing import Any, Dict, Tuple, Union
+
+
+RESULT_SCHEMA_VERSION = 1
 
 
 @dataclass(frozen=True)
@@ -39,11 +45,27 @@ class CompletionResult:
     answer: str
     stats: Dict[str, Any]
     trajectory: Tuple[TrajectoryEvent, ...]
+    config: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         """Return a detached JSON-serializable representation."""
         return {
+            "schema_version": RESULT_SCHEMA_VERSION,
+            "termination_reason": "completed",
             "answer": self.answer,
             "stats": deepcopy(self.stats),
+            "config": deepcopy(self.config),
             "trajectory": [event.to_dict() for event in self.trajectory],
         }
+
+    def write_jsonl(
+        self,
+        path: Union[str, PathLike[str]],
+        *,
+        append: bool = True,
+    ) -> None:
+        """Write this completed run as one versioned UTF-8 JSONL record."""
+        mode = "a" if append else "w"
+        record = json.dumps(self.to_dict(), ensure_ascii=False, separators=(",", ":"))
+        with Path(path).open(mode, encoding="utf-8", newline="\n") as stream:
+            stream.write(record + "\n")

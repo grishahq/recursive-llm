@@ -9,6 +9,10 @@ class RLMError(Exception):
     """Base error for RLM."""
 
 
+class ProviderResponseError(RLMError):
+    """A provider returned a response that does not satisfy the text contract."""
+
+
 class MaxIterationsError(RLMError):
     """Maximum root or child RLM iterations exceeded."""
 

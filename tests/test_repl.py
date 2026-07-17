@@ -202,6 +202,17 @@ def test_answer_object_publishes_final_result(repl):
     assert repl.pop_final_answer() is None
 
 
+def test_rejected_answer_object_can_be_reset(repl):
+    """Resetting a publication should clear readiness in the persistent worker."""
+    env = {"answer": {"content": "", "ready": False}}
+    repl.execute("answer['content'] = 'bad'; answer['ready'] = True", env)
+
+    repl.reset_final_answer()
+    repl.execute("answer['content'] = 'good'", env)
+
+    assert repl.pop_final_answer() is None
+
+
 def test_hard_timeout_terminates_and_recovers():
     """Test that non-terminating local code is killed and the executor restarts."""
     executor = REPLExecutor(timeout=0.5)

@@ -6,19 +6,37 @@ import asyncio
 import concurrent.futures
 import re
 from threading import Lock
-from typing import Any, Callable, Coroutine, Dict, List, NoReturn, Optional, Sequence, TypeVar, cast
+from typing import (
+    Any,
+    Callable,
+    Coroutine,
+    Dict,
+    List,
+    NoReturn,
+    Optional,
+    Sequence,
+    Tuple,
+    TypeVar,
+    cast,
+)
 
 import litellm
 
 from .budget import RunBudget
-from .errors import BudgetExceededError, MaxDepthError, MaxIterationsError, RLMError
+from .errors import (
+    BudgetExceededError,
+    MaxDepthError,
+    MaxIterationsError,
+    ProviderResponseError,
+    RLMError,
+)
 from .parser import extract_final, extract_final_var_name
 from .prompts import build_system_prompt
 from .repl import REPLError, REPLExecutor, WorkerResourceLimits
 from .results import CompletionResult, TrajectoryEvent
 from .run_state import RunState
 from .stats import UsageTracker
-from .types import Message
+from .types import FinalAnswerValidator, Message
 
 T = TypeVar("T")
 
@@ -55,6 +73,9 @@ class RLM:
         max_total_tokens: Optional[int] = None,
         max_total_cost_usd: Optional[float] = None,
         max_elapsed_seconds: Optional[float] = None,
+        max_retries: int = 0,
+        retry_backoff_seconds: float = 1.0,
+        final_answer_validator: Optional[FinalAnswerValidator] = None,
         capture_trajectory_content: bool = False,
         event_handler: Optional[Callable[[TrajectoryEvent], None]] = None,
         _current_depth: int = 0,
@@ -80,8 +101,14 @@ class RLM:
             raise ValueError("max_output_chars must be greater than zero")
         if max_concurrent_subcalls <= 0:
             raise ValueError("max_concurrent_subcalls must be greater than zero")
+        if max_retries < 0:
+            raise ValueError("max_retries must be zero or greater")
+        if retry_backoff_seconds < 0:
+            raise ValueError("retry_backoff_seconds must be zero or greater")
         if _current_depth < 0:
             raise ValueError("_current_depth must be zero or greater")
+        if "num_retries" in llm_kwargs:
+            raise ValueError("Use RLM max_retries instead of LiteLLM num_retries")
 
         self.model = model
         self.recursive_model = recursive_model or model
@@ -101,6 +128,9 @@ class RLM:
         self.max_total_tokens = max_total_tokens
         self.max_total_cost_usd = max_total_cost_usd
         self.max_elapsed_seconds = max_elapsed_seconds
+        self.max_retries = max_retries
+        self.retry_backoff_seconds = retry_backoff_seconds
+        self.final_answer_validator = final_answer_validator
         self.capture_trajectory_content = capture_trajectory_content
         self.event_handler = event_handler
         self._current_depth = _current_depth
@@ -185,6 +215,7 @@ class RLM:
                 answer=answer,
                 stats=self._stats_snapshot(run_state),
                 trajectory=run_state.trajectory(),
+                config=self._result_config(),
             )
         finally:
             self._publish_run_state(run_state)
@@ -238,14 +269,13 @@ class RLM:
 
                 direct_answer = extract_final(response)
                 if direct_answer is not None:
-                    run_state.record_event(
-                        "final_answer",
-                        self._current_depth,
-                        node_id,
-                        method="directive",
-                        **self._content_data(answer=direct_answer),
+                    rejection = await self._process_final_answer(
+                        run_state, node_id, direct_answer, method="directive"
                     )
-                    return direct_answer
+                    if rejection is None:
+                        return direct_answer
+                    self._append_validation_feedback(messages, response, rejection)
+                    continue
 
                 final_var_name = extract_final_var_name(response)
                 if final_var_name is not None:
@@ -254,27 +284,31 @@ class RLM:
                     except REPLError:
                         if final_var_name in repl_env:
                             answer = str(repl_env[final_var_name])
-                            run_state.record_event(
-                                "final_answer",
-                                self._current_depth,
+                            rejection = await self._process_final_answer(
+                                run_state,
                                 node_id,
+                                answer,
                                 method="parent_snapshot",
                                 variable=final_var_name,
-                                **self._content_data(answer=answer),
                             )
-                            return answer
+                            if rejection is None:
+                                return answer
+                            self._append_validation_feedback(messages, response, rejection)
+                            continue
                     else:
                         if found:
                             answer = str(value)
-                            run_state.record_event(
-                                "final_answer",
-                                self._current_depth,
+                            rejection = await self._process_final_answer(
+                                run_state,
                                 node_id,
+                                answer,
                                 method="worker_variable",
                                 variable=final_var_name,
-                                **self._content_data(answer=answer),
                             )
-                            return answer
+                            if rejection is None:
+                                return answer
+                            self._append_validation_feedback(messages, response, rejection)
+                            continue
                     messages.append({"role": "assistant", "content": response})
                     messages.append(
                         {
@@ -289,14 +323,25 @@ class RLM:
                     self._record_repl_step(run_state, node_id, response, exec_result, status="ok")
                     published_answer = repl.pop_final_answer()
                     if published_answer is not None:
-                        run_state.record_event(
-                            "final_answer",
-                            self._current_depth,
+                        rejection = await self._process_final_answer(
+                            run_state,
                             node_id,
+                            published_answer,
                             method="answer_object",
-                            **self._content_data(answer=published_answer),
                         )
-                        return published_answer
+                        if rejection is None:
+                            return published_answer
+                        await asyncio.to_thread(repl.reset_final_answer)
+                        answer_object = repl_env.get("answer")
+                        if isinstance(answer_object, dict):
+                            answer_object["ready"] = False
+                        self._append_validation_feedback(
+                            messages,
+                            response,
+                            rejection,
+                            observation=exec_result,
+                        )
+                        continue
                 except REPLError as exc:
                     exec_result = f"Error: {exc}"
                     self._record_repl_step(
@@ -317,6 +362,86 @@ class RLM:
 
         raise MaxIterationsError(
             f"Max iterations ({self.max_iterations}) exceeded without a final answer"
+        )
+
+    async def _process_final_answer(
+        self,
+        run_state: RunState,
+        node_id: str,
+        answer: str,
+        *,
+        method: str,
+        variable: str = "",
+    ) -> Optional[str]:
+        """Record an accepted answer or return deterministic validator feedback."""
+        validator = self.final_answer_validator
+        event_data: Dict[str, Any] = {"method": method}
+        if variable:
+            event_data["variable"] = variable
+        rejection: Optional[str] = None
+        if validator is not None:
+            try:
+                rejection = await asyncio.to_thread(validator, answer)
+            except Exception as exc:
+                run_state.record_event(
+                    "final_answer_validation_error",
+                    self._current_depth,
+                    node_id,
+                    error_type=type(exc).__name__,
+                    error=str(exc),
+                    **event_data,
+                )
+                raise RLMError(f"Final-answer validator failed: {exc}") from exc
+
+            if rejection is not None and (not isinstance(rejection, str) or not rejection.strip()):
+                raise RLMError("Final-answer validator must return None or a non-empty string")
+        if rejection is None:
+            if validator is not None:
+                run_state.record_event(
+                    "final_answer_validated",
+                    self._current_depth,
+                    node_id,
+                    **event_data,
+                    **self._content_data(answer=answer),
+                )
+            run_state.record_event(
+                "final_answer",
+                self._current_depth,
+                node_id,
+                **event_data,
+                **self._content_data(answer=answer),
+            )
+            return None
+
+        rejection = rejection.strip()
+        run_state.record_event(
+            "final_answer_rejected",
+            self._current_depth,
+            node_id,
+            **event_data,
+            **self._content_data(answer=answer, reason=rejection),
+        )
+        return rejection
+
+    @staticmethod
+    def _append_validation_feedback(
+        messages: List[Message],
+        response: str,
+        rejection: str,
+        *,
+        observation: str = "",
+    ) -> None:
+        """Append deterministic validator feedback for the next model iteration."""
+        messages.append({"role": "assistant", "content": response})
+        prefix = f"{observation}\n\n" if observation else ""
+        messages.append(
+            {
+                "role": "user",
+                "content": (
+                    f"{prefix}Final answer rejected by validator: {rejection}\n"
+                    "Continue working and return a corrected final answer."
+                ),
+            }
         )
 
     def _content_data(self, **values: str) -> Dict[str, Any]:
@@ -417,48 +542,98 @@ class RLM:
         is_leaf: bool,
     ) -> str:
         """Execute and trace one root, recursive, or leaf model call."""
-        call_id = run_state.next_node_id("llm")
-        request_data: Dict[str, Any] = {
-            "model": model,
-            "is_leaf": is_leaf,
-            "message_count": len(messages),
-        }
-        if self.capture_trajectory_content:
-            request_data["messages"] = [dict(message) for message in messages]
-        else:
-            request_data["message_chars"] = sum(len(message["content"]) for message in messages)
-        run_state.record_event("model_call_start", depth, call_id, parent_node_id, **request_data)
-        try:
-            self._reserve_model_call(run_state, model, depth, is_leaf=is_leaf)
-            response = await self._request_completion(run_state, model, messages, overrides)
-            self._record_response(run_state, model, response)
-            text = self._response_text(response)
-        except BaseException as exc:
+        completion_kwargs = self._completion_kwargs(overrides)
+        max_attempts = self.max_retries + 1
+        for attempt_index in range(max_attempts):
+            call_id = run_state.next_node_id("llm")
+            request_data: Dict[str, Any] = {
+                "model": model,
+                "is_leaf": is_leaf,
+                "message_count": len(messages),
+                "attempt": attempt_index + 1,
+                "max_attempts": max_attempts,
+            }
+            if self.capture_trajectory_content:
+                request_data["messages"] = [dict(message) for message in messages]
+            else:
+                request_data["message_chars"] = sum(len(message["content"]) for message in messages)
             run_state.record_event(
-                "model_call_error",
+                "model_call_start", depth, call_id, parent_node_id, **request_data
+            )
+            try:
+                self._reserve_model_call(
+                    run_state,
+                    model,
+                    depth,
+                    is_leaf=is_leaf,
+                    is_retry=attempt_index > 0,
+                )
+                response = await self._request_completion(
+                    run_state, model, messages, completion_kwargs
+                )
+                self._record_response(run_state, model, response)
+                text, normalized_none = self._response_text_info(response)
+                if normalized_none:
+                    run_state.record_event(
+                        "provider_response_normalized",
+                        depth,
+                        call_id,
+                        parent_node_id,
+                        model=model,
+                        field="choices[0].message.content",
+                        normalized_to="empty_string",
+                    )
+            except BaseException as exc:
+                retrying = attempt_index < self.max_retries and self._is_retryable_error(exc)
+                run_state.record_event(
+                    "model_call_error",
+                    depth,
+                    call_id,
+                    parent_node_id,
+                    model=model,
+                    is_leaf=is_leaf,
+                    attempt=attempt_index + 1,
+                    retrying=retrying,
+                    error_type=type(exc).__name__,
+                    error=str(exc),
+                )
+                if not retrying:
+                    raise
+                delay = self._retry_delay_seconds(exc, attempt_index)
+                run_state.record_event(
+                    "model_retry",
+                    depth,
+                    call_id,
+                    parent_node_id,
+                    model=model,
+                    failed_attempt=attempt_index + 1,
+                    next_attempt=attempt_index + 2,
+                    delay_seconds=delay,
+                    error_type=type(exc).__name__,
+                )
+                await self._wait_for_retry(run_state, delay)
+                continue
+            run_state.record_event(
+                "model_call_end",
                 depth,
                 call_id,
                 parent_node_id,
                 model=model,
                 is_leaf=is_leaf,
-                error_type=type(exc).__name__,
-                error=str(exc),
+                attempt=attempt_index + 1,
+                **self._content_data(response=text),
             )
-            raise
-        run_state.record_event(
-            "model_call_end",
-            depth,
-            call_id,
-            parent_node_id,
-            model=model,
-            is_leaf=is_leaf,
-            **self._content_data(response=text),
-        )
-        return text
+            return text
+        raise AssertionError("unreachable")
 
     def _completion_kwargs(self, overrides: Dict[str, Any]) -> Dict[str, Any]:
         """Merge common provider arguments for one LiteLLM request."""
         call_kwargs = {**self.llm_kwargs, **overrides}
+        forbidden_retry_keys = {"max_retries", "num_retries"} & call_kwargs.keys()
+        if forbidden_retry_keys:
+            names = ", ".join(sorted(forbidden_retry_keys))
+            raise ValueError(f"Use RLM max_retries instead of LiteLLM retry options: {names}")
+        call_kwargs["num_retries"] = 0
         if self.api_base:
             call_kwargs["api_base"] = self.api_base
         if self.api_key:
@@ -470,7 +645,7 @@ class RLM:
         run_state: RunState,
         model: str,
         messages: List[Message],
-        overrides: Dict[str, Any],
+        completion_kwargs: Dict[str, Any],
     ) -> Any:
         """Make one provider request within the remaining run deadline."""
         remaining = run_state.budget.remaining_seconds()
@@ -478,18 +653,24 @@ class RLM:
             return await litellm.acompletion(
                 model=model,
                 messages=messages,
-                **self._completion_kwargs(overrides),
+                **completion_kwargs,
             )
         if remaining <= 0:
             self._check_budget_deadline(run_state)
-        awaitable = litellm.acompletion(
-            model=model,
-            messages=messages,
-            **self._completion_kwargs(overrides),
+        task = asyncio.ensure_future(
+            litellm.acompletion(
+                model=model,
+                messages=messages,
+                **completion_kwargs,
+            )
         )
         try:
-            return await asyncio.wait_for(awaitable, timeout=remaining)
+            return await asyncio.wait_for(task, timeout=remaining)
         except asyncio.TimeoutError as exc:
+            if task.done() and not task.cancelled():
+                provider_error = task.exception()
+                if provider_error is not None:
+                    raise provider_error
             self._raise_budget_error(
                 run_state,
                 BudgetExceededError(
@@ -507,13 +688,14 @@ class RLM:
         depth: int,
         *,
         is_leaf: bool = False,
+        is_retry: bool = False,
     ) -> None:
         """Reserve and record one provider request for the shared tree."""
         try:
             run_state.budget.reserve_call()
         except BudgetExceededError as exc:
             self._raise_budget_error(run_state, exc)
-        run_state.usage.record_call(model, depth, is_leaf=is_leaf)
+        run_state.usage.record_call(model, depth, is_leaf=is_leaf, is_retry=is_retry)
 
     def _check_budget_deadline(self, run_state: RunState) -> None:
         try:
@@ -566,11 +748,92 @@ class RLM:
             self._raise_budget_error(run_state, exc)
 
     @staticmethod
-    def _response_text(response: Any) -> str:
-        content = response.choices[0].message.content
+    def _response_text_info(response: Any) -> tuple[str, bool]:
+        """Return normalized response text and whether ``None`` became an empty string."""
+
+        def field(value: Any, name: str) -> Any:
+            if isinstance(value, dict):
+                return value.get(name)
+            return getattr(value, name, None)
+
+        choices = field(response, "choices")
+        if not isinstance(choices, Sequence) or isinstance(choices, (str, bytes)) or not choices:
+            raise ProviderResponseError("LLM response did not contain a non-empty choices list")
+        message = field(choices[0], "message")
+        if message is None:
+            raise ProviderResponseError("LLM response choice did not contain a message")
+        content = field(message, "content")
         if content is None:
-            raise RLMError("LLM response did not contain text content")
-        return cast(str, content)
+            return "", True
+        if not isinstance(content, str):
+            raise ProviderResponseError("LLM response text content must be a string or None")
+        return content, False
+
+    @staticmethod
+    def _response_text(response: Any) -> str:
+        """Return normalized text from a LiteLLM-compatible response."""
+        return RLM._response_text_info(response)[0]
+
+    @staticmethod
+    def _is_retryable_error(error: BaseException) -> bool:
+        """Return whether a provider failure is normally safe to retry."""
+        if isinstance(error, (BudgetExceededError, asyncio.CancelledError)):
+            return False
+        if isinstance(error, (ProviderResponseError, asyncio.TimeoutError)):
+            return True
+
+        retryable_litellm_names = (
+            "APIConnectionError",
+            "InternalServerError",
+            "RateLimitError",
+            "ServiceUnavailableError",
+            "Timeout",
+        )
+        for name in retryable_litellm_names:
+            exception_type = getattr(litellm, name, None)
+            if isinstance(exception_type, type) and isinstance(error, exception_type):
+                return True
+
+        status_code = getattr(error, "status_code", None)
+        response = getattr(error, "response", None)
+        if status_code is None and response is not None:
+            status_code = getattr(response, "status_code", None)
+        if not isinstance(status_code, (int, str)):
+            return False
+        try:
+            status = int(status_code)
+        except (TypeError, ValueError):
+            return False
+        return status in {408, 409, 425, 429} or status >= 500
+
+    def _retry_delay_seconds(self, error: BaseException, retry_index: int) -> float:
+        """Return exponential delay, respecting a numeric Retry-After header."""
+        delay: float = self.retry_backoff_seconds * (2**retry_index)
+        response = getattr(error, "response", None)
+        headers = getattr(error, "headers", None)
+        if headers is None and response is not None:
+            headers = getattr(response, "headers", None)
+        if headers is not None:
+            try:
+                retry_after = headers.get("Retry-After", headers.get("retry-after"))
+                delay = max(delay, float(retry_after)) if retry_after is not None else delay
+            except (AttributeError, TypeError, ValueError):
+                pass
+        return delay
+
+    async def _wait_for_retry(self, run_state: RunState, delay: float) -> None:
+        """Wait for a retry without allowing backoff to cross the run deadline."""
+        remaining = run_state.budget.remaining_seconds()
+        if remaining is not None and delay >= remaining:
+            limit = cast(float, run_state.budget.max_elapsed_seconds)
+            self._raise_budget_error(
+                run_state, BudgetExceededError("elapsed_seconds", limit, limit)
+            )
+        if delay > 0:
+            await asyncio.sleep(delay)
+        else:
+            await asyncio.sleep(0)
+        self._check_budget_deadline(run_state)
 
     @staticmethod
     def _get_response_cost(response: Any) -> Optional[float]:
@@ -679,6 +942,8 @@ class RLM:
                 max_total_tokens=self.max_total_tokens,
                 max_total_cost_usd=self.max_total_cost_usd,
                 max_elapsed_seconds=self.max_elapsed_seconds,
+                max_retries=self.max_retries,
+                retry_backoff_seconds=self.retry_backoff_seconds,
                 capture_trajectory_content=self.capture_trajectory_content,
                 event_handler=self.event_handler,
                 _current_depth=self._current_depth + 1,
@@ -749,6 +1014,33 @@ class RLM:
         with self._state_lock:
             run_state = self._last_run_state
         return self._stats_snapshot(run_state)
+
+    @property
+    def trajectory(self) -> Tuple[TrajectoryEvent, ...]:
+        """Return a detached trajectory for the latest run, including failed runs."""
+        with self._state_lock:
+            run_state = self._last_run_state
+        return run_state.trajectory()
+
+    def _result_config(self) -> Dict[str, Any]:
+        """Return a secret-free snapshot of public run configuration."""
+        return {
+            "model": self.model,
+            "recursive_model": self.recursive_model,
+            "max_depth": self.max_depth,
+            "max_iterations": self.max_iterations,
+            "repl_timeout": self.repl_timeout,
+            "max_output_chars": self.max_output_chars,
+            "max_concurrent_subcalls": self.max_concurrent_subcalls,
+            "max_total_calls": self.max_total_calls,
+            "max_total_tokens": self.max_total_tokens,
+            "max_total_cost_usd": self.max_total_cost_usd,
+            "max_elapsed_seconds": self.max_elapsed_seconds,
+            "max_retries": self.max_retries,
+            "retry_backoff_seconds": self.retry_backoff_seconds,
+            "capture_trajectory_content": self.capture_trajectory_content,
+            "final_answer_validator": self.final_answer_validator is not None,
+        }
 
     def _stats_snapshot(self, run_state: RunState) -> Dict[str, Any]:
         """Return current completion-tree statistics, including its budget."""

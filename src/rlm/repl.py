@@ -353,6 +353,12 @@ def _worker_main(
                 }
             )
             continue
+        if command == "reset_final_answer":
+            answer = env.get("answer")
+            if isinstance(answer, dict):
+                answer["ready"] = False
+            connection.send({"type": "final_answer_reset"})
+            continue
         if command != "execute":
             connection.send({"type": "error", "error": "Unknown REPL command"})
             continue
@@ -452,6 +458,16 @@ class REPLExecutor:
         answer = self._final_answer
         self._final_answer = None
         return answer
+
+    def reset_final_answer(self) -> None:
+        """Clear a rejected answer publication in the persistent worker."""
+        with self._lock:
+            connection = self._require_connection()
+            connection.send({"command": "reset_final_answer"})
+            message = self._wait_for_message(self.timeout)
+            if message.get("type") != "final_answer_reset":
+                raise REPLError("Invalid final-answer reset response from the REPL worker")
+            self._final_answer = None
 
     def close(self) -> None:
         """Stop the worker process and release its communication channel."""

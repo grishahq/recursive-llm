@@ -2,6 +2,8 @@
 
 from typing import Any, Callable, Dict, List, Optional, TypedDict
 
+FinalAnswerValidator = Callable[[str], Optional[str]]
+
 
 class Message(TypedDict):
     """LLM message format."""
@@ -29,6 +31,9 @@ class RLMConfig(TypedDict, total=False):
     max_total_tokens: Optional[int]
     max_total_cost_usd: Optional[float]
     max_elapsed_seconds: Optional[float]
+    max_retries: int
+    retry_backoff_seconds: float
+    final_answer_validator: Optional[FinalAnswerValidator]
     capture_trajectory_content: bool
     temperature: float
     timeout: int

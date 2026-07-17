@@ -240,9 +240,9 @@ def run_task(
             max_total_calls=max_total_calls,
             max_elapsed_seconds=max_elapsed_seconds,
             capture_trajectory_content=trace,
+            max_retries=0,
             timeout=60,
             max_tokens=max_tokens,
-            num_retries=0,
         )
 
     started = time.perf_counter()
@@ -265,6 +265,8 @@ def run_task(
     except Exception as exc:  # Keep later repetitions running after one failure.
         answer = ""
         stats = rlm.stats if rlm is not None else _empty_direct_stats()
+        if trace and rlm is not None:
+            trajectory = [event.to_dict() for event in rlm.trajectory]
         error = f"{type(exc).__name__}: {exc}"
     elapsed_seconds = time.perf_counter() - started
 

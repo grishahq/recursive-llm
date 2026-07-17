@@ -33,6 +33,7 @@ class UsageTracker:
         self._root_calls = 0
         self._recursive_calls = 0
         self._leaf_calls = 0
+        self._retry_calls = 0
         self._total_iterations = 0
         self._max_depth_reached = 0
         self._prompt_tokens = 0
@@ -48,6 +49,7 @@ class UsageTracker:
     def _empty_model_stats() -> Dict[str, Any]:
         return {
             "calls": 0,
+            "retry_calls": 0,
             "prompt_tokens": 0,
             "completion_tokens": 0,
             "total_tokens": 0,
@@ -62,7 +64,14 @@ class UsageTracker:
         with self._lock:
             self._total_iterations += 1
 
-    def record_call(self, model: str, depth: int, *, is_leaf: bool = False) -> None:
+    def record_call(
+        self,
+        model: str,
+        depth: int,
+        *,
+        is_leaf: bool = False,
+        is_retry: bool = False,
+    ) -> None:
         """Record an attempted model call."""
         with self._lock:
             self._llm_calls += 1
@@ -72,10 +81,14 @@ class UsageTracker:
                 self._recursive_calls += 1
             if is_leaf:
                 self._leaf_calls += 1
+            if is_retry:
+                self._retry_calls += 1
             self._max_depth_reached = max(self._max_depth_reached, depth)
 
             model_stats = self._by_model.setdefault(model, self._empty_model_stats())
             model_stats["calls"] += 1
+            if is_retry:
+                model_stats["retry_calls"] += 1
 
     def record_response(
         self,
@@ -133,6 +146,7 @@ class UsageTracker:
                 "root_calls": self._root_calls,
                 "recursive_calls": self._recursive_calls,
                 "leaf_calls": self._leaf_calls,
+                "retry_calls": self._retry_calls,
                 "total_iterations": self._total_iterations,
                 "max_depth_reached": self._max_depth_reached,
                 "prompt_tokens": self._prompt_tokens,

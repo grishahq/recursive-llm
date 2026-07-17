@@ -6,7 +6,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from rlm import CompletionResult, RLM, TrajectoryEvent
+from rlm import CompletionResult, MaxIterationsError, RLM, TrajectoryEvent
 
 
 class MockResponse:
@@ -76,6 +76,50 @@ async def test_trajectory_redacts_content_by_default() -> None:
 
 
 @pytest.mark.asyncio
+async def test_jsonl_export_is_versioned_redacted_and_appendable(tmp_path) -> None:
+    """Each exported line should be a complete, safe, versioned run record."""
+    with patch(
+        "rlm.core.litellm.acompletion",
+        side_effect=[MockResponse("x = context[:3]"), MockResponse('FINAL("answer")')],
+    ):
+        result = await RLM(model="test-model").acomplete_result(
+            "Sensitive query", "Sensitive context"
+        )
+
+    output = tmp_path / "runs.jsonl"
+    result.write_jsonl(output)
+    result.write_jsonl(output)
+
+    records = [json.loads(line) for line in output.read_text(encoding="utf-8").splitlines()]
+    assert len(records) == 2
+    record = records[0]
+    assert record["schema_version"] == 1
+    assert record["termination_reason"] == "completed"
+    assert record["answer"] == "answer"
+    assert record["config"]["model"] == "test-model"
+    assert record["config"]["capture_trajectory_content"] is False
+    assert record["config"]["final_answer_validator"] is False
+    serialized = json.dumps(record)
+    assert "Sensitive query" not in serialized
+    assert "Sensitive context" not in serialized
+
+
+@pytest.mark.asyncio
+async def test_jsonl_export_can_replace_an_existing_file(tmp_path) -> None:
+    """Explicit replacement should produce exactly one JSONL record."""
+    with patch("rlm.core.litellm.acompletion", return_value=MockResponse('FINAL("answer")')):
+        result = await RLM(model="test-model").acomplete_result("Test", "Context")
+
+    output = tmp_path / "runs.jsonl"
+    output.write_text("old record\n", encoding="utf-8")
+    result.write_jsonl(output, append=False)
+
+    records = output.read_text(encoding="utf-8").splitlines()
+    assert len(records) == 1
+    assert json.loads(records[0])["answer"] == "answer"
+
+
+@pytest.mark.asyncio
 async def test_content_capture_and_event_handler_are_explicit_opt_ins() -> None:
     """Opt-in diagnostics should include payloads and stream every event."""
     streamed = []
@@ -117,6 +161,20 @@ async def test_handler_failure_does_not_change_model_completion() -> None:
 
     assert result.answer == "answer"
     assert result.trajectory[-1].kind == "run_end"
+
+
+@pytest.mark.asyncio
+async def test_latest_trajectory_includes_failed_run_events() -> None:
+    """A failed run remains inspectable after its exception is raised."""
+    rlm = RLM(model="test-model", max_iterations=1, capture_trajectory_content=True)
+
+    with patch("rlm.core.litellm.acompletion", return_value=MockResponse("print(context[:3])")):
+        with pytest.raises(MaxIterationsError):
+            await rlm.acomplete_result("Test", "Sensitive context")
+
+    assert rlm.trajectory[-1].kind == "run_error"
+    repl_step = next(event for event in rlm.trajectory if event.kind == "repl_step")
+    assert repl_step.data["code"] == "print(context[:3])"
 
 
 @pytest.mark.asyncio
