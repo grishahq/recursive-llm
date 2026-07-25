@@ -58,8 +58,8 @@ The corpora were independently sourced and distributed the required evidence acr
 The search helper cut median latency but reduced the exact pass count from six to four and increased
 mean model-token use by 19.8%. A content-bearing diagnostic trace showed that the model first guessed
 the helper's result keys incorrectly, then replaced compact REPL searches with many small helper
-calls. The API was computationally fast after indexing—repeat searches took 0.4 to 5.8
-milliseconds—but the model interaction was worse, so the feature was not retained.
+calls. The API was computationally fast after indexing: repeat searches took 0.4 to 5.8
+milliseconds, but the model interaction was worse, so the feature was not retained.
 
 The progress guard occasionally shortened successful runs to five or six calls, but it reduced the
 overall pass count from six to four, increased median latency by 4.1%, and increased mean token use
@@ -70,8 +70,8 @@ The third proposal, structured failed-run results, does not alter prompts, tools
 flow. It was retained because it turns the same failure into inspectable data without changing the
 quality path. Twenty paired samples of 5,000 mocked successful runs measured a median difference of
 -0.149 microseconds per run between `atry_complete_result` and `acomplete_result`, inside a measured
-noise range of -3.543 to +6.509 microseconds. Three live, deliberately one-iteration runs—one per
-corpus—each returned a typed `MaxIterationsError` record with exactly one counted provider call and
+noise range of -3.543 to +6.509 microseconds. Three live, deliberately one-iteration runs, one per
+corpus, each returned a typed `MaxIterationsError` record with exactly one counted provider call and
 continued to the next task.
 
 ### Multi-document reproduction
