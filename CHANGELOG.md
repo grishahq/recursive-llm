@@ -4,7 +4,7 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
-## [0.3.0] - 2026-07-25
+## [0.3.0] - 2026-07-28
 
 ### Added
 
@@ -30,6 +30,7 @@ All notable changes to this project are documented in this file.
 - Disabled hidden LiteLLM retries so every real retry is governed by tree-wide budgets.
 - Preserved content-bearing benchmark trajectories when a traced run raises an exception.
 - Updated the benchmark runner to consume success and failure results through one structured API.
+- Pinned Ruff and made the stable baseline rules explicit for reproducible local and CI checks.
 
 ## [0.2.0] - 2026-07-15
 

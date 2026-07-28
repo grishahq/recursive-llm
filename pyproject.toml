@@ -35,7 +35,7 @@ dev = [
     "pytest-cov>=7.0.0",
     "coverage[toml]>=7.10.0",
     "black==25.11.0",
-    "ruff>=0.1.0",
+    "ruff==0.16.0",
     "mypy>=1.0.0,<2.0.0",
 ]
 
@@ -73,6 +73,9 @@ target-version = ['py39']
 [tool.ruff]
 line-length = 100
 target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
 
 [tool.mypy]
 python_version = "3.9"
