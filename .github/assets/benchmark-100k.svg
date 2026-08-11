@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">Direct versus RLM on a 100k-character exact aggregation task</title>
+  <desc id="description">GPT-5 mini direct used 37,928 tokens and passed zero of three runs, while RLM used 8,224 tokens and passed three of three. DeepSeek V4 Flash direct used 39,364 tokens and passed zero of three, while RLM used 15,209 tokens and passed two of three.</desc>
+  <rect width="1200" height="630" rx="28" fill="#0b1020"/>
+  <text x="72" y="82" fill="#f8fafc" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="700">100k-character exact aggregation</text>
+  <text x="72" y="122" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="20">Mean model tokens, with exact pass count from 3 live runs</text>
+
+  <line x1="300" y1="178" x2="1080" y2="178" stroke="#334155" stroke-width="2"/>
+  <line x1="300" y1="178" x2="300" y2="524" stroke="#334155" stroke-width="2"/>
+  <line x1="690" y1="178" x2="690" y2="524" stroke="#1e293b" stroke-width="1"/>
+  <line x1="1080" y1="178" x2="1080" y2="524" stroke="#1e293b" stroke-width="1"/>
+  <text x="300" y="160" text-anchor="middle" fill="#64748b" font-family="Inter, Arial, sans-serif" font-size="15">0</text>
+  <text x="690" y="160" text-anchor="middle" fill="#64748b" font-family="Inter, Arial, sans-serif" font-size="15">20k</text>
+  <text x="1080" y="160" text-anchor="middle" fill="#64748b" font-family="Inter, Arial, sans-serif" font-size="15">40k tokens</text>
+
+  <text x="72" y="232" fill="#e2e8f0" font-family="Inter, Arial, sans-serif" font-size="20">GPT-5 mini direct</text>
+  <rect x="300" y="202" width="740" height="42" rx="8" fill="#475569"/>
+  <text x="1024" y="230" text-anchor="end" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">37,928</text>
+  <text x="1094" y="230" fill="#f87171" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">0/3</text>
+
+  <text x="72" y="310" fill="#e2e8f0" font-family="Inter, Arial, sans-serif" font-size="20">GPT-5 mini RLM</text>
+  <rect x="300" y="280" width="160" height="42" rx="8" fill="#22c55e"/>
+  <text x="474" y="308" fill="#bbf7d0" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">8,224</text>
+  <text x="1094" y="308" fill="#4ade80" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">3/3</text>
+  <text x="474" y="332" fill="#86efac" font-family="Inter, Arial, sans-serif" font-size="15">78% fewer tokens</text>
+
+  <text x="72" y="410" fill="#e2e8f0" font-family="Inter, Arial, sans-serif" font-size="20">DeepSeek direct</text>
+  <rect x="300" y="380" width="768" height="42" rx="8" fill="#475569"/>
+  <text x="1052" y="408" text-anchor="end" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">39,364</text>
+  <text x="1094" y="408" fill="#f87171" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">0/3</text>
+
+  <text x="72" y="488" fill="#e2e8f0" font-family="Inter, Arial, sans-serif" font-size="20">DeepSeek RLM</text>
+  <rect x="300" y="458" width="297" height="42" rx="8" fill="#38bdf8"/>
+  <text x="611" y="486" fill="#bae6fd" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">15,209</text>
+  <text x="1094" y="486" fill="#4ade80" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">2/3</text>
+  <text x="611" y="510" fill="#7dd3fc" font-family="Inter, Arial, sans-serif" font-size="15">61% fewer tokens</text>
+
+  <text x="72" y="578" fill="#64748b" font-family="Inter, Arial, sans-serif" font-size="16">One generated corpus seed. Exact grader. July 15, 2026. Not a paper reproduction.</text>
+</svg>

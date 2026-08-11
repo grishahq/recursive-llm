@@ -1,5 +1,6 @@
 include CHANGELOG.md
 include SECURITY.md
 include BENCHMARK_RESULTS.md
+include .github/assets/benchmark-100k.svg
 recursive-include benchmarks *.py
 recursive-include examples *.py

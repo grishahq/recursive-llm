@@ -1,53 +1,94 @@
 # Recursive Language Models (RLM)
 
-Python implementation of Recursive Language Models for efficient long-context processing. Context
-stays in a Python REPL so models can inspect relevant parts and reduce token usage on large-context
-tasks.
+[![CI](https://github.com/grishahq/recursive-llm/actions/workflows/ci.yml/badge.svg)](https://github.com/grishahq/recursive-llm/actions/workflows/ci.yml)
+[![Python 3.9-3.12](https://img.shields.io/badge/python-3.9--3.12-3776AB.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Latest release](https://img.shields.io/github/v/release/grishahq/recursive-llm)](https://github.com/grishahq/recursive-llm/releases/latest)
 
-**Based on the [RLM paper](https://arxiv.org/abs/2512.24601) by Alex L. Zhang, Tim Kraska, and Omar Khattab** | [Official implementation](https://github.com/alexzhang13/rlm)
+Analyze large contexts with bounded cost and inspectable execution. Instead of placing the full
+source in model prompts, RLM keeps it in a restricted Python REPL, where the model can search,
+compute, partition, and send only selected sections to language-model calls.
 
+This is an independent Python implementation of the
+[Recursive Language Models paper](https://arxiv.org/abs/2512.24601), focused on practical library
+use: provider portability, tree-wide budgets, structured failures, reproducible benchmarks, and
+complete run trajectories.
 
-## What is RLM?
+[Quick start](#quick-start) | [Measured results](#measured-results) |
+[Configuration](#configuration) | [Security](SECURITY.md) |
+[Original implementation](https://github.com/alexzhang13/rlm)
 
-RLM enables language models to process extremely long contexts (100k+ tokens) by:
-- Storing context as a Python variable instead of in the prompt
-- Allowing the LM to recursively explore and partition the context
-- Using local search and computation to reduce model token usage on suitable long-context tasks
-- Avoiding "context rot" (performance degradation with long context)
+## Why use this implementation?
 
-Instead of this:
-```python
-llm.complete(prompt="Summarize this", context=huge_document)  # Context rot!
+| Capability | What it provides |
+| --- | --- |
+| Externalized context | Large source text stays in the REPL instead of being repeated in model prompts |
+| Bounded execution | Tree-wide limits for calls, tokens, estimated cost, elapsed time, and local execution |
+| Observable runs | Per-run statistics, typed failures, versioned JSONL records, and complete trajectories |
+| Provider portability | OpenAI, Anthropic, DeepSeek, local models, and other LiteLLM providers |
+| Reproducible evaluation | Exact graders, generated corpora, pinned public documents, and repeated live runs |
+| Restricted execution | Spawned RestrictedPython worker with hard timeouts and optional POSIX resource limits |
+
+## Measured results
+
+The exact 100k-character aggregation benchmark used one generated corpus seed and three live runs
+per configuration. On this task, RLM improved exact correctness while reducing model-token usage.
+
+![Direct and RLM results on the generated 100k-character benchmark](.github/assets/benchmark-100k.svg)
+
+| Model and mode | Exact passes | Mean model tokens | Mean estimated cost |
+| --- | ---: | ---: | ---: |
+| GPT-5 mini, direct | 0/3 | 37,928 | $0.0088788 |
+| GPT-5 mini, RLM | 3/3 | 8,224 | $0.0048132 |
+| DeepSeek V4 Flash, direct | 0/3 | 39,364 | $0.0012240 |
+| DeepSeek V4 Flash, RLM | 2/3 | 15,209 | $0.0010156 |
+
+These measurements are an engineering check, not a paper reproduction or a universal quality
+claim. Direct completion was faster and cheaper on short tasks. A separate 1M-character RLM scale
+check passed 6/6 exact-graded runs, but those runs used local REPL computation without child RLMs.
+See [BENCHMARK_RESULTS.md](BENCHMARK_RESULTS.md) for methodology, raw summaries, public-document
+experiments, limitations, and reproduction commands.
+
+## When to use RLM
+
+RLM is a good fit when:
+
+- the source is too large or too expensive to place in a normal model prompt;
+- the task benefits from search, filtering, exact counting, or local Python computation;
+- selected sections can be delegated to model calls instead of repeatedly sending the full source;
+- call, token, cost, and time limits must apply to the whole recursive run.
+
+Prefer direct completion when the context fits comfortably in the model window and the task is
+small. Semantic synthesis across long narrative text remains difficult and should be evaluated on
+your own data before production use.
+
+## Execution at a glance
+
+```text
+query -> root model -> Python REPL over full context -> selected chunks or child calls -> answer
+                       |                           |
+                       +-- local search/compute   +-- shared budgets and trajectory
 ```
 
-RLM does this:
-```python
-rlm = RLM(model="gpt-5-mini")
-result = rlm.complete(
-    query="Summarize this",
-    context=huge_document  # Stored as variable, not in prompt
-)
-```
-
-The LM can then peek, search, and recursively process the context adaptively.
+The root model receives the query and instructions, while the source is exposed as the `context`
+variable. REPL state persists across iterations. The model can inspect small regions, perform local
+computation, call a plain LM, or create a child RLM when the configured depth permits it.
 
 ## Installation
 
 **Note:** This package is not yet published to PyPI. Install from source:
 
 ```bash
-# Clone the repository
 git clone https://github.com/grishahq/recursive-llm.git
 cd recursive-llm
-
-# Install in editable mode
 pip install -e .
-
-# Or install with dev dependencies
-pip install -e ".[dev]"
 ```
 
-**Future:** Once published to PyPI, you'll be able to install with `pip install recursive-llm`
+Or install the current GitHub version directly:
+
+```bash
+pip install "recursive-llm @ git+https://github.com/grishahq/recursive-llm.git"
+```
 
 ## Requirements
 
@@ -57,22 +98,35 @@ pip install -e ".[dev]"
 
 ## Quick Start
 
+Set the provider key, create `quickstart.py`, and point it at a UTF-8 text file:
+
+```bash
+export OPENAI_API_KEY="sk-..."
+```
+
 ```python
+from pathlib import Path
+
 from rlm import RLM
 
+
 def main():
-    # Initialize with any LLM
     rlm = RLM(model="gpt-5-mini")
 
-    # Process long context
-    result = rlm.complete(
+    result = rlm.complete_result(
         query="What are the main themes in this document?",
-        context=long_document,
+        context=Path("document.txt").read_text(encoding="utf-8"),
     )
-    print(result)
+    print(result.answer)
+    print(result.stats)
+
 
 if __name__ == "__main__":
     main()
+```
+
+```bash
+python quickstart.py
 ```
 
 RLM uses a spawned worker process for isolated REPL execution. Executable Python scripts must use
