@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "recursive-llm"
-version = "0.3.1"
+version = "0.4.0"
 description = "Recursive Language Models for efficient long-context processing"
 authors = [{name = "Grigori Gvadzabia"}]
 readme = "README.md"

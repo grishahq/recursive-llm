@@ -4,6 +4,24 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-08-31
+
+### Added
+
+- A SHA-pinned exact-graded document benchmark covering a Project Gutenberg TXT book, the NIST AI
+  RMF Playbook in PDF and CSV forms, and the official Python sqlite3 HTML documentation.
+- A deterministic REPL snapshot IPC benchmark and structured Codex CLI verification schema.
+
+### Changed
+
+- Capped parent-side REPL state snapshots at 1 MB by default while preserving complete variables
+  in the persistent worker and explicit variable retrieval.
+
+### Fixed
+
+- Applied the shared elapsed-time budget to REPL exchanges and prevented answers completed by a
+  late final-answer validator from being accepted after the tree deadline.
+
 ## [0.3.1] - 2026-07-28
 
 ### Fixed
@@ -85,7 +103,8 @@ All notable changes to this project are documented in this file.
 
 - Initial public release.
 
-[Unreleased]: https://github.com/grishahq/recursive-llm/compare/v0.3.1...HEAD
+[Unreleased]: https://github.com/grishahq/recursive-llm/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/grishahq/recursive-llm/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/grishahq/recursive-llm/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/grishahq/recursive-llm/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/grishahq/recursive-llm/compare/v0.1.0...v0.2.0
