@@ -21,6 +21,8 @@ All notable changes to this project are documented in this file.
 
 - Applied the shared elapsed-time budget to REPL exchanges and prevented answers completed by a
   late final-answer validator from being accepted after the tree deadline.
+- Capped LiteLLM below 1.98.0 because that release imports Python 3.11-only typing symbols during
+  startup and breaks the supported Python 3.9 and 3.10 environments.
 
 ## [0.3.1] - 2026-07-28
 
