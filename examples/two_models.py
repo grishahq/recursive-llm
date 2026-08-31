@@ -14,7 +14,8 @@ Our company achieved record revenue of $500M in 2024, representing 25% year-over
 Net income reached $75M, with an operating margin of 18%.
 """
     + "\n\n"
-    + ("""
+    + (
+        """
 Quarterly Performance:
 Q1 2024: Revenue $110M, Net Income $15M
 Q2 2024: Revenue $120M, Net Income $18M
@@ -27,7 +28,9 @@ Department Breakdown:
 - Marketing: $100M revenue, 50 employees
 - Operations: $50M revenue, 100 employees
 
-""" * 50)
+"""
+        * 50
+    )
 )  # Repeat to make it very long
 
 

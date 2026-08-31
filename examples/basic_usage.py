@@ -8,7 +8,8 @@ from rlm import RLM
 load_dotenv()
 
 # Sample long document
-long_document = """
+long_document = (
+    """
 The History of Artificial Intelligence
 
 Introduction
@@ -39,7 +40,9 @@ These models have billions of parameters and are trained on vast amounts of text
 Conclusion
 AI continues to evolve rapidly, with applications in healthcare, transportation, education,
 and countless other domains. The future promises even more exciting developments.
-""" * 10  # Multiply to make it longer
+"""
+    * 10
+)  # Multiply to make it longer
 
 
 def main():
