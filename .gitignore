@@ -136,8 +136,11 @@ Thumbs.db
 # Benchmarks (ignore generated artifacts, keep reproducible scripts)
 benchmarks/*
 !benchmarks/compare_same_model.py
+!benchmarks/document_formats.py
+!benchmarks/codex_evaluation.schema.json
 !benchmarks/generated_long_context.py
 !benchmarks/multi_document.py
+!benchmarks/repl_snapshot.py
 !benchmarks/war_and_peace.py
 
 # Internal documentation (development notes, not for distribution)

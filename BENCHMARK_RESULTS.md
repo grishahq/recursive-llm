@@ -4,6 +4,19 @@ These live measurements were collected on July 15, 2026 with Python 3.12.13. The
 engineering check, not a paper reproduction. Provider behavior is stochastic, only one generated
 corpus seed was used, and prices are LiteLLM estimates.
 
+## TXT, PDF, CSV, and HTML evaluation
+
+An August 31, 2026 evaluation added a SHA-pinned four-format corpus, exact graders, a direct-model
+comparison, staged regression runs, and independent Codex CLI verification. GPT-5 mini passed all
+four baseline tasks in both modes. RLM used 78.2% fewer model tokens and 38.2% less estimated cost,
+while direct completion had 5.24x lower median latency. Two isolated implementation changes were
+retained: tree-wide deadline enforcement and a bounded REPL parent snapshot. Each primary live
+post-change run had one model-dependent failure, and each targeted retry passed; these single runs
+are therefore compatibility checks, not evidence of a quality improvement.
+
+See [DOCUMENT_EVALUATION.md](DOCUMENT_EVALUATION.md) for sources, hashes, commands, stage-by-stage
+results, rejected interpretations, and the implementation roadmap.
+
 ## Unreleased Reliability Validation
 
 The provider-retry, JSONL-export, and final-answer-validation changes were checked on July 16, 2026

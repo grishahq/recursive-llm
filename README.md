@@ -15,7 +15,8 @@ use: provider portability, tree-wide budgets, structured failures, reproducible 
 complete run trajectories.
 
 [Quick start](#quick-start) | [Measured results](#measured-results) |
-[Configuration](#configuration) | [Security](SECURITY.md) |
+[Document-format evaluation](DOCUMENT_EVALUATION.md) | [Configuration](#configuration) |
+[Security](SECURITY.md) |
 [Original implementation](https://github.com/alexzhang13/rlm)
 
 ## Why use this implementation?
@@ -48,6 +49,9 @@ claim. Direct completion was faster and cheaper on short tasks. A separate 1M-ch
 check passed 6/6 exact-graded runs, but those runs used local REPL computation without child RLMs.
 See [BENCHMARK_RESULTS.md](BENCHMARK_RESULTS.md) for methodology, raw summaries, public-document
 experiments, limitations, and reproduction commands.
+The separate [document-format evaluation](DOCUMENT_EVALUATION.md) compares RLM with direct
+completion on a SHA-pinned TXT book, PDF, CSV, and HTML documentation page and records two
+reliability/performance changes evaluated one at a time.
 
 ## When to use RLM
 
@@ -344,6 +348,7 @@ rlm = RLM(
     max_iterations=20,           # Maximum REPL iterations per RLM
     repl_timeout=5,              # Hard timeout for each local Python step
     max_output_chars=2000,       # Observation truncation limit
+    repl_max_snapshot_bytes=1_000_000,  # Parent-copy cap; full state stays in the worker
     max_concurrent_subcalls=4,   # Bound batch concurrency
     max_total_calls=24,          # Exact provider-call cap for the full recursion tree
     max_total_tokens=100_000,    # Stop after reported usage crosses this value
@@ -358,8 +363,11 @@ rlm = RLM(
 Call limits are reserved atomically before provider requests, including batched and recursive
 subcalls. Token and cost limits are evaluated after each response because providers only report
 those values after generation; the crossing response is included in partial statistics attached to
-`BudgetExceededError`. A deadline also bounds in-flight provider requests. All limits are optional
-and are reset for each root completion.
+`BudgetExceededError`. A deadline also bounds in-flight provider requests and REPL exchanges, and
+prevents a validator result completed after the deadline from being accepted. A synchronous
+validator cannot be forcibly stopped safely, so slow validator code can delay delivery of the
+resulting `BudgetExceededError`; validators should remain fast and independently bounded. All
+limits are optional and are reset for each root completion.
 
 Retries are opt-in and share the same call and elapsed-time budgets as the rest of the recursion
 tree. Every retry is counted as a provider call and recorded in statistics and trajectories.
@@ -449,6 +457,12 @@ final expression is evaluated exactly once, print output is isolated per step, a
 local code is terminated by `repl_timeout`. Time spent waiting for model subcalls is not charged to
 the local Python timeout. Imports are limited to the already exposed `re`, `json`, `math`,
 `datetime`, and `collections` helpers; arbitrary modules remain blocked.
+
+Ordinary user variables are copied back to the parent after each step only up to
+`repl_max_snapshot_bytes` (1 MB by default), preferring smaller values. Larger values remain intact
+in the persistent worker and are still available to later code and `FINAL_VAR`; the cap avoids
+repeatedly serializing large intermediate lists or strings. Increase the limit only when an
+application directly depends on the parent-side compatibility snapshot.
 
 POSIX deployments may also opt in to worker-process limits:
 

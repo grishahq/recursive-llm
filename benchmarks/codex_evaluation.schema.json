@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "variant": {"type": "string"},
+    "unit_tests_passed": {"type": "boolean"},
+    "unit_test_summary": {"type": "string"},
+    "benchmark_records_valid": {"type": "boolean"},
+    "benchmark_passed": {"type": "integer"},
+    "benchmark_runs": {"type": "integer"},
+    "findings": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  },
+  "required": [
+    "variant",
+    "unit_tests_passed",
+    "unit_test_summary",
+    "benchmark_records_valid",
+    "benchmark_passed",
+    "benchmark_runs",
+    "findings"
+  ],
+  "additionalProperties": false
+}
