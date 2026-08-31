@@ -121,6 +121,49 @@ async def test_elapsed_budget_cancels_an_in_flight_provider_request() -> None:
     assert raised.value.stats["llm_calls"] == 1
 
 
+@pytest.mark.asyncio
+async def test_elapsed_budget_rejects_answer_finished_by_late_validator() -> None:
+    """A validator result completed after the tree deadline must not be accepted."""
+
+    def slow_validator(_answer: str):
+        time.sleep(0.08)
+        return None
+
+    with patch("rlm.core.litellm.acompletion", return_value=MockResponse('FINAL("late")')):
+        rlm = RLM(
+            model="test-model",
+            max_elapsed_seconds=0.03,
+            final_answer_validator=slow_validator,
+        )
+        with pytest.raises(BudgetExceededError) as raised:
+            await rlm.acomplete("Test", "Context")
+
+    assert raised.value.metric == "elapsed_seconds"
+    assert raised.value.stats is not None
+
+
+@pytest.mark.asyncio
+async def test_elapsed_budget_caps_repl_execution_by_remaining_tree_time() -> None:
+    """A long local step must use the remaining tree deadline, not only repl_timeout."""
+    with patch(
+        "rlm.core.litellm.acompletion",
+        return_value=MockResponse("while True: pass"),
+    ):
+        rlm = RLM(
+            model="test-model",
+            max_iterations=2,
+            repl_timeout=2,
+            max_elapsed_seconds=0.15,
+        )
+        started = time.monotonic()
+        with pytest.raises(BudgetExceededError) as raised:
+            await rlm.acomplete("Test", "Context")
+
+    assert time.monotonic() - started < 1
+    assert raised.value.metric == "elapsed_seconds"
+    assert raised.value.stats is not None
+
+
 def test_elapsed_budget_uses_a_monotonic_deadline() -> None:
     """Elapsed time is checked against a monotonic clock."""
     with patch("rlm.budget.time.monotonic", side_effect=[10.0, 11.01]):

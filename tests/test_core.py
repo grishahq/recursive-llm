@@ -347,6 +347,7 @@ def test_negative_max_depth_is_rejected(max_depth):
     [
         {"max_iterations": 0},
         {"repl_timeout": 0},
+        {"repl_max_snapshot_bytes": 0},
         {"max_output_chars": 0},
         {"max_concurrent_subcalls": 0},
         {"max_retries": -1},

@@ -249,17 +249,34 @@ def _make_callback_proxy(connection: Connection, name: str) -> Callable[..., Any
 
 
 def _snapshot_environment(
-    env: Dict[str, Any], callback_names: Set[str], runtime_names: Set[str]
-) -> Dict[str, Any]:
-    """Copy ordinary user variables back to the parent process."""
+    env: Dict[str, Any],
+    callback_names: Set[str],
+    runtime_names: Set[str],
+    max_snapshot_bytes: int,
+) -> Tuple[Dict[str, Any], Tuple[str, ...]]:
+    """Copy bounded user state back to the parent, preferring small values."""
     snapshot: Dict[str, Any] = {}
+    omitted = []
+    candidates = []
     excluded = _RESERVED_NAMES | callback_names | runtime_names
     for name, value in env.items():
         if name.startswith("_") or name in excluded or isinstance(value, ModuleType):
             continue
-        if _is_picklable(value):
-            snapshot[name] = value
-    return snapshot
+        try:
+            serialized_size = len(pickle.dumps(value, protocol=pickle.HIGHEST_PROTOCOL))
+        except (pickle.PickleError, TypeError, AttributeError):
+            omitted.append(name)
+            continue
+        candidates.append((serialized_size, name, value))
+
+    used_bytes = 0
+    for serialized_size, name, value in sorted(candidates, key=lambda item: item[0]):
+        if used_bytes + serialized_size > max_snapshot_bytes:
+            omitted.append(name)
+            continue
+        snapshot[name] = value
+        used_bytes += serialized_size
+    return snapshot, tuple(omitted)
 
 
 def _execute_code(code: str, env: Dict[str, Any]) -> str:
@@ -307,6 +324,7 @@ def _worker_main(
     initial_env: Dict[str, Any],
     callback_names: Set[str],
     max_output_chars: int,
+    max_snapshot_bytes: int,
     resource_limits: WorkerResourceLimits,
 ) -> None:
     """Serve execution requests while preserving state between REPL steps."""
@@ -376,21 +394,29 @@ def _worker_main(
             final_answer: Optional[str] = None
             if isinstance(answer, dict) and answer.get("ready"):
                 final_answer = str(answer.get("content", ""))
+            snapshot, snapshot_omitted = _snapshot_environment(
+                env, callback_names, runtime_names, max_snapshot_bytes
+            )
             connection.send(
                 {
                     "type": "result",
                     "output": output,
-                    "snapshot": _snapshot_environment(env, callback_names, runtime_names),
+                    "snapshot": snapshot,
+                    "snapshot_omitted": snapshot_omitted,
                     "final_answer": final_answer,
                 }
             )
         except BaseException as exc:
             try:
+                snapshot, snapshot_omitted = _snapshot_environment(
+                    env, callback_names, runtime_names, max_snapshot_bytes
+                )
                 connection.send(
                     {
                         "type": "error",
                         "error": str(exc),
-                        "snapshot": _snapshot_environment(env, callback_names, runtime_names),
+                        "snapshot": snapshot,
+                        "snapshot_omitted": snapshot_omitted,
                     }
                 )
             except (BrokenPipeError, EOFError, OSError):
@@ -406,6 +432,7 @@ class REPLExecutor:
         self,
         timeout: float = 5,
         max_output_chars: int = 2000,
+        max_snapshot_bytes: int = 1_000_000,
         resource_limits: Optional[WorkerResourceLimits] = None,
     ):
         """Initialize the executor with a hard local-code timeout."""
@@ -413,8 +440,11 @@ class REPLExecutor:
             raise ValueError("timeout must be greater than zero")
         if max_output_chars <= 0:
             raise ValueError("max_output_chars must be greater than zero")
+        if max_snapshot_bytes <= 0:
+            raise ValueError("max_snapshot_bytes must be greater than zero")
         self.timeout = float(timeout)
         self.max_output_chars = max_output_chars
+        self.max_snapshot_bytes = max_snapshot_bytes
         self.resource_limits = resource_limits or WorkerResourceLimits()
         self._process: Optional[BaseProcess] = None
         self._connection: Optional[Connection] = None
@@ -422,17 +452,25 @@ class REPLExecutor:
         self._final_answer: Optional[str] = None
         self._lock = threading.RLock()
 
-    def execute(self, code: str, env: Dict[str, Any]) -> str:
+    def execute(self, code: str, env: Dict[str, Any], *, timeout: Optional[float] = None) -> str:
         """Execute one restricted step, preserving variables for later steps."""
         code = _extract_code(code)
         if not code.strip():
             return "No code to execute"
+        wait_budget = self._resolve_timeout(timeout)
+        deadline = time.monotonic() + wait_budget if timeout is not None else None
 
         with self._lock:
-            self._ensure_worker(env)
+            self._ensure_worker(env, timeout=wait_budget if timeout is not None else None)
             connection = self._require_connection()
             connection.send({"command": "execute", "code": code})
-            message = self._wait_for_message(self.timeout)
+            remaining = wait_budget if deadline is None else deadline - time.monotonic()
+            if remaining <= 0:
+                self._terminate_timed_out_worker()
+                raise REPLTimeoutError(f"Execution timed out after {wait_budget:g} seconds")
+            message = self._wait_for_message(remaining)
+            for name in message.get("snapshot_omitted", ()):
+                env.pop(str(name), None)
             env.update(message.get("snapshot", {}))
 
             if message.get("type") == "error":
@@ -443,12 +481,12 @@ class REPLExecutor:
             self._final_answer = message.get("final_answer")
             return str(message["output"])
 
-    def get_variable(self, name: str) -> Tuple[bool, Any]:
+    def get_variable(self, name: str, *, timeout: Optional[float] = None) -> Tuple[bool, Any]:
         """Read a variable from the persistent worker namespace."""
         with self._lock:
             connection = self._require_connection()
             connection.send({"command": "get_variable", "name": name})
-            message = self._wait_for_message(self.timeout)
+            message = self._wait_for_message(self._resolve_timeout(timeout))
             if message.get("type") != "variable":
                 raise REPLError("Invalid variable response from the REPL worker")
             return bool(message.get("found")), message.get("value")
@@ -459,12 +497,12 @@ class REPLExecutor:
         self._final_answer = None
         return answer
 
-    def reset_final_answer(self) -> None:
+    def reset_final_answer(self, *, timeout: Optional[float] = None) -> None:
         """Clear a rejected answer publication in the persistent worker."""
         with self._lock:
             connection = self._require_connection()
             connection.send({"command": "reset_final_answer"})
-            message = self._wait_for_message(self.timeout)
+            message = self._wait_for_message(self._resolve_timeout(timeout))
             if message.get("type") != "final_answer_reset":
                 raise REPLError("Invalid final-answer reset response from the REPL worker")
             self._final_answer = None
@@ -488,7 +526,7 @@ class REPLExecutor:
                     process.terminate()
                     process.join(timeout=1)
 
-    def _ensure_worker(self, env: Dict[str, Any]) -> None:
+    def _ensure_worker(self, env: Dict[str, Any], *, timeout: Optional[float] = None) -> None:
         if self._process is not None and self._process.is_alive():
             return
         self.close()
@@ -507,6 +545,7 @@ class REPLExecutor:
                 initial_env,
                 set(callbacks),
                 self.max_output_chars,
+                self.max_snapshot_bytes,
                 self.resource_limits,
             ),
             daemon=True,
@@ -516,9 +555,10 @@ class REPLExecutor:
         self._callbacks = callbacks
         self._connection = parent_connection
         self._process = process
-        if not parent_connection.poll(10):
+        startup_timeout = 10.0 if timeout is None else min(10.0, timeout)
+        if not parent_connection.poll(startup_timeout):
             self._terminate_timed_out_worker()
-            raise REPLError("REPL worker did not start within 10 seconds")
+            raise REPLTimeoutError(f"REPL worker did not start within {startup_timeout:g} seconds")
         try:
             ready_message = parent_connection.recv()
         except (EOFError, OSError) as exc:
@@ -568,6 +608,14 @@ class REPLExecutor:
 
         self._terminate_timed_out_worker()
         raise REPLTimeoutError(f"Execution timed out after {budget:g} seconds")
+
+    def _resolve_timeout(self, timeout: Optional[float]) -> float:
+        """Return a positive timeout capped by the executor's local limit."""
+        if timeout is None:
+            return self.timeout
+        if timeout <= 0:
+            raise ValueError("timeout must be greater than zero")
+        return min(self.timeout, float(timeout))
 
     def _terminate_timed_out_worker(self) -> None:
         process = self._process

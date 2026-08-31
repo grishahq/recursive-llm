@@ -32,7 +32,7 @@ from .errors import (
 )
 from .parser import extract_final, extract_final_var_name
 from .prompts import build_system_prompt
-from .repl import REPLError, REPLExecutor, WorkerResourceLimits
+from .repl import REPLError, REPLExecutor, REPLTimeoutError, WorkerResourceLimits
 from .results import CompletionResult, FailedCompletionResult, RunResult, TrajectoryEvent
 from .run_state import RunState
 from .stats import UsageTracker
@@ -65,6 +65,7 @@ class RLM:
         max_iterations: int = 30,
         repl_timeout: float = 5,
         max_output_chars: int = 2000,
+        repl_max_snapshot_bytes: int = 1_000_000,
         repl_memory_limit_mb: Optional[int] = None,
         repl_cpu_time_limit_seconds: Optional[int] = None,
         repl_max_open_files: Optional[int] = None,
@@ -99,6 +100,8 @@ class RLM:
             raise ValueError("repl_timeout must be greater than zero")
         if max_output_chars <= 0:
             raise ValueError("max_output_chars must be greater than zero")
+        if repl_max_snapshot_bytes <= 0:
+            raise ValueError("repl_max_snapshot_bytes must be greater than zero")
         if max_concurrent_subcalls <= 0:
             raise ValueError("max_concurrent_subcalls must be greater than zero")
         if max_retries < 0:
@@ -118,6 +121,7 @@ class RLM:
         self.max_iterations = max_iterations
         self.repl_timeout = repl_timeout
         self.max_output_chars = max_output_chars
+        self.repl_max_snapshot_bytes = repl_max_snapshot_bytes
         self.repl_resource_limits = WorkerResourceLimits(
             memory_mb=repl_memory_limit_mb,
             cpu_time_seconds=repl_cpu_time_limit_seconds,
@@ -264,6 +268,7 @@ class RLM:
         repl = REPLExecutor(
             timeout=self.repl_timeout,
             max_output_chars=self.max_output_chars,
+            max_snapshot_bytes=self.repl_max_snapshot_bytes,
             resource_limits=self.repl_resource_limits,
         )
         system_prompt = build_system_prompt(
@@ -309,8 +314,15 @@ class RLM:
 
                 final_var_name = extract_final_var_name(response)
                 if final_var_name is not None:
+                    repl_timeout, deadline_limited = self._remaining_repl_timeout(run_state)
                     try:
-                        found, value = await asyncio.to_thread(repl.get_variable, final_var_name)
+                        found, value = await asyncio.to_thread(
+                            repl.get_variable, final_var_name, timeout=repl_timeout
+                        )
+                    except REPLTimeoutError:
+                        if deadline_limited:
+                            self._raise_elapsed_budget_error(run_state)
+                        raise
                     except REPLError:
                         if final_var_name in repl_env:
                             answer = str(repl_env[final_var_name])
@@ -349,8 +361,17 @@ class RLM:
                     continue
 
                 try:
-                    exec_result = await asyncio.to_thread(repl.execute, response, repl_env)
+                    repl_timeout, deadline_limited = self._remaining_repl_timeout(run_state)
+                    try:
+                        exec_result = await asyncio.to_thread(
+                            repl.execute, response, repl_env, timeout=repl_timeout
+                        )
+                    except REPLTimeoutError:
+                        if deadline_limited:
+                            self._raise_elapsed_budget_error(run_state)
+                        raise
                     self._record_repl_step(run_state, node_id, response, exec_result, status="ok")
+                    self._check_budget_deadline(run_state)
                     published_answer = repl.pop_final_answer()
                     if published_answer is not None:
                         rejection = await self._process_final_answer(
@@ -361,7 +382,13 @@ class RLM:
                         )
                         if rejection is None:
                             return published_answer
-                        await asyncio.to_thread(repl.reset_final_answer)
+                        repl_timeout, deadline_limited = self._remaining_repl_timeout(run_state)
+                        try:
+                            await asyncio.to_thread(repl.reset_final_answer, timeout=repl_timeout)
+                        except REPLTimeoutError:
+                            if deadline_limited:
+                                self._raise_elapsed_budget_error(run_state)
+                            raise
                         answer_object = repl_env.get("answer")
                         if isinstance(answer_object, dict):
                             answer_object["ready"] = False
@@ -423,6 +450,8 @@ class RLM:
                 )
                 raise RLMError(f"Final-answer validator failed: {exc}") from exc
 
+            self._check_budget_deadline(run_state)
+
             if rejection is not None and (not isinstance(rejection, str) or not rejection.strip()):
                 raise RLMError("Final-answer validator must return None or a non-empty string")
         if rejection is None:
@@ -451,6 +480,7 @@ class RLM:
             **event_data,
             **self._content_data(answer=answer, reason=rejection),
         )
+        self._check_budget_deadline(run_state)
         return rejection
 
     @staticmethod
@@ -733,6 +763,23 @@ class RLM:
         except BudgetExceededError as exc:
             self._raise_budget_error(run_state, exc)
 
+    def _remaining_repl_timeout(self, run_state: RunState) -> Tuple[Optional[float], bool]:
+        """Cap one REPL exchange by both its local limit and the tree deadline."""
+        remaining = run_state.budget.remaining_seconds()
+        if remaining is None:
+            return None, False
+        if remaining <= 0:
+            self._check_budget_deadline(run_state)
+        return min(self.repl_timeout, remaining), remaining <= self.repl_timeout
+
+    def _raise_elapsed_budget_error(self, run_state: RunState) -> NoReturn:
+        """Raise the standard elapsed-time error with partial run statistics."""
+        limit = cast(float, run_state.budget.max_elapsed_seconds)
+        self._raise_budget_error(
+            run_state,
+            BudgetExceededError("elapsed_seconds", limit, limit),
+        )
+
     def _raise_budget_error(self, run_state: RunState, error: BudgetExceededError) -> NoReturn:
         """Attach partial tree statistics before surfacing a budget error."""
         error.stats = self._stats_snapshot(run_state)
@@ -964,6 +1011,7 @@ class RLM:
                 max_iterations=self.max_iterations,
                 repl_timeout=self.repl_timeout,
                 max_output_chars=self.max_output_chars,
+                repl_max_snapshot_bytes=self.repl_max_snapshot_bytes,
                 repl_memory_limit_mb=self.repl_resource_limits.memory_mb,
                 repl_cpu_time_limit_seconds=self.repl_resource_limits.cpu_time_seconds,
                 repl_max_open_files=self.repl_resource_limits.max_open_files,
@@ -1061,6 +1109,7 @@ class RLM:
             "max_iterations": self.max_iterations,
             "repl_timeout": self.repl_timeout,
             "max_output_chars": self.max_output_chars,
+            "repl_max_snapshot_bytes": self.repl_max_snapshot_bytes,
             "max_concurrent_subcalls": self.max_concurrent_subcalls,
             "max_total_calls": self.max_total_calls,
             "max_total_tokens": self.max_total_tokens,

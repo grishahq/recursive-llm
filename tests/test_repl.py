@@ -138,6 +138,23 @@ def test_runtime_helpers_stay_out_of_parent_snapshot(repl):
     assert "len" not in repl.execute("SHOW_VARS()", env)
 
 
+def test_large_snapshot_value_stays_in_worker_without_stale_parent_copy():
+    """Large state remains usable in the worker but is not copied after every step."""
+    executor = REPLExecutor(max_snapshot_bytes=1024)
+    env = {}
+    try:
+        executor.execute("payload = 'small'", env)
+        assert env["payload"] == "small"
+
+        executor.execute("payload = 'x' * 5000; payload_size = len(payload)", env)
+
+        assert "payload" not in env
+        assert env["payload_size"] == 5000
+        assert executor.get_variable("payload") == (True, "x" * 5000)
+    finally:
+        executor.close()
+
+
 def test_empty_code(repl):
     """Test empty code."""
     env = {}
