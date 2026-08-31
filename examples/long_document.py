@@ -9,8 +9,7 @@ def generate_long_document():
     chapters = []
 
     for i in range(1, 21):  # 20 chapters
-        chapter = (
-            f"""
+        chapter = f"""
 Chapter {i}: Topic {i}
 
 This chapter discusses important concept {i} in great detail. The key findings include:
@@ -48,9 +47,7 @@ References:
 [1] Author {i}. "Study on Topic {i}". Journal of Research. 2024.
 [2] Researcher {i}. "Analysis of Topic {i}". Scientific Papers. 2024.
 
-"""
-            + "Additional context paragraph. " * 100
-        )  # Make each chapter longer
+""" + "Additional context paragraph. " * 100  # Make each chapter longer
         chapters.append(chapter)
 
     return "\n\n".join(chapters)

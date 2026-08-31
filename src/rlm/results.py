@@ -9,7 +9,6 @@ from os import PathLike
 from pathlib import Path
 from typing import Any, Dict, Tuple, Union
 
-
 RESULT_SCHEMA_VERSION = 1
 
 
