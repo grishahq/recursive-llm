@@ -1,5 +1,7 @@
 # Recursive Language Models (RLM)
 
+![Recursive Language Models — large-context analysis through recursive selection](https://github.com/user-attachments/assets/c1c629fc-90ce-4c95-907e-0fd161628920)
+
 [![CI](https://github.com/grishahq/recursive-llm/actions/workflows/ci.yml/badge.svg)](https://github.com/grishahq/recursive-llm/actions/workflows/ci.yml)
 [![Python 3.9-3.12](https://img.shields.io/badge/python-3.9--3.12-3776AB.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
