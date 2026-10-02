@@ -17,7 +17,6 @@ import argparse
 import hashlib
 import json
 import re
-import unicodedata
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Sequence
 
@@ -29,6 +28,7 @@ try:
         ValidationResult,
         aggregate_results,
         run_task,
+        validate_labeled_fields,
     )
 except ImportError:  # Support direct execution from the repository root.
     from compare_same_model import (
@@ -36,60 +36,66 @@ except ImportError:  # Support direct execution from the repository root.
         ValidationResult,
         aggregate_results,
         run_task,
+        validate_labeled_fields,
     )
 
 
 DOCUMENT_URL = "https://www.gutenberg.org/files/2600/2600-0.txt"
 DOCUMENT_SHA256 = "e4bcf9042609b62c7de72a6f1b311f54c412943a9d641b7efcf79a464b5f31c8"
-
-
-def _normalized(value: str) -> str:
-    """Return lowercase ASCII text with punctuation collapsed to spaces."""
-    decomposed = unicodedata.normalize("NFKD", value)
-    ascii_text = decomposed.encode("ascii", "ignore").decode("ascii")
-    return re.sub(r"[^a-z0-9]+", " ", ascii_text.lower()).strip()
-
-
-def _missing_phrases(answer: str, phrases: Sequence[str]) -> List[str]:
-    """Return expected normalized phrases that are absent from an answer."""
-    normalized_answer = _normalized(answer)
-    return [phrase for phrase in phrases if _normalized(phrase) not in normalized_answer]
+GRADER_VERSION = "war-and-peace-fields-v2"
+PETYA_FINAL_NIGHT_QUERY = (
+    "Reconstruct Petya's final-night sequence using narrative evidence. State the "
+    "Cossack who helped him, the service he requested, the payment he gave, the "
+    "companion who entered the French camp with him, who said `Done for!` after "
+    "Petya fell, and the words of that verdict. Return exactly six lines labeled "
+    "`Cossack:`, `Service:`, `Payment:`, `Companion:`, `Verdict speaker:`, and `Verdict:`. "
+    "Use only the person's name for each person field, a short affirmative action phrase "
+    "for the service, amount and currency for payment, and the quoted words for the verdict. "
+    "Give every field once with no other text."
+)
 
 
 def validate_body_chapter_count(answer: str) -> ValidationResult:
     """Require the exact count of chapter headings in the narrative body."""
-    counts = [
-        int(match.group(1))
-        for match in re.finditer(r"total\s+chapters\s*[:=]\s*(\d+)", answer, re.IGNORECASE)
-    ]
-    failures = () if counts == [365] else (f"expected Total chapters: 365, observed={counts}",)
+    match = re.fullmatch(r"\s*total\s+chapters\s*[:=]\s*365\s*", answer, re.IGNORECASE)
+    failures = () if match else ("expected only Total chapters: 365",)
     return ValidationResult(not failures, failures)
 
 
 def validate_distant_fact_retrieval(answer: str) -> ValidationResult:
     """Require three facts located near the beginning and end of the novel."""
-    missing = _missing_phrases(answer, ("la grippe", "Karabakh"))
-    normalized = _normalized(answer)
-    has_annual_cost = "forty thousand rubles" in normalized or re.search(
-        r"\b40\s*000\s+rubles\b", normalized
+    return validate_labeled_fields(
+        answer,
+        {
+            "illness": ("la grippe",),
+            "annual cost": tuple(
+                f"{amount} {currency}"
+                for amount in ("40,000", "40 000", "40000", "forty thousand")
+                for currency in ("rubles", "roubles")
+            ),
+            "horse": ("Karabakh",),
+        },
     )
-    if not has_annual_cost:
-        missing.append("40,000 rubles")
-    failures = tuple(f"missing expected fact {phrase!r}" for phrase in missing)
-    return ValidationResult(not failures, failures)
 
 
 def validate_petya_final_night(answer: str) -> ValidationResult:
     """Require the people, service, payment, and verdict in Petya's final sequence."""
-    missing = _missing_phrases(
+    return validate_labeled_fields(
         answer,
-        ("Likhachev", "sharpen", "saber", "one ruble", "Dolokhov", "Done for"),
+        {
+            "cossack": ("Likhachev",),
+            "service": tuple(
+                f"{verb} {possessive}{weapon}"
+                for verb in ("sharpen", "sharpening", "sharpened", "to sharpen")
+                for possessive in ("", "the ", "his ", "Petya's ")
+                for weapon in ("saber", "sabre")
+            ),
+            "payment": ("one ruble", "1 ruble", "one rouble", "1 rouble"),
+            "companion": ("Dolokhov",),
+            "verdict speaker": ("Dolokhov",),
+            "verdict": ("Done for!",),
+        },
     )
-    normalized = _normalized(answer)
-    if "one ruble" in missing and re.search(r"\b1\s+ruble\b", normalized):
-        missing.remove("one ruble")
-    failures = tuple(f"missing expected detail {phrase!r}" for phrase in missing)
-    return ValidationResult(not failures, failures)
 
 
 def build_tasks(document: str, *, document_sha256: str) -> Sequence[Task]:
@@ -98,6 +104,7 @@ def build_tasks(document: str, *, document_sha256: str) -> Sequence[Task]:
         "source_url": DOCUMENT_URL,
         "sha256": document_sha256,
         "characters": len(document),
+        "grader_version": GRADER_VERSION,
     }
     return (
         Task(
@@ -118,7 +125,9 @@ def build_tasks(document: str, *, document_sha256: str) -> Sequence[Task]:
                 "Find three facts in the novel: the illness term described near the opening as "
                 "a new word in St. Petersburg, the annual amount Prince Vasili says Anatole costs "
                 "him, and the name Petya calls his horse late in the novel. Return exactly three "
-                "lines labeled `Illness:`, `Annual cost:`, and `Horse:`."
+                "lines labeled `Illness:`, `Annual cost:`, and `Horse:`. Use only the illness "
+                "term, amount and currency, and horse's name in their respective fields. "
+                "Give every field once with no other text."
             ),
             context=document,
             validator=validate_distant_fact_retrieval,
@@ -126,12 +135,7 @@ def build_tasks(document: str, *, document_sha256: str) -> Sequence[Task]:
         ),
         Task(
             name="petya_final_night",
-            query=(
-                "Reconstruct Petya's final-night sequence using narrative evidence. State the "
-                "Cossack who helped him, the service he requested, the payment he gave, the "
-                "companion who entered the French camp with him, and who said `Done for!` after "
-                "Petya fell. Return concise labeled fields."
-            ),
+            query=PETYA_FINAL_NIGHT_QUERY,
             context=document,
             validator=validate_petya_final_night,
             metadata=metadata,

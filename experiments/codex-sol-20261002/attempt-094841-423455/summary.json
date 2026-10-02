@@ -1,0 +1,115 @@
+{
+  "manifest": "manifest.json",
+  "scenarios": [
+    {
+      "scenario": "root_tuple_assignment",
+      "passed": true,
+      "checks": {
+        "exact_answer": true,
+        "no_repl_errors": true,
+        "text_only_cli": true,
+        "call_limit": true,
+        "tuple_assignment_executed": true,
+        "root_only": true
+      },
+      "answer": "id=TX-B amount=29",
+      "stats": {
+        "llm_calls": 3,
+        "root_calls": 3,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 3,
+        "max_depth_reached": 0,
+        "prompt_tokens": 14068,
+        "completion_tokens": 103,
+        "total_tokens": 14171,
+        "cached_tokens": 5376,
+        "usage_calls": 3,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "gpt-6.1-sol": {
+            "calls": 3,
+            "retry_calls": 0,
+            "prompt_tokens": 14068,
+            "completion_tokens": 103,
+            "total_tokens": 14171,
+            "cached_tokens": 5376,
+            "usage_calls": 3,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 3,
+        "depth": 0,
+        "budget": {
+          "max_calls": 12,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 180,
+          "reserved_calls": 3,
+          "observed_tokens": 14171,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 36.837129
+        }
+      },
+      "artifact": "root_tuple_assignment.json"
+    },
+    {
+      "scenario": "child_rlm_delegation",
+      "passed": true,
+      "checks": {
+        "exact_answer": true,
+        "no_repl_errors": true,
+        "text_only_cli": true,
+        "call_limit": true,
+        "child_repl_executed": true,
+        "child_model_called": true
+      },
+      "answer": "release_label=ORCHID-4289",
+      "stats": {
+        "llm_calls": 4,
+        "root_calls": 2,
+        "recursive_calls": 2,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 4,
+        "max_depth_reached": 1,
+        "prompt_tokens": 18734,
+        "completion_tokens": 106,
+        "total_tokens": 18840,
+        "cached_tokens": 5376,
+        "usage_calls": 4,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "gpt-6.1-sol": {
+            "calls": 4,
+            "retry_calls": 0,
+            "prompt_tokens": 18734,
+            "completion_tokens": 106,
+            "total_tokens": 18840,
+            "cached_tokens": 5376,
+            "usage_calls": 4,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 2,
+        "depth": 0,
+        "budget": {
+          "max_calls": 12,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 180,
+          "reserved_calls": 4,
+          "observed_tokens": 18840,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 56.55919
+        }
+      },
+      "artifact": "child_rlm_delegation.json"
+    }
+  ]
+}

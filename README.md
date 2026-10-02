@@ -16,7 +16,7 @@ This is an independent Python implementation of the
 use: provider portability, tree-wide budgets, structured failures, reproducible benchmarks, and
 complete run trajectories.
 
-[Quick start](#quick-start) | [Measured results](#measured-results) |
+[Quick start](#quick-start) | [Visual comparison](#visual-comparison) | [Measured results](#measured-results) |
 [Document-format evaluation](DOCUMENT_EVALUATION.md) | [Configuration](#configuration) |
 [Security](SECURITY.md) |
 [Original implementation](https://github.com/alexzhang13/rlm)
@@ -31,6 +31,36 @@ complete run trajectories.
 | Provider portability | OpenAI, Anthropic, DeepSeek, local models, and other LiteLLM providers |
 | Reproducible evaluation | Exact graders, generated corpora, pinned public documents, and repeated live runs |
 | Restricted execution | Spawned RestrictedPython worker with hard timeouts and optional POSIX resource limits |
+
+## Visual comparison
+
+To celebrate 600 stars, the project includes a [side-by-side visualizer](visualizer/README.md) of
+real RLM and direct-model runs: synchronized replay, Python steps, call trees, exact grading, and
+exportable recordings. Both sides use GPT-5.6 Luna through a ChatGPT-authenticated Codex CLI.
+
+[![RLM and direct LLM comparison](.github/assets/rlm-comparison.gif)](visualizer/public/rlm-comparison.mp4)
+
+On one 100k-character paired experiment, both answers were exact. RLM used 11,656 total CLI model
+tokens versus 37,521 directly, with elapsed times of 30.7 and 29.0 seconds respectively. The 10k
+experiment favored direct completion. See [CODEX_COMPARISON.md](CODEX_COMPARISON.md) for both
+outcomes, raw recordings, methodology, and reproduction commands. These are individual experiments,
+not a general performance claim or a measurement of subscription credits saved.
+
+```bash
+# Uses the existing ChatGPT login and consumes Codex subscription allowance
+python examples/capture_codex_comparison.py --chars 100000 --output comparison.json
+```
+
+To test another model through the same transport, pass its settings explicitly:
+
+```bash
+python examples/capture_codex_comparison.py --model gpt-6.1-sol \
+    --reasoning-effort low --max-depth 1 --chars 100000 --output comparison-sol.json
+```
+
+The web companion keeps the historical Luna/medium/depth-1 defaults. Imported captures record
+their own model, reasoning effort, and depth; changing depth enables subcalls but does not force
+the model to use them.
 
 ## Measured results
 
@@ -54,6 +84,10 @@ experiments, limitations, and reproduction commands.
 The separate [document-format evaluation](DOCUMENT_EVALUATION.md) compares RLM with direct
 completion on a SHA-pinned TXT book, PDF, CSV, and HTML documentation page and records two
 reliability/performance changes evaluated one at a time.
+
+Historical transaction and literary scores used legacy graders. Current graders reject ambiguous
+or contradictory fields and record their version; see the grading-version note in
+[BENCHMARK_RESULTS.md](BENCHMARK_RESULTS.md) before comparing old and new runs.
 
 ## When to use RLM
 

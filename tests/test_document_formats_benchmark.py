@@ -3,12 +3,25 @@
 import csv
 import io
 
+import pytest
+
 from benchmarks.document_formats import (
+    GRADER_VERSION,
+    SOURCE_SPECS,
     _csv_to_text,
     _html_to_text,
+    build_tasks,
     validate_frankenstein,
     validate_playbook_structure,
     validate_sqlite_defaults,
+)
+
+
+FRANKENSTEIN_FACTS = "Letters: 4\nChapters: 24\nAddressee: Mrs. Saville\nObserved family: De Lacey"
+PLAYBOOK_COUNTS = "Govern: 19\nManage: 13\nMap: 18\nMeasure: 22"
+SQLITE_DEFAULTS = (
+    "timeout: 5.0\nisolation_level: DEFERRED\n"
+    "cached_statements: 128\nautocommit: sqlite3.LEGACY_TRANSACTION_CONTROL"
 )
 
 
@@ -59,3 +72,30 @@ def test_document_graders_reject_near_misses() -> None:
         "timeout: 5\nisolation_level: DEFERRED\n"
         "cached_statements: 128\nautocommit: sqlite3.LEGACY_TRANSACTION_CONTROL"
     ).passed
+
+
+@pytest.mark.parametrize(
+    "validator,answer",
+    [
+        (validate_frankenstein, FRANKENSTEIN_FACTS + "\nLetters: 0"),
+        (validate_frankenstein, FRANKENSTEIN_FACTS.replace("Letters: 4", "Letters: -4")),
+        (validate_frankenstein, FRANKENSTEIN_FACTS.replace("Letters: 4", "Letters: .4")),
+        (validate_frankenstein, FRANKENSTEIN_FACTS.replace("Mrs. Saville", "not Mrs. Saville")),
+        (validate_frankenstein, FRANKENSTEIN_FACTS.replace("De Lacey", "not De Lacey")),
+        (validate_playbook_structure, PLAYBOOK_COUNTS + "\nGovern: 0"),
+        (validate_playbook_structure, PLAYBOOK_COUNTS + "\nGovern: 19"),
+        (validate_playbook_structure, PLAYBOOK_COUNTS.replace("19", "-19")),
+        (validate_playbook_structure, PLAYBOOK_COUNTS.replace("19", "19.5")),
+        (validate_sqlite_defaults, SQLITE_DEFAULTS + "\ntimeout: 0"),
+        (validate_sqlite_defaults, SQLITE_DEFAULTS.replace("5.0", "-5.0")),
+        (validate_sqlite_defaults, SQLITE_DEFAULTS + "\nActually these values are wrong."),
+    ],
+)
+def test_document_graders_reject_duplicates_negations_and_signed_counts(validator, answer) -> None:
+    assert not validator(answer).passed
+
+
+def test_document_tasks_record_grader_version() -> None:
+    tasks = build_tasks({name: "context" for name in SOURCE_SPECS}, label="test")
+
+    assert all(task.metadata["grader_version"] == GRADER_VERSION for task in tasks)

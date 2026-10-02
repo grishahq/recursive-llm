@@ -23,6 +23,7 @@ from RestrictedPython import (
 from RestrictedPython.Guards import (
     full_write_guard,
     guarded_iter_unpack_sequence,
+    guarded_unpack_sequence,
     safer_getattr,
 )
 from RestrictedPython.PrintCollector import PrintCollector
@@ -150,6 +151,7 @@ def _build_globals() -> Dict[str, Any]:
     restricted_globals.update(
         {
             "_iter_unpack_sequence_": guarded_iter_unpack_sequence,
+            "_unpack_sequence_": guarded_unpack_sequence,
             "_getattr_": safer_getattr,
             "_getitem_": lambda obj, index: obj[index],
             "_getiter_": iter,
@@ -337,6 +339,7 @@ def _worker_main(
     env = _build_globals()
     runtime_names = set(env)
     env.update(initial_env)
+    snapshot_names = set(initial_env) - _RESERVED_NAMES - runtime_names
     env.setdefault("answer", {"content": "", "ready": False})
     for name in callback_names:
         env[name] = _make_callback_proxy(connection, name)
@@ -349,6 +352,20 @@ def _worker_main(
         }
 
     env["SHOW_VARS"] = show_vars
+
+    def snapshot_data() -> Dict[str, Any]:
+        nonlocal snapshot_names
+        snapshot, omitted = _snapshot_environment(
+            env, callback_names, runtime_names, max_snapshot_bytes
+        )
+        removed = tuple(sorted(snapshot_names - snapshot.keys()))
+        snapshot_names = set(snapshot)
+        return {
+            "snapshot": snapshot,
+            "snapshot_omitted": omitted,
+            "snapshot_removed": removed,
+        }
+
     connection.send({"type": "ready"})
 
     while True:
@@ -394,29 +411,21 @@ def _worker_main(
             final_answer: Optional[str] = None
             if isinstance(answer, dict) and answer.get("ready"):
                 final_answer = str(answer.get("content", ""))
-            snapshot, snapshot_omitted = _snapshot_environment(
-                env, callback_names, runtime_names, max_snapshot_bytes
-            )
             connection.send(
                 {
                     "type": "result",
                     "output": output,
-                    "snapshot": snapshot,
-                    "snapshot_omitted": snapshot_omitted,
+                    **snapshot_data(),
                     "final_answer": final_answer,
                 }
             )
         except BaseException as exc:
             try:
-                snapshot, snapshot_omitted = _snapshot_environment(
-                    env, callback_names, runtime_names, max_snapshot_bytes
-                )
                 connection.send(
                     {
                         "type": "error",
                         "error": str(exc),
-                        "snapshot": snapshot,
-                        "snapshot_omitted": snapshot_omitted,
+                        **snapshot_data(),
                     }
                 )
             except (BrokenPipeError, EOFError, OSError):
@@ -451,6 +460,7 @@ class REPLExecutor:
         self._callbacks: Dict[str, Callable[..., Any]] = {}
         self._final_answer: Optional[str] = None
         self._lock = threading.RLock()
+        self._aborted = threading.Event()
 
     def execute(self, code: str, env: Dict[str, Any], *, timeout: Optional[float] = None) -> str:
         """Execute one restricted step, preserving variables for later steps."""
@@ -469,6 +479,8 @@ class REPLExecutor:
                 self._terminate_timed_out_worker()
                 raise REPLTimeoutError(f"Execution timed out after {wait_budget:g} seconds")
             message = self._wait_for_message(remaining)
+            for name in message.get("snapshot_removed", ()):
+                env.pop(str(name), None)
             for name in message.get("snapshot_omitted", ()):
                 env.pop(str(name), None)
             env.update(message.get("snapshot", {}))
@@ -525,8 +537,28 @@ class REPLExecutor:
                 if process.is_alive():
                     process.terminate()
                     process.join(timeout=1)
+                if process.is_alive():
+                    process.kill()
+                    process.join(timeout=1)
+
+    def abort(self) -> None:
+        """Interrupt the worker without waiting for a running exchange's lock.
+
+        The executor cannot be reused after an abort. Normal ``close`` still
+        owns connection cleanup and joining after the blocked exchange wakes.
+        """
+        self._aborted.set()
+        process = self._process
+        if process is not None:
+            try:
+                # Cancellation must also stop workers with a slow SIGTERM handler.
+                process.kill()
+            except (OSError, ValueError):
+                pass  # The exchange may already have terminated the worker.
 
     def _ensure_worker(self, env: Dict[str, Any], *, timeout: Optional[float] = None) -> None:
+        if self._aborted.is_set():
+            raise REPLError("REPL execution was aborted")
         if self._process is not None and self._process.is_alive():
             return
         self.close()
@@ -555,6 +587,9 @@ class REPLExecutor:
         self._callbacks = callbacks
         self._connection = parent_connection
         self._process = process
+        if self._aborted.is_set():
+            self._terminate_timed_out_worker()
+            raise REPLError("REPL execution was aborted")
         startup_timeout = 10.0 if timeout is None else min(10.0, timeout)
         if not parent_connection.poll(startup_timeout):
             self._terminate_timed_out_worker()
@@ -627,6 +662,9 @@ class REPLExecutor:
         if process is not None and process.is_alive():
             process.terminate()
             process.join(timeout=1)
+            if process.is_alive():
+                process.kill()
+                process.join(timeout=1)
 
     def _require_connection(self) -> Connection:
         if self._connection is None:

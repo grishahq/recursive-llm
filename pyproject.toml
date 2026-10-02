@@ -28,6 +28,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+visualizer = ["pypdf>=6.18.0,<7"]
 dev = [
     "build>=1.2.0",
     "pytest>=7.0.0",
@@ -60,6 +61,7 @@ pythonpath = ["src"]
 asyncio_default_fixture_loop_scope = "function"
 
 [tool.coverage.run]
+source = ["rlm"]
 branch = true
 concurrency = ["multiprocessing", "thread"]
 parallel = true

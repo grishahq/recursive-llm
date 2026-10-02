@@ -9,6 +9,9 @@ from dataclasses import dataclass
 from typing import Tuple
 
 
+GRADER_VERSION = "transaction-fields-v2"
+
+
 @dataclass(frozen=True)
 class RollupTruth:
     """Exact answer key for one generated transaction corpus."""
@@ -36,7 +39,7 @@ class GeneratedLongContext:
         return len(self.context)
 
     def validate(self, answer: str) -> Tuple[str, ...]:
-        """Return exact labeled-field mismatches for a model answer."""
+        """Require exactly one complete value for each requested field, with no prose."""
         expected = {
             "count": str(self.truth.count),
             "total_amount_cents": str(self.truth.total_amount_cents),
@@ -44,13 +47,22 @@ class GeneratedLongContext:
             "max_amount_cents": str(self.truth.max_amount_cents),
         }
         failures = []
+        fields = {}
+        end = 0
+        for match in re.finditer(r"([A-Za-z_][A-Za-z0-9_]*)\s*=\s*([^\s=]+)", answer):
+            if answer[end : match.start()].strip():
+                failures.append("answer contains text outside the requested fields")
+            end = match.end()
+            label, observed = match.group(1).casefold(), match.group(2)
+            if label not in expected:
+                failures.append(f"unexpected field {label!r}")
+            if label in fields:
+                failures.append(f"duplicate field {label!r}")
+            fields[label] = observed
+        if answer[end:].strip():
+            failures.append("answer contains text outside the requested fields")
         for label, expected_value in expected.items():
-            match = re.search(
-                rf"\b{re.escape(label)}\s*=\s*([A-Za-z0-9-]+)",
-                answer,
-                flags=re.IGNORECASE,
-            )
-            observed = match.group(1) if match else None
+            observed = fields.get(label)
             if observed != expected_value:
                 failures.append(f"{label} differs: expected={expected_value}, observed={observed}")
         return tuple(failures)
@@ -101,8 +113,8 @@ def generate_long_context(*, target_chars: int = 100_000, seed: int = 2026) -> G
         "Inspect all transaction records. For records where region=EMEA and status=SETTLED, "
         "return the exact count, sum of amount_cents, and the transaction with the largest "
         "amount_cents. Break ties by the lexicographically largest transaction ID. Return "
-        "exactly these labeled fields: count=<integer> total_amount_cents=<integer> "
-        "max_transaction_id=<ID> max_amount_cents=<integer>."
+        "exactly these labeled fields, each once, with no other text: count=<integer> "
+        "total_amount_cents=<integer> max_transaction_id=<ID> max_amount_cents=<integer>."
     )
     return GeneratedLongContext(
         query=query,

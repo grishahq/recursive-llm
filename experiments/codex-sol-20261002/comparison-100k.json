@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "kind": "recorded",
+  "title": "A real Codex subscription experiment",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "max_depth": 1,
+  "query": "Inspect all transaction records. For records where region=EMEA and status=SETTLED, return the exact count, sum of amount_cents, and the transaction with the largest amount_cents. Break ties by the lexicographically largest transaction ID. Return exactly these labeled fields, each once, with no other text: count=<integer> total_amount_cents=<integer> max_transaction_id=<ID> max_amount_cents=<integer>.",
+  "original_query": "Inspect all transaction records. For records where region=EMEA and status=SETTLED, return the exact count, sum of amount_cents, and the transaction with the largest amount_cents. Break ties by the lexicographically largest transaction ID. Return exactly these labeled fields, each once, with no other text: count=<integer> total_amount_cents=<integer> max_transaction_id=<ID> max_amount_cents=<integer>.",
+  "reference_fields": {
+    "count": 57,
+    "total_amount_cents": 27404392,
+    "max_transaction_id": "TX-0000883",
+    "max_amount_cents": 993620
+  },
+  "evaluation_label": "Reference fields: numbers compared exactly; text ignores case, typography, and whitespace. Whitespace-only strings and booleans are compared exactly. References are withheld from both models.",
+  "context_chars": 100098,
+  "context_preview": "TX-0000001 account=ACCT-8386 region=APAC status=REFUNDED amount_cents=527025 channel=api checksum=e255accb\nTX-0000002 account=ACCT-9381 region=EMEA status=SETTLED amount_cents=821526 channel=web checksum=c0433cbd\nTX-0000003 account=ACCT-1323 region=NA status=PENDING amount_cents=2757 channel=api checksum=49889310\nTX-0000004 account=ACCT-8033 region=APAC status=SETTLED amount_cents=12146 channel=mobile checksum=35d14880\nTX-0000005 account=ACCT-5844 region=NA status=REFUNDED amount_cents=364645 channel=web checksum=ffe976ab\nTX-0000006 account=ACCT-9134 region=APAC status=REFUNDED amount_cents=94120 channel=mobile checksum=49a047dc\nTX-0000007 account=ACCT-9461 region=NA status=PENDING amount_cents=919150 channel=mobile checksum=06555096\nTX-0000008 account=ACCT-6918 region=LATAM status=REFUNDED amount_cents=483569 channel=api checksum=66160227\nTX-0000009 account=ACCT-8297 region=NA status=CANCELLED amount_cents=446209 channel=web checksum=65ed0de4\nTX-0000010 account=ACCT-7852 region=LATAM status=SETTLED amount_cents=591496 channel=api checksum=93550840\nTX-0000011 account=ACCT-0801 region=EMEA status=PENDING amount_cents=857973 channel=api checksum=b7a1774f\nTX-0000012 account=ACCT-7899 region=NA status=SETTLED amount_cents=149430 channel=batch checksum=d9814559\nTX-0000013 account=ACCT-7691 region=APAC status=SETTLED amount_cents=707158 channel=mobile checksum=8f4ecb4f\nTX-0000014 acc",
+  "context_sha256": "1ee43f3b42f8db55369c337d2e37f1e7f61224abe3d538581a716865df8a6fcc",
+  "sample_note": "100,098 generated characters · seed 2026 · 2026-10-02 UTC · low reasoning · RLM max depth 1 · one run per mode (direct first). Reference answer fields; no grading feedback during either run. Codex CLI tokens include cached input and prompt overhead; subscription dollar cost is unavailable. This single task does not establish a general advantage.",
+  "rlm": {
+    "tokens": 16482,
+    "usage_complete": true,
+    "observed_tokens": 16482,
+    "cached_tokens": 0,
+    "prompt_tokens": 16300,
+    "completion_tokens": 182,
+    "cost": null,
+    "seconds": 35.569689,
+    "calls": 3,
+    "result": "count=57 total_amount_cents=27404392 max_transaction_id=TX-0000883 max_amount_cents=993620",
+    "passed": "4 / 4 fields",
+    "steps": [
+      {
+        "at": 2.7e-05,
+        "node_id": "rlm-1",
+        "parent_id": "",
+        "kind": "run_start",
+        "title": "Context stays in Python",
+        "detail": "The model receives the question and context size."
+      },
+      {
+        "at": 0.010592,
+        "node_id": "llm-2",
+        "parent_id": "rlm-1",
+        "kind": "model_call_start",
+        "title": "Model call 1",
+        "detail": "gpt-6.1-sol · depth 0 · RLM step"
+      },
+      {
+        "at": 12.829709,
+        "node_id": "rlm-1",
+        "parent_id": "",
+        "kind": "repl_step",
+        "title": "Execute Python",
+        "detail": "Executed by the library's restricted REPL.",
+        "code": "print(context[:4000])\n",
+        "output": "TX-0000001 account=ACCT-8386 region=APAC status=REFUNDED amount_cents=527025 channel=api checksum=e255accb\nTX-0000002 account=ACCT-9381 region=EMEA status=SETTLED amount_cents=821526 channel=web checksum=c0433cbd\nTX-0000003 account=ACCT-1323 region=NA status=PENDING amount_cents=2757 channel=api checksum=49889310\nTX-0000004 account=ACCT-8033 region=APAC status=SETTLED amount_cents=12146 channel=mobile checksum=35d14880\nTX-0000005 account=ACCT-5844 region=NA status=REFUNDED amount_cents=364645 channel=web checksum=ffe976ab\nTX-0000006 account=ACCT-9134 region=APAC status=REFUNDED amount_cents=94120 channel=mobile checksum=49a047dc\nTX-0000007 account=ACCT-9461 region=NA status=PENDING amount_cents=919150 channel=mobile checksum=06555096\nTX-0000008 account=ACCT-6918 region=LATAM status=REFUNDED amount_cents=483569 channel=api checksum=66160227\nTX-0000009 account=ACCT-8297 region=NA status=CANCELLED amount_cents=446209 channel=web checksum=65ed0de4\nTX-0000010 account=ACCT-7852 region=LATAM status=SETTLED amount_cents=591496 channel=api checksum=93550840\nTX-0000011 account=ACCT-0801 region=EMEA status=PENDING amount_cents=857973 channel=api checksum=b7a1774f\nTX-0000012 account=ACCT-7899 region=NA status=SETTLED amount_cents=149430 channel=batch checksum=d9814559\nTX-0000013 account=ACCT-7691 region=APAC status=SETTLED amount_cents=707158 channel=mobile checksum=8f4ecb4f\nTX-0000014 account=ACCT-8224 region=NA status=REFUNDED amount_cents=574875 channel=web checksum=ce0d8d87\nTX-0000015 account=ACCT-4824 region=NA status=SETTLED amount_cents=212469 channel=mobile checksum=025ff87c\nTX-0000016 account=ACCT-9786 region=APAC status=PENDING amount_cents=687591 channel=web checksum=cdb54088\nTX-0000017 account=ACCT-3275 region=NA status=REFUNDED amount_cents=966372 channel=mobile checksum=b1515fff\nTX-0000018 account=ACCT-8146 region=NA status=SETTLED amount_cents=536202 channel=web checksum=8ece78b0\nTX-0000019 account=ACCT-7499 region=APAC status=REFUNDED amount_cents=332139 channel=api checksum=703e53cf\nTX-0000020 account=ACCT-3000 region=LATAM status=SETTLED amount_cents=966856 channel=web checksum=d7aa2208\nTX-0000021 account=ACCT-4366 region=NA status=CANCELLED amount_cents=680152 channel=web checksum=5ec0c260\nTX-0000022 account=ACCT-6739 region=APAC status=PENDING amount_cents=783964 channel=batch checksum=730b89dc\nTX-0000023 account=ACCT-7393 region=APAC status=CANCELLED amount_cents=324 channel=api checksum=9c31b930\nTX-0000024 account=ACCT-0732 region=EMEA status=PENDING amount_cents=126787 channel=mobile checksum=ab215122\nTX-0000025 account=ACCT-5136 region=LATAM status=PENDING amount_cents=5480 channel=web checksum=b093e3b4\nTX-0000026 account=ACCT-9633 region=EMEA status=PENDING amount_cents=496059 channel=batch checksum=f551abfd\nTX-0000027 account=ACCT-2624 region=LATAM status=CANCELLED amount_cents=438172 channel=batch checksum=c88f63d6\nTX-0000028 account=ACCT-2434 region=LATAM status=SETTLED amount_cents=409471 channel=batch checksum=6041f10e\nTX-000002\n\n[Output truncated: 4000 chars total, showing first 3000]"
+      },
+      {
+        "at": 12.836969,
+        "node_id": "llm-3",
+        "parent_id": "rlm-1",
+        "kind": "model_call_start",
+        "title": "Model call 2",
+        "detail": "gpt-6.1-sol · depth 0 · RLM step"
+      },
+      {
+        "at": 25.609721,
+        "node_id": "rlm-1",
+        "parent_id": "",
+        "kind": "repl_step",
+        "title": "Execute Python",
+        "detail": "Executed by the library's restricted REPL.",
+        "code": "records = re.findall(r'^(TX-\\S+)\\s+account=\\S+\\s+region=(\\S+)\\s+status=(\\S+)\\s+amount_cents=(-?\\d+)\\b', context, re.MULTILINE)\nmatches = [(int(amount), transaction_id) for transaction_id, region, status, amount in records if region == \"EMEA\" and status == \"SETTLED\"]\nmax_amount, max_id = max(matches)\nprint(f\"count={len(matches)} total_amount_cents={sum(amount for amount, _ in matches)} max_transaction_id={max_id} max_amount_cents={max_amount}\")",
+        "output": "count=57 total_amount_cents=27404392 max_transaction_id=TX-0000883 max_amount_cents=993620"
+      },
+      {
+        "at": 25.617382,
+        "node_id": "llm-4",
+        "parent_id": "rlm-1",
+        "kind": "model_call_start",
+        "title": "Model call 3",
+        "detail": "gpt-6.1-sol · depth 0 · RLM step"
+      },
+      {
+        "at": 35.322799,
+        "node_id": "rlm-1",
+        "parent_id": "",
+        "kind": "final_answer",
+        "title": "Final answer",
+        "detail": "RLM returned its answer.",
+        "output": "count=57 total_amount_cents=27404392 max_transaction_id=TX-0000883 max_amount_cents=993620"
+      }
+    ],
+    "quality": {
+      "status": "graded",
+      "matched": 4,
+      "total": 4,
+      "fields": [
+        {
+          "label": "count",
+          "expected": 57,
+          "observed": "57",
+          "passed": true
+        },
+        {
+          "label": "total_amount_cents",
+          "expected": 27404392,
+          "observed": "27404392",
+          "passed": true
+        },
+        {
+          "label": "max_transaction_id",
+          "expected": "TX-0000883",
+          "observed": "TX-0000883",
+          "passed": true
+        },
+        {
+          "label": "max_amount_cents",
+          "expected": 993620,
+          "observed": "993620",
+          "passed": true
+        }
+      ]
+    }
+  },
+  "direct": {
+    "tokens": 38650,
+    "usage_complete": true,
+    "cached_tokens": 2688,
+    "prompt_tokens": 38101,
+    "completion_tokens": 549,
+    "cost": null,
+    "seconds": 33.940777,
+    "calls": 1,
+    "result": "count=57 total_amount_cents=28150192 max_transaction_id=TX-0000883 max_amount_cents=993620",
+    "passed": "3 / 4 fields",
+    "steps": [
+      {
+        "at": 0,
+        "title": "Send full context",
+        "detail": "100,098 characters in one model request.",
+        "kind": "model_call_start"
+      },
+      {
+        "at": 33.940777,
+        "title": "Final answer",
+        "detail": "One text-only Codex turn; no external computation.",
+        "output": "count=57 total_amount_cents=28150192 max_transaction_id=TX-0000883 max_amount_cents=993620",
+        "kind": "final_answer"
+      }
+    ],
+    "quality": {
+      "status": "graded",
+      "matched": 3,
+      "total": 4,
+      "fields": [
+        {
+          "label": "count",
+          "expected": 57,
+          "observed": "57",
+          "passed": true
+        },
+        {
+          "label": "total_amount_cents",
+          "expected": 27404392,
+          "observed": "28150192",
+          "passed": false
+        },
+        {
+          "label": "max_transaction_id",
+          "expected": "TX-0000883",
+          "observed": "TX-0000883",
+          "passed": true
+        },
+        {
+          "label": "max_amount_cents",
+          "expected": 993620,
+          "observed": "993620",
+          "passed": true
+        }
+      ]
+    }
+  }
+}

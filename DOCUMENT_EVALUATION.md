@@ -9,6 +9,11 @@ The live sample contains one primary run per task and targeted retries only for 
 behavior is stochastic, so these results can catch obvious regressions but cannot establish a
 general quality improvement. PyPI publication was deliberately excluded from this work.
 
+This is a historical report of the August implementation and legacy grading rules, not validation
+of the current working tree. October 2026 graders reject duplicate fields, contradictions, and
+extra prose; new results record their grader version. The four-format measurements below have
+not been regraded without their original raw answers and must not be merged with new scores.
+
 ## Reproducible corpus
 
 `benchmarks/document_formats.py` downloads every source, verifies its raw SHA-256, prepares a

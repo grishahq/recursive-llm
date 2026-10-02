@@ -13,7 +13,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import re
 import zipfile
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Sequence
@@ -21,11 +20,25 @@ from typing import Any, Dict, Iterable, List, Mapping, Sequence
 from dotenv import load_dotenv
 
 try:
-    from .compare_same_model import Task, ValidationResult, aggregate_results, run_task
-    from .war_and_peace import validate_petya_final_night
+    from .compare_same_model import (
+        Task,
+        ValidationResult,
+        aggregate_results,
+        run_task,
+        validate_labeled_fields,
+    )
+    from .war_and_peace import GRADER_VERSION as WAR_AND_PEACE_GRADER_VERSION
+    from .war_and_peace import PETYA_FINAL_NIGHT_QUERY, validate_petya_final_night
 except ImportError:  # Support direct execution from the repository root.
-    from compare_same_model import Task, ValidationResult, aggregate_results, run_task
-    from war_and_peace import validate_petya_final_night
+    from compare_same_model import (
+        Task,
+        ValidationResult,
+        aggregate_results,
+        run_task,
+        validate_labeled_fields,
+    )
+    from war_and_peace import GRADER_VERSION as WAR_AND_PEACE_GRADER_VERSION
+    from war_and_peace import PETYA_FINAL_NIGHT_QUERY, validate_petya_final_night
 
 
 DOCUMENT_SPECS: Mapping[str, Mapping[str, str]] = {
@@ -46,6 +59,7 @@ DOCUMENT_SPECS: Mapping[str, Mapping[str, str]] = {
         "source_url": "https://docs.python.org/3.14/archives/python-3.14-docs-text.zip",
     },
 }
+GRADER_VERSION = "multi-document-fields-v2"
 
 
 def _sha256(data: bytes) -> str:
@@ -92,62 +106,45 @@ def load_documents(directory: Path) -> Dict[str, str]:
     }
 
 
-def _field(answer: str, label: str) -> str:
-    """Return a stripped case-insensitive labeled answer field."""
-    match = re.search(rf"^{re.escape(label)}\s*:\s*(.+)$", answer, re.IGNORECASE | re.MULTILINE)
-    return match.group(1).strip() if match else ""
-
-
-def _compact(value: str) -> str:
-    """Normalize punctuation and whitespace for exact semantic fields."""
-    return re.sub(r"[^a-z0-9.]+", " ", value.casefold()).strip()
-
-
 def validate_commission_facts(answer: str) -> ValidationResult:
     """Grade facts from the preface and the intelligence-reform recommendation."""
-    fields = {
-        "Pages reviewed": _compact(_field(answer, "Pages reviewed")),
-        "Individuals interviewed": _compact(_field(answer, "Individuals interviewed")),
-        "Countries": _compact(_field(answer, "Countries")),
-        "Replacement": _compact(_field(answer, "Replacement")),
-        "Responsibilities": _compact(_field(answer, "Responsibilities")),
-        "Location": _compact(_field(answer, "Location")),
-    }
-    checks = {
-        "Pages reviewed": "2.5 million" in fields["Pages reviewed"],
-        "Individuals interviewed": bool(
-            re.search(r"\b1\s*200\b", fields["Individuals interviewed"])
-            or "one thousand two hundred" in fields["Individuals interviewed"]
-        ),
-        "Countries": fields["Countries"] in {"10", "ten", "10 countries", "ten countries"},
-        "Replacement": "national intelligence director" in fields["Replacement"],
-        "Responsibilities": fields["Responsibilities"] in {"2", "two", "two main areas"},
-        "Location": "executive office of the president" in fields["Location"],
-    }
-    failures = tuple(
-        f"incorrect or missing field {label!r}" for label, ok in checks.items() if not ok
+    return validate_labeled_fields(
+        answer,
+        {
+            "pages reviewed": tuple(
+                f"{qualifier}{amount}{unit}"
+                for qualifier in ("", "more than ", "over ")
+                for amount in ("2.5 million", "2,500,000", "2500000")
+                for unit in ("", " pages", " pages of documents", " document pages")
+            ),
+            "individuals interviewed": tuple(
+                f"{qualifier}{amount}{unit}"
+                for qualifier in ("", "more than ", "over ")
+                for amount in ("1,200", "1200", "1 200", "one thousand two hundred")
+                for unit in ("", " individuals", " people")
+            ),
+            "countries": ("10", "ten", "10 countries", "ten countries"),
+            "replacement": ("National Intelligence Director",),
+            "responsibilities": ("2", "two", "2 main areas", "two main areas"),
+            "location": (
+                "Executive Office of the President",
+                "the Executive Office of the President",
+            ),
+        },
     )
-    return ValidationResult(not failures, failures)
 
 
 def validate_python_docs_facts(answer: str) -> ValidationResult:
     """Grade facts distributed across four Python 3.14 documentation files."""
-    fields = {
-        "Zstandard module": _compact(_field(answer, "Zstandard module")),
-        "Default pickle protocol": _compact(_field(answer, "Default pickle protocol")),
-        "map parameter": _compact(_field(answer, "map parameter")),
-        "Thread.join exception": _compact(_field(answer, "Thread.join exception")),
-    }
-    checks = {
-        "Zstandard module": fields["Zstandard module"] == "compression.zstd",
-        "Default pickle protocol": fields["Default pickle protocol"] == "5",
-        "map parameter": fields["map parameter"] == "strict",
-        "Thread.join exception": fields["Thread.join exception"] == "pythonfinalizationerror",
-    }
-    failures = tuple(
-        f"incorrect or missing field {label!r}" for label, ok in checks.items() if not ok
+    return validate_labeled_fields(
+        answer,
+        {
+            "zstandard module": ("compression.zstd",),
+            "default pickle protocol": ("5",),
+            "map parameter": ("strict",),
+            "thread.join exception": ("PythonFinalizationError",),
+        },
     )
-    return ValidationResult(not failures, failures)
 
 
 def build_tasks(documents: Mapping[str, str], *, label: str) -> Sequence[Task]:
@@ -164,20 +161,19 @@ def build_tasks(documents: Mapping[str, str], *, label: str) -> Sequence[Task]:
             **({"download_sha256": spec["download_sha256"]} if "download_sha256" in spec else {}),
             "context_sha256": _sha256(document.encode("utf-8")),
             "characters": len(document),
+            "grader_version": GRADER_VERSION,
         }
 
     return (
         Task(
             name="war_and_peace_petya",
-            query=(
-                "Reconstruct Petya's final-night sequence using narrative evidence. State the "
-                "Cossack who helped him, the service he requested, the payment he gave, the "
-                "companion who entered the French camp with him, and who said `Done for!` after "
-                "Petya fell. Return concise labeled fields."
-            ),
+            query=PETYA_FINAL_NIGHT_QUERY,
             context=documents["war_and_peace"],
             validator=validate_petya_final_night,
-            metadata=metadata("war_and_peace"),
+            metadata={
+                **metadata("war_and_peace"),
+                "grader_version": WAR_AND_PEACE_GRADER_VERSION,
+            },
         ),
         Task(
             name="commission_distributed_facts",
@@ -187,7 +183,8 @@ def build_tasks(documents: Mapping[str, str], *, label: str) -> Sequence[Task]:
                 "give the title replacing the Director of Central Intelligence, its number of main "
                 "responsibility areas, and its proposed location. Return exactly six lines labeled "
                 "`Pages reviewed:`, `Individuals interviewed:`, `Countries:`, `Replacement:`, "
-                "`Responsibilities:`, and `Location:`."
+                "`Responsibilities:`, and `Location:`. Give each field once with only the "
+                "requested quantity, title, or location; include no other text."
             ),
             context=documents["commission_report"],
             validator=validate_commission_facts,
@@ -200,7 +197,8 @@ def build_tasks(documents: Mapping[str, str], *, label: str) -> Sequence[Task]:
                 "Zstandard compression, the default pickle protocol in 3.14, the parameter added "
                 "to map(), and the exception Thread.join() may raise during late finalization. "
                 "Return exactly four lines labeled `Zstandard module:`, `Default pickle protocol:`, "
-                "`map parameter:`, and `Thread.join exception:`."
+                "`map parameter:`, and `Thread.join exception:`. Give each field once with only "
+                "the requested API name or number; include no other text."
             ),
             context=documents["python_docs"],
             validator=validate_python_docs_facts,

@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "purpose": "Bounded post-fix smoke comparisons; one attempt per size, not a quality benchmark",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "max_depth": 1,
+  "seed": 2026,
+  "cli_version": "codex-cli 0.159.0",
+  "git_base_commit": "b81ab894d4190757a632822478f454f8b9c6275c",
+  "working_tree": true,
+  "source_sha256": {
+    "examples/capture_codex_comparison.py": "51ed344c776dcb7ffee0a7f0e28c19cc2ebd540bedacbbf8b0f8a33fe4d549fb",
+    "benchmarks/generated_long_context.py": "8bab20b863d7e81972b15629e8ce148c25a27aa104d0b2af5575a51bb9d55c68",
+    "src/rlm/__init__.py": "e7756549d5b20b602197f244c774a8135cf7ddc08cc565786e99413d17cb0a51",
+    "src/rlm/budget.py": "0c38224c559b9cec3e4777f1825ba8872d7c12b393f06876a505e8205ad14d15",
+    "src/rlm/codex.py": "81634775f97b10ad7d628455b8ac02443789d1d4531dc59722e6c784f570b7ea",
+    "src/rlm/core.py": "ccff53c4c50b126ec8e7f43df98bcce44447e9270e747ce2f7d0e22085ed0058",
+    "src/rlm/errors.py": "fd9ccab151f4d93c92b7639e1a4e33f5e344c4d78b92311649a5383b3b24c110",
+    "src/rlm/parser.py": "51c518c450c298ecd5572e51dee9e21eb6821136fa5d5a4d0026b9ddfe240944",
+    "src/rlm/prompts.py": "1cbb98ab9ce67620c9bafb58848220ad887b49976ed432daddd3f64bbdea1a2a",
+    "src/rlm/repl.py": "8a4e1cc231d9c04cf07dd53973f54b944dfb5dd886802f5a5628f92bdc96d8d9",
+    "src/rlm/results.py": "1090a81f2ea2cb9552cb874df5118af193b94872217d8b1e42db6b9411e8f11b",
+    "src/rlm/run_state.py": "eb805f9306f3b0fe17e86a747b593699635d6acb47201d4dfbc1f2bec7518d63",
+    "src/rlm/stats.py": "fc9de7c36704bcf321925885156dfcf44e5484e8dc6a644c9e174255e636a44f",
+    "src/rlm/types.py": "971e5c79d8504f3f1e7278e804970b3aeec2cb0dd14d05e5ee69c84190da4609"
+  },
+  "runs": [
+    {
+      "target_chars": 10000,
+      "actual_chars": 10104,
+      "context_sha256": "753ce91f5a0d19351081775d4529a379358b0ff132bfb350c8f2050627f15236",
+      "captured_at": "2026-10-02T09:43:31.986031+00:00",
+      "comparison": "comparison-10k.json",
+      "raw": "comparison-10k.raw.json",
+      "artifact_sha256": {
+        "comparison-10k.json": "14ce488db8a5d0a139af1edf7041108b98c06f3c8f2bc0a85e7ed682d8276228",
+        "comparison-10k.raw.json": "041ed3d29a05c2a7897df7390697dc762a713826feacd34a5504a312039019bc"
+      },
+      "lanes": {
+        "direct": {
+          "tokens": 7752,
+          "seconds": 11.413464,
+          "calls": 1,
+          "passed": "4 / 4 fields",
+          "quality": {
+            "status": "graded",
+            "matched": 4,
+            "total": 4,
+            "fields": [
+              {
+                "label": "count",
+                "expected": 3,
+                "observed": "3",
+                "passed": true
+              },
+              {
+                "label": "total_amount_cents",
+                "expected": 2220828,
+                "observed": "2220828",
+                "passed": true
+              },
+              {
+                "label": "max_transaction_id",
+                "expected": "TX-0000002",
+                "observed": "TX-0000002",
+                "passed": true
+              },
+              {
+                "label": "max_amount_cents",
+                "expected": 821526,
+                "observed": "821526",
+                "passed": true
+              }
+            ]
+          },
+          "strict_grader_failures": [],
+          "error": null
+        },
+        "rlm": {
+          "tokens": 16425,
+          "seconds": 29.942773,
+          "calls": 3,
+          "passed": "4 / 4 fields",
+          "quality": {
+            "status": "graded",
+            "matched": 4,
+            "total": 4,
+            "fields": [
+              {
+                "label": "count",
+                "expected": 3,
+                "observed": "3",
+                "passed": true
+              },
+              {
+                "label": "total_amount_cents",
+                "expected": 2220828,
+                "observed": "2220828",
+                "passed": true
+              },
+              {
+                "label": "max_transaction_id",
+                "expected": "TX-0000002",
+                "observed": "TX-0000002",
+                "passed": true
+              },
+              {
+                "label": "max_amount_cents",
+                "expected": 821526,
+                "observed": "821526",
+                "passed": true
+              }
+            ]
+          },
+          "strict_grader_failures": [],
+          "error": null
+        }
+      },
+      "rlm_call_types": {
+        "root_calls": 3,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "max_depth_reached": 0
+      },
+      "repl_errors": []
+    },
+    {
+      "target_chars": 100000,
+      "actual_chars": 100098,
+      "context_sha256": "1ee43f3b42f8db55369c337d2e37f1e7f61224abe3d538581a716865df8a6fcc",
+      "captured_at": "2026-10-02T09:44:50.853525+00:00",
+      "comparison": "comparison-100k.json",
+      "raw": "comparison-100k.raw.json",
+      "artifact_sha256": {
+        "comparison-100k.json": "ff8a17b75aab50249a6dc6e2d1fdaaf5f4835c7b6281db2ac57f82fa752d79df",
+        "comparison-100k.raw.json": "ce25a72373cf1591c9bcd282dbd4736704260e28d9bccf5facf44e9e966eb391"
+      },
+      "lanes": {
+        "direct": {
+          "tokens": 38650,
+          "seconds": 33.940777,
+          "calls": 1,
+          "passed": "3 / 4 fields",
+          "quality": {
+            "status": "graded",
+            "matched": 3,
+            "total": 4,
+            "fields": [
+              {
+                "label": "count",
+                "expected": 57,
+                "observed": "57",
+                "passed": true
+              },
+              {
+                "label": "total_amount_cents",
+                "expected": 27404392,
+                "observed": "28150192",
+                "passed": false
+              },
+              {
+                "label": "max_transaction_id",
+                "expected": "TX-0000883",
+                "observed": "TX-0000883",
+                "passed": true
+              },
+              {
+                "label": "max_amount_cents",
+                "expected": 993620,
+                "observed": "993620",
+                "passed": true
+              }
+            ]
+          },
+          "strict_grader_failures": [
+            "total_amount_cents differs: expected=27404392, observed=28150192"
+          ],
+          "error": null
+        },
+        "rlm": {
+          "tokens": 16482,
+          "seconds": 35.569689,
+          "calls": 3,
+          "passed": "4 / 4 fields",
+          "quality": {
+            "status": "graded",
+            "matched": 4,
+            "total": 4,
+            "fields": [
+              {
+                "label": "count",
+                "expected": 57,
+                "observed": "57",
+                "passed": true
+              },
+              {
+                "label": "total_amount_cents",
+                "expected": 27404392,
+                "observed": "27404392",
+                "passed": true
+              },
+              {
+                "label": "max_transaction_id",
+                "expected": "TX-0000883",
+                "observed": "TX-0000883",
+                "passed": true
+              },
+              {
+                "label": "max_amount_cents",
+                "expected": 993620,
+                "observed": "993620",
+                "passed": true
+              }
+            ]
+          },
+          "strict_grader_failures": [],
+          "error": null
+        }
+      },
+      "rlm_call_types": {
+        "root_calls": 3,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "max_depth_reached": 0
+      },
+      "repl_errors": []
+    }
+  ],
+  "grader_version": "transaction-fields-v2",
+  "source_sha256_after_runs": {
+    "examples/capture_codex_comparison.py": "51ed344c776dcb7ffee0a7f0e28c19cc2ebd540bedacbbf8b0f8a33fe4d549fb",
+    "benchmarks/generated_long_context.py": "8bab20b863d7e81972b15629e8ce148c25a27aa104d0b2af5575a51bb9d55c68",
+    "src/rlm/__init__.py": "e7756549d5b20b602197f244c774a8135cf7ddc08cc565786e99413d17cb0a51",
+    "src/rlm/budget.py": "0c38224c559b9cec3e4777f1825ba8872d7c12b393f06876a505e8205ad14d15",
+    "src/rlm/codex.py": "81634775f97b10ad7d628455b8ac02443789d1d4531dc59722e6c784f570b7ea",
+    "src/rlm/core.py": "ccff53c4c50b126ec8e7f43df98bcce44447e9270e747ce2f7d0e22085ed0058",
+    "src/rlm/errors.py": "fd9ccab151f4d93c92b7639e1a4e33f5e344c4d78b92311649a5383b3b24c110",
+    "src/rlm/parser.py": "51c518c450c298ecd5572e51dee9e21eb6821136fa5d5a4d0026b9ddfe240944",
+    "src/rlm/prompts.py": "1cbb98ab9ce67620c9bafb58848220ad887b49976ed432daddd3f64bbdea1a2a",
+    "src/rlm/repl.py": "8a4e1cc231d9c04cf07dd53973f54b944dfb5dd886802f5a5628f92bdc96d8d9",
+    "src/rlm/results.py": "1090a81f2ea2cb9552cb874df5118af193b94872217d8b1e42db6b9411e8f11b",
+    "src/rlm/run_state.py": "bddc4b6e64ffabac9d16bb09437469a314ac756277912b4a0a33c5cbc7fd857a",
+    "src/rlm/stats.py": "fc9de7c36704bcf321925885156dfcf44e5484e8dc6a644c9e174255e636a44f",
+    "src/rlm/types.py": "971e5c79d8504f3f1e7278e804970b3aeec2cb0dd14d05e5ee69c84190da4609"
+  },
+  "source_changes_during_runs": [
+    "src/rlm/run_state.py"
+  ],
+  "source_note": "Working tree smoke tests; source hashes were collected during the first capture and after both captures. Changes listed explicitly; this is not an immutable-revision benchmark."
+}

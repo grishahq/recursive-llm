@@ -4,6 +4,15 @@ These live measurements were collected on July 15, 2026 with Python 3.12.13. The
 engineering check, not a paper reproduction. Provider behavior is stochastic, only one generated
 corpus seed was used, and prices are LiteLLM estimates.
 
+**Grading-version note (October 2, 2026):** the historical generated-transaction,
+literary, and multi-document scores below used legacy graders. Those graders could accept duplicate
+contradictory labels or expected words assigned to the wrong facts. Current graders reject
+these cases, and the literary tasks now request explicit fact fields. The original scores
+remain historical measurements; they have not been regraded without the original raw
+answers. The four available September transaction responses also pass the new grader; this
+does not revalidate the older July/August runs. New runs record their grader version and must
+be reported separately.
+
 ## TXT, PDF, CSV, and HTML evaluation
 
 An August 31, 2026 evaluation added a SHA-pinned four-format corpus, exact graders, a direct-model

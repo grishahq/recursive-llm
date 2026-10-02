@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "kind": "recorded",
+  "title": "A real Codex subscription experiment",
+  "model": "gpt-5.6-luna",
+  "query": "Inspect all transaction records. For records where region=EMEA and status=SETTLED, return the exact count, sum of amount_cents, and the transaction with the largest amount_cents. Break ties by the lexicographically largest transaction ID. Return exactly these labeled fields: count=<integer> total_amount_cents=<integer> max_transaction_id=<ID> max_amount_cents=<integer>.",
+  "context_chars": 10104,
+  "context_preview": "TX-0000001 account=ACCT-8386 region=APAC status=REFUNDED amount_cents=527025 channel=api checksum=e255accb\nTX-0000002 account=ACCT-9381 region=EMEA status=SETTLED amount_cents=821526 channel=web checksum=c0433cbd\nTX-0000003 account=ACCT-1323 region=NA status=PENDING amount_cents=2757 channel=api checksum=49889310\nTX-0000004 account=ACCT-8033 region=APAC status=SETTLED amount_cents=12146 channel=mobile checksum=35d14880\nTX-0000005 account=ACCT-5844 region=NA status=REFUNDED amount_cents=364645 channel=web checksum=ffe976ab\nTX-0000006 account=ACCT-9134 region=APAC status=REFUNDED amount_cents=94120 channel=mobile checksum=49a047dc\nTX-0000007 account=ACCT-9461 region=NA status=PENDING amount_cents=919150 channel=mobile checksum=06555096\nTX-0000008 account=ACCT-6918 region=LATAM status=REFUNDED amount_cents=483569 channel=api checksum=66160227\nTX-0000009 account=ACCT-8297 region=NA status=CANCELLED amount_cents=446209 channel=web checksum=65ed0de4\nTX-0000010 account=ACCT-7852 region=LATAM status=SETTLED amount_cents=591496 channel=api checksum=93550840\nTX-0000011 account=ACCT-0801 region=EMEA status=PENDING amount_cents=857973 channel=api checksum=b7a1774f\nTX-0000012 account=ACCT-7899 region=NA status=SETTLED amount_cents=149430 channel=batch checksum=d9814559\nTX-0000013 account=ACCT-7691 region=APAC status=SETTLED amount_cents=707158 channel=mobile checksum=8f4ecb4f\nTX-0000014 acc",
+  "context_sha256": "753ce91f5a0d19351081775d4529a379358b0ff132bfb350c8f2050627f15236",
+  "sample_note": "10,104 generated characters · seed 2026 · 2026-09-08 UTC · medium reasoning · one run per mode (direct first). Exact answer key; no grading feedback during either run. Codex CLI tokens include cached input and prompt overhead; subscription dollar cost is unavailable. This single task does not establish a general advantage.",
+  "rlm": {
+    "tokens": null,
+    "cached_tokens": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "cost": null,
+    "seconds": 0.13962,
+    "calls": 1,
+    "result": "",
+    "passed": "0 / 4 fields",
+    "steps": [
+      {
+        "at": 7e-06,
+        "node_id": "rlm-1",
+        "parent_id": "",
+        "kind": "run_start",
+        "title": "Context stays in Python",
+        "detail": "The model receives the question and context size."
+      },
+      {
+        "at": 9.4e-05,
+        "node_id": "llm-2",
+        "parent_id": "rlm-1",
+        "kind": "model_call_start",
+        "title": "Model call 1",
+        "detail": "gpt-5.6-luna · depth 0 · RLM step"
+      },
+      {
+        "at": 0.139151,
+        "node_id": "llm-2",
+        "parent_id": "rlm-1",
+        "kind": "model_call_error",
+        "title": "Run error",
+        "detail": "Text-only contract violated by Codex item: error"
+      },
+      {
+        "at": 0.139547,
+        "node_id": "rlm-1",
+        "parent_id": "",
+        "kind": "run_error",
+        "title": "Run error",
+        "detail": "Text-only contract violated by Codex item: error"
+      }
+    ],
+    "error": "Text-only contract violated by Codex item: error"
+  },
+  "direct": {
+    "tokens": null,
+    "cached_tokens": 0,
+    "prompt_tokens": null,
+    "completion_tokens": null,
+    "cost": null,
+    "seconds": 1.873042,
+    "calls": 1,
+    "result": "",
+    "passed": "0 / 4 fields",
+    "steps": [
+      {
+        "at": 0,
+        "title": "Send full context",
+        "detail": "10,104 characters in one model request.",
+        "kind": "model_call_start"
+      },
+      {
+        "at": 1.873042,
+        "title": "Run error",
+        "detail": "One text-only Codex turn; no external computation.",
+        "output": "CodexError: Text-only contract violated by Codex item: error",
+        "kind": "run_error"
+      }
+    ],
+    "error": "CodexError: Text-only contract violated by Codex item: error"
+  }
+}

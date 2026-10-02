@@ -87,6 +87,42 @@ def test_list_operations(repl):
     assert env["items"] == [1, 2, 3, 4, 5]
 
 
+@pytest.mark.parametrize(
+    ("code", "expected"),
+    [
+        ("amount, ident = max([(10, 'A'), (20, 'B')])", {"amount": 20, "ident": "B"}),
+        ("first, (second, third) = [1, (2, 3)]", {"first": 1, "second": 2, "third": 3}),
+        ("first, *middle, last = range(5)", {"first": 0, "middle": [1, 2, 3], "last": 4}),
+    ],
+)
+def test_assignment_unpacking_preserves_python_semantics(repl, code, expected):
+    env = {}
+    repl.execute(code, env)
+    assert env == expected
+
+
+@pytest.mark.parametrize("raise_after_delete", [False, True])
+def test_deleted_variables_are_removed_from_recovery_snapshot(repl, raise_after_delete):
+    def callback():
+        return "callback works"
+
+    env = {"initial": "remove me", "context": "source", "callback": callback}
+    repl.execute("del initial; result = 'old answer'", env)
+    assert "initial" not in env
+    code = "del result"
+    if raise_after_delete:
+        with pytest.raises(REPLError, match="division by zero"):
+            repl.execute(code + "; 1 / 0", env)
+    else:
+        repl.execute(code, env)
+    assert env == {"context": "source", "callback": callback}
+    assert repl.get_variable("result") == (False, None)
+    # A replacement worker must inherit the reconciled snapshot, not deleted values.
+    repl.close()
+    assert repl.execute("callback()", env) == "callback works"
+    assert repl.get_variable("result") == (False, None)
+
+
 def test_forbidden_import(repl):
     """Test that arbitrary imports are forbidden."""
     env = {}

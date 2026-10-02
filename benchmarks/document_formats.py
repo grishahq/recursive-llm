@@ -16,7 +16,6 @@ import argparse
 import csv
 import hashlib
 import json
-import re
 import shutil
 import subprocess
 import urllib.request
@@ -27,11 +26,24 @@ from typing import Any, Dict, Iterable, List, Mapping, Sequence
 from dotenv import load_dotenv
 
 try:
-    from .compare_same_model import Task, ValidationResult, aggregate_results, run_task
+    from .compare_same_model import (
+        Task,
+        ValidationResult,
+        aggregate_results,
+        run_task,
+        validate_labeled_fields,
+    )
 except ImportError:  # Support direct execution from the repository root.
-    from compare_same_model import Task, ValidationResult, aggregate_results, run_task
+    from compare_same_model import (
+        Task,
+        ValidationResult,
+        aggregate_results,
+        run_task,
+        validate_labeled_fields,
+    )
 
 
+GRADER_VERSION = "document-format-fields-v2"
 SOURCE_SPECS: Mapping[str, Mapping[str, str]] = {
     "frankenstein": {
         "format": "txt",
@@ -210,60 +222,39 @@ def load_documents(directory: Path) -> Dict[str, str]:
     return documents
 
 
-def _field(answer: str, label: str) -> str:
-    match = re.search(rf"^{re.escape(label)}\s*:\s*(.+)$", answer, re.IGNORECASE | re.MULTILINE)
-    return match.group(1).strip() if match else ""
-
-
-def _normalized(value: str) -> str:
-    return re.sub(r"[^a-z0-9_.]+", " ", value.casefold()).strip()
-
-
 def validate_frankenstein(answer: str) -> ValidationResult:
-    fields = {
-        "Letters": _normalized(_field(answer, "Letters")),
-        "Chapters": _normalized(_field(answer, "Chapters")),
-        "Addressee": _normalized(_field(answer, "Addressee")),
-        "Observed family": _normalized(_field(answer, "Observed family")),
-    }
-    checks = {
-        "Letters": fields["Letters"] == "4",
-        "Chapters": fields["Chapters"] == "24",
-        "Addressee": any(
-            expected in fields["Addressee"]
-            for expected in ("mrs saville", "mrs. saville", "margaret saville")
-        ),
-        "Observed family": "de lacey" in fields["Observed family"],
-    }
-    failures = tuple(
-        f"incorrect or missing field {name!r}" for name, ok in checks.items() if not ok
+    return validate_labeled_fields(
+        answer,
+        {
+            "letters": ("4",),
+            "chapters": ("24",),
+            "addressee": (
+                "Mrs Saville",
+                "Mrs. Saville",
+                "Margaret Saville",
+                "Mrs. Margaret Saville",
+            ),
+            "observed family": ("De Lacey", "De Lacey family", "the De Lacey family"),
+        },
     )
-    return ValidationResult(not failures, failures)
 
 
 def validate_playbook_structure(answer: str) -> ValidationResult:
-    expected = {"Govern": "19", "Manage": "13", "Map": "18", "Measure": "22"}
-    failures = tuple(
-        f"incorrect or missing field {name!r}"
-        for name, value in expected.items()
-        if _normalized(_field(answer, name)) != value
+    return validate_labeled_fields(
+        answer, {"govern": ("19",), "manage": ("13",), "map": ("18",), "measure": ("22",)}
     )
-    return ValidationResult(not failures, failures)
 
 
 def validate_sqlite_defaults(answer: str) -> ValidationResult:
-    expected = {
-        "timeout": "5.0",
-        "isolation_level": "deferred",
-        "cached_statements": "128",
-        "autocommit": "sqlite3.legacy_transaction_control",
-    }
-    failures = tuple(
-        f"incorrect or missing field {name!r}"
-        for name, value in expected.items()
-        if _normalized(_field(answer, name)) != value
+    return validate_labeled_fields(
+        answer,
+        {
+            "timeout": ("5.0",),
+            "isolation_level": ("DEFERRED",),
+            "cached_statements": ("128",),
+            "autocommit": ("sqlite3.LEGACY_TRANSACTION_CONTROL",),
+        },
     )
-    return ValidationResult(not failures, failures)
 
 
 def build_tasks(documents: Mapping[str, str], *, label: str) -> Sequence[Task]:
@@ -278,12 +269,14 @@ def build_tasks(documents: Mapping[str, str], *, label: str) -> Sequence[Task]:
             "raw_sha256": spec["sha256"],
             "context_sha256": _sha256(context.encode("utf-8")),
             "characters": len(context),
+            "grader_version": GRADER_VERSION,
         }
 
     playbook_query = (
         "Count the distinct numbered subcategory headings belonging to each top-level AI RMF "
         "function. Count headings such as GOVERN 1.1 once and do not count prose mentions. Return "
-        "exactly four lines labeled `Govern:`, `Manage:`, `Map:`, and `Measure:`."
+        "exactly four lines labeled `Govern:`, `Manage:`, `Map:`, and `Measure:`, each once "
+        "with only its integer count and no other text."
     )
     return (
         Task(
@@ -292,7 +285,8 @@ def build_tasks(documents: Mapping[str, str], *, label: str) -> Sequence[Task]:
                 "Use the full book text. Count the standalone Letter and Chapter headings in the "
                 "book body (ignore the indented contents list), identify the addressee printed under "
                 "the letters, and name the family observed by the creature. Return exactly four lines "
-                "labeled `Letters:`, `Chapters:`, `Addressee:`, and `Observed family:`."
+                "labeled `Letters:`, `Chapters:`, `Addressee:`, and `Observed family:`. Give each "
+                "field once with only the requested integer count or name and no other text."
             ),
             context=documents["frankenstein"],
             validator=validate_frankenstein,
@@ -317,7 +311,8 @@ def build_tasks(documents: Mapping[str, str], *, label: str) -> Sequence[Task]:
             query=(
                 "Find the documented default values in the sqlite3.connect signature for timeout, "
                 "isolation_level, cached_statements, and autocommit. Return exactly four lines labeled "
-                "`timeout:`, `isolation_level:`, `cached_statements:`, and `autocommit:`."
+                "`timeout:`, `isolation_level:`, `cached_statements:`, and `autocommit:`. Give "
+                "each field once with only the value as written in the signature and no other text."
             ),
             context=documents["python_sqlite_html"],
             validator=validate_sqlite_defaults,

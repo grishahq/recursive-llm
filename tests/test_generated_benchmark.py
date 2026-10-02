@@ -53,6 +53,38 @@ def test_generated_answer_validator_requires_exact_labeled_fields() -> None:
     assert generated.validate(valid.replace(str(truth.total_amount_cents), "0"))
 
 
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        lambda answer: answer + " count=0",
+        lambda answer: answer + "\nCOUNT=0",
+        lambda answer: answer + " " + answer,
+        lambda answer: answer.replace("count=", "count=0 count="),
+        lambda answer: answer.replace("count=", "count=-"),
+        lambda answer: re.sub(r"(count=\d+)", r"\1.5", answer),
+        lambda answer: re.sub(r"(count=\d+)", r"\1e1", answer),
+        lambda answer: answer + " extra=0",
+        lambda answer: "Not " + answer,
+        lambda answer: answer + "\nThe count above is incorrect.",
+    ],
+)
+def test_generated_grader_rejects_ambiguous_or_partial_field_values(mutation) -> None:
+    """No correct prefix, duplicate or contradictory prose can earn an exact pass."""
+    generated = generate_long_context(target_chars=5_000, seed=9)
+    valid = " ".join(f"{key}={value}" for key, value in vars(generated.truth).items())
+
+    assert generated.validate(mutation(valid))
+
+
+def test_generated_grader_allows_whitespace_and_field_order_variants() -> None:
+    generated = generate_long_context(target_chars=5_000, seed=9)
+    answer = "\n".join(
+        f" {key.upper()} = {value} " for key, value in reversed(vars(generated.truth).items())
+    )
+
+    assert generated.validate(answer) == ()
+
+
 @pytest.mark.parametrize("target_chars", [0, -1])
 def test_invalid_generated_context_size_is_rejected(target_chars: int) -> None:
     """The generator should reject empty or negative benchmark sizes."""
