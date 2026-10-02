@@ -66,6 +66,7 @@ jobs:
             python-version: "3.11"
           - os: ubuntu-latest
             python-version: "3.12"
+            extras: dev,visualizer
           - os: macos-latest
             python-version: "3.12"
           - os: windows-latest
@@ -78,8 +79,30 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: pip
       - name: Install development dependencies
-        run: python -m pip install --upgrade pip && python -m pip install -e ".[dev]"
+        run: python -m pip install --upgrade pip && python -m pip install -e ".[${{ matrix.extras || 'dev' }}]"
+      - name: Verify document parser is installed
+        if: matrix.extras == 'dev,visualizer'
+        run: python -c "import pypdf"
       - name: Run test suite
         run: pytest
       - name: Run offline demo
         run: python examples/demo.py
+
+  visualizer:
+    name: Visualizer
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: visualizer
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: visualizer/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build

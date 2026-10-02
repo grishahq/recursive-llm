@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "purpose": "Single final-code smoke capture; earlier 10k and100k attempts remain in summary.json, including the initial direct100k arithmetic error",
+  "captured_at": "2026-10-02T10:02:03.709059+00:00",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "max_depth": 1,
+  "seed": 2026,
+  "target_chars": 100000,
+  "actual_chars": 100098,
+  "context_sha256": "1ee43f3b42f8db55369c337d2e37f1e7f61224abe3d538581a716865df8a6fcc",
+  "grader_version": "transaction-fields-v2",
+  "comparison": "comparison-100k-final.json",
+  "raw": "comparison-100k-final.raw.json",
+  "runtime_manifest": "final-runtime.json",
+  "cli_log": "comparison-100k-final.cli.log",
+  "lanes": {
+    "direct": {
+      "tokens": 38790,
+      "cached_tokens": 2688,
+      "seconds": 33.133458,
+      "calls": 1,
+      "passed": "4 / 4 fields",
+      "quality": {
+        "status": "graded",
+        "matched": 4,
+        "total": 4,
+        "fields": [
+          {
+            "label": "count",
+            "expected": 57,
+            "observed": "57",
+            "passed": true
+          },
+          {
+            "label": "total_amount_cents",
+            "expected": 27404392,
+            "observed": "27404392",
+            "passed": true
+          },
+          {
+            "label": "max_transaction_id",
+            "expected": "TX-0000883",
+            "observed": "TX-0000883",
+            "passed": true
+          },
+          {
+            "label": "max_amount_cents",
+            "expected": 993620,
+            "observed": "993620",
+            "passed": true
+          }
+        ]
+      },
+      "strict_grader_failures": [],
+      "error": null,
+      "codex_item_types": [
+        "agent_message"
+      ]
+    },
+    "rlm": {
+      "tokens": 16485,
+      "cached_tokens": 8064,
+      "seconds": 31.719526,
+      "calls": 3,
+      "passed": "4 / 4 fields",
+      "quality": {
+        "status": "graded",
+        "matched": 4,
+        "total": 4,
+        "fields": [
+          {
+            "label": "count",
+            "expected": 57,
+            "observed": "57",
+            "passed": true
+          },
+          {
+            "label": "total_amount_cents",
+            "expected": 27404392,
+            "observed": "27404392",
+            "passed": true
+          },
+          {
+            "label": "max_transaction_id",
+            "expected": "TX-0000883",
+            "observed": "TX-0000883",
+            "passed": true
+          },
+          {
+            "label": "max_amount_cents",
+            "expected": 993620,
+            "observed": "993620",
+            "passed": true
+          }
+        ]
+      },
+      "strict_grader_failures": [],
+      "error": null,
+      "codex_item_types": [
+        "agent_message"
+      ]
+    }
+  },
+  "rlm_call_types": {
+    "root_calls": 3,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "max_depth_reached": 0
+  },
+  "repl_errors": [],
+  "source_sha256_before": {
+    "examples/capture_codex_comparison.py": "51ed344c776dcb7ffee0a7f0e28c19cc2ebd540bedacbbf8b0f8a33fe4d549fb",
+    "benchmarks/generated_long_context.py": "8bab20b863d7e81972b15629e8ce148c25a27aa104d0b2af5575a51bb9d55c68",
+    "src/rlm/__init__.py": "1fcada3eec8eaa30deb2a3fd9e99c1914ca367ffc62549f185d4ac29bede69a2",
+    "src/rlm/budget.py": "0c38224c559b9cec3e4777f1825ba8872d7c12b393f06876a505e8205ad14d15",
+    "src/rlm/codex.py": "81634775f97b10ad7d628455b8ac02443789d1d4531dc59722e6c784f570b7ea",
+    "src/rlm/core.py": "ccff53c4c50b126ec8e7f43df98bcce44447e9270e747ce2f7d0e22085ed0058",
+    "src/rlm/errors.py": "fd9ccab151f4d93c92b7639e1a4e33f5e344c4d78b92311649a5383b3b24c110",
+    "src/rlm/parser.py": "51c518c450c298ecd5572e51dee9e21eb6821136fa5d5a4d0026b9ddfe240944",
+    "src/rlm/prompts.py": "1cbb98ab9ce67620c9bafb58848220ad887b49976ed432daddd3f64bbdea1a2a",
+    "src/rlm/repl.py": "8a4e1cc231d9c04cf07dd53973f54b944dfb5dd886802f5a5628f92bdc96d8d9",
+    "src/rlm/results.py": "1090a81f2ea2cb9552cb874df5118af193b94872217d8b1e42db6b9411e8f11b",
+    "src/rlm/run_state.py": "bddc4b6e64ffabac9d16bb09437469a314ac756277912b4a0a33c5cbc7fd857a",
+    "src/rlm/stats.py": "fc9de7c36704bcf321925885156dfcf44e5484e8dc6a644c9e174255e636a44f",
+    "src/rlm/types.py": "971e5c79d8504f3f1e7278e804970b3aeec2cb0dd14d05e5ee69c84190da4609"
+  },
+  "source_sha256_after": {
+    "examples/capture_codex_comparison.py": "51ed344c776dcb7ffee0a7f0e28c19cc2ebd540bedacbbf8b0f8a33fe4d549fb",
+    "benchmarks/generated_long_context.py": "8bab20b863d7e81972b15629e8ce148c25a27aa104d0b2af5575a51bb9d55c68",
+    "src/rlm/__init__.py": "1fcada3eec8eaa30deb2a3fd9e99c1914ca367ffc62549f185d4ac29bede69a2",
+    "src/rlm/budget.py": "0c38224c559b9cec3e4777f1825ba8872d7c12b393f06876a505e8205ad14d15",
+    "src/rlm/codex.py": "81634775f97b10ad7d628455b8ac02443789d1d4531dc59722e6c784f570b7ea",
+    "src/rlm/core.py": "ccff53c4c50b126ec8e7f43df98bcce44447e9270e747ce2f7d0e22085ed0058",
+    "src/rlm/errors.py": "fd9ccab151f4d93c92b7639e1a4e33f5e344c4d78b92311649a5383b3b24c110",
+    "src/rlm/parser.py": "51c518c450c298ecd5572e51dee9e21eb6821136fa5d5a4d0026b9ddfe240944",
+    "src/rlm/prompts.py": "1cbb98ab9ce67620c9bafb58848220ad887b49976ed432daddd3f64bbdea1a2a",
+    "src/rlm/repl.py": "8a4e1cc231d9c04cf07dd53973f54b944dfb5dd886802f5a5628f92bdc96d8d9",
+    "src/rlm/results.py": "1090a81f2ea2cb9552cb874df5118af193b94872217d8b1e42db6b9411e8f11b",
+    "src/rlm/run_state.py": "bddc4b6e64ffabac9d16bb09437469a314ac756277912b4a0a33c5cbc7fd857a",
+    "src/rlm/stats.py": "fc9de7c36704bcf321925885156dfcf44e5484e8dc6a644c9e174255e636a44f",
+    "src/rlm/types.py": "971e5c79d8504f3f1e7278e804970b3aeec2cb0dd14d05e5ee69c84190da4609"
+  },
+  "source_unchanged": true,
+  "interpretation": "Both answers pass; RLM used only root Python execution. One pair cannot establish a general model-quality or recursion advantage.",
+  "artifact_sha256": {
+    "comparison-100k-final.json": "df79355f861d7dc1ce362a5e942c9d32a05558a817567e68494fc06f9fa20b56",
+    "comparison-100k-final.raw.json": "6f7686598978dd33649e56a34f904a72189ef2196840a97d8a6a5d3100c67ddf",
+    "final-runtime.json": "4a456d86be3d63a2f7107d83e85321fdd1c165d35eb03cbb575e4c6590d5d1a7",
+    "comparison-100k-final.cli.log": "b09954c80c043565307326a3f3001119f71099c1ce04c7c7ba1a9847367ca098"
+  }
+}

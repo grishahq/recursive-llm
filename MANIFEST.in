@@ -2,6 +2,8 @@ include CHANGELOG.md
 include SECURITY.md
 include BENCHMARK_RESULTS.md
 include DOCUMENT_EVALUATION.md
+include CODEX_COMPARISON.md
+include examples/document_presets.json
 include benchmarks/codex_evaluation.schema.json
 include .github/assets/benchmark-100k.svg
 recursive-include benchmarks *.py

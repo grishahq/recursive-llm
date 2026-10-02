@@ -7,11 +7,25 @@ import pytest
 
 from benchmarks.multi_document import (
     DOCUMENT_SPECS,
+    GRADER_VERSION as MULTI_DOCUMENT_GRADER_VERSION,
     build_tasks,
     load_documents,
     validate_commission_facts,
     validate_python_docs_facts,
 )
+from benchmarks.war_and_peace import GRADER_VERSION, PETYA_FINAL_NIGHT_QUERY
+
+
+COMMISSION_FACTS = """Pages reviewed: more than 2.5 million
+Individuals interviewed: more than 1,200
+Countries: ten
+Replacement: National Intelligence Director
+Responsibilities: two main areas
+Location: Executive Office of the President"""
+PYTHON_FACTS = """Zstandard module: compression.zstd
+Default pickle protocol: 5
+map parameter: strict
+Thread.join exception: PythonFinalizationError"""
 
 
 def test_commission_validator_requires_every_labeled_fact() -> None:
@@ -39,6 +53,40 @@ Thread.join exception: PythonFinalizationError"""
     assert not validate_python_docs_facts(answer.replace("strict", "exact")).passed
 
 
+@pytest.mark.parametrize(
+    "answer",
+    [
+        COMMISSION_FACTS + "\nCountries: 0",
+        COMMISSION_FACTS + "\nCountries: ten",
+        COMMISSION_FACTS.replace("2.5 million", "12.5 million"),
+        COMMISSION_FACTS.replace("more than 2.5 million", "less than 2.5 million"),
+        COMMISSION_FACTS.replace("more than 1,200", "not 1,200"),
+        COMMISSION_FACTS.replace(
+            "National Intelligence Director", "not National Intelligence Director"
+        ),
+        COMMISSION_FACTS.replace(
+            "Executive Office of the President", "not Executive Office of the President"
+        ),
+    ],
+)
+def test_commission_grader_rejects_contradictions_and_numeric_substrings(answer: str) -> None:
+    assert not validate_commission_facts(answer).passed
+
+
+@pytest.mark.parametrize(
+    "answer",
+    [
+        PYTHON_FACTS + "\nDefault pickle protocol: 0",
+        PYTHON_FACTS + "\nmap parameter: strict",
+        PYTHON_FACTS.replace("Default pickle protocol: 5", "Default pickle protocol: -5"),
+        PYTHON_FACTS.replace("Default pickle protocol: 5", "Default pickle protocol: .5"),
+        PYTHON_FACTS + "\nIgnore these incorrect defaults.",
+    ],
+)
+def test_python_docs_grader_rejects_duplicates_and_erased_numeric_signs(answer: str) -> None:
+    assert not validate_python_docs_facts(answer).passed
+
+
 def test_task_builder_covers_three_distinct_corpora() -> None:
     documents = {
         "war_and_peace": "war",
@@ -55,6 +103,11 @@ def test_task_builder_covers_three_distinct_corpora() -> None:
     ]
     assert {task.metadata["corpus"] for task in tasks if task.metadata} == set(documents)
     assert all(task.metadata and task.metadata["variant"] == "experiment" for task in tasks)
+    assert tasks[0].query == PETYA_FINAL_NIGHT_QUERY
+    assert tasks[0].metadata["grader_version"] == GRADER_VERSION
+    assert all(
+        task.metadata["grader_version"] == MULTI_DOCUMENT_GRADER_VERSION for task in tasks[1:]
+    )
 
 
 def test_loader_rejects_unpinned_input(tmp_path: Path) -> None:

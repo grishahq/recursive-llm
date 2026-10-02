@@ -1,0 +1,54 @@
+[
+  {
+    "id": "alice-gutenberg-11",
+    "title": "Alice’s Adventures in Wonderland",
+    "description": "Explore the chapters and characters of a classic.",
+    "filename": "alice-gutenberg-11.txt",
+    "source_url": "https://www.gutenberg.org/cache/epub/11/pg11.txt",
+    "source_page": "https://www.gutenberg.org/ebooks/11",
+    "context_chars": 163950,
+    "sha256": "01b38ea4c710a84bc18d0bd41271a5a1a92b94e97b2812f4dece97d4a694725e",
+    "suggested_question": "How many chapters are in Alice in Wonderland, what are the first and last called, and who is the judge at the trial?",
+    "expected_fields": {
+      "chapter_count": 12,
+      "first_chapter_title": "Down the Rabbit-Hole",
+      "last_chapter_title": "Alice’s Evidence",
+      "trial_judge": "King"
+    },
+    "expected_aliases": {
+      "trial_judge": ["The King", "King of Hearts", "The King of Hearts"]
+    }
+  },
+  {
+    "id": "usgs-2024-earthquakes",
+    "title": "USGS 2024 earthquake catalog",
+    "description": "Find strong, shallow earthquakes in a real catalog.",
+    "filename": "usgs-2024-m5_5-earthquakes.csv",
+    "source_url": "https://earthquake.usgs.gov/fdsnws/event/1/query?format=csv&starttime=2024-01-01T00:00:00&endtime=2024-12-31T23:59:59.999&minmagnitude=5.5&eventtype=earthquake&orderby=time-asc",
+    "source_page": "https://earthquake.usgs.gov/fdsnws/event/1/",
+    "context_chars": 64973,
+    "sha256": "a9998fe7705df7ebc294067ae8f960c15873caf18e35ccaf7b6e41c99d7104d4",
+    "suggested_question": "How many earthquakes in 2024 had a magnitude of at least 6.5 and a depth under 70 km? What were the ID and magnitude of the strongest one?",
+    "expected_fields": {
+      "matching_events": 18,
+      "largest_event_id": "us6000m0xl",
+      "largest_magnitude": 7.5
+    }
+  },
+  {
+    "id": "python-csv-docs",
+    "title": "Python 3.14 CSV documentation",
+    "description": "Find the default CSV format in Python.",
+    "filename": "python-3.14-csv-docs.txt",
+    "source_url": "https://raw.githubusercontent.com/python/cpython/v3.14.0/Doc/library/csv.rst",
+    "source_page": "https://github.com/python/cpython/blob/v3.14.0/Doc/library/csv.rst",
+    "context_chars": 23705,
+    "sha256": "9e0b648823bbffc3d6112de905d5fcbb7ebe2d29a4a9e8fd0e16737b6e0d3359",
+    "suggested_question": "When writing CSV files, what delimiter, quote character and line ending does Python use by default?",
+    "expected_fields": {
+      "delimiter": ",",
+      "quotechar": "\"",
+      "lineterminator": "\r\n"
+    }
+  }
+]

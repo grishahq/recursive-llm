@@ -4,6 +4,38 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-10-02
+
+### Added
+
+- A side-by-side web visualizer and downloadable film of real RLM and direct GPT-5.6 Luna runs,
+  with synchronized replay, call trees, recorded Python steps, import, and JSON export.
+- An optional async completion handler, propagated across child RLMs, and a bounded Codex CLI
+  transport for ChatGPT-authenticated subscription experiments without API keys.
+- A reproducible paired capture script, 10k and 100k generated-source recordings, and an explicit
+  methodology distinguishing total CLI tokens from subscription billing.
+
+### Changed
+
+- Made the paired Codex capture model, reasoning effort, and recursion depth configurable while
+  retaining the historical Luna/medium/depth-1 defaults and recording the actual settings.
+- Versioned stricter generated-transaction and document fact graders; historical benchmark scores
+  remain labeled as results of their original grading rules.
+- Added frontend type, test, and build checks and Python PDF coverage to CI.
+- Updated the visualizer's React, Vite, Vinext, and Cloudflare dependencies to patched,
+  peer-compatible releases, with a scoped Satori decompressor override.
+
+### Fixed
+
+- Stopped admitting calls after a shared usage budget is exhausted and drained cancelled callbacks
+  before publishing the final run statistics and trajectory.
+- Removed deleted REPL variables from recovery snapshots and prevented final answers from using
+  an obsolete parent snapshot after worker loss.
+- Enabled ordinary, nested, and starred assignment unpacking in the restricted Python worker.
+- Separated process-readiness allowances from cancellation assertions in coverage-instrumented tests.
+- Deferred the public `RLM` import so standalone REPL workers start without importing LiteLLM.
+- Kept the visualizer's required `lib` sources visible to Git.
+
 ## [0.4.0] - 2026-08-31
 
 ### Added
@@ -105,7 +137,8 @@ All notable changes to this project are documented in this file.
 
 - Initial public release.
 
-[Unreleased]: https://github.com/grishahq/recursive-llm/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/grishahq/recursive-llm/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/grishahq/recursive-llm/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/grishahq/recursive-llm/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/grishahq/recursive-llm/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/grishahq/recursive-llm/compare/v0.2.0...v0.3.0

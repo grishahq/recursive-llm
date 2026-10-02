@@ -1,0 +1,21 @@
+WEBVTT
+
+00:00.000 --> 00:03.000
+One question. Two approaches.
+GPT-5.6 Luna through Codex.
+
+00:03.000 --> 00:09.000
+Left: RLM keeps the full source in a Python REPL.
+Right: a direct call receives the complete source.
+
+00:09.000 --> 00:21.000
+Actual recorded events. Both timelines are accelerated
+by the same factor for this video.
+
+00:21.000 --> 00:30.000
+Compare the answers, exact fields, total model tokens,
+and elapsed time. This is one paired experiment.
+
+00:30.000 --> 00:34.000
+600 stars. Thank you.
+github.com/grishahq/recursive-llm

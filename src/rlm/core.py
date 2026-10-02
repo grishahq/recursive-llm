@@ -8,6 +8,7 @@ import re
 from threading import Lock
 from typing import (
     Any,
+    Awaitable,
     Callable,
     Coroutine,
     Dict,
@@ -79,6 +80,7 @@ class RLM:
         final_answer_validator: Optional[FinalAnswerValidator] = None,
         capture_trajectory_content: bool = False,
         event_handler: Optional[Callable[[TrajectoryEvent], None]] = None,
+        completion_handler: Optional[Callable[..., Awaitable[Any]]] = None,
         _current_depth: int = 0,
         _run_state: Optional[RunState] = None,
         _node_id: str = "",
@@ -91,6 +93,11 @@ class RLM:
         RLM objects. At depth 0 the root has a REPL but no subcalls. At depth 1
         it can call a plain LM. At depth 2 it can create one child RLM, whose
         boundary falls back to a plain LM call.
+
+        ``completion_handler`` optionally replaces LiteLLM with an async callable
+        accepting ``model``, ``messages``, and provider options. It must return a
+        LiteLLM-compatible response (``choices`` and optional ``usage``). The same
+        handler is used throughout the recursion tree and shares its run budget.
         """
         if max_depth < 0:
             raise ValueError("max_depth must be zero or greater")
@@ -137,6 +144,7 @@ class RLM:
         self.final_answer_validator = final_answer_validator
         self.capture_trajectory_content = capture_trajectory_content
         self.event_handler = event_handler
+        self.completion_handler = completion_handler
         self._current_depth = _current_depth
         self._inherited_run_state = _run_state
         self._inherited_node_id = _node_id
@@ -213,6 +221,8 @@ class RLM:
         try:
             answer = await self._acomplete_impl(query, context, kwargs, run_state, node_id)
         except BaseException as exc:
+            if self._current_depth == 0:
+                await run_state.finish_callbacks()
             run_state.record_event(
                 "rlm_error",
                 self._current_depth,
@@ -229,6 +239,8 @@ class RLM:
                     error_type=type(exc).__name__,
                     error=str(exc),
                 )
+                if isinstance(exc, BudgetExceededError):
+                    exc.stats = self._stats_snapshot(run_state)
             if return_failure and isinstance(exc, Exception):
                 return FailedCompletionResult(
                     error_type=type(exc).__name__,
@@ -239,6 +251,8 @@ class RLM:
                 )
             raise
         else:
+            if self._current_depth == 0:
+                await run_state.finish_callbacks()
             answer_data = self._content_data(answer=answer)
             run_state.record_event(
                 "rlm_end", self._current_depth, node_id, parent_id, **answer_data
@@ -324,19 +338,9 @@ class RLM:
                             self._raise_elapsed_budget_error(run_state)
                         raise
                     except REPLError:
-                        if final_var_name in repl_env:
-                            answer = str(repl_env[final_var_name])
-                            rejection = await self._process_final_answer(
-                                run_state,
-                                node_id,
-                                answer,
-                                method="parent_snapshot",
-                                variable=final_var_name,
-                            )
-                            if rejection is None:
-                                return answer
-                            self._append_validation_feedback(messages, response, rejection)
-                            continue
+                        # A lost worker has no authoritative current value. Parent
+                        # snapshots are recovery checkpoints, not final answers.
+                        pass
                     else:
                         if found:
                             answer = str(value)
@@ -414,6 +418,11 @@ class RLM:
 
                 messages.append({"role": "assistant", "content": response})
                 messages.append({"role": "user", "content": exec_result})
+        except BaseException:
+            repl.abort()
+            if self._current_depth == 0:
+                run_state.cancel_callbacks()
+            raise
         finally:
             await asyncio.to_thread(repl.close)
 
@@ -709,8 +718,9 @@ class RLM:
     ) -> Any:
         """Make one provider request within the remaining run deadline."""
         remaining = run_state.budget.remaining_seconds()
+        completion = self.completion_handler or litellm.acompletion
         if remaining is None:
-            return await litellm.acompletion(
+            return await completion(
                 model=model,
                 messages=messages,
                 **completion_kwargs,
@@ -718,7 +728,7 @@ class RLM:
         if remaining <= 0:
             self._check_budget_deadline(run_state)
         task = asyncio.ensure_future(
-            litellm.acompletion(
+            completion(
                 model=model,
                 messages=messages,
                 **completion_kwargs,
@@ -915,6 +925,8 @@ class RLM:
     @staticmethod
     def _get_response_cost(response: Any) -> Optional[float]:
         """Return LiteLLM's best-effort response cost without affecting completion."""
+        if isinstance(response, dict) and response.get("billing_mode") == "subscription":
+            return None
         hidden_params = getattr(response, "_hidden_params", None)
         if isinstance(hidden_params, dict):
             response_cost = hidden_params.get("response_cost")
@@ -1024,6 +1036,7 @@ class RLM:
                 retry_backoff_seconds=self.retry_backoff_seconds,
                 capture_trajectory_content=self.capture_trajectory_content,
                 event_handler=self.event_handler,
+                completion_handler=self.completion_handler,
                 _current_depth=self._current_depth + 1,
                 _run_state=state,
                 _node_id=child_node_id,
@@ -1058,18 +1071,24 @@ class RLM:
             async def run_one(item_query: str, item_context: str) -> str:
                 async with semaphore:
                     try:
+                        self._check_budget_deadline(state)
                         return await asyncio.to_thread(query_fn, item_query, item_context)
                     except BudgetExceededError:
                         raise
                     except Exception as exc:
                         return f"Error: {exc}"
 
-            return await asyncio.gather(
-                *(
-                    run_one(item_query, item_context)
-                    for item_query, item_context in zip(query_list, context_list)
-                )
-            )
+            tasks = [
+                asyncio.create_task(run_one(item_query, item_context))
+                for item_query, item_context in zip(query_list, context_list)
+            ]
+            try:
+                return await asyncio.gather(*tasks)
+            finally:
+                for task in tasks:
+                    if not task.done():
+                        task.cancel()
+                await asyncio.gather(*tasks, return_exceptions=True)
 
         def batched(
             queries: Sequence[str],
@@ -1083,7 +1102,7 @@ class RLM:
         """Run a REPL callback on its owning completion loop when available."""
         loop = run_state.loop
         if loop is not None and loop.is_running():
-            return asyncio.run_coroutine_threadsafe(awaitable, loop).result()
+            return run_state.submit_callback(awaitable).result()
         return _run_sync(awaitable)
 
     @property

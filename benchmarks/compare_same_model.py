@@ -17,6 +17,7 @@ import math
 import re
 import statistics
 import time
+import unicodedata
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple, cast
@@ -28,8 +29,10 @@ from rlm import FailedCompletionResult, RLM
 from rlm.stats import UsageTracker
 
 try:
+    from .generated_long_context import GRADER_VERSION as GENERATED_GRADER_VERSION
     from .generated_long_context import generate_long_context
 except ImportError:  # Support direct execution from the repository root.
+    from generated_long_context import GRADER_VERSION as GENERATED_GRADER_VERSION
     from generated_long_context import generate_long_context
 
 
@@ -39,6 +42,43 @@ class ValidationResult:
 
     passed: bool
     failures: Tuple[str, ...]
+
+
+def validate_labeled_fields(answer: str, expected: Mapping[str, Sequence[str]]) -> ValidationResult:
+    """Bind unique labeled lines to finite aliases, rejecting prose and contradictions.
+
+    Expected labels must be lowercase. This grades the output contract, not
+    arbitrary semantic entailment; an unlisted paraphrase does not pass.
+    """
+
+    def normalized(value: str) -> str:
+        decomposed = unicodedata.normalize("NFKD", value)
+        text = "".join(
+            character for character in decomposed if not unicodedata.combining(character)
+        )
+        text = text.translate(str.maketrans("‘’“”", "''\"\""))
+        return " ".join(text.casefold().split()).strip(" \"'!")
+
+    fields: Dict[str, str] = {}
+    failures = []
+    for line in answer.splitlines():
+        if not line.strip():
+            continue
+        match = re.fullmatch(r"\s*([^:=]+?)\s*[:=]\s*(\S.*?)\s*", line)
+        if match is None:
+            failures.append("answer contains a malformed field or extra prose")
+            continue
+        label, value = " ".join(match.group(1).casefold().split()), match.group(2)
+        if label not in expected:
+            failures.append(f"unexpected field {label!r}")
+        if label in fields:
+            failures.append(f"duplicate field {label!r}")
+        fields[label] = value
+    for label, aliases in expected.items():
+        observed = fields.get(label)
+        if observed is None or normalized(observed) not in {normalized(x) for x in aliases}:
+            failures.append(f"incorrect or missing field {label!r}")
+    return ValidationResult(not failures, tuple(failures))
 
 
 Validator = Callable[[str], ValidationResult]
@@ -201,6 +241,7 @@ def build_generated_task(target_chars: int, seed: int) -> Task:
         context=generated.context,
         validator=validate,
         metadata={
+            "grader_version": GENERATED_GRADER_VERSION,
             "seed": generated.seed,
             "target_chars": generated.target_chars,
             "actual_chars": generated.actual_chars,

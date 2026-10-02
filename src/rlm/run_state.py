@@ -4,13 +4,16 @@ from __future__ import annotations
 
 import asyncio
 import time
+from concurrent.futures import Future, InvalidStateError
 from copy import deepcopy
 from threading import Lock
-from typing import Any, Callable, Dict, Optional, Tuple
+from typing import Any, Callable, Coroutine, Dict, Optional, Tuple, TypeVar
 
 from .budget import RunBudget
 from .results import TrajectoryEvent
 from .stats import UsageTracker
+
+T = TypeVar("T")
 
 
 class RunState:
@@ -32,6 +35,89 @@ class RunState:
         self._events: list[TrajectoryEvent] = []
         self._event_handler = event_handler
         self._lock = Lock()
+        self._callbacks: Dict[Future[Any], Optional[asyncio.Task[Any]]] = {}
+        self._cancelled = False
+
+    def submit_callback(self, awaitable: Coroutine[Any, Any, T]) -> Future[T]:
+        """Own both the thread bridge and its task until async cleanup finishes."""
+        loop = self.loop
+        if loop is None:
+            awaitable.close()
+            raise RuntimeError("REPL callback requires an owning event loop")
+        future: Future[T] = Future()
+        with self._lock:
+            if self._cancelled:
+                awaitable.close()
+                future.cancel()
+                return future
+            # Track scheduled callbacks too: cancellation can precede task creation.
+            self._callbacks[future] = None
+
+        def finished(task: asyncio.Task[T]) -> None:
+            try:
+                value = task.result()
+            except asyncio.CancelledError:
+                future.cancel()
+            except BaseException as exc:
+                try:
+                    future.set_exception(exc)
+                except InvalidStateError:
+                    pass
+            else:
+                try:
+                    future.set_result(value)
+                except InvalidStateError:
+                    pass
+            finally:
+                with self._lock:
+                    self._callbacks.pop(future, None)
+
+        def start() -> None:
+            with self._lock:
+                cancelled = self._cancelled
+                if cancelled:
+                    self._callbacks.pop(future, None)
+            if cancelled:
+                awaitable.close()
+                future.cancel()
+                return
+            # Task factories may start the coroutine synchronously. Never hold
+            # the state lock while callback code can re-enter this run state.
+            task = loop.create_task(awaitable)
+            with self._lock:
+                self._callbacks[future] = task
+                cancelled = self._cancelled
+            task.add_done_callback(finished)
+            if cancelled:
+                task.cancel()
+
+        loop.call_soon_threadsafe(start)
+        return future
+
+    def cancel_callbacks(self) -> None:
+        """Wake REPL threads awaiting child calls belonging to this run only."""
+        with self._lock:
+            if self._cancelled:
+                return
+            self._cancelled = True
+            callbacks = tuple(self._callbacks.items())
+        for future, task in callbacks:
+            future.cancel()
+            if task is not None:
+                task.get_loop().call_soon_threadsafe(task.cancel)
+
+    async def finish_callbacks(self) -> None:
+        """Cancel and drain all run-owned work before freezing its result."""
+        self.cancel_callbacks()
+        while True:
+            with self._lock:
+                if not self._callbacks:
+                    return
+                tasks = [task for task in self._callbacks.values() if task is not None]
+            if tasks:
+                await asyncio.gather(*tasks, return_exceptions=True)
+            # Let pending submissions and task done callbacks release ownership.
+            await asyncio.sleep(0)
 
     @property
     def loop(self) -> Optional[asyncio.AbstractEventLoop]:

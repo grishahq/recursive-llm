@@ -37,6 +37,7 @@ class RunBudget:
         self._calls = 0
         self._observed_tokens = 0
         self._observed_cost_usd: Optional[float] = None
+        self._exhausted: Optional[tuple[str, float, float]] = None
         self._lock = Lock()
 
     @staticmethod
@@ -47,10 +48,11 @@ class RunBudget:
     def reserve_call(self) -> None:
         """Reserve one provider call atomically before it starts."""
         with self._lock:
+            self._check_exhausted_locked()
             self._check_deadline_locked()
             next_calls = self._calls + 1
             if self.max_calls is not None and next_calls > self.max_calls:
-                raise BudgetExceededError("llm_calls", self.max_calls, next_calls)
+                self._exceed_locked("llm_calls", self.max_calls, next_calls)
             self._calls = next_calls
 
     def record_usage(self, total_tokens: int, estimated_cost_usd: Optional[float]) -> None:
@@ -58,21 +60,21 @@ class RunBudget:
         with self._lock:
             self._observed_tokens = total_tokens
             self._observed_cost_usd = estimated_cost_usd
+            self._check_exhausted_locked()
             if self.max_tokens is not None and total_tokens > self.max_tokens:
-                raise BudgetExceededError("total_tokens", self.max_tokens, total_tokens)
+                self._exceed_locked("total_tokens", self.max_tokens, total_tokens)
             if (
                 self.max_cost_usd is not None
                 and estimated_cost_usd is not None
                 and estimated_cost_usd > self.max_cost_usd
             ):
-                raise BudgetExceededError(
-                    "estimated_cost_usd", self.max_cost_usd, estimated_cost_usd
-                )
+                self._exceed_locked("estimated_cost_usd", self.max_cost_usd, estimated_cost_usd)
             self._check_deadline_locked()
 
     def check_deadline(self) -> None:
         """Raise when the elapsed-time limit has been exhausted."""
         with self._lock:
+            self._check_exhausted_locked()
             self._check_deadline_locked()
 
     def remaining_seconds(self) -> Optional[float]:
@@ -101,4 +103,13 @@ class RunBudget:
             return
         elapsed = time.monotonic() - self._started_at
         if elapsed >= self.max_elapsed_seconds:
-            raise BudgetExceededError("elapsed_seconds", self.max_elapsed_seconds, elapsed)
+            self._exceed_locked("elapsed_seconds", self.max_elapsed_seconds, elapsed)
+
+    def _check_exhausted_locked(self) -> None:
+        if self._exhausted is not None:
+            raise BudgetExceededError(*self._exhausted)
+
+    def _exceed_locked(self, metric: str, limit: float, observed: float) -> None:
+        """Latch exhaustion so later requests cannot spend a failed run's budget."""
+        self._exhausted = (metric, limit, observed)
+        raise BudgetExceededError(metric, limit, observed)
