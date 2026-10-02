@@ -155,7 +155,9 @@ async def test_subprocess_timeout_and_tool_event_kill_child(tmp_path, monkeypatc
             # Coverage initialization happens before the fake CLI starts. Keep that
             # startup deadline separate from the short exchange timeout under test.
             ready = await asyncio.wait_for(process.stderr.readline(), timeout=20)
-            assert ready == b"FAKE_CLI_READY\n", "Fake CLI failed before becoming ready"
+            assert (
+                ready.rstrip(b"\r\n") == b"FAKE_CLI_READY"
+            ), "Fake CLI failed before becoming ready"
         except BaseException:
             if process.returncode is None:
                 process.kill()
