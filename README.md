@@ -4,7 +4,7 @@
 
 [![CI](https://github.com/grishahq/recursive-llm/actions/workflows/ci.yml/badge.svg)](https://github.com/grishahq/recursive-llm/actions/workflows/ci.yml)
 [![Python 3.9-3.12](https://img.shields.io/badge/python-3.9--3.12-3776AB.svg)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/grishahq/recursive-llm/blob/main/LICENSE)
 [![Latest release](https://img.shields.io/github/v/release/grishahq/recursive-llm)](https://github.com/grishahq/recursive-llm/releases/latest)
 
 Analyze large contexts with bounded cost and inspectable execution. Instead of placing the full
@@ -17,8 +17,8 @@ use: provider portability, tree-wide budgets, structured failures, reproducible 
 complete run trajectories.
 
 [Quick start](#quick-start) | [Visual comparison](#visual-comparison) | [Measured results](#measured-results) |
-[Document-format evaluation](DOCUMENT_EVALUATION.md) | [Configuration](#configuration) |
-[Security](SECURITY.md) |
+[Document-format evaluation](https://github.com/grishahq/recursive-llm/blob/main/DOCUMENT_EVALUATION.md) | [Configuration](#configuration) |
+[Security](https://github.com/grishahq/recursive-llm/blob/main/SECURITY.md) |
 [Original implementation](https://github.com/alexzhang13/rlm)
 
 ## Why use this implementation?
@@ -34,15 +34,15 @@ complete run trajectories.
 
 ## Visual comparison
 
-To celebrate 600 stars, the project includes a [side-by-side visualizer](visualizer/README.md) of
+To celebrate 600 stars, the project includes a [side-by-side visualizer](https://github.com/grishahq/recursive-llm/blob/main/visualizer/README.md) of
 real RLM and direct-model runs: synchronized replay, Python steps, call trees, exact grading, and
 exportable recordings. Both sides use GPT-5.6 Luna through a ChatGPT-authenticated Codex CLI.
 
-[![RLM and direct LLM comparison](.github/assets/rlm-comparison.gif)](visualizer/public/rlm-comparison.mp4)
+[![RLM and direct LLM comparison](https://raw.githubusercontent.com/grishahq/recursive-llm/main/.github/assets/rlm-comparison.gif)](https://github.com/grishahq/recursive-llm/blob/main/visualizer/public/rlm-comparison.mp4)
 
 On one 100k-character paired experiment, both answers were exact. RLM used 11,656 total CLI model
 tokens versus 37,521 directly, with elapsed times of 30.7 and 29.0 seconds respectively. The 10k
-experiment favored direct completion. See [CODEX_COMPARISON.md](CODEX_COMPARISON.md) for both
+experiment favored direct completion. See [CODEX_COMPARISON.md](https://github.com/grishahq/recursive-llm/blob/main/CODEX_COMPARISON.md) for both
 outcomes, raw recordings, methodology, and reproduction commands. These are individual experiments,
 not a general performance claim or a measurement of subscription credits saved.
 
@@ -67,7 +67,7 @@ the model to use them.
 The exact 100k-character aggregation benchmark used one generated corpus seed and three live runs
 per configuration. On this task, RLM improved exact correctness while reducing model-token usage.
 
-![Direct and RLM results on the generated 100k-character benchmark](.github/assets/benchmark-100k.svg)
+![Direct and RLM results on the generated 100k-character benchmark](https://raw.githubusercontent.com/grishahq/recursive-llm/main/.github/assets/benchmark-100k.svg)
 
 | Model and mode | Exact passes | Mean model tokens | Mean estimated cost |
 | --- | ---: | ---: | ---: |
@@ -79,15 +79,15 @@ per configuration. On this task, RLM improved exact correctness while reducing m
 These measurements are an engineering check, not a paper reproduction or a universal quality
 claim. Direct completion was faster and cheaper on short tasks. A separate 1M-character RLM scale
 check passed 6/6 exact-graded runs, but those runs used local REPL computation without child RLMs.
-See [BENCHMARK_RESULTS.md](BENCHMARK_RESULTS.md) for methodology, raw summaries, public-document
+See [BENCHMARK_RESULTS.md](https://github.com/grishahq/recursive-llm/blob/main/BENCHMARK_RESULTS.md) for methodology, raw summaries, public-document
 experiments, limitations, and reproduction commands.
-The separate [document-format evaluation](DOCUMENT_EVALUATION.md) compares RLM with direct
+The separate [document-format evaluation](https://github.com/grishahq/recursive-llm/blob/main/DOCUMENT_EVALUATION.md) compares RLM with direct
 completion on a SHA-pinned TXT book, PDF, CSV, and HTML documentation page and records two
 reliability/performance changes evaluated one at a time.
 
 Historical transaction and literary scores used legacy graders. Current graders reject ambiguous
 or contradictory fields and record their version; see the grading-version note in
-[BENCHMARK_RESULTS.md](BENCHMARK_RESULTS.md) before comparing old and new runs.
+[BENCHMARK_RESULTS.md](https://github.com/grishahq/recursive-llm/blob/main/BENCHMARK_RESULTS.md) before comparing old and new runs.
 
 ## When to use RLM
 
@@ -116,7 +116,16 @@ computation, call a plain LM, or create a child RLM when the configured depth pe
 
 ## Installation
 
-**Note:** This package is not yet published to PyPI. Install from source:
+Use a fresh virtual environment (recommended), then install the latest release from PyPI:
+
+```bash
+pip install recursive-llm
+```
+
+`recursive-llm` and `rlms` both provide the `rlm` import namespace. Install only one of them in a
+given environment.
+
+For development, install from source:
 
 ```bash
 git clone https://github.com/grishahq/recursive-llm.git
@@ -292,7 +301,7 @@ python benchmarks/war_and_peace.py deepseek/deepseek-v4-flash \
 Peace*, the official 9/11 Commission Report, and the official Python 3.14 text documentation. It
 verifies every prepared artifact by SHA-256 and uses exact labeled-field graders. Download and PDF
 extraction commands, hashes, task definitions, and measured candidate results are in
-[`BENCHMARK_RESULTS.md`](BENCHMARK_RESULTS.md).
+[`BENCHMARK_RESULTS.md`](https://github.com/grishahq/recursive-llm/blob/main/BENCHMARK_RESULTS.md).
 
 ## API Keys Setup
 
@@ -514,7 +523,7 @@ rlm = RLM(
 These values depend on the runtime and workload, so the library does not guess defaults. A
 configured limit that the platform cannot enforce fails worker startup explicitly. RestrictedPython
 and a subprocess are defense-in-depth controls, not a security boundary for hostile code; read
-[SECURITY.md](SECURITY.md) before processing untrusted prompts or contexts.
+[SECURITY.md](https://github.com/grishahq/recursive-llm/blob/main/SECURITY.md) before processing untrusted prompts or contexts.
 
 ## Examples
 
@@ -550,7 +559,7 @@ On OOLONG benchmark (132k tokens):
 answers. `benchmarks/generated_long_context.py` creates byte-reproducible transaction corpora with
 seed, SHA-256 identity, and a computed answer key. Model outputs remain stochastic, so use `--runs`
 and compare pass rate plus p50/p95 latency before drawing quality conclusions. See
-[BENCHMARK_RESULTS.md](BENCHMARK_RESULTS.md) for the latest checked-in live comparison.
+[BENCHMARK_RESULTS.md](https://github.com/grishahq/recursive-llm/blob/main/BENCHMARK_RESULTS.md) for the latest checked-in live comparison.
 
 `benchmarks/war_and_peace.py` adds exact chapter counting, distant fact retrieval, and narrative
 evidence synthesis over a verified 3.2-million-character real document.

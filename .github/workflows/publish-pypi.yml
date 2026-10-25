@@ -1,0 +1,134 @@
+name: Publish to PyPI
+run-name: Publish recursive-llm ${{ inputs.version }} to PyPI
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Package version to publish (must match pyproject.toml)"
+        required: true
+        type: string
+        default: "0.5.0"
+
+permissions: {}
+
+concurrency:
+  group: publish-pypi
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build and validate distributions
+    if: github.repository == 'grishahq/recursive-llm' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    outputs:
+      artifact_id: ${{ steps.upload.outputs.artifact-id }}
+    steps:
+      - name: Check out the dispatched commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - name: Validate the requested package version
+        env:
+          EXPECTED_VERSION: ${{ inputs.version }}
+        run: |
+          python - <<'PY'
+          import os
+          import pathlib
+          import tomllib
+
+          project = tomllib.loads(pathlib.Path("pyproject.toml").read_text())["project"]
+          if project["name"] != "recursive-llm":
+              raise SystemExit("Unexpected package name")
+          if project["version"] != os.environ["EXPECTED_VERSION"]:
+              raise SystemExit("Requested version does not match pyproject.toml")
+          print(f"Building {project['name']} {project['version']}")
+          PY
+      - name: Install build tools
+        run: python -m pip install --upgrade build twine
+      - name: Build source distribution and wheel
+        run: python -m build
+      - name: Validate built distributions
+        env:
+          EXPECTED_VERSION: ${{ inputs.version }}
+        run: |
+          python -m twine check --strict dist/*
+          python - <<'PY'
+          import email.parser
+          import os
+          import pathlib
+          import tarfile
+          import zipfile
+
+          dist = pathlib.Path("dist")
+          wheels = list(dist.glob("*.whl"))
+          sdists = list(dist.glob("*.tar.gz"))
+          if len(wheels) != 1 or len(sdists) != 1 or len(list(dist.iterdir())) != 2:
+              raise SystemExit("Expected exactly one wheel and one source distribution")
+
+          with zipfile.ZipFile(wheels[0]) as archive:
+              names = [name for name in archive.namelist() if name.endswith(".dist-info/METADATA")]
+              if len(names) != 1:
+                  raise SystemExit("Expected one wheel metadata record")
+              wheel_metadata = archive.read(names[0])
+          with tarfile.open(sdists[0], "r:gz") as archive:
+              members = [
+                  member for member in archive.getmembers()
+                  if member.isfile()
+                  and pathlib.PurePosixPath(member.name).name == "PKG-INFO"
+                  and len(pathlib.PurePosixPath(member.name).parts) == 2
+              ]
+              if len(members) != 1:
+                  raise SystemExit("Expected one source distribution metadata record")
+              with archive.extractfile(members[0]) as stream:
+                  sdist_metadata = stream.read()
+
+          for raw_metadata in (wheel_metadata, sdist_metadata):
+              metadata = email.parser.BytesParser().parsebytes(raw_metadata)
+              if metadata["Name"].replace("_", "-") != "recursive-llm":
+                  raise SystemExit("Built distribution has an unexpected name")
+              if metadata["Version"] != os.environ["EXPECTED_VERSION"]:
+                  raise SystemExit("Built distribution version does not match the request")
+          PY
+          sha256sum dist/*
+      - name: Preserve the distributions for publishing
+        id: upload
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: python-distributions
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    name: Publish the validated distributions
+    needs: build
+    if: github.repository == 'grishahq/recursive-llm' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: pypi
+      url: https://pypi.org/project/recursive-llm/
+    permissions:
+      id-token: write
+    steps:
+      - name: Download the distributions from this build
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          artifact-ids: ${{ needs.build.outputs.artifact_id }}
+          path: dist/
+          merge-multiple: true
+          digest-mismatch: error
+      - name: Publish to PyPI with Trusted Publishing
+        uses: pypa/gh-action-pypi-publish@7245906fb61fa33a13554f9d5fb856fe61758086 # v1.14.3
+        with:
+          packages-dir: dist/
+          skip-existing: false
+          attestations: true
