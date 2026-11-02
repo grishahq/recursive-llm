@@ -1,16 +1,21 @@
-An answer with a citation can still point to text that is not there.
+You ask an AI to read a 157-page report.
+It gives you a clean answer with page numbers.
 
-recursive-llm v0.6.0 adds a document API that checks each quoted passage against unchanged source text: source ID, content hash, physical page and exact character span.
+Then you open the PDF and start searching.
 
-The use case is concrete: questions across a long report, or rules and exceptions spread over PDF pages. Search handles accents and whitespace while returning the original quotation and offsets. Answers can also record what remains unknown.
+Was that number really on this page? Where is the exception? Does the quoted sentence exist in this version of the document?
 
-I tested the workflow on a complete 157-page report, official Python documentation and synthetic calculation rules. The deeper real-document run completed 48 attempts: all 48 passed structural citation checks, and 46 passed the frozen field-and-evidence criteria. The two strict misses are retained with manual review notes.
+That second job is what I wanted to make easier in recursive-llm v0.6.0.
 
-Fixed-response controls also check altered quotations, hashes and coordinates. Corrected replies were supplied in those controls. The earlier API could use a custom validator; the new document API integrates that contract.
+Each quoted claim can now carry its way back to the evidence: the original passage, physical page, exact text location and a fingerprint of the source text. The document API checks that they match. Changed quotes, wrong locations and stale source references are rejected before a final answer is accepted.
 
-The limit matters: a real quote can accompany a wrong claim. These checks do not prove meaning or completeness, and the live runs used no child calls, so they do not establish a recursion advantage.
+This matters when an answer joins facts from distant pages, or turns scattered rules and exceptions into calculation code. You need to inspect the passages behind the result. You also need to see what the system could not resolve.
 
-Release, reproducible checks and failure cases:
+I tested it on a complete 157-page report, official Python documentation and synthetic rules. In the deeper live check, all 48 attempts passed structural citation checks; 46 met the frozen field-and-evidence criteria. Both strict misses are published with the review notes.
+
+There is still a human job here: a quotation can be real and the conclusion can be wrong. These checks establish where the words came from. They do not prove the interpretation or that every exception was found.
+
+Try it on a report whose answers you already know. Inspect the evidence, then inspect the conclusion.
+
+Release, checks and failure cases:
 https://github.com/grishahq/recursive-llm/releases/tag/v0.6.0
-
-Try it on a report with known answers and inspect the passages before relying on the result.

@@ -80,7 +80,8 @@ ID, or the hash of a stale document with the same ID. The previous release's
 default string API accepts the first invalid payload in all seven cases. The
 document API rejects each invalid payload and accepts the supplied repair.
 The previous release **with the same explicit custom validator also rejects and
-repairs all seven**. Its validator hook already existed; the improvement is
+repairs all seven**. This control passes the new source-validator callback into
+the existing old hook. The improvement is
 integrated document handling and defaults, not a new validation algorithm.
 
 Other controlled outcomes:

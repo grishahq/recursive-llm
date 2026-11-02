@@ -136,5 +136,27 @@
     "ruff": "0.16.0 passed",
     "mypy": "passed",
     "git_diff_check": "passed"
+  },
+  "ci_quality_dependency_fix": {
+    "failed_run_id": 41428356347,
+    "failed_job_id": 125220394177,
+    "failed_head": "6c45447f8037e77a53387b75aaa9a513359821da",
+    "confirmed_failure": "mypy could not resolve pypdf, pypdf.errors, and pypdf.generic because the quality job installed only the dev extra.",
+    "change": "The Quality and package job now installs .[dev,documents], retaining optional PDF API type checking.",
+    "runtime_changed": false,
+    "package_contents_changed": false,
+    "artifact_sha256_rechecked": true,
+    "local_checks": {
+      "mypy_with_fresh_isolated_dependency_environment": "passed,14sourcefiles,pypdf6.21.4",
+      "ruff": "passed with project-pinned Ruff0.16.0",
+      "black": "passed with project-pinned Black25.11.0;63filesunchanged",
+      "workflow_yaml": "parsed; quality install has documents extra"
+    },
+    "remote_rerun_status": "not run by this verification task; requires committing and pushing the workflow fix.",
+    "pinned_quality_commands": [
+      "mypy --python-executable /tmp/rlm-release-install-v0.6.0/bin/python src",
+      "/tmp/rlm-release-install-v0.6.0/bin/ruff check src tests examples benchmarks",
+      "/tmp/rlm-release-install-v0.6.0/bin/black --check src tests examples benchmarks"
+    ]
   }
 }

@@ -1,7 +1,8 @@
-recursive-llm v0.6.0: quotes you can trace.
+The AI gave you an answer. Now find the quote in 157 pages.
 
-The document API checks source hashes, pages and exact quoted spans. Tested on a 157-page report.
+That second job is why recursive-llm v0.6.0 checks quotes against the original page and rejects mismatches.
 
-A real quote does not prove the claim.
+Read the passage. Judge the conclusion.
 
+Try it on a report you know:
 https://github.com/grishahq/recursive-llm/releases/tag/v0.6.0
