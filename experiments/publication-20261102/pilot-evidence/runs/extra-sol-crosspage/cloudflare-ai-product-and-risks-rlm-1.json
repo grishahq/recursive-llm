@@ -1,0 +1,219 @@
+{
+  "dataset_version": "grounded-documents-v1",
+  "grader_version": "grounded-document-fields-v2",
+  "task": "cloudflare-ai-product-and-risks",
+  "mode": "rlm",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "Across Cloudflare's Developer-based Solutions and its risk factors, identify the compute powering Workers AI; the two dimensions of cyber attacks that artificial intelligence or machine learning may increase; and the information that employee or contractor errors using AI or machine learning could expose externally. For workers_ai_compute use the short noun phrase. For ai_attack_dimensions use comma-separated nouns in source order, without 'and' or punctuation. For ai_information_exposure use the complete noun phrase describing the exposed information.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: workers_ai_compute, ai_attack_dimensions, ai_information_exposure. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 31.38935,
+  "raw_answer": "{\"answer\": \"workers_ai_compute: serverless GPUs\\nai_attack_dimensions: prevalence, intensity\\nai_information_exposure: proprietary or other confidential information\", \"claims\": [{\"claim\": \"workers_ai_compute: serverless GPUs\", \"citations\": [{\"document_id\": \"cloudflare-2024\", \"source_sha256\": \"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\", \"page\": 12, \"start\": 587, \"end\": 1037, \"quote\": \"liver more performant applications that have global scale, all while improving\\ntheir productivity. Our primary developer-based solutions include products categorized for AI, compute, storage & databases, and media.\\nAI\\n\\u2022 Workers AI: Enables developers to run machine learning models, powered by serverless GPUs, on our global network.\\n\\u2022 Vectorize: Allows developers to easily store and query embeddings, representations of values or objects commonly c\"}]}, {\"claim\": \"ai_attack_dimensions: prevalence, intensity\", \"citations\": [{\"document_id\": \"cloudflare-2024\", \"source_sha256\": \"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\", \"page\": 37, \"start\": 1203, \"end\": 1703, \"quote\": \"rs that are involved in particularly sensitive industries or activities, such as banking and finance\\ncompanies and governmental entities or in relation to elections in the United States or elsewhere. Additionally, artificial intelligence and machine\\nlearning may increase cybersecurity risks we face through, for example, being used to increase the prevalence or intensity of cyber attacks.\\nWhile we have implemented security measures internally and have integrated security measures into our network\"}]}, {\"claim\": \"ai_information_exposure: proprietary or other confidential information\", \"citations\": [{\"document_id\": \"cloudflare-2024\", \"source_sha256\": \"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\", \"page\": 59, \"start\": 3185, \"end\": 3685, \"quote\": \"t disclosure of confidential information and\\nmay not provide an adequate remedy in the event of unauthorized disclosure of confidential information. Further, errors made by our employees\\nor contractors in utilizing artificial intelligence or machine learning in our products or in the operation of our business could result in proprietary or\\nother confidential information being exposed externally. In addition, others may independently discover our trade secrets or develop similar\\ntechnologies and \"}]}], \"unknowns\": []}",
+  "started_at": "2026-11-02T09:26:40.925412+00:00",
+  "repeat": 1,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "c5abc74ef02a4435c88f2be83d86fd5b6691ae047be9e5e4d9a916c0c3d1a8fd",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "cloudflare-2024",
+      "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+      "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+      "page_count": 157,
+      "character_count": 591696
+    }
+  ],
+  "config": {
+    "max_depth": 2,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 16,
+    "max_total_tokens": 350000,
+    "max_elapsed_seconds": 300.0,
+    "call_timeout": 180.0,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 4,
+    "root_calls": 4,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 4,
+    "max_depth_reached": 0,
+    "prompt_tokens": 27941,
+    "completion_tokens": 638,
+    "total_tokens": 28579,
+    "cached_tokens": 5376,
+    "usage_calls": 4,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 4,
+    "depth": 0,
+    "budget": {
+      "max_calls": 16,
+      "max_tokens": 350000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 300.0,
+      "reserved_calls": 4,
+      "observed_tokens": 28579,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 31.389063
+    },
+    "by_model": {
+      "gpt-6.1-sol": {
+        "retry_calls": 0,
+        "prompt_tokens": 27941,
+        "completion_tokens": 638,
+        "total_tokens": 28579,
+        "cached_tokens": 5376,
+        "usage_calls": 4,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 4
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 4,
+    "prompt_tokens": 27941,
+    "completion_tokens": 638,
+    "total_tokens": 28579,
+    "cached_tokens": 5376,
+    "usage_calls": 4,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription"
+  },
+  "grade": {
+    "passed": true,
+    "factual_passed": true,
+    "provenance_passed": true,
+    "supported_gold_fields": 3,
+    "required_gold_fields": 3,
+    "grader_version": "grounded-document-fields-v2",
+    "failures": [],
+    "answer_grade": {
+      "passed": true,
+      "failures": []
+    }
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.727519,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5722,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 25,
+      "response_sha256": "028143aa5afe93c6f7d68c8b20aee97244b18ef9ad8d7f1de574d77e709f3b7d"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.321018,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5837,
+        "cached_input_tokens": 0,
+        "output_tokens": 34
+      },
+      "usage_known": true,
+      "response_chars": 121,
+      "response_sha256": "f5d02a95d576d069c61867c1bc639f9459a964a3825f181e9a5feadfe2d6bbfa"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 10.14597,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 7583,
+        "cached_input_tokens": 0,
+        "output_tokens": 586
+      },
+      "usage_known": true,
+      "response_chars": 2487,
+      "response_sha256": "1b43d1137fa9c651c47bb20d400f4f5eb5045033ac255668ce98c5113dff1ec3"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 7.793287,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 8799,
+        "cached_input_tokens": 2688,
+        "output_tokens": 10
+      },
+      "usage_known": true,
+      "response_chars": 28,
+      "response_sha256": "21163be7dca2dca1fa85e3f623cb35e3f70e1ec64ab25ea94104f85c62d0e4bb"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 4,
+    "known_usage_calls": 4,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 28579,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 20,
+    "event_counts": {
+      "final_answer": 1,
+      "final_answer_validated": 1,
+      "model_call_end": 4,
+      "model_call_start": 4,
+      "repl_step": 3,
+      "rlm_end": 1,
+      "rlm_start": 1,
+      "run_end": 1,
+      "run_start": 1,
+      "source_search": 2,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "final_answer": 1,
+        "final_answer_validated": 1,
+        "model_call_end": 4,
+        "model_call_start": 4,
+        "repl_step": 3,
+        "rlm_end": 1,
+        "rlm_start": 1,
+        "run_end": 1,
+        "run_start": 1,
+        "source_search": 2,
+        "sources_available": 1
+      }
+    },
+    "source_reads": []
+  }
+}

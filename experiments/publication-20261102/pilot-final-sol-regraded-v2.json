@@ -1,0 +1,1533 @@
+{
+  "grader_version": "grounded-document-fields-v2",
+  "grader_sha256": "4158b0547d651aefe6335ea8bda096c1bca979903402258fec3512bf389145da",
+  "method": "All saved answers regraded; original grades and captures preserved; no new inference.",
+  "records": [
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-synthetic/synthetic-absence-direct-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "synthetic-absence",
+      "mode": "direct",
+      "status": "completed",
+      "raw_answer_sha256": "48698ee4b23d0c59eaf7162f25e36148b428f7af76e1911b19a8bb9aec262221",
+      "original_grade": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 0,
+        "required_gold_fields": 0,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 0,
+        "required_gold_fields": 0,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 1,
+        "prompt_tokens": 20535,
+        "completion_tokens": 29,
+        "total_tokens": 20564,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 1,
+        "prompt_tokens": 20535,
+        "completion_tokens": 29,
+        "total_tokens": 20564,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    },
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-synthetic/synthetic-absence-python-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "synthetic-absence",
+      "mode": "python",
+      "status": "completed",
+      "raw_answer_sha256": "9c1ca88543ac5634a397820c1d720880322238e77f8d9836495221757e3d97c1",
+      "original_grade": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 0,
+        "required_gold_fields": 0,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 0,
+        "required_gold_fields": 0,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 23520,
+        "completion_tokens": 79,
+        "total_tokens": 23599,
+        "cached_tokens": 10752,
+        "usage_calls": 4,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 23520,
+        "completion_tokens": 79,
+        "total_tokens": 23599,
+        "cached_tokens": 10752,
+        "usage_calls": 4,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    },
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-synthetic/synthetic-absence-rlm-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "synthetic-absence",
+      "mode": "rlm",
+      "status": "completed",
+      "raw_answer_sha256": "9c1ca88543ac5634a397820c1d720880322238e77f8d9836495221757e3d97c1",
+      "original_grade": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 0,
+        "required_gold_fields": 0,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 0,
+        "required_gold_fields": 0,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 23594,
+        "completion_tokens": 79,
+        "total_tokens": 23673,
+        "cached_tokens": 2688,
+        "usage_calls": 4,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 23594,
+        "completion_tokens": 79,
+        "total_tokens": 23673,
+        "cached_tokens": 2688,
+        "usage_calls": 4,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    },
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-synthetic/synthetic-exception-direct-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "synthetic-exception",
+      "mode": "direct",
+      "status": "completed",
+      "raw_answer_sha256": "234aa800f8d776177e87df4b3f9e80747145916b5c9740b3212c20b693b5e1de",
+      "original_grade": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 1,
+        "prompt_tokens": 20538,
+        "completion_tokens": 132,
+        "total_tokens": 20670,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 1,
+        "prompt_tokens": 20538,
+        "completion_tokens": 132,
+        "total_tokens": 20670,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    },
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-synthetic/synthetic-exception-python-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "synthetic-exception",
+      "mode": "python",
+      "status": "completed",
+      "raw_answer_sha256": "3698e5a97a24772f2a8cfd69bf51d0f0fdaa2083734cfeeecc33d43932ee7e98",
+      "original_grade": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 24090,
+        "completion_tokens": 260,
+        "total_tokens": 24350,
+        "cached_tokens": 5376,
+        "usage_calls": 4,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 24090,
+        "completion_tokens": 260,
+        "total_tokens": 24350,
+        "cached_tokens": 5376,
+        "usage_calls": 4,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    },
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-synthetic/synthetic-exception-rlm-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "synthetic-exception",
+      "mode": "rlm",
+      "status": "completed",
+      "raw_answer_sha256": "39a80bc059e54c6a25db6c90540bc5a780a831720236a9830097010c9b8f414d",
+      "original_grade": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 5,
+        "prompt_tokens": 30890,
+        "completion_tokens": 128,
+        "total_tokens": 31018,
+        "cached_tokens": 8064,
+        "usage_calls": 5,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 5,
+        "prompt_tokens": 30890,
+        "completion_tokens": 128,
+        "total_tokens": 31018,
+        "cached_tokens": 8064,
+        "usage_calls": 5,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    },
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-synthetic/synthetic-fee-direct-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "synthetic-fee",
+      "mode": "direct",
+      "status": "completed",
+      "raw_answer_sha256": "62331ed874073b15cd2e605ea010f710a5a1abe3c129b251d1c4b2041fa7ad09",
+      "original_grade": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 1,
+        "prompt_tokens": 20543,
+        "completion_tokens": 249,
+        "total_tokens": 20792,
+        "cached_tokens": 2688,
+        "usage_calls": 1,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 1,
+        "prompt_tokens": 20543,
+        "completion_tokens": 249,
+        "total_tokens": 20792,
+        "cached_tokens": 2688,
+        "usage_calls": 1,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    },
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-synthetic/synthetic-fee-python-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "synthetic-fee",
+      "mode": "python",
+      "status": "completed",
+      "raw_answer_sha256": "0fd15c6af822d3b5dda8088941ad4a7811735e3ae707c858fd84135ad3ca072e",
+      "original_grade": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 24878,
+        "completion_tokens": 408,
+        "total_tokens": 25286,
+        "cached_tokens": 5376,
+        "usage_calls": 4,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 24878,
+        "completion_tokens": 408,
+        "total_tokens": 25286,
+        "cached_tokens": 5376,
+        "usage_calls": 4,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    },
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-synthetic/synthetic-fee-rlm-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "synthetic-fee",
+      "mode": "rlm",
+      "status": "completed",
+      "raw_answer_sha256": "0fd15c6af822d3b5dda8088941ad4a7811735e3ae707c858fd84135ad3ca072e",
+      "original_grade": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 24567,
+        "completion_tokens": 405,
+        "total_tokens": 24972,
+        "cached_tokens": 2688,
+        "usage_calls": 4,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 24567,
+        "completion_tokens": 405,
+        "total_tokens": 24972,
+        "cached_tokens": 2688,
+        "usage_calls": 4,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    },
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-synthetic/synthetic-unicode-direct-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "synthetic-unicode",
+      "mode": "direct",
+      "status": "completed",
+      "raw_answer_sha256": "dbedd8ce5dc1740ccffacb2b3816b7b60e9092caf7405b946b681e4e7fe1f519",
+      "original_grade": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 1,
+        "prompt_tokens": 20540,
+        "completion_tokens": 187,
+        "total_tokens": 20727,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 1,
+        "prompt_tokens": 20540,
+        "completion_tokens": 187,
+        "total_tokens": 20727,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    },
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-synthetic/synthetic-unicode-python-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "synthetic-unicode",
+      "mode": "python",
+      "status": "completed",
+      "raw_answer_sha256": "dda46a58741c49f74c2bdabf2a4a1fcd5506036954e5ad346c34bb1931ef0cb5",
+      "original_grade": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 23791,
+        "completion_tokens": 268,
+        "total_tokens": 24059,
+        "cached_tokens": 5376,
+        "usage_calls": 4,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 23791,
+        "completion_tokens": 268,
+        "total_tokens": 24059,
+        "cached_tokens": 5376,
+        "usage_calls": 4,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    },
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-synthetic/synthetic-unicode-rlm-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "synthetic-unicode",
+      "mode": "rlm",
+      "status": "completed",
+      "raw_answer_sha256": "dda46a58741c49f74c2bdabf2a4a1fcd5506036954e5ad346c34bb1931ef0cb5",
+      "original_grade": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 24056,
+        "completion_tokens": 271,
+        "total_tokens": 24327,
+        "cached_tokens": 10752,
+        "usage_calls": 4,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 24056,
+        "completion_tokens": 271,
+        "total_tokens": 24327,
+        "cached_tokens": 10752,
+        "usage_calls": 4,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    },
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-documents/cloudflare-gateway-direct-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "cloudflare-gateway",
+      "mode": "direct",
+      "status": "completed",
+      "raw_answer_sha256": "9e492ee58bc16dc6d74c63a862fcdea251ec661f0090a2416b88ab0d4948b602",
+      "original_grade": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 1,
+        "prompt_tokens": 145830,
+        "completion_tokens": 335,
+        "total_tokens": 146165,
+        "cached_tokens": 2688,
+        "usage_calls": 1,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 1,
+        "prompt_tokens": 145830,
+        "completion_tokens": 335,
+        "total_tokens": 146165,
+        "cached_tokens": 2688,
+        "usage_calls": 1,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    },
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-documents/cloudflare-gateway-python-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "cloudflare-gateway",
+      "mode": "python",
+      "status": "completed",
+      "raw_answer_sha256": "252cd4126aa1e3a877d1a8ecf9299754bee213c62ab875eef141ed896350e29b",
+      "original_grade": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 24655,
+        "completion_tokens": 470,
+        "total_tokens": 25125,
+        "cached_tokens": 10752,
+        "usage_calls": 4,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 24655,
+        "completion_tokens": 470,
+        "total_tokens": 25125,
+        "cached_tokens": 10752,
+        "usage_calls": 4,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    },
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-documents/cloudflare-gateway-rlm-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "cloudflare-gateway",
+      "mode": "rlm",
+      "status": "completed",
+      "raw_answer_sha256": "f7b17251b3dd9081eb41128d56e8d0609997acb7a8500289d4264ee222e5cc5d",
+      "original_grade": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 1,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 23962,
+        "completion_tokens": 365,
+        "total_tokens": 24327,
+        "cached_tokens": 5376,
+        "usage_calls": 4,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 23962,
+        "completion_tokens": 365,
+        "total_tokens": 24327,
+        "cached_tokens": 5376,
+        "usage_calls": 4,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    },
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-documents/cloudflare-products-direct-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "cloudflare-products",
+      "mode": "direct",
+      "status": "completed",
+      "raw_answer_sha256": "56eedf97ed8708af63e9f0fd2fcf2c73f252e74de4057d4fb2ec684f8eebf4fa",
+      "original_grade": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 2,
+        "required_gold_fields": 2,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 2,
+        "required_gold_fields": 2,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": []
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 1,
+        "prompt_tokens": 145837,
+        "completion_tokens": 632,
+        "total_tokens": 146469,
+        "cached_tokens": 2688,
+        "usage_calls": 1,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 1,
+        "prompt_tokens": 145837,
+        "completion_tokens": 632,
+        "total_tokens": 146469,
+        "cached_tokens": 2688,
+        "usage_calls": 1,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    },
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-documents/cloudflare-products-python-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "cloudflare-products",
+      "mode": "python",
+      "status": "completed",
+      "raw_answer_sha256": "9e80b4271624b27b5081a7c952b1bad79240e7d84205d93532add091030a375e",
+      "original_grade": {
+        "passed": false,
+        "factual_passed": false,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 2,
+        "failures": [
+          "incorrect or missing field 'vectorize_data'",
+          "incorrect exact value for 'vectorize_data'",
+          "incorrect claim value for 'vectorize_data'"
+        ],
+        "answer_grade": {
+          "passed": false,
+          "failures": [
+            "incorrect or missing field 'vectorize_data'",
+            "incorrect exact value for 'vectorize_data'"
+          ]
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": false,
+        "factual_passed": false,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 2,
+        "failures": [
+          "incorrect or missing field 'vectorize_data'",
+          "incorrect exact value for 'vectorize_data'",
+          "incorrect claim value for 'vectorize_data'"
+        ],
+        "answer_grade": {
+          "passed": false,
+          "failures": [
+            "incorrect or missing field 'vectorize_data'",
+            "incorrect exact value for 'vectorize_data'"
+          ]
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 24544,
+        "completion_tokens": 555,
+        "total_tokens": 25099,
+        "cached_tokens": 5376,
+        "usage_calls": 4,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 24544,
+        "completion_tokens": 555,
+        "total_tokens": 25099,
+        "cached_tokens": 5376,
+        "usage_calls": 4,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    },
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-documents/cloudflare-products-rlm-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "cloudflare-products",
+      "mode": "rlm",
+      "status": "completed",
+      "raw_answer_sha256": "8ffb4f500e7bceeea2238d0bc2f9afe881f73ce7e9e39fb03b2df1899d119aac",
+      "original_grade": {
+        "passed": false,
+        "factual_passed": false,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 2,
+        "failures": [
+          "incorrect or missing field 'vectorize_data'",
+          "incorrect exact value for 'vectorize_data'",
+          "incorrect claim value for 'vectorize_data'"
+        ],
+        "answer_grade": {
+          "passed": false,
+          "failures": [
+            "incorrect or missing field 'vectorize_data'",
+            "incorrect exact value for 'vectorize_data'"
+          ]
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": false,
+        "factual_passed": false,
+        "provenance_passed": true,
+        "supported_gold_fields": 1,
+        "required_gold_fields": 2,
+        "failures": [
+          "incorrect or missing field 'vectorize_data'",
+          "incorrect exact value for 'vectorize_data'",
+          "incorrect claim value for 'vectorize_data'"
+        ],
+        "answer_grade": {
+          "passed": false,
+          "failures": [
+            "incorrect or missing field 'vectorize_data'",
+            "incorrect exact value for 'vectorize_data'"
+          ]
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 24983,
+        "completion_tokens": 544,
+        "total_tokens": 25527,
+        "cached_tokens": 10752,
+        "usage_calls": 4,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 4,
+        "prompt_tokens": 24983,
+        "completion_tokens": 544,
+        "total_tokens": 25527,
+        "cached_tokens": 10752,
+        "usage_calls": 4,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    },
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-documents/synthetic-code-direct-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "synthetic-code",
+      "mode": "direct",
+      "status": "completed",
+      "raw_answer_sha256": "449b1f75592d884d79df2f6883db29279f3705d2b91c8ed78dc467c1dc207598",
+      "original_grade": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 5,
+        "required_gold_fields": 5,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": [],
+          "tested_inputs": 4,
+          "observed_outputs": [
+            [
+              120,
+              20
+            ],
+            [
+              360,
+              5
+            ],
+            [
+              210,
+              14
+            ],
+            [
+              390,
+              14
+            ]
+          ]
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 5,
+        "required_gold_fields": 5,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": [],
+          "tested_inputs": 16,
+          "observed_outputs": [
+            [
+              120,
+              20
+            ],
+            [
+              120,
+              5
+            ],
+            [
+              30,
+              14
+            ],
+            [
+              30,
+              14
+            ],
+            [
+              360,
+              20
+            ],
+            [
+              360,
+              5
+            ],
+            [
+              90,
+              14
+            ],
+            [
+              90,
+              14
+            ],
+            [
+              840,
+              20
+            ],
+            [
+              840,
+              5
+            ],
+            [
+              210,
+              14
+            ],
+            [
+              210,
+              14
+            ],
+            [
+              1560,
+              20
+            ],
+            [
+              1560,
+              5
+            ],
+            [
+              390,
+              14
+            ],
+            [
+              390,
+              14
+            ]
+          ]
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 1,
+        "prompt_tokens": 20577,
+        "completion_tokens": 835,
+        "total_tokens": 21412,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 1,
+        "prompt_tokens": 20577,
+        "completion_tokens": 835,
+        "total_tokens": 21412,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    },
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-documents/synthetic-code-python-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "synthetic-code",
+      "mode": "python",
+      "status": "completed",
+      "raw_answer_sha256": "45a5dfb1e5107de459e0b0248857c7115f82f6f2d005183fc805da8ba28dcb56",
+      "original_grade": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 5,
+        "required_gold_fields": 5,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": [],
+          "tested_inputs": 4,
+          "observed_outputs": [
+            [
+              120,
+              20
+            ],
+            [
+              360,
+              5
+            ],
+            [
+              210,
+              14
+            ],
+            [
+              390,
+              14
+            ]
+          ]
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 5,
+        "required_gold_fields": 5,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": [],
+          "tested_inputs": 16,
+          "observed_outputs": [
+            [
+              120,
+              20
+            ],
+            [
+              120,
+              5
+            ],
+            [
+              30,
+              14
+            ],
+            [
+              30,
+              14
+            ],
+            [
+              360,
+              20
+            ],
+            [
+              360,
+              5
+            ],
+            [
+              90,
+              14
+            ],
+            [
+              90,
+              14
+            ],
+            [
+              840,
+              20
+            ],
+            [
+              840,
+              5
+            ],
+            [
+              210,
+              14
+            ],
+            [
+              210,
+              14
+            ],
+            [
+              1560,
+              20
+            ],
+            [
+              1560,
+              5
+            ],
+            [
+              390,
+              14
+            ],
+            [
+              390,
+              14
+            ]
+          ]
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 5,
+        "prompt_tokens": 35033,
+        "completion_tokens": 369,
+        "total_tokens": 35402,
+        "cached_tokens": 13440,
+        "usage_calls": 5,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 5,
+        "prompt_tokens": 35033,
+        "completion_tokens": 369,
+        "total_tokens": 35402,
+        "cached_tokens": 13440,
+        "usage_calls": 5,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    },
+    {
+      "artifact": "experiments/grounded-documents-20261102/runs/final-sol-documents/synthetic-code-rlm-1.json",
+      "model": "gpt-6.1-sol",
+      "task": "synthetic-code",
+      "mode": "rlm",
+      "status": "completed",
+      "raw_answer_sha256": "0f2b8bf8942fd03e4a8bbbdd27cd7a3f429157477b8a2f943aefc0915a5f58c2",
+      "original_grade": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 5,
+        "required_gold_fields": 5,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": [],
+          "tested_inputs": 4,
+          "observed_outputs": [
+            [
+              120,
+              20
+            ],
+            [
+              360,
+              5
+            ],
+            [
+              210,
+              14
+            ],
+            [
+              390,
+              14
+            ]
+          ]
+        },
+        "grader_version": "grounded-document-fields-v1"
+      },
+      "regraded": {
+        "passed": true,
+        "factual_passed": true,
+        "provenance_passed": true,
+        "supported_gold_fields": 5,
+        "required_gold_fields": 5,
+        "failures": [],
+        "answer_grade": {
+          "passed": true,
+          "failures": [],
+          "tested_inputs": 16,
+          "observed_outputs": [
+            [
+              120,
+              20
+            ],
+            [
+              120,
+              5
+            ],
+            [
+              30,
+              14
+            ],
+            [
+              30,
+              14
+            ],
+            [
+              360,
+              20
+            ],
+            [
+              360,
+              5
+            ],
+            [
+              90,
+              14
+            ],
+            [
+              90,
+              14
+            ],
+            [
+              840,
+              20
+            ],
+            [
+              840,
+              5
+            ],
+            [
+              210,
+              14
+            ],
+            [
+              210,
+              14
+            ],
+            [
+              1560,
+              20
+            ],
+            [
+              1560,
+              5
+            ],
+            [
+              390,
+              14
+            ],
+            [
+              390,
+              14
+            ]
+          ]
+        },
+        "grader_version": "grounded-document-fields-v2"
+      },
+      "recursive_calls": 0,
+      "original_transport_usage": {
+        "llm_calls": 5,
+        "prompt_tokens": 35321,
+        "completion_tokens": 359,
+        "total_tokens": 35680,
+        "cached_tokens": 8320,
+        "usage_calls": 5,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      },
+      "audited_transport_usage": {
+        "llm_calls": 5,
+        "prompt_tokens": 35321,
+        "completion_tokens": 359,
+        "total_tokens": 35680,
+        "cached_tokens": 8320,
+        "usage_calls": 5,
+        "unknown_usage_calls": 0,
+        "failed_calls_with_known_usage": 0,
+        "estimated_cost_usd": null,
+        "billing_mode": "subscription"
+      }
+    }
+  ],
+  "summary": {
+    "groups": {
+      "direct": {
+        "attempts": 7,
+        "completed": 7,
+        "exact_passes": 7,
+        "factual_passes": 7,
+        "provenance_passes": 7,
+        "total_tokens": 396799,
+        "elapsed_seconds": 96.140325,
+        "calls": 7
+      },
+      "python": {
+        "attempts": 7,
+        "completed": 7,
+        "exact_passes": 6,
+        "factual_passes": 6,
+        "provenance_passes": 7,
+        "total_tokens": 182920,
+        "elapsed_seconds": 214.294266,
+        "calls": 29
+      },
+      "rlm": {
+        "attempts": 7,
+        "completed": 7,
+        "exact_passes": 6,
+        "factual_passes": 6,
+        "provenance_passes": 7,
+        "total_tokens": 189524,
+        "elapsed_seconds": 218.649252,
+        "calls": 30
+      }
+    },
+    "attempt_count": 21,
+    "limitations": [
+      "Small engineering pilot, not a population estimate or paper reproduction.",
+      "Codex subscription token usage is not subscription credits or a dollar price.",
+      "Failed calls without usage can make observed tokens a lower bound.",
+      "Direct input includes exact source segments to avoid manual offset arithmetic.",
+      "No tail-latency estimate is made from a small number of repetitions.",
+      "RLM mode permits children; a trajectory must confirm whether children were used."
+    ]
+  }
+}

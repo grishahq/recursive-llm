@@ -1,0 +1,387 @@
+{
+  "dataset_version": "grounded-documents-v1",
+  "grader_version": "grounded-document-fields-v2",
+  "task": "synthetic-fee-forced-child",
+  "mode": "rlm",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "This is an explicit child-source integration check, not a performance baseline. Call recursive_llm exactly once to ask a child RLM to solve this question using source_manifest, search_sources and read_source. Pass a short sub_context telling the child to inspect the inherited documents. Do not send the entire source as the sub_context. Ask the child for the required grounded JSON, verify its cited evidence, and return the answer. The child must read the inherited source.\nUnder the Aurora policy, what application fee in EUR does an approved nonprofit pay? Compute it from the stated standard fee and nonprofit rule.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: approved_nonprofit_fee_eur. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 74.281563,
+  "raw_answer": "{\"answer\": \"approved_nonprofit_fee_eur: 30\", \"claims\": [{\"claim\": \"approved_nonprofit_fee_eur: 30\", \"citations\": [{\"document_id\": \"aurora-policy\", \"source_sha256\": \"08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d\", \"page\": 3, \"start\": 2158, \"end\": 2206, \"quote\": \"le F1. The standard application fee is EUR 120.\\n\"}, {\"document_id\": \"aurora-policy\", \"source_sha256\": \"08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d\", \"page\": 14, \"start\": 2140, \"end\": 2236, \"quote\": \"tion is pending.\\nRule F2. An approved nonprofit pays 25% of the standard application fee in F1.\\n\"}]}], \"unknowns\": []}",
+  "started_at": "2026-11-02T09:25:46.887602+00:00",
+  "repeat": 1,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "4b79160a12dc06a3886b38a8f96db1e8e3a203724fee4fba4620c38ad4f6d975",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "aurora-policy",
+      "title": "Aurora fictional application policy",
+      "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+      "page_count": 24,
+      "character_count": 52310
+    },
+    {
+      "document_id": "borealis-policy",
+      "title": "Borealis policy, a different program",
+      "source_sha256": "54430077260753df96c8f7d47dccd42dd62c2af6d812307f53e306a24fb79692",
+      "page_count": 1,
+      "character_count": 128
+    }
+  ],
+  "config": {
+    "max_depth": 2,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 16,
+    "max_total_tokens": 350000,
+    "max_elapsed_seconds": 300.0,
+    "call_timeout": 180.0,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 10,
+    "root_calls": 4,
+    "recursive_calls": 6,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 10,
+    "max_depth_reached": 1,
+    "prompt_tokens": 63380,
+    "completion_tokens": 663,
+    "total_tokens": 64043,
+    "cached_tokens": 13440,
+    "usage_calls": 10,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 4,
+    "depth": 0,
+    "budget": {
+      "max_calls": 16,
+      "max_tokens": 350000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 300.0,
+      "reserved_calls": 10,
+      "observed_tokens": 64043,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 74.281469
+    },
+    "by_model": {
+      "gpt-6.1-sol": {
+        "retry_calls": 0,
+        "prompt_tokens": 63380,
+        "completion_tokens": 663,
+        "total_tokens": 64043,
+        "cached_tokens": 13440,
+        "usage_calls": 10,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 10
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 10,
+    "prompt_tokens": 63380,
+    "completion_tokens": 663,
+    "total_tokens": 64043,
+    "cached_tokens": 13440,
+    "usage_calls": 10,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription"
+  },
+  "grade": {
+    "passed": true,
+    "factual_passed": true,
+    "provenance_passed": true,
+    "supported_gold_fields": 1,
+    "required_gold_fields": 1,
+    "grader_version": "grounded-document-fields-v2",
+    "failures": [],
+    "answer_grade": {
+      "passed": true,
+      "failures": []
+    }
+  },
+  "integration_checks": {
+    "forced_child": true,
+    "child_calls": 6,
+    "child_used": true,
+    "note": "Explicit integration exercise; excluded from the performance comparison."
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 10.698227,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5741,
+        "cached_input_tokens": 0,
+        "output_tokens": 149
+      },
+      "usage_known": true,
+      "response_chars": 782,
+      "response_sha256": "40bec14821e73053042996d56d974222cdaf4d4342ebb1a171067578739a2d0c"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.995633,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5598,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 25,
+      "response_sha256": "028143aa5afe93c6f7d68c8b20aee97244b18ef9ad8d7f1de574d77e709f3b7d"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.955071,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5782,
+        "cached_input_tokens": 0,
+        "output_tokens": 48
+      },
+      "usage_known": true,
+      "response_chars": 172,
+      "response_sha256": "30e51bc97b353c53801482aff5f154f31ca6d2dbf9aedb1b18641572cfa2d283"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 7.772383,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6134,
+        "cached_input_tokens": 0,
+        "output_tokens": 47
+      },
+      "usage_known": true,
+      "response_chars": 140,
+      "response_sha256": "9bc82a7c79c8f2c76bead3d26d98bfab86765e4298fedea558f9e5162ca27bd9"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.698942,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6574,
+        "cached_input_tokens": 2688,
+        "output_tokens": 25
+      },
+      "usage_known": true,
+      "response_chars": 61,
+      "response_sha256": "6d8668db50602d88ce351c0b0cc181ae3953425cdc26d1139e1c075008e3954b"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 13.734428,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6711,
+        "cached_input_tokens": 2688,
+        "output_tokens": 245
+      },
+      "usage_known": true,
+      "response_chars": 644,
+      "response_sha256": "b534c631ff446d7a5be709259a3d05dcdad3394c856c4459967172b6f692aab7"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.608467,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6992,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 17,
+      "response_sha256": "b69e4bf58f5516f161a7d35449ad5a095ab879dfb43dd80b93a3102b42c1d309"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.925651,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6318,
+        "cached_input_tokens": 0,
+        "output_tokens": 62
+      },
+      "usage_known": true,
+      "response_chars": 155,
+      "response_sha256": "59a0d8d4d9766120fb370e7109e4c9a8060387f5581c832a2f896a295b569250"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.11946,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6600,
+        "cached_input_tokens": 0,
+        "output_tokens": 63
+      },
+      "usage_known": true,
+      "response_chars": 194,
+      "response_sha256": "5b619d73db2cf8e80b657867fc877b14008830f5f1b919ed219d7cd4dc5604f9"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 6.50856,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6930,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 17,
+      "response_sha256": "b69e4bf58f5516f161a7d35449ad5a095ab879dfb43dd80b93a3102b42c1d309"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 10,
+    "known_usage_calls": 10,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 64043,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 46,
+    "event_counts": {
+      "final_answer": 2,
+      "final_answer_validated": 2,
+      "model_call_end": 10,
+      "model_call_start": 10,
+      "repl_step": 8,
+      "rlm_end": 2,
+      "rlm_start": 2,
+      "run_end": 1,
+      "run_start": 1,
+      "source_read": 4,
+      "source_search": 3,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "final_answer": 1,
+        "final_answer_validated": 1,
+        "model_call_end": 4,
+        "model_call_start": 4,
+        "repl_step": 3,
+        "rlm_end": 1,
+        "rlm_start": 1,
+        "run_end": 1,
+        "run_start": 1,
+        "source_read": 2,
+        "sources_available": 1
+      },
+      "1": {
+        "final_answer": 1,
+        "final_answer_validated": 1,
+        "model_call_end": 6,
+        "model_call_start": 6,
+        "repl_step": 5,
+        "rlm_end": 1,
+        "rlm_start": 1,
+        "source_read": 2,
+        "source_search": 3
+      }
+    },
+    "source_reads": [
+      {
+        "sequence": 18,
+        "depth": 1,
+        "node_id": "rlm-3",
+        "parent_id": "",
+        "elapsed_seconds": 32.260676,
+        "document_id": "aurora-policy",
+        "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+        "page": 14,
+        "start": 2140,
+        "end": 2236,
+        "quote_chars": 96
+      },
+      {
+        "sequence": 22,
+        "depth": 1,
+        "node_id": "rlm-3",
+        "parent_id": "",
+        "elapsed_seconds": 37.961359,
+        "document_id": "aurora-policy",
+        "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+        "page": 3,
+        "start": 2158,
+        "end": 2206,
+        "quote_chars": 48
+      },
+      {
+        "sequence": 35,
+        "depth": 0,
+        "node_id": "rlm-1",
+        "parent_id": "",
+        "elapsed_seconds": 62.444251,
+        "document_id": "aurora-policy",
+        "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+        "page": 3,
+        "start": 2158,
+        "end": 2206,
+        "quote_chars": 48
+      },
+      {
+        "sequence": 36,
+        "depth": 0,
+        "node_id": "rlm-1",
+        "parent_id": "",
+        "elapsed_seconds": 62.444271,
+        "document_id": "aurora-policy",
+        "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+        "page": 14,
+        "start": 2140,
+        "end": 2236,
+        "quote_chars": 96
+      }
+    ]
+  }
+}

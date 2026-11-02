@@ -1,0 +1,173 @@
+{
+  "dataset_version": "grounded-documents-v1",
+  "grader_version": "grounded-document-fields-v2",
+  "task": "synthetic-unicode",
+  "mode": "python",
+  "model": "gpt-6-luna",
+  "reasoning_effort": "low",
+  "query": "Find Petya, the review owner for Aurora, and give the full name with the original spelling. Do not confuse Aurora with Borealis.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: review_owner. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "failed",
+  "elapsed_seconds": 6.369955,
+  "raw_answer": null,
+  "started_at": "2026-11-02T09:27:42.177289+00:00",
+  "repeat": 1,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "2e0994259d44d56f0d5960b78d1f0757dd4e1aeccb4fdd59e2261be9ff54f6b1",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "aurora-policy",
+      "title": "Aurora fictional application policy",
+      "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+      "page_count": 24,
+      "character_count": 52310
+    },
+    {
+      "document_id": "borealis-policy",
+      "title": "Borealis policy, a different program",
+      "source_sha256": "54430077260753df96c8f7d47dccd42dd62c2af6d812307f53e306a24fb79692",
+      "page_count": 1,
+      "character_count": 128
+    }
+  ],
+  "config": {
+    "max_depth": 0,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 10,
+    "max_total_tokens": 350000,
+    "max_elapsed_seconds": 180.0,
+    "call_timeout": 120.0,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 1,
+    "root_calls": 1,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 1,
+    "max_depth_reached": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "total_tokens": 0,
+    "cached_tokens": 0,
+    "usage_calls": 0,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 1,
+    "depth": 0,
+    "budget": {
+      "max_calls": 10,
+      "max_tokens": 350000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 180.0,
+      "reserved_calls": 1,
+      "observed_tokens": 0,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 6.369861
+    },
+    "by_model": {
+      "gpt-6-luna": {
+        "retry_calls": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0,
+        "cached_tokens": 0,
+        "usage_calls": 0,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 1
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 1,
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "total_tokens": 0,
+    "cached_tokens": 0,
+    "usage_calls": 0,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription"
+  },
+  "grade": {
+    "passed": false,
+    "factual_passed": false,
+    "provenance_passed": false,
+    "grader_version": "grounded-document-fields-v2",
+    "failures": [
+      "no completed answer"
+    ]
+  },
+  "error": {
+    "type": "CodexError",
+    "message": "Expected exactly one nonempty final Codex message"
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low",
+      "status": "failed",
+      "elapsed_seconds": 6.368902,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 11330,
+        "cached_input_tokens": 0,
+        "output_tokens": 24
+      },
+      "usage_known": true,
+      "response_chars": 0,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 1,
+    "known_usage_calls": 1,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 11354,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 7,
+    "event_counts": {
+      "model_call_error": 1,
+      "model_call_start": 1,
+      "rlm_error": 1,
+      "rlm_start": 1,
+      "run_error": 1,
+      "run_start": 1,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "model_call_error": 1,
+        "model_call_start": 1,
+        "rlm_error": 1,
+        "rlm_start": 1,
+        "run_error": 1,
+        "run_start": 1,
+        "sources_available": 1
+      }
+    },
+    "source_reads": []
+  }
+}

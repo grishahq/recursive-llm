@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import concurrent.futures
+import json
 import re
 from threading import Lock
 from typing import (
@@ -32,11 +33,18 @@ from .errors import (
     RLMError,
 )
 from .parser import extract_final, extract_final_var_name
-from .prompts import build_system_prompt
+from .prompts import build_document_prompt, build_system_prompt
 from .repl import REPLError, REPLExecutor, REPLTimeoutError, WorkerResourceLimits
-from .results import CompletionResult, FailedCompletionResult, RunResult, TrajectoryEvent
+from .results import (
+    CompletionResult,
+    DocumentResult,
+    FailedCompletionResult,
+    RunResult,
+    TrajectoryEvent,
+)
 from .run_state import RunState
 from .stats import UsageTracker
+from .sources import MAX_ANSWER_CHARS, SourceCorpus, SourceDocument
 from .types import FinalAnswerValidator, Message
 
 T = TypeVar("T")
@@ -186,6 +194,40 @@ class RLM:
         """Complete a query without raising ordinary run failures."""
         return await self._run_result(query, context, kwargs, return_failure=True)
 
+    def complete_documents(
+        self, query: str, documents: Sequence[SourceDocument], **kwargs: Any
+    ) -> DocumentResult:
+        """Analyze documents and return an answer with source-checked citations."""
+        return _run_sync(self.acomplete_documents(query, documents, **kwargs))
+
+    async def acomplete_documents(
+        self, query: str, documents: Sequence[SourceDocument], **kwargs: Any
+    ) -> DocumentResult:
+        """Analyze original page text while preserving citation identity per run.
+
+        All RLM nodes share this immutable corpus and validate their structured
+        final outputs. Plain LM leaves are unvalidated; their parent's accepted
+        answer must still contain valid original-source citations. Validation
+        verifies exact quotes, not claim entailment or completeness.
+        """
+        corpus = SourceCorpus(documents)
+        if not corpus.documents:
+            raise ValueError("documents must contain at least one SourceDocument")
+        completed = cast(
+            CompletionResult,
+            await self._run_result(
+                query, corpus.context, kwargs, return_failure=False, source_corpus=corpus
+            ),
+        )
+        parsed = corpus.parse_answer(completed.answer)
+        return DocumentResult(
+            answer=parsed["answer"],
+            claims=tuple(parsed["claims"]),
+            unknowns=tuple(parsed["unknowns"]),
+            sources=tuple(corpus.manifest()),
+            completion=completed,
+        )
+
     async def _run_result(
         self,
         query: str,
@@ -193,9 +235,13 @@ class RLM:
         kwargs: Dict[str, Any],
         *,
         return_failure: bool,
+        source_corpus: Optional[SourceCorpus] = None,
     ) -> RunResult:
         """Execute one run and optionally convert ordinary failures to results."""
-        if query and not context:
+        inherited_sources = (
+            self._inherited_run_state.sources if self._inherited_run_state is not None else None
+        )
+        if query and not context and source_corpus is None and inherited_sources is None:
             context = query
             query = ""
 
@@ -207,6 +253,7 @@ class RLM:
         loop = asyncio.get_running_loop()
         if self._current_depth == 0:
             run_state = self._new_run_state(loop)
+            run_state.sources = source_corpus
         else:
             run_state = self._inherited_run_state or self._new_run_state(loop)
             run_state.attach_loop(loop)
@@ -217,6 +264,10 @@ class RLM:
         if self._current_depth == 0:
             run_state.record_event("run_start", 0, node_id, **start_data)
         run_state.record_event("rlm_start", self._current_depth, node_id, parent_id, **start_data)
+        if self._current_depth == 0 and run_state.sources is not None:
+            run_state.record_event(
+                "sources_available", 0, node_id, sources=run_state.sources.manifest()
+            )
 
         try:
             answer = await self._acomplete_impl(query, context, kwargs, run_state, node_id)
@@ -279,17 +330,24 @@ class RLM:
         """Run one RLM loop within an already-created invocation state."""
 
         repl_env = self._build_repl_env(query, context, run_state, node_id)
+
+        def source_event(kind: str, data: Dict[str, Any]) -> None:
+            run_state.record_event(kind, self._current_depth, node_id, **data)
+
         repl = REPLExecutor(
             timeout=self.repl_timeout,
             max_output_chars=self.max_output_chars,
             max_snapshot_bytes=self.repl_max_snapshot_bytes,
             resource_limits=self.repl_resource_limits,
+            source_event_handler=source_event if run_state.sources is not None else None,
         )
         system_prompt = build_system_prompt(
             len(context),
             depth=self._current_depth,
             max_depth=self.max_depth,
         )
+        if run_state.sources is not None:
+            system_prompt += build_document_prompt()
         messages: List[Message] = [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": query},
@@ -315,6 +373,26 @@ class RLM:
                         }
                     )
                     continue
+
+                if run_state.sources is not None and response.lstrip().startswith("{"):
+                    oversized = len(response) > MAX_ANSWER_CHARS
+                    candidate = None
+                    if not oversized:
+                        try:
+                            candidate = json.loads(response)
+                        except (ValueError, RecursionError):
+                            pass
+                    if oversized or (
+                        isinstance(candidate, dict)
+                        and {"answer", "claims", "unknowns"} <= candidate.keys()
+                    ):
+                        rejection = await self._process_final_answer(
+                            run_state, node_id, response, method="document_json"
+                        )
+                        if rejection is None:
+                            return response
+                        self._append_validation_feedback(messages, response, rejection)
+                        continue
 
                 direct_answer = extract_final(response)
                 if direct_answer is not None:
@@ -440,12 +518,16 @@ class RLM:
         variable: str = "",
     ) -> Optional[str]:
         """Record an accepted answer or return deterministic validator feedback."""
-        validator = self.final_answer_validator
+        validators: List[Callable[[str], Optional[str]]] = []
+        if run_state.sources is not None:
+            validators.append(run_state.sources.validate_answer)
+        if self.final_answer_validator is not None:
+            validators.append(self.final_answer_validator)
         event_data: Dict[str, Any] = {"method": method}
         if variable:
             event_data["variable"] = variable
         rejection: Optional[str] = None
-        if validator is not None:
+        for validator in validators:
             try:
                 rejection = await asyncio.to_thread(validator, answer)
             except Exception as exc:
@@ -463,8 +545,10 @@ class RLM:
 
             if rejection is not None and (not isinstance(rejection, str) or not rejection.strip()):
                 raise RLMError("Final-answer validator must return None or a non-empty string")
+            if rejection is not None:
+                break
         if rejection is None:
-            if validator is not None:
+            if validators:
                 run_state.record_event(
                     "final_answer_validated",
                     self._current_depth,
@@ -956,6 +1040,10 @@ class RLM:
             "answer": {"content": "", "ready": False},
             "re": re,
         }
+        if state.sources is not None:
+            # Local search runs inside the worker so it shares its hard timeout.
+            # Keep the immutable page tuple in the parent for worker recovery.
+            env["_source_documents"] = state.sources.documents
         if self.max_depth == 0:
             return env
 

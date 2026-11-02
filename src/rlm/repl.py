@@ -12,7 +12,7 @@ from dataclasses import dataclass
 from multiprocessing.connection import Connection
 from multiprocessing.process import BaseProcess
 from types import ModuleType
-from typing import Any, Callable, Dict, Optional, Set, Tuple, cast
+from typing import Any, Callable, Dict, List, Optional, Sequence, Set, Tuple, cast
 
 from RestrictedPython import (
     compile_restricted_exec,
@@ -27,6 +27,8 @@ from RestrictedPython.Guards import (
     safer_getattr,
 )
 from RestrictedPython.PrintCollector import PrintCollector
+
+from .sources import SourceCorpus, SourceDocument
 
 try:
     import resource as resource_module
@@ -321,6 +323,52 @@ def _execute_code(code: str, env: Dict[str, Any]) -> str:
     return output.strip() or "Code executed successfully (no output)"
 
 
+def _source_helpers(
+    connection: Connection, documents: Sequence[SourceDocument]
+) -> Dict[str, Callable[..., Any]]:
+    """Keep local source computation inside the killable REPL process.
+
+    Source events contain only identifiers, coordinates, and content lengths.
+    Source quotations and search strings never travel through this event channel.
+    """
+    corpus = SourceCorpus(documents)
+
+    def emit(kind: str, data: Dict[str, Any]) -> None:
+        connection.send({"type": "source_event", "kind": kind, "data": data})
+
+    def read_source(
+        document_id: str, page: int, start: int = 0, end: Optional[int] = None
+    ) -> Dict[str, Any]:
+        citation = corpus.read(document_id, page, start, end)
+        emit(
+            "source_read",
+            {
+                **{key: value for key, value in citation.items() if key != "quote"},
+                "quote_chars": len(citation["quote"]),
+            },
+        )
+        return citation
+
+    def search_sources(
+        term: str,
+        document_id: Optional[str] = None,
+        limit: int = 10,
+        window: int = 200,
+    ) -> List[Dict[str, Any]]:
+        matches = corpus.search(term, document_id, limit, window)
+        emit(
+            "source_search",
+            {"document_id": document_id, "matches": len(matches), "term_chars": len(term)},
+        )
+        return matches
+
+    return {
+        "source_manifest": corpus.manifest,
+        "read_source": read_source,
+        "search_sources": search_sources,
+    }
+
+
 def _worker_main(
     connection: Connection,
     initial_env: Dict[str, Any],
@@ -338,11 +386,16 @@ def _worker_main(
         return
     env = _build_globals()
     runtime_names = set(env)
+    source_documents = initial_env.pop("_source_documents", None)
     env.update(initial_env)
-    snapshot_names = set(initial_env) - _RESERVED_NAMES - runtime_names
     env.setdefault("answer", {"content": "", "ready": False})
     for name in callback_names:
         env[name] = _make_callback_proxy(connection, name)
+    if source_documents is not None:
+        helpers = _source_helpers(connection, source_documents)
+        env.update(helpers)
+        runtime_names.update(helpers)
+    snapshot_names = set(initial_env) - _RESERVED_NAMES - runtime_names
 
     def show_vars() -> Dict[str, str]:
         return {
@@ -443,6 +496,7 @@ class REPLExecutor:
         max_output_chars: int = 2000,
         max_snapshot_bytes: int = 1_000_000,
         resource_limits: Optional[WorkerResourceLimits] = None,
+        source_event_handler: Optional[Callable[[str, Dict[str, Any]], None]] = None,
     ):
         """Initialize the executor with a hard local-code timeout."""
         if timeout <= 0:
@@ -455,6 +509,7 @@ class REPLExecutor:
         self.max_output_chars = max_output_chars
         self.max_snapshot_bytes = max_snapshot_bytes
         self.resource_limits = resource_limits or WorkerResourceLimits()
+        self._source_event_handler = source_event_handler
         self._process: Optional[BaseProcess] = None
         self._connection: Optional[Connection] = None
         self._callbacks: Dict[str, Callable[..., Any]] = {}
@@ -622,6 +677,16 @@ class REPLExecutor:
             except (EOFError, OSError) as exc:
                 self.close()
                 raise REPLError("REPL worker exited unexpectedly") from exc
+
+            if message.get("type") == "source_event":
+                handling_started = time.monotonic()
+                if self._source_event_handler is not None:
+                    try:
+                        self._source_event_handler(str(message["kind"]), message["data"])
+                    except Exception:
+                        pass
+                remaining -= time.monotonic() - handling_started
+                continue
 
             if message.get("type") != "callback":
                 return cast(Dict[str, Any], message)

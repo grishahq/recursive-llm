@@ -27,6 +27,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+import warnings as extraction_warnings
 import zipfile
 from copy import deepcopy
 from datetime import datetime, timezone
@@ -37,11 +38,23 @@ from xml.etree import ElementTree
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from rlm.document_io import (
+    DocumentExtractionWarning,
+    DocumentLimits,
+    DocumentLoadError,
+    PDF_EXTRACTION_WARNING,
+    read_document_bytes,
+)
+
 MODEL = "gpt-5.6-luna"
 MAX_BYTES = 5 * 1024 * 1024
 MAX_CHARS = 300_000
 MAX_JSON_BYTES = ((MAX_BYTES + 2) // 3) * 4 + 10_000
 MAX_EXPANDED_BYTES = 20 * 1024 * 1024
+DOCUMENT_PROFILES = {
+    "standard": DocumentLimits(max_chars=MAX_CHARS),
+    "long": DocumentLimits(),
+}
 DEFAULT_ORIGINS = {
     "https://recursive-llm-lab.sakhli.chatgpt.site",
     "http://localhost:5173",
@@ -75,18 +88,26 @@ def valid_filename(value: Any) -> str:
     return value
 
 
-def _extract_text(filename: str, data: bytes) -> Dict[str, Any]:
+def _extract_text(
+    filename: str, data: bytes, limits: Optional[DocumentLimits] = None
+) -> Dict[str, Any]:
     """Parse bytes in a disposable bounded worker, without extracting archive paths."""
     valid_filename(filename)
-    if not data or len(data) > MAX_BYTES:
-        raise RequestError("Document must contain 1 byte to 5 MiB")
+    limits = limits or DOCUMENT_PROFILES["standard"]
+    if not data or len(data) > limits.max_bytes:
+        raise RequestError(f"Document must contain 1 to {limits.max_bytes:,} bytes")
     suffix = Path(filename).suffix.lower()
     warnings = []
     if suffix == ".docx":
         with zipfile.ZipFile(io.BytesIO(data)) as archive:
             members = archive.infolist()
-            if len(members) > 2000 or sum(item.file_size for item in members) > MAX_EXPANDED_BYTES:
-                raise RequestError("DOCX expanded content exceeds the 20 MiB limit")
+            if (
+                len(members) > 2000
+                or sum(item.file_size for item in members) > limits.max_expanded_bytes
+            ):
+                raise RequestError(
+                    f"DOCX expanded content exceeds {limits.max_expanded_bytes:,} bytes"
+                )
             for item in members:
                 path = PurePosixPath(item.filename)
                 if path.is_absolute() or ".." in path.parts or "\\" in item.filename:
@@ -118,49 +139,35 @@ def _extract_text(filename: str, data: bytes) -> Dict[str, Any]:
         warnings.append(
             "DOCX body text and tables extracted; headers, footnotes, and images are omitted."
         )
-    elif suffix == ".pdf":
-        try:
-            from pypdf import Configuration, PdfReader
-        except ImportError as exc:
-            raise RequestError("Install PDF support with: pip install -e '.[visualizer]'") from exc
-        if not data.startswith(b"%PDF-"):
-            raise RequestError("File does not have a PDF header")
-        Configuration.zlib_maximum_output_length = 10 * 1024 * 1024
-        reader = PdfReader(io.BytesIO(data), strict=True)
-        if reader.is_encrypted:
-            raise RequestError("Encrypted PDFs are unsupported")
-        if len(reader.pages) > 500:
-            raise RequestError("PDF exceeds the 500-page limit")
-        pieces = []
-        expanded = 0
-        chars = 0
-        for page in reader.pages:
-            contents = page.get_contents()
-            expanded += len(contents.get_data()) if contents else 0
-            if expanded > MAX_EXPANDED_BYTES:
-                raise RequestError("PDF expanded content exceeds 20 MiB")
-            piece = page.extract_text() or ""
-            chars += len(piece) + 1
-            if chars > MAX_CHARS:
-                raise RequestError("Extracted PDF text exceeds 300,000 characters")
-            pieces.append(piece)
-        text = "\n".join(pieces)
-        warnings.append(
-            "PDF text extraction has no OCR; scanned images and complex tables may be incomplete."
-        )
     else:
         try:
-            text = data.decode("utf-8-sig")
-        except UnicodeDecodeError as exc:
-            raise RequestError("Text documents must use UTF-8 encoding") from exc
-        if "\x00" in text:
-            raise RequestError("Binary content is not a UTF-8 text document")
+            with extraction_warnings.catch_warnings():
+                extraction_warnings.simplefilter("ignore", DocumentExtractionWarning)
+                document = read_document_bytes(filename, data, limits=limits)
+        except DocumentLoadError as exc:
+            raise RequestError(str(exc)) from exc
+        pages = document.pages
+        text = "\n".join(pages)
+        if suffix == ".pdf":
+            warnings.append(PDF_EXTRACTION_WARNING)
     text = text.replace("\r\n", "\n").replace("\r", "\n")
     if not text.strip():
         raise RequestError("No readable text found; scanned PDFs need OCR before uploading")
-    if len(text) > MAX_CHARS:
-        raise RequestError("Extracted text exceeds 300,000 characters")
-    return {"text": text, "format": suffix[1:], "warnings": warnings}
+    if len(text) > limits.max_chars:
+        raise RequestError(f"Extracted text exceeds {limits.max_chars:,} characters")
+    if suffix == ".docx":
+        pages = (text,)
+    return {
+        "text": text,
+        "pages": pages,
+        "format": suffix[1:],
+        "warnings": warnings,
+        "source": {
+            "page_count": len(pages),
+            "page_numbering": "physical_pdf" if suffix == ".pdf" else "text_block",
+            "page_chars": [len(page) for page in pages],
+        },
+    }
 
 
 class _PresetRedirects(urllib.request.HTTPRedirectHandler):
@@ -246,7 +253,16 @@ def bounded_worker(operation: str, payload: Any, timeout: float = 20) -> Any:
 class CompanionState:
     """Prepared documents and one cancellable comparison on a dedicated event loop."""
 
-    def __init__(self, output_dir: Optional[Path] = None, capture: Any = None) -> None:
+    def __init__(
+        self,
+        output_dir: Optional[Path] = None,
+        capture: Any = None,
+        document_profile: str = "standard",
+    ) -> None:
+        if document_profile not in DOCUMENT_PROFILES:
+            raise ValueError("document_profile must be standard or long")
+        self.document_profile = document_profile
+        self.document_limits = DOCUMENT_PROFILES[document_profile]
         self.token = secrets.token_urlsafe(32)
         self.output_dir = (
             Path(output_dir) if output_dir else Path(tempfile.mkdtemp(prefix="rlm-lab-runs-"))
@@ -273,8 +289,9 @@ class CompanionState:
             raise RequestError(
                 "Preset SHA256 changed; its reference answers cannot be applied", 409
             )
-        extracted = bounded_worker("extract", (filename, data))
+        extracted = bounded_worker("extract", (filename, data, self.document_limits))
         text = extracted.pop("text")
+        pages = tuple(extracted.pop("pages"))
         document_id = secrets.token_hex(12)
         metadata = {
             "document_id": document_id,
@@ -299,7 +316,7 @@ class CompanionState:
         with self.lock:
             if len(self.documents) >= 16:
                 self.documents.pop(next(iter(self.documents)))
-            self.documents[document_id] = {"metadata": metadata, "text": text}
+            self.documents[document_id] = {"metadata": metadata, "text": text, "pages": pages}
         return deepcopy(metadata)
 
     def start_run(self, payload: Dict[str, Any]) -> Dict[str, Any]:
@@ -589,7 +606,12 @@ class CompanionHandler(BaseHTTPRequestHandler):
                     "service": "rlm-compare",
                     "model": MODEL,
                     "authenticated": True,
-                    "limits": {"file_bytes": MAX_BYTES, "text_chars": MAX_CHARS, "active_runs": 1},
+                    "limits": {
+                        "file_bytes": state.document_limits.max_bytes,
+                        "text_chars": state.document_limits.max_chars,
+                        "active_runs": 1,
+                    },
+                    "document_profile": state.document_profile,
                 },
             )
         elif self.command == "GET" and path == "/presets":
@@ -655,8 +677,14 @@ def main() -> None:
     parser.add_argument("--port", type=int, default=8766)
     parser.add_argument("--allow-origin", action="append", default=[])
     parser.add_argument("--output-dir", type=Path)
+    parser.add_argument(
+        "--document-profile",
+        choices=tuple(DOCUMENT_PROFILES),
+        default="standard",
+        help="standard: 300,000 text characters; long: 2,000,000 text characters",
+    )
     args = parser.parse_args()
-    state = CompanionState(args.output_dir)
+    state = CompanionState(args.output_dir, document_profile=args.document_profile)
     server = CompanionServer(
         args.port, state, DEFAULT_ORIGINS | {_origin(value) for value in args.allow_origin}
     )

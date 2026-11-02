@@ -1,0 +1,255 @@
+{
+  "public_schema_version": 1,
+  "record_count": 35,
+  "skipped_json_files": 36,
+  "raw_bytes": 27481231,
+  "public_bytes": 274490,
+  "records": [
+    {
+      "path": "runs/extra-sol-crosspage/cloudflare-ai-product-and-risks-direct-1.json",
+      "raw_capture_sha256": "9b90175b00efe4fe70f4cae76ae37baa1a1405dac22ef3b75577bef69b074fe4",
+      "public_sha256": "ffe0e20494843ee5c41d6448c1a5296d5c88ef78db03bb5e41d3969282df5525",
+      "raw_bytes": 671830,
+      "public_bytes": 8939
+    },
+    {
+      "path": "runs/extra-sol-crosspage/cloudflare-ai-product-and-risks-python-1.json",
+      "raw_capture_sha256": "f4fa0e29d81d85e434d3478a11e08e2d2784e0fd6c8c4df7c9994803768658bb",
+      "public_sha256": "af169301ea754f8ffc0a055d7686366f09685ff02377a7295369fedcf87724c5",
+      "raw_bytes": 2743102,
+      "public_bytes": 11632
+    },
+    {
+      "path": "runs/extra-sol-crosspage/cloudflare-ai-product-and-risks-rlm-1.json",
+      "raw_capture_sha256": "c5abc74ef02a4435c88f2be83d86fd5b6691ae047be9e5e4d9a916c0c3d1a8fd",
+      "public_sha256": "ab0f3ee32f89bafc6384f9315f281e2fe2a59eac5b7f15ebefdc8f3b5b8f0a67",
+      "raw_bytes": 2646375,
+      "public_bytes": 9663
+    },
+    {
+      "path": "runs/final-protocol-sol-crosspage/cloudflare-ai-product-and-risks-rlm-1.json",
+      "raw_capture_sha256": "7ba4ebde1bf828b4eb0d57bf3ed89ecee13594724721fd02c720945514c62fd0",
+      "public_sha256": "4c1ac9173e5ed21c2ea095f5ef064d4d1483a6dda73e44094ffa60d29bec2263",
+      "raw_bytes": 2575097,
+      "public_bytes": 9189
+    },
+    {
+      "path": "runs/final-sol-documents/cloudflare-gateway-direct-1.json",
+      "raw_capture_sha256": "8e14b32c39149c169f9658e6faafc597a42d4d19842d7798622b8c4272de19d7",
+      "public_sha256": "ce1c2e26a575b211144b120d49c405177f592634db1cab8d79a79ecd3e2f5f75",
+      "raw_bytes": 659015,
+      "public_bytes": 5552
+    },
+    {
+      "path": "runs/final-sol-documents/cloudflare-gateway-python-1.json",
+      "raw_capture_sha256": "53adb2644e7ce8820afdf6053614f2d2bdb00ade526b18edf4a469f7b9c87c92",
+      "public_sha256": "11eb5b66a790224ae281f6e0a0eafcc5b8400d74031e99c609616dbdc0f179c4",
+      "raw_bytes": 2582666,
+      "public_bytes": 8708
+    },
+    {
+      "path": "runs/final-sol-documents/cloudflare-gateway-rlm-1.json",
+      "raw_capture_sha256": "edb4d06e757a2737959957923d3f85ae4e7067c33035808ead1d94dd206505b5",
+      "public_sha256": "d66a70d539cb865bb785e98a926e46281bd85e205c6236c9178d412b6910cda7",
+      "raw_bytes": 2557840,
+      "public_bytes": 8169
+    },
+    {
+      "path": "runs/final-sol-documents/cloudflare-products-direct-1.json",
+      "raw_capture_sha256": "cb258823c39ff4b58ea73b8556f6159589c8b33ecda0e14635776b8756156a24",
+      "public_sha256": "6e7d71d6326bef1ecae4ebefdf32e10ded90e1b147aa15723fa35e4d0865ce25",
+      "raw_bytes": 664900,
+      "public_bytes": 7039
+    },
+    {
+      "path": "runs/final-sol-documents/cloudflare-products-python-1.json",
+      "raw_capture_sha256": "f821fea4146e173bc45317e5e4bf1a4deb2d77e7754dba75a85b8e332f7da8e6",
+      "public_sha256": "fb8d3f1e3b530cc65b63441e454481e5639fbf349c0c05864593d58de6d32695",
+      "raw_bytes": 2584173,
+      "public_bytes": 9294
+    },
+    {
+      "path": "runs/final-sol-documents/cloudflare-products-rlm-1.json",
+      "raw_capture_sha256": "ff6ac9539db265c72776634b56db62bb424ff0a1aadc3d6f559761712910c19b",
+      "public_sha256": "d3b951c53d7683d2c87f1097003a7710fe940e8e0a169c8c14e939725abe8a7e",
+      "raw_bytes": 2589431,
+      "public_bytes": 9208
+    },
+    {
+      "path": "runs/final-sol-documents/synthetic-code-direct-1.json",
+      "raw_capture_sha256": "c78f79192d4840f0eb9d2e7df3a983116da014d19aaa47d6baf453f54d73590b",
+      "public_sha256": "725a44531a294bc4ca6309a6f107e1d94cd49b3f610625bba826daaec7a91e61",
+      "raw_bytes": 75366,
+      "public_bytes": 6755
+    },
+    {
+      "path": "runs/final-sol-documents/synthetic-code-python-1.json",
+      "raw_capture_sha256": "df0af9374e9d1126b9a0203bfab8072f29d3186708689c8792352a486ccddeac",
+      "public_sha256": "d5529401b68a8b7bfd937a7f9d2798d277765471c48d9cf0eaa3fa6490636e93",
+      "raw_bytes": 469211,
+      "public_bytes": 12860
+    },
+    {
+      "path": "runs/final-sol-documents/synthetic-code-rlm-1.json",
+      "raw_capture_sha256": "badd7dbd20ed9f21fb342f6e8c14fa0bb7d745ed3285f2ec5ff109a1a0227df7",
+      "public_sha256": "e4bcca3a3edccac9cd3ae3ee9a660bcceb083d6f7ad004edc4afb00b6c378f66",
+      "raw_bytes": 479501,
+      "public_bytes": 13358
+    },
+    {
+      "path": "runs/final-sol-synthetic/synthetic-absence-direct-1.json",
+      "raw_capture_sha256": "1550512cd930821726b5c7338cf246dfea7a5cde8fab759559db7532378478c3",
+      "public_sha256": "85b36b3b8216ab2552e99c1c035a15e3a28bc7df9e1f45ac555aa859047f615b",
+      "raw_bytes": 65963,
+      "public_bytes": 4164
+    },
+    {
+      "path": "runs/final-sol-synthetic/synthetic-absence-python-1.json",
+      "raw_capture_sha256": "4cc670f7cb59629f1113e0b9aec901832c35697218d98b1cae852c0ecc1ace7a",
+      "public_sha256": "bb992f653d6ad9aedfc3fd4b4c59bceeedf053a7b148c9c5e924f571a31198a7",
+      "raw_bytes": 326493,
+      "public_bytes": 6964
+    },
+    {
+      "path": "runs/final-sol-synthetic/synthetic-absence-rlm-1.json",
+      "raw_capture_sha256": "cf966a8565ad6bbc19e08a5a537132c442860e386325fa3215484dca40ef5a58",
+      "public_sha256": "92f9028311abbead6fdca5c6454a463ec897f3a360223ec5cf6c91ba4352be70",
+      "raw_bytes": 327450,
+      "public_bytes": 6949
+    },
+    {
+      "path": "runs/final-sol-synthetic/synthetic-exception-direct-1.json",
+      "raw_capture_sha256": "ccc0d09167c02aa5e5cd16162f8808f2f7888dcd833f86598e48f97ab3b4c72f",
+      "public_sha256": "b2f75dbeb31af0a335472080e2ba46ae9f89e2c32bed51649ee51b979ed903bc",
+      "raw_bytes": 67608,
+      "public_bytes": 4593
+    },
+    {
+      "path": "runs/final-sol-synthetic/synthetic-exception-python-1.json",
+      "raw_capture_sha256": "8570092e2a44a89c5894db46f7befe7be4a04b25d36f93576621ba66b76674b8",
+      "public_sha256": "d92ff191f5a1351df2413556d640e470af6e4c0a4aa77719547fc82e7279e3a6",
+      "raw_bytes": 345458,
+      "public_bytes": 7636
+    },
+    {
+      "path": "runs/final-sol-synthetic/synthetic-exception-rlm-1.json",
+      "raw_capture_sha256": "5c61b6ea826c3f726f800a00cda4307fe7b927a487d6aaaa31d1c3fcf0b7eb09",
+      "public_sha256": "e0c39224d3c63f1fdc59573433bfbafa47acf771447a12ea27f743bc8c07c653",
+      "raw_bytes": 375798,
+      "public_bytes": 8278
+    },
+    {
+      "path": "runs/final-sol-synthetic/synthetic-fee-direct-1.json",
+      "raw_capture_sha256": "1602349d4cacc17c8285d31f49ff7a0bfd481ac5500c007e56340d6a6fddd41a",
+      "public_sha256": "095997f006477705202c73a6a39548cf0ba747b709aaf962d1fd01283faa63cc",
+      "raw_bytes": 68403,
+      "public_bytes": 4750
+    },
+    {
+      "path": "runs/final-sol-synthetic/synthetic-fee-python-1.json",
+      "raw_capture_sha256": "e908099f156c3e94c93361615e57c168b2608d3dfa7273d5ac3ca2b91c679c78",
+      "public_sha256": "bc156d6ff66220e421ff9b7ed3e721073334b937af3c22ae2b607bdcbb85a750",
+      "raw_bytes": 363503,
+      "public_bytes": 8048
+    },
+    {
+      "path": "runs/final-sol-synthetic/synthetic-fee-rlm-1.json",
+      "raw_capture_sha256": "00de74f530eacd2b0ce20d5193d1c53e35222f3b5ca281b19aab25339cd57459",
+      "public_sha256": "17d85eaa2979c891fde9aa8a1e98d698db2226c3a5fecdafe171f5cfcd688a48",
+      "raw_bytes": 358089,
+      "public_bytes": 8040
+    },
+    {
+      "path": "runs/final-sol-synthetic/synthetic-unicode-direct-1.json",
+      "raw_capture_sha256": "ccafb6b3c0f77ce122161b4576480c6651b0e43b3828dd6c4424ea18e1703898",
+      "public_sha256": "865de7b389b59b7677b7d49f42b7c687f2e588763bcb76e283c5ecaa419ac156",
+      "raw_bytes": 67128,
+      "public_bytes": 4467
+    },
+    {
+      "path": "runs/final-sol-synthetic/synthetic-unicode-python-1.json",
+      "raw_capture_sha256": "82e5a70d05272c08bedb12154513463a014e91980732ee968d62828cf5098599",
+      "public_sha256": "2a3641d43ee26db913c86b2749218665ab365cbc77372224fd2384d8cbbba408",
+      "raw_bytes": 340140,
+      "public_bytes": 7584
+    },
+    {
+      "path": "runs/final-sol-synthetic/synthetic-unicode-rlm-1.json",
+      "raw_capture_sha256": "ab424cdc396cc77bf48ec96e3e10d373ccf696833da0bfb111258c1c16556cbe",
+      "public_sha256": "8c204631e3603d6857b36836778c0431c1910de48e47ef5093e1ee745919eaff",
+      "raw_bytes": 344033,
+      "public_bytes": 7590
+    },
+    {
+      "path": "runs/integration-sol-forced-child/synthetic-fee-forced-child-rlm-1.json",
+      "raw_capture_sha256": "4b79160a12dc06a3886b38a8f96db1e8e3a203724fee4fba4620c38ad4f6d975",
+      "public_sha256": "3a76e5eb302a7a230240f0d17eef45a57e5b45abe9cc75a60ca99af3d834ff7c",
+      "raw_bytes": 555687,
+      "public_bytes": 12737
+    },
+    {
+      "path": "runs/smoke-luna-after-empty-repair/sqlite-defaults-python-1.json",
+      "raw_capture_sha256": "7672bb6d0cfe23e966faa34e2373f1b992e2fc396bdfed295f435f967a542b1a",
+      "public_sha256": "643968a98a1dec95d513b211686dc3c3500806170428a614486c9c6a6eb6621c",
+      "raw_bytes": 211785,
+      "public_bytes": 5045
+    },
+    {
+      "path": "runs/smoke-luna-after-empty-repair/synthetic-unicode-python-1.json",
+      "raw_capture_sha256": "621e3a0f062a06d6d9bdcb638822d98bbdc4b52dd6b5e56e4366a6723f527c38",
+      "public_sha256": "2c4b4e4a6000bd9e66f9aec66d24c5a743852f9d6ff855a88b42d570903ea524",
+      "raw_bytes": 300082,
+      "public_bytes": 8613
+    },
+    {
+      "path": "runs/smoke-luna-sources/sqlite-defaults-python-1.json",
+      "raw_capture_sha256": "02e6dde4b91fa49498a68580bed3defd9ad07a144373bc847882fbb0561c6a4e",
+      "public_sha256": "59e9cbe7a525b2de1630d31478a63971042dee1155cce338d2e3ef2ab6344d90",
+      "raw_bytes": 245062,
+      "public_bytes": 6009
+    },
+    {
+      "path": "runs/smoke-luna-sources/synthetic-unicode-python-1.json",
+      "raw_capture_sha256": "2e0994259d44d56f0d5960b78d1f0757dd4e1aeccb4fdd59e2261be9ff54f6b1",
+      "public_sha256": "6b4e892cf1a12999d6b7e977f4b5d7f3a969d5d80aa51e390bb464649c405bf5",
+      "raw_bytes": 128454,
+      "public_bytes": 5291
+    },
+    {
+      "path": "runs/smoke-sol-20261102/synthetic-fee-direct-1.json",
+      "raw_capture_sha256": "552522593f6a3faa0d091a7c0b2b02c01ce208eaba0c1db2a01c54bb0fde88ca",
+      "public_sha256": "1e8050f013ba082084e497fa5378819b2aea6a2f97f5ba3cdca413e94c1fb163",
+      "raw_bytes": 68160,
+      "public_bytes": 4635
+    },
+    {
+      "path": "runs/smoke-sol-20261102/synthetic-fee-python-1.json",
+      "raw_capture_sha256": "588a3218a48c31736f2c36e0fffae84f8190657524634fbb9113534eb667b935",
+      "public_sha256": "3da222c01b68962f56c8d12ecb7d3bc62f9edcdcaeb430e39a9d1828367a103b",
+      "raw_bytes": 356955,
+      "public_bytes": 7981
+    },
+    {
+      "path": "runs/smoke-sol-20261102/synthetic-fee-rlm-1.json",
+      "raw_capture_sha256": "8f421adaae137afe65701c5fb1e76380c7fd393a33cbd95fc541c3744dcb2851",
+      "public_sha256": "9de935017f00af30989218accd63e859654a07a14659a26e41c807eb73fac7a3",
+      "raw_bytes": 363686,
+      "public_bytes": 7982
+    },
+    {
+      "path": "runs/smoke-terra-sources/sqlite-defaults-python-1.json",
+      "raw_capture_sha256": "db919c26282a78e47406ebc85579517501bc2ddb1e015a80fbee263fce77e473",
+      "public_sha256": "56da620e7e9fdb309bfb4e14b1a4d6e2698d7e6d22a152df4621eecae79dab4d",
+      "raw_bytes": 565710,
+      "public_bytes": 9287
+    },
+    {
+      "path": "runs/smoke-terra-sources/synthetic-unicode-python-1.json",
+      "raw_capture_sha256": "f76b5869ae471fc981039d60496727fb0ce18b0920b802177313f74d77d7988d",
+      "public_sha256": "824f079ae796f18b2a2ddd54e3d050da72343f94207e24a02168f26bfd4d3618",
+      "raw_bytes": 337077,
+      "public_bytes": 7481
+    }
+  ],
+  "note": "Original captures remain unchanged locally. Public records retain answers, scores, identities and usage, not complete prompts or execution replay."
+}

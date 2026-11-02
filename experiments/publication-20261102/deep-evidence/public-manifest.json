@@ -1,0 +1,346 @@
+{
+  "public_schema_version": 1,
+  "record_count": 48,
+  "skipped_json_files": 104,
+  "raw_bytes": 92633307,
+  "public_bytes": 469791,
+  "records": [
+    {
+      "path": "live/all-second-repeat/cloud-concentration-python-2.json",
+      "raw_capture_sha256": "e9346cd29150f5157171d22fc63b5ff57ce718f0080e575b3147a4de70a78ed2",
+      "public_sha256": "b51039f663d3dd625107d7222ffd01f2d00b289043280b8c661626a2ef8d26b9",
+      "raw_bytes": 2533505,
+      "public_bytes": 7665
+    },
+    {
+      "path": "live/all-second-repeat/cloud-concentration-rlm-2.json",
+      "raw_capture_sha256": "fbf6b4d8ffbb36b988d972be0622c97d33375f4738a37093041a7e8e942ab026",
+      "public_sha256": "f56c875882cb629e8c40cb2b007c5e458a3f2575d309375bb775c1b131db399a",
+      "raw_bytes": 2527350,
+      "public_bytes": 7447
+    },
+    {
+      "path": "live/all-second-repeat/cloud-customer-counts-python-2.json",
+      "raw_capture_sha256": "efb031c42e3c079447ff7bf276f28e385cab52f18072a6bde74febf7af6fcdab",
+      "public_sha256": "c9d195197969a5285c80993716f4474c21a1d91093cc7299c5c2343561712513",
+      "raw_bytes": 2697745,
+      "public_bytes": 10832
+    },
+    {
+      "path": "live/all-second-repeat/cloud-customer-counts-rlm-2.json",
+      "raw_capture_sha256": "17bc37b0f6b75dbdfcec7c54dfbbd11ccc5e4d6276c973895377a7495d342aaf",
+      "public_sha256": "77be322c2a334aed71f825a4f9ce94ce8373935206182592c7c12edcd4437a1b",
+      "raw_bytes": 2654509,
+      "public_bytes": 10100
+    },
+    {
+      "path": "live/all-second-repeat/cloud-distributed-profile-python-2.json",
+      "raw_capture_sha256": "f76e62c5d0913bd98234585bd1ae0aa51193ba6a944ccf67a9375bd6838434ac",
+      "public_sha256": "705c37dee2113dcc3dcd0a1622e699f1bac2f9c6a2a134062d6e688ec8c3ad29",
+      "raw_bytes": 2637346,
+      "public_bytes": 9154
+    },
+    {
+      "path": "live/all-second-repeat/cloud-distributed-profile-rlm-2.json",
+      "raw_capture_sha256": "8beb999483345f055116d56352d7a78b18fa89f123598b7b70a7cd56cb688a98",
+      "public_sha256": "e82fbf7e5d080f73f37de32284283491e6068eb7ac95b58897a510c7ec57880d",
+      "raw_bytes": 2667528,
+      "public_bytes": 9225
+    },
+    {
+      "path": "live/all-second-repeat/cloud-free-cash-flow-python-2.json",
+      "raw_capture_sha256": "bc835eece1faf0853108cf5c38427dd5da126429da548b65b5fdd6daf79e25d1",
+      "public_sha256": "91a1cba3df759226dcdedbcc47986e0c15696096d57e46998a704ade2e2a9f14",
+      "raw_bytes": 2747150,
+      "public_bytes": 10776
+    },
+    {
+      "path": "live/all-second-repeat/cloud-free-cash-flow-rlm-2.json",
+      "raw_capture_sha256": "4ecb0173a218327fe1e2c2935e7d25b727db11119d9900044b7b447862557b1b",
+      "public_sha256": "c85f8ac5e46942af3123393902157405e15980e440a605c3bcf55678088609c0",
+      "raw_bytes": 2894107,
+      "public_bytes": 22714
+    },
+    {
+      "path": "live/all-second-repeat/cloud-patents-python-2.json",
+      "raw_capture_sha256": "02628f62512308d5e1fbc8691f405d73d705c2093d6d2458316a709a38d35e59",
+      "public_sha256": "60c54944eedb7e6f07c5d9c744c767cc2e19728ea5098dd714b7c1f6bc208e61",
+      "raw_bytes": 2571441,
+      "public_bytes": 9545
+    },
+    {
+      "path": "live/all-second-repeat/cloud-patents-rlm-2.json",
+      "raw_capture_sha256": "9ab86ec8771f819fce464a7d0c4c401fa8d8699240370b598bf5d1b3d88f3648",
+      "public_sha256": "a613b0a5fe92f6238b379b6514505d9729539fafae1ee9eb7a4b68fc7364350f",
+      "raw_bytes": 2570297,
+      "public_bytes": 10152
+    },
+    {
+      "path": "live/all-second-repeat/cloud-regional-revenue-python-2.json",
+      "raw_capture_sha256": "9be209ced618a4b429b91a48c4444d65518377119ac0b0df98cd279568bb6049",
+      "public_sha256": "64762ac6b28cc54dde8217d493b0eb4120c626c86a5de9e6a999a97423da6c0b",
+      "raw_bytes": 2618312,
+      "public_bytes": 11521
+    },
+    {
+      "path": "live/all-second-repeat/cloud-regional-revenue-rlm-2.json",
+      "raw_capture_sha256": "541ff09f739761966e7e790e08bde491e76aeedba5ab6e958c4ec65379aef4c6",
+      "public_sha256": "f3640f7baf9543ca58b92edbca9ddd0cd3990245910fe0f3f8edda7fc88d5e81",
+      "raw_bytes": 2571699,
+      "public_bytes": 10005
+    },
+    {
+      "path": "live/all-second-repeat/cloud-retention-terms-python-2.json",
+      "raw_capture_sha256": "6d2cf8593bde895c839544921f5dd935ecb2b21b92ab28a7ed427fe7719e5333",
+      "public_sha256": "97852d16d7710bb435cd5466898c01b434297101c40a586a8cb893e305744630",
+      "raw_bytes": 2604554,
+      "public_bytes": 9620
+    },
+    {
+      "path": "live/all-second-repeat/cloud-retention-terms-rlm-2.json",
+      "raw_capture_sha256": "4200ee1df79213966069bce2546dd0ef7f6292e8161e021558c8b57cd290d62b",
+      "public_sha256": "141f840d7644e6e87cc2b6727f08883b4cc1d4cc6b2197632443c2c3db46a406",
+      "raw_bytes": 2597950,
+      "public_bytes": 9415
+    },
+    {
+      "path": "live/all-second-repeat/cloud-workforce-python-2.json",
+      "raw_capture_sha256": "06ef7d391ea5e21d7c742908a5c4e39a5c2dff5649dd69fdbf2cd3f9d3db99f7",
+      "public_sha256": "d762ddd436de3e95fe6d156656c50864f6e111f7be457349afb259bbc9bebd87",
+      "raw_bytes": 2530639,
+      "public_bytes": 8293
+    },
+    {
+      "path": "live/all-second-repeat/cloud-workforce-rlm-2.json",
+      "raw_capture_sha256": "d789d497cec28948b01d1efa5d26bb55e4a995af64562e1014816c9bb21bcb52",
+      "public_sha256": "3765b6451f306313ed45b12e24ead7ddf8fbd50a3c4ae11e8941ff3b9b69a2e4",
+      "raw_bytes": 2539389,
+      "public_bytes": 8774
+    },
+    {
+      "path": "live/all-second-repeat/sqlite-lastrowid-python-2.json",
+      "raw_capture_sha256": "b56d1796faa0010018d72ac52ffc7b0dd2bdbe5506286e9baae985b384ab07fa",
+      "public_sha256": "82cd526554523cd0b2b7050b16d4e48b1151158170580065b625cf75d6d66854",
+      "raw_bytes": 555895,
+      "public_bytes": 10698
+    },
+    {
+      "path": "live/all-second-repeat/sqlite-lastrowid-rlm-2.json",
+      "raw_capture_sha256": "3d4008c56f4050debbed3212b8b1a32b6adf4545d727835aa5b1006fb7a6eb7b",
+      "public_sha256": "812860c22266c291bad83f8f39cd4c4c3d1e67f3471826a6ee581a7d58e77c68",
+      "raw_bytes": 576034,
+      "public_bytes": 11640
+    },
+    {
+      "path": "live/all-second-repeat/sqlite-parameter-containers-python-2.json",
+      "raw_capture_sha256": "f24de3a8fc8d139105becd81ced90deeda8574413ed5bba1622cd7a96bd60747",
+      "public_sha256": "ccff46e1cf20f598580a26ca7431f210228ac464d87a7a4a64ad35fc174eeb52",
+      "raw_bytes": 521527,
+      "public_bytes": 8929
+    },
+    {
+      "path": "live/all-second-repeat/sqlite-parameter-containers-rlm-2.json",
+      "raw_capture_sha256": "02a5661f40173eb55d3c9c5e88e640842b263c19f14efc40f3195790ab43d7c6",
+      "public_sha256": "f40f7abd933c06964d5d8efd82cbb649533bf810f33ef34b5c324bea19df4380",
+      "raw_bytes": 532637,
+      "public_bytes": 9397
+    },
+    {
+      "path": "live/all-second-repeat/sqlite-row-factory-python-2.json",
+      "raw_capture_sha256": "cadf3a3ccaf2df9e184df3af1dabd578a95a13269c13de896c20004d31b4f9a4",
+      "public_sha256": "d944da42ed9d883c2f331268bbebf84dc28b972b7bc0e8208a30d64ea701a70b",
+      "raw_bytes": 578125,
+      "public_bytes": 9269
+    },
+    {
+      "path": "live/all-second-repeat/sqlite-row-factory-rlm-2.json",
+      "raw_capture_sha256": "a229717667412fb043085f21a792b22012f25f3bd481a655b910d3b9147bc3e6",
+      "public_sha256": "06a73c93b7914ab353f543e0a8b4aa43e8feebe98982aa1584e51879fdbb2122",
+      "raw_bytes": 536586,
+      "public_bytes": 8466
+    },
+    {
+      "path": "live/all-second-repeat/sqlite-thread-contract-python-2.json",
+      "raw_capture_sha256": "caff35748672688b496a54e8d198fd62a2ba550dc0ca6056862d6dabc1ba254d",
+      "public_sha256": "a3b00bded10c2d8a9393117f6af3e2df61f376b82219c3e4ba69d0bbf68c31f8",
+      "raw_bytes": 505203,
+      "public_bytes": 8286
+    },
+    {
+      "path": "live/all-second-repeat/sqlite-thread-contract-rlm-2.json",
+      "raw_capture_sha256": "885f5aef5e358144fa95e50aadbabaadee442e6c694c904e443f75514b435db1",
+      "public_sha256": "84867cdaa0f5533acdfc815da45c1629d3983c42e4bd12393b2627ab0bfba810",
+      "raw_bytes": 498674,
+      "public_bytes": 7945
+    },
+    {
+      "path": "live/pilot4/cloud-workforce-python-1.json",
+      "raw_capture_sha256": "4bd3e4e972634ecd9f8e7a63f9579fd3b1d54ed54df2ed909d23c00f7f53f0d1",
+      "public_sha256": "626e65e3813563dec97f57b57d5d8b4e8fe3f25b8e6b0d547fb25c37bd31fb10",
+      "raw_bytes": 2530573,
+      "public_bytes": 8307
+    },
+    {
+      "path": "live/pilot4/cloud-workforce-rlm-1.json",
+      "raw_capture_sha256": "448d0423bde56956d4b72263f19fdbc43edff5fad0de8f9cc1587848ae6f2e26",
+      "public_sha256": "b18fd97b66ee68901a124eb3035c8e307b6dfd41d86bea0f234da0e31a196a6f",
+      "raw_bytes": 2539458,
+      "public_bytes": 8758
+    },
+    {
+      "path": "live/pilot4/sqlite-thread-contract-python-1.json",
+      "raw_capture_sha256": "7be0229986bb16c804339dac2cd8042ada24091b6016c87f59891bd553846c02",
+      "public_sha256": "3e07ad356afdb677ce1741624db537fd90b0006fed0acb2c853b30c5c699e819",
+      "raw_bytes": 507529,
+      "public_bytes": 8402
+    },
+    {
+      "path": "live/pilot4/sqlite-thread-contract-rlm-1.json",
+      "raw_capture_sha256": "73cc6543fda3b37849066e2af0eb904bde90ccb0df2d7f4dd6bc1ff689b628ce",
+      "public_sha256": "ab264c500a6886a28cefcfd6701d552a42b5ed167dbc451eb7a7c79c8f76b97f",
+      "raw_bytes": 505724,
+      "public_bytes": 8277
+    },
+    {
+      "path": "live/remaining-first-repeat/cloud-concentration-python-1.json",
+      "raw_capture_sha256": "0d6f2512ddd972d65fd43249aefaaed6798bd615ee12f3ad2a78a08c7f871656",
+      "public_sha256": "39fa9d8d939b250b51a14d57aac044109d4948c4657bec1b89575bc72aa9f211",
+      "raw_bytes": 2526550,
+      "public_bytes": 7449
+    },
+    {
+      "path": "live/remaining-first-repeat/cloud-concentration-rlm-1.json",
+      "raw_capture_sha256": "e6f4defaafd12301adf2b502375cd98a081e3ff7c77a5146b5f85701b2e5887f",
+      "public_sha256": "e988715008f3902db454fdcb896d0e5e65b772a61c35ac4d63989448c2027c64",
+      "raw_bytes": 2527354,
+      "public_bytes": 7449
+    },
+    {
+      "path": "live/remaining-first-repeat/cloud-customer-counts-python-1.json",
+      "raw_capture_sha256": "cb21bcb7c655247ae9c411dba33879d09e16e65ed65d0f6db010d8c85c668233",
+      "public_sha256": "5fe0d776930e872ec4e1c1e178a1b8e38bbe6aac5f4f3427acda7f8d482f135f",
+      "raw_bytes": 2679260,
+      "public_bytes": 10509
+    },
+    {
+      "path": "live/remaining-first-repeat/cloud-customer-counts-rlm-1.json",
+      "raw_capture_sha256": "e1e618c362dc239121f3485fd3b524eb8dae792d44e2fb90bdc14871321617da",
+      "public_sha256": "05ec8534d99e2ef8af4712c282ebadf2b37ec165a85365af58cc7173ac797217",
+      "raw_bytes": 2679828,
+      "public_bytes": 10503
+    },
+    {
+      "path": "live/remaining-first-repeat/cloud-distributed-profile-python-1.json",
+      "raw_capture_sha256": "6978deac4f54a3cff5814b8b1b5740c0b93a2be6a3520a206c6cc5b66108a262",
+      "public_sha256": "d2b2f17fa851eac731a1cf72b6576eee4b3112b746e77f0014075862113fcedb",
+      "raw_bytes": 2768633,
+      "public_bytes": 10567
+    },
+    {
+      "path": "live/remaining-first-repeat/cloud-distributed-profile-rlm-1.json",
+      "raw_capture_sha256": "671a905db5a55ba093e6d3f9faa721a4be322da70963fd27de8d1ad20d4ae56f",
+      "public_sha256": "8df67df50563ca17a163ef36e63025ef48548c2e4544d7d2ca29ca4ee27dcda3",
+      "raw_bytes": 2646306,
+      "public_bytes": 9450
+    },
+    {
+      "path": "live/remaining-first-repeat/cloud-free-cash-flow-python-1.json",
+      "raw_capture_sha256": "dca6890fa689f1c8c085bc97e539c3246aa2989d3a052e57eef61aadb5ad7fa1",
+      "public_sha256": "b7deb9172d9158ca4410b7eb7c3294d69da3ead2fa200aeea89cf81f0b64867e",
+      "raw_bytes": 2739528,
+      "public_bytes": 10620
+    },
+    {
+      "path": "live/remaining-first-repeat/cloud-free-cash-flow-rlm-1.json",
+      "raw_capture_sha256": "1a319d3d15e12fd8dfb4b60ca2cd9036bd74945aacbbab5b361d95d76f1c394a",
+      "public_sha256": "fb8c36d2b3506750bb841ab6b36ce276b96584e1cebbf14dc0ce4e3220482cbb",
+      "raw_bytes": 2838351,
+      "public_bytes": 11147
+    },
+    {
+      "path": "live/remaining-first-repeat/cloud-patents-python-1.json",
+      "raw_capture_sha256": "653ba5ca1dc80c89bc0aacb74268a9a1dcbf2b7e796754733c588d6481bd7766",
+      "public_sha256": "70c471e18568cf34d1cb1974dc4fdfb2486b04c89738dbc0898b72be5cac5c71",
+      "raw_bytes": 2563967,
+      "public_bytes": 9100
+    },
+    {
+      "path": "live/remaining-first-repeat/cloud-patents-rlm-1.json",
+      "raw_capture_sha256": "9d27a15422eac948e09e09b3f7b22431d5fd86a3d2571ee0c66c0f47fb2b47b7",
+      "public_sha256": "2f2af146930f9c094a382fc357c41d544e60265cd60e90fdade1091655658dd0",
+      "raw_bytes": 2571876,
+      "public_bytes": 9548
+    },
+    {
+      "path": "live/remaining-first-repeat/cloud-regional-revenue-python-1.json",
+      "raw_capture_sha256": "e20441a37f06b6dbd068c2e400e90b1df0ccef4dbc4070682f11299cdecd0379",
+      "public_sha256": "d0d601b660240226564a15e1702392ed93ca2458fb9766b79367d5ceee7e76ec",
+      "raw_bytes": 2618210,
+      "public_bytes": 11518
+    },
+    {
+      "path": "live/remaining-first-repeat/cloud-regional-revenue-rlm-1.json",
+      "raw_capture_sha256": "913481018d2fa2198a067cdf767cdad94dfff1a9329c7215af7cede824671c84",
+      "public_sha256": "84bbcac163b9dc73e785445be6c5f46fa1ab8c2bd40fdd062ec82a04289dcd40",
+      "raw_bytes": 2580441,
+      "public_bytes": 10423
+    },
+    {
+      "path": "live/remaining-first-repeat/cloud-retention-terms-python-1.json",
+      "raw_capture_sha256": "3486df84255ee6613d257d9d857bc3985612950d3f71ecec75b900e9c775c60a",
+      "public_sha256": "8373eecf89d1fb15e823d51e20a3bf3f8cd8591da9bb5b5fbc006ce1d94a853b",
+      "raw_bytes": 2656964,
+      "public_bytes": 9847
+    },
+    {
+      "path": "live/remaining-first-repeat/cloud-retention-terms-rlm-1.json",
+      "raw_capture_sha256": "7052bc465a7dd493c2c628ff8d678ce2bd528138ee1250bc0737784868f492bc",
+      "public_sha256": "8d01e6b632697ec36b0971aa4556a832acff5573d28e7d8bd44d2d5bafa1bd23",
+      "raw_bytes": 2605614,
+      "public_bytes": 9818
+    },
+    {
+      "path": "live/remaining-first-repeat/sqlite-lastrowid-python-1.json",
+      "raw_capture_sha256": "62b310af4d1b348a21471f9ced3ff37f8be6e72512ca15cc46496962773fbcf3",
+      "public_sha256": "c886cae717056b87eacac09688724e0aef8bdb11e22e1a5cbebd288c37b58df1",
+      "raw_bytes": 562263,
+      "public_bytes": 11009
+    },
+    {
+      "path": "live/remaining-first-repeat/sqlite-lastrowid-rlm-1.json",
+      "raw_capture_sha256": "866eaccf04302a30ec280a9ad39c34707bafc2ccc2beaf083d6416a3ba7571d6",
+      "public_sha256": "399beef5487ad808ad468a351fb6d95713c343341b898a8c7a5a9b546a24714f",
+      "raw_bytes": 576123,
+      "public_bytes": 11639
+    },
+    {
+      "path": "live/remaining-first-repeat/sqlite-parameter-containers-python-1.json",
+      "raw_capture_sha256": "b39bbc69e4c02566beddb789f9d0b6e07a6dd1197c31e1020c217a300bd1c4df",
+      "public_sha256": "ed6cf0fc96dfa1450eaba18343e14bc4080c0b5d7a7c42253090708711f8f7cb",
+      "raw_bytes": 521530,
+      "public_bytes": 8932
+    },
+    {
+      "path": "live/remaining-first-repeat/sqlite-parameter-containers-rlm-1.json",
+      "raw_capture_sha256": "cf6d201e4cb7ca5a97e6ee9b85f2f056f532f3351fac985d1de927eb0c8a82e8",
+      "public_sha256": "e2778f77c5b476e13d9c3f3a5fe133afdb1ba2386b5d99e956813313a1a5b38c",
+      "raw_bytes": 529038,
+      "public_bytes": 9237
+    },
+    {
+      "path": "live/remaining-first-repeat/sqlite-row-factory-python-1.json",
+      "raw_capture_sha256": "2dd51c30d506f927d34f51e88de9ac5a52c8d40e74bb9b24f706700ffef0ef85",
+      "public_sha256": "77178d5c7c1305c0994654e2ca904785dd810dd0ce3d79baa49839a0d2fa8f8c",
+      "raw_bytes": 541878,
+      "public_bytes": 8626
+    },
+    {
+      "path": "live/remaining-first-repeat/sqlite-row-factory-rlm-1.json",
+      "raw_capture_sha256": "f281ed8b318634bf770b603fa3d683de87cec1d7e4fc22c1adb87a15ba3ace37",
+      "public_sha256": "932a930a7640de519ae67bb46fd476dd7a7f596e7fe0aef68f6fdcfdf26b844c",
+      "raw_bytes": 548107,
+      "public_bytes": 8788
+    }
+  ],
+  "note": "Original captures remain unchanged locally. Public records retain answers, scores, identities and usage, not complete prompts or execution replay."
+}

@@ -1,0 +1,243 @@
+{
+  "kind": "OFFLINE_FIXED_RESPONSE_REPLAY",
+  "live_model_calls": 0,
+  "source_capture": "experiments/grounded-documents-20261102/runs/smoke-luna-after-empty-repair/synthetic-unicode-python-1.json",
+  "source_capture_sha256": "621e3a0f062a06d6d9bdcb638822d98bbdc4b52dd6b5e56e4366a6723f527c38",
+  "limitations": [
+    "Recorded model responses are fixed, not freshly generated for the new prompt.",
+    "Replayed usage is historical metadata, not new token consumption.",
+    "Success verifies runtime acceptance, not live model reliability."
+  ],
+  "status": "completed",
+  "grade": {
+    "passed": true,
+    "factual_passed": true,
+    "provenance_passed": true,
+    "supported_gold_fields": 1,
+    "required_gold_fields": 1,
+    "failures": [],
+    "answer_grade": {
+      "passed": true,
+      "failures": []
+    },
+    "grader_version": "grounded-document-fields-v2"
+  },
+  "result": {
+    "document_schema_version": 1,
+    "answer": "review_owner: Pétya Sokolova",
+    "claims": [
+      {
+        "claim": "review_owner: Pétya Sokolova",
+        "citations": [
+          {
+            "document_id": "aurora-policy",
+            "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+            "page": 17,
+            "start": 1904,
+            "end": 2204,
+            "quote": " 5; inventory reference AUR-1719; reconciliation is pending.\nArchive entry 17-20: warehouse zone 6; inventory reference AUR-1720; reconciliation is pending.\nArchive entry 17-21: warehouse zone 0; inventory reference AUR-1721; reconciliation is pending.\nThe review owner for Aurora is Pétya Sokolova.\n"
+          }
+        ]
+      }
+    ],
+    "unknowns": [],
+    "sources": [
+      {
+        "document_id": "aurora-policy",
+        "title": "Aurora fictional application policy",
+        "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+        "page_count": 24,
+        "character_count": 52310
+      },
+      {
+        "document_id": "borealis-policy",
+        "title": "Borealis policy, a different program",
+        "source_sha256": "54430077260753df96c8f7d47dccd42dd62c2af6d812307f53e306a24fb79692",
+        "page_count": 1,
+        "character_count": 128
+      }
+    ],
+    "run": {
+      "schema_version": 1,
+      "answer": "{\"answer\":\"review_owner: Pétya Sokolova\",\"claims\":[{\"claim\":\"review_owner: Pétya Sokolova\",\"citations\":[{\"document_id\":\"aurora-policy\",\"source_sha256\":\"08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d\",\"page\":17,\"start\":1904,\"end\":2204,\"quote\":\" 5; inventory reference AUR-1719; reconciliation is pending.\\nArchive entry 17-20: warehouse zone 6; inventory reference AUR-1720; reconciliation is pending.\\nArchive entry 17-21: warehouse zone 0; inventory reference AUR-1721; reconciliation is pending.\\nThe review owner for Aurora is Pétya Sokolova.\\n\"}]}],\"unknowns\":[]}",
+      "stats": {
+        "llm_calls": 5,
+        "root_calls": 5,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 5,
+        "max_depth_reached": 0,
+        "prompt_tokens": 29907,
+        "completion_tokens": 482,
+        "total_tokens": 30389,
+        "cached_tokens": 0,
+        "usage_calls": 5,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "gpt-6-luna": {
+            "calls": 5,
+            "retry_calls": 0,
+            "prompt_tokens": 29907,
+            "completion_tokens": 482,
+            "total_tokens": 30389,
+            "cached_tokens": 0,
+            "usage_calls": 5,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 5,
+        "depth": 0,
+        "budget": {
+          "max_calls": 12,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 60,
+          "reserved_calls": 5,
+          "observed_tokens": 30389,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 1.488798
+        }
+      },
+      "config": {
+        "model": "gpt-6-luna",
+        "recursive_model": "gpt-6-luna",
+        "max_depth": 0,
+        "max_iterations": 10,
+        "repl_timeout": 5,
+        "max_output_chars": 16000,
+        "repl_max_snapshot_bytes": 1000000,
+        "max_concurrent_subcalls": 4,
+        "max_total_calls": 12,
+        "max_total_tokens": null,
+        "max_total_cost_usd": null,
+        "max_elapsed_seconds": 60,
+        "max_retries": 0,
+        "retry_backoff_seconds": 1.0,
+        "capture_trajectory_content": true,
+        "final_answer_validator": false
+      }
+    }
+  },
+  "replayed_calls": [
+    {
+      "original_call_index": 1,
+      "response": {
+        "choices": [
+          {
+            "message": {
+              "role": "assistant",
+              "content": "FINAL(\"print(json.dumps({'answer':'review_owner: not specified','claims':[],'unknowns':['review_owner']}))\")"
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 5633,
+          "completion_tokens": 36,
+          "total_tokens": 5669,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "billing_mode": "subscription"
+      },
+      "model": "gpt-6-luna"
+    },
+    {
+      "original_call_index": 2,
+      "response": {
+        "choices": [
+          {
+            "message": {
+              "role": "assistant",
+              "content": "print(json.dumps(source_manifest()))"
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 5705,
+          "completion_tokens": 10,
+          "total_tokens": 5715,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "billing_mode": "subscription"
+      },
+      "model": "gpt-6-luna"
+    },
+    {
+      "original_call_index": 3,
+      "response": {
+        "choices": [
+          {
+            "message": {
+              "role": "assistant",
+              "content": "print(search_sources(\"Petya\", document_id=\"aurora-policy\", limit=10, window=300))"
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 5890,
+          "completion_tokens": 26,
+          "total_tokens": 5916,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "billing_mode": "subscription"
+      },
+      "model": "gpt-6-luna"
+    },
+    {
+      "original_call_index": 4,
+      "response": {
+        "choices": [
+          {
+            "message": {
+              "role": "assistant",
+              "content": "print(json.dumps({\n    \"answer\": \"review_owner: Pétya Sokolova\",\n    \"claims\": [{\n        \"claim\": \"review_owner: Pétya Sokolova\",\n        \"citations\": [{\n            \"document_id\": \"aurora-policy\",\n            \"source_sha256\": \"08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d\",\n            \"page\": 17,\n            \"start\": 1904,\n            \"end\": 2204,\n            \"quote\": \" 5; inventory reference AUR-1719; reconciliation is pending.\\nArchive entry 17-20: warehouse zone 6; inventory reference AUR-1720; reconciliation is pending.\\nArchive entry 17-21: warehouse zone 0; inventory reference AUR-1721; reconciliation is pending.\\nThe review owner for Aurora is Pétya Sokolova.\\n\"\n        }]\n    }],\n    \"unknowns\": []\n}))"
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 6096,
+          "completion_tokens": 223,
+          "total_tokens": 6319,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "billing_mode": "subscription"
+      },
+      "model": "gpt-6-luna"
+    },
+    {
+      "original_call_index": 5,
+      "response": {
+        "choices": [
+          {
+            "message": {
+              "role": "assistant",
+              "content": "{\"answer\":\"review_owner: Pétya Sokolova\",\"claims\":[{\"claim\":\"review_owner: Pétya Sokolova\",\"citations\":[{\"document_id\":\"aurora-policy\",\"source_sha256\":\"08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d\",\"page\":17,\"start\":1904,\"end\":2204,\"quote\":\" 5; inventory reference AUR-1719; reconciliation is pending.\\nArchive entry 17-20: warehouse zone 6; inventory reference AUR-1720; reconciliation is pending.\\nArchive entry 17-21: warehouse zone 0; inventory reference AUR-1721; reconciliation is pending.\\nThe review owner for Aurora is Pétya Sokolova.\\n\"}]}],\"unknowns\":[]}"
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 6583,
+          "completion_tokens": 187,
+          "total_tokens": 6770,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "billing_mode": "subscription"
+      },
+      "model": "gpt-6-luna"
+    }
+  ],
+  "original_artifact_sha256": "ef96144b6d9b23d74164defb6388683c054ab0a7224628e496ad5d93c542450a",
+  "projection": "Request prompts, full source context and trajectory payloads omitted; source answers, grades, stats and fixed replies retained."
+}

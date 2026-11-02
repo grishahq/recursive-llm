@@ -1,0 +1,19 @@
+{
+  "gold_sha256": "29c1cfff1f5b1c260b5e1ab3312adb7d753807576ae0e79728003de5118acec3",
+  "dataset_version": "deep-documents-v2",
+  "grader_version": "deep-document-fields-v1",
+  "tasks": [
+    "cloud-workforce",
+    "cloud-patents",
+    "cloud-customer-counts",
+    "cloud-free-cash-flow",
+    "cloud-concentration",
+    "cloud-retention-terms",
+    "cloud-regional-revenue",
+    "cloud-distributed-profile",
+    "sqlite-thread-contract",
+    "sqlite-row-factory",
+    "sqlite-parameter-containers",
+    "sqlite-lastrowid"
+  ]
+}

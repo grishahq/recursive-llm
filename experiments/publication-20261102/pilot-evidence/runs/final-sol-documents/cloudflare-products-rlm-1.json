@@ -1,0 +1,226 @@
+{
+  "dataset_version": "grounded-documents-v1",
+  "grader_version": "grounded-document-fields-v1",
+  "task": "cloudflare-products",
+  "mode": "rlm",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "According to the Developer-based Solutions AI product descriptions, what compute powers Workers AI and what data does Vectorize store and query? Use short noun phrases for workers_ai_compute and vectorize_data.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: workers_ai_compute, vectorize_data. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 30.454343,
+  "raw_answer": "{\"answer\": \"workers_ai_compute: serverless GPUs\\nvectorize_data: embeddings, representations of values or objects commonly consumed by machine learning models\", \"claims\": [{\"claim\": \"workers_ai_compute: serverless GPUs\", \"citations\": [{\"document_id\": \"cloudflare-2024\", \"source_sha256\": \"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\", \"page\": 12, \"start\": 487, \"end\": 1137, \"quote\": \"hout needing to spend time and\\neffort on infrastructure or operations. This enables developers to deliver more performant applications that have global scale, all while improving\\ntheir productivity. Our primary developer-based solutions include products categorized for AI, compute, storage & databases, and media.\\nAI\\n\\u2022 Workers AI: Enables developers to run machine learning models, powered by serverless GPUs, on our global network.\\n\\u2022 Vectorize: Allows developers to easily store and query embeddings, representations of values or objects commonly consumed by\\nmachine learning models.\\n\\u2022 AI Gateway: Provides observability, caching, security, and rou\"}]}, {\"claim\": \"vectorize_data: embeddings, representations of values or objects commonly consumed by machine learning models\", \"citations\": [{\"document_id\": \"cloudflare-2024\", \"source_sha256\": \"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\", \"page\": 12, \"start\": 603, \"end\": 1253, \"quote\": \"rmant applications that have global scale, all while improving\\ntheir productivity. Our primary developer-based solutions include products categorized for AI, compute, storage & databases, and media.\\nAI\\n\\u2022 Workers AI: Enables developers to run machine learning models, powered by serverless GPUs, on our global network.\\n\\u2022 Vectorize: Allows developers to easily store and query embeddings, representations of values or objects commonly consumed by\\nmachine learning models.\\n\\u2022 AI Gateway: Provides observability, caching, security, and routing features for AI applications.\\nCompute\\n\\u2022 Cloudflare Workers: Allows developers to augment existing applications \"}]}], \"unknowns\": []}",
+  "started_at": "2026-11-02T09:21:23.011229+00:00",
+  "repeat": 1,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "ff6ac9539db265c72776634b56db62bb424ff0a1aadc3d6f559761712910c19b",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "cloudflare-2024",
+      "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+      "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+      "page_count": 157,
+      "character_count": 591696
+    }
+  ],
+  "config": {
+    "max_depth": 2,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 16,
+    "max_total_tokens": 350000,
+    "max_elapsed_seconds": 300.0,
+    "call_timeout": 180.0,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 4,
+    "root_calls": 4,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 4,
+    "max_depth_reached": 0,
+    "prompt_tokens": 24983,
+    "completion_tokens": 544,
+    "total_tokens": 25527,
+    "cached_tokens": 10752,
+    "usage_calls": 4,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 4,
+    "depth": 0,
+    "budget": {
+      "max_calls": 16,
+      "max_tokens": 350000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 300.0,
+      "reserved_calls": 4,
+      "observed_tokens": 25527,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 30.453979
+    },
+    "by_model": {
+      "gpt-6.1-sol": {
+        "retry_calls": 0,
+        "prompt_tokens": 24983,
+        "completion_tokens": 544,
+        "total_tokens": 25527,
+        "cached_tokens": 10752,
+        "usage_calls": 4,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 4
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 4,
+    "prompt_tokens": 24983,
+    "completion_tokens": 544,
+    "total_tokens": 25527,
+    "cached_tokens": 10752,
+    "usage_calls": 4,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription"
+  },
+  "grade": {
+    "passed": false,
+    "factual_passed": false,
+    "provenance_passed": true,
+    "supported_gold_fields": 1,
+    "required_gold_fields": 2,
+    "grader_version": "grounded-document-fields-v1",
+    "failures": [
+      "incorrect or missing field 'vectorize_data'",
+      "incorrect exact value for 'vectorize_data'",
+      "incorrect claim value for 'vectorize_data'"
+    ],
+    "answer_grade": {
+      "passed": false,
+      "failures": [
+        "incorrect or missing field 'vectorize_data'",
+        "incorrect exact value for 'vectorize_data'"
+      ]
+    }
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.648835,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5660,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 25,
+      "response_sha256": "028143aa5afe93c6f7d68c8b20aee97244b18ef9ad8d7f1de574d77e709f3b7d"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.488607,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5775,
+        "cached_input_tokens": 2688,
+        "output_tokens": 34
+      },
+      "usage_known": true,
+      "response_chars": 113,
+      "response_sha256": "4ce07ebb811a63a9d5e37791670fc8acde37577d6355606bbbf2d355eec03052"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 11.75816,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6246,
+        "cached_input_tokens": 2688,
+        "output_tokens": 494
+      },
+      "usage_known": true,
+      "response_chars": 2088,
+      "response_sha256": "dabf0cb6acf216de79a04be310d1dd49e42e38d5fbf272c22e093c7d3d0fb320"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.331639,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 7302,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 17,
+      "response_sha256": "b69e4bf58f5516f161a7d35449ad5a095ab879dfb43dd80b93a3102b42c1d309"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 4,
+    "known_usage_calls": 4,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 25527,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 20,
+    "event_counts": {
+      "final_answer": 1,
+      "final_answer_validated": 1,
+      "model_call_end": 4,
+      "model_call_start": 4,
+      "repl_step": 3,
+      "rlm_end": 1,
+      "rlm_start": 1,
+      "run_end": 1,
+      "run_start": 1,
+      "source_search": 2,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "final_answer": 1,
+        "final_answer_validated": 1,
+        "model_call_end": 4,
+        "model_call_start": 4,
+        "repl_step": 3,
+        "rlm_end": 1,
+        "rlm_start": 1,
+        "run_end": 1,
+        "run_start": 1,
+        "source_search": 2,
+        "sources_available": 1
+      }
+    },
+    "source_reads": []
+  }
+}

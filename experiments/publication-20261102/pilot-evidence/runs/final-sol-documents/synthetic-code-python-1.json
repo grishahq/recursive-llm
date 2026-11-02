@@ -1,0 +1,328 @@
+{
+  "dataset_version": "grounded-documents-v1",
+  "grader_version": "grounded-document-fields-v1",
+  "task": "synthetic-code",
+  "mode": "python",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "Compile the distributed Aurora application-fee and review-time rules into a reusable Python function. It must handle normal and expedited applications from approved nonprofits and other applicants. Account for every fee rule and the review-time override.\nThe answer string must contain only a Python function named application_quote(application_count, approved_nonprofit, expedited), without Markdown fences or imports. Return a tuple (total_fee_eur, review_business_days). application_count is a positive integer; the other inputs are booleans. The total fee is the per-application fee multiplied by application_count. Use only the policy rules and respect its exception. Create exactly one cited factual claim for each of these source facts, using 'field: value' claim strings: standard_fee_eur, nonprofit_fee_percent, standard_review_days, expedited_review_days, nonprofit_review_days. Use numeric values, preserve exact source citations, and return the required JSON object with answer, claims and unknowns.",
+  "status": "completed",
+  "elapsed_seconds": 31.528331,
+  "raw_answer": "{\"answer\": \"def application_quote(application_count, approved_nonprofit, expedited):\\n    per_application_fee = 120 * 25 // 100 if approved_nonprofit else 120\\n    review_business_days = 14 if approved_nonprofit else (5 if expedited else 20)\\n    return (per_application_fee * application_count, review_business_days)\", \"claims\": [{\"claim\": \"standard_fee_eur: 120\", \"citations\": [{\"document_id\": \"aurora-policy\", \"source_sha256\": \"08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d\", \"page\": 3, \"start\": 1956, \"end\": 2206, \"quote\": \"ending.\\nArchive entry 03-20: warehouse zone 6; inventory reference AUR-0320; reconciliation is pending.\\nArchive entry 03-21: warehouse zone 0; inventory reference AUR-0321; reconciliation is pending.\\nRule F1. The standard application fee is EUR 120.\\n\"}]}, {\"claim\": \"nonprofit_fee_percent: 25\", \"citations\": [{\"document_id\": \"aurora-policy\", \"source_sha256\": \"08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d\", \"page\": 14, \"start\": 1986, \"end\": 2236, \"quote\": \"warehouse zone 6; inventory reference AUR-1420; reconciliation is pending.\\nArchive entry 14-21: warehouse zone 0; inventory reference AUR-1421; reconciliation is pending.\\nRule F2. An approved nonprofit pays 25% of the standard application fee in F1.\\n\"}]}, {\"claim\": \"standard_review_days: 20\", \"citations\": [{\"document_id\": \"aurora-policy\", \"source_sha256\": \"08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d\", \"page\": 5, \"start\": 2030, \"end\": 2280, \"quote\": \"0; reconciliation is pending.\\nArchive entry 05-21: warehouse zone 0; inventory reference AUR-0521; reconciliation is pending.\\nRule T0. Standard review takes 20 business days.\\nRule T1. An expedited application is normally reviewed in 5 business days.\\n\"}]}, {\"claim\": \"expedited_review_days: 5\", \"citations\": [{\"document_id\": \"aurora-policy\", \"source_sha256\": \"08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d\", \"page\": 5, \"start\": 2030, \"end\": 2280, \"quote\": \"0; reconciliation is pending.\\nArchive entry 05-21: warehouse zone 0; inventory reference AUR-0521; reconciliation is pending.\\nRule T0. Standard review takes 20 business days.\\nRule T1. An expedited application is normally reviewed in 5 business days.\\n\"}]}, {\"claim\": \"nonprofit_review_days: 14\", \"citations\": [{\"document_id\": \"aurora-policy\", \"source_sha256\": \"08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d\", \"page\": 22, \"start\": 1879, \"end\": 2279, \"quote\": \"try 22-19: warehouse zone 5; inventory reference AUR-2219; reconciliation is pending.\\nArchive entry 22-20: warehouse zone 6; inventory reference AUR-2220; reconciliation is pending.\\nArchive entry 22-21: warehouse zone 0; inventory reference AUR-2221; reconciliation is pending.\\nException T2. Approved nonprofit applications take 14 business days, including expedited applications; this overrides T1.\\n\"}]}], \"unknowns\": []}",
+  "started_at": "2026-11-02T09:19:25.083892+00:00",
+  "repeat": 1,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "df0af9374e9d1126b9a0203bfab8072f29d3186708689c8792352a486ccddeac",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "aurora-policy",
+      "title": "Aurora fictional application policy",
+      "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+      "page_count": 24,
+      "character_count": 52310
+    },
+    {
+      "document_id": "borealis-policy",
+      "title": "Borealis policy, a different program",
+      "source_sha256": "54430077260753df96c8f7d47dccd42dd62c2af6d812307f53e306a24fb79692",
+      "page_count": 1,
+      "character_count": 128
+    }
+  ],
+  "config": {
+    "max_depth": 0,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 16,
+    "max_total_tokens": 350000,
+    "max_elapsed_seconds": 300.0,
+    "call_timeout": 180.0,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 5,
+    "root_calls": 5,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 5,
+    "max_depth_reached": 0,
+    "prompt_tokens": 35033,
+    "completion_tokens": 369,
+    "total_tokens": 35402,
+    "cached_tokens": 13440,
+    "usage_calls": 5,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 5,
+    "depth": 0,
+    "budget": {
+      "max_calls": 16,
+      "max_tokens": 350000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 300.0,
+      "reserved_calls": 5,
+      "observed_tokens": 35402,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 31.528126
+    },
+    "by_model": {
+      "gpt-6.1-sol": {
+        "retry_calls": 0,
+        "prompt_tokens": 35033,
+        "completion_tokens": 369,
+        "total_tokens": 35402,
+        "cached_tokens": 13440,
+        "usage_calls": 5,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 5
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 5,
+    "prompt_tokens": 35033,
+    "completion_tokens": 369,
+    "total_tokens": 35402,
+    "cached_tokens": 13440,
+    "usage_calls": 5,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription"
+  },
+  "grade": {
+    "passed": true,
+    "factual_passed": true,
+    "provenance_passed": true,
+    "supported_gold_fields": 5,
+    "required_gold_fields": 5,
+    "grader_version": "grounded-document-fields-v1",
+    "failures": [],
+    "answer_grade": {
+      "passed": true,
+      "tested_inputs": 4,
+      "failures": [],
+      "observed_outputs": [
+        [
+          120,
+          20
+        ],
+        [
+          360,
+          5
+        ],
+        [
+          210,
+          14
+        ],
+        [
+          390,
+          14
+        ]
+      ]
+    }
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.871765,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5670,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 25,
+      "response_sha256": "028143aa5afe93c6f7d68c8b20aee97244b18ef9ad8d7f1de574d77e709f3b7d"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.361516,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5854,
+        "cached_input_tokens": 2688,
+        "output_tokens": 46
+      },
+      "usage_known": true,
+      "response_chars": 163,
+      "response_sha256": "401a440cbaf51e3aa589f39fefdf22765ad22b091f13d079eef1edd6ec042f3e"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.8934,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6780,
+        "cached_input_tokens": 2688,
+        "output_tokens": 47
+      },
+      "usage_known": true,
+      "response_chars": 167,
+      "response_sha256": "2fc46a43b3e6b3c480fcb474cd09b87bcb38822a93353fa21d4b7b6d1695ad90"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 8.196351,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 7739,
+        "cached_input_tokens": 2688,
+        "output_tokens": 260
+      },
+      "usage_known": true,
+      "response_chars": 876,
+      "response_sha256": "8ea2853091c1d2ea15e3f001bc129a8ed5a4616e80166663b0c184a0cc9eb8be"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.528886,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 8990,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 17,
+      "response_sha256": "b69e4bf58f5516f161a7d35449ad5a095ab879dfb43dd80b93a3102b42c1d309"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 5,
+    "known_usage_calls": 5,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 35402,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 30,
+    "event_counts": {
+      "final_answer": 1,
+      "final_answer_validated": 1,
+      "model_call_end": 5,
+      "model_call_start": 5,
+      "repl_step": 4,
+      "rlm_end": 1,
+      "rlm_start": 1,
+      "run_end": 1,
+      "run_start": 1,
+      "source_read": 5,
+      "source_search": 4,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "final_answer": 1,
+        "final_answer_validated": 1,
+        "model_call_end": 5,
+        "model_call_start": 5,
+        "repl_step": 4,
+        "rlm_end": 1,
+        "rlm_start": 1,
+        "run_end": 1,
+        "run_start": 1,
+        "source_read": 5,
+        "source_search": 4,
+        "sources_available": 1
+      }
+    },
+    "source_reads": [
+      {
+        "sequence": 19,
+        "depth": 0,
+        "node_id": "rlm-1",
+        "parent_id": "",
+        "elapsed_seconds": 25.792879,
+        "document_id": "aurora-policy",
+        "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+        "page": 3,
+        "start": 1956,
+        "end": 2206,
+        "quote_chars": 250
+      },
+      {
+        "sequence": 20,
+        "depth": 0,
+        "node_id": "rlm-1",
+        "parent_id": "",
+        "elapsed_seconds": 25.79291,
+        "document_id": "aurora-policy",
+        "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+        "page": 14,
+        "start": 1986,
+        "end": 2236,
+        "quote_chars": 250
+      },
+      {
+        "sequence": 21,
+        "depth": 0,
+        "node_id": "rlm-1",
+        "parent_id": "",
+        "elapsed_seconds": 25.792924,
+        "document_id": "aurora-policy",
+        "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+        "page": 5,
+        "start": 2030,
+        "end": 2280,
+        "quote_chars": 250
+      },
+      {
+        "sequence": 22,
+        "depth": 0,
+        "node_id": "rlm-1",
+        "parent_id": "",
+        "elapsed_seconds": 25.792936,
+        "document_id": "aurora-policy",
+        "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+        "page": 5,
+        "start": 2030,
+        "end": 2280,
+        "quote_chars": 250
+      },
+      {
+        "sequence": 23,
+        "depth": 0,
+        "node_id": "rlm-1",
+        "parent_id": "",
+        "elapsed_seconds": 25.792947,
+        "document_id": "aurora-policy",
+        "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+        "page": 22,
+        "start": 1879,
+        "end": 2279,
+        "quote_chars": 400
+      }
+    ]
+  }
+}

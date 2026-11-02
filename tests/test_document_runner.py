@@ -24,6 +24,7 @@ from examples.capture_codex_comparison import (
 from examples.serve_codex_comparison import (
     CompanionServer,
     CompanionState,
+    DOCUMENT_PROFILES,
     MAX_EXPANDED_BYTES,
     PRESETS,
     RequestError,
@@ -114,8 +115,57 @@ def test_pdf_extracts_text_and_reports_no_ocr():
         _extract_text("blank.pdf", stream.getvalue())
 
 
+def test_pdf_extraction_preserves_pages_and_accepts_empty_password_permissions():
+    from tests.test_document_io import pdf_bytes
+
+    data = pdf_bytes(["First source", "", "Third source"], password="")
+    result = _extract_text("a.pdf", data)
+    assert result["pages"] == ("First source", "", "Third source")
+    assert result["text"] == "First source\n\nThird source"
+    assert result["source"] == {
+        "page_count": 3,
+        "page_numbering": "physical_pdf",
+        "page_chars": [12, 0, 12],
+    }
+    with pytest.raises(RequestError, match="password"):
+        _extract_text("locked.pdf", pdf_bytes(["Private"], password="secret"))
+
+
+def test_long_profile_reaches_bounded_worker_and_keeps_pages_off_client_response(
+    tmp_path, monkeypatch
+):
+    calls = []
+
+    def worker(operation, payload):
+        calls.append(payload)
+        return _extract_text(*payload)
+
+    monkeypatch.setattr("examples.serve_codex_comparison.bounded_worker", worker)
+    data = b"x" * 300_001
+    standard = CompanionState(tmp_path / "standard")
+    long = CompanionState(tmp_path / "long", document_profile="long")
+    try:
+        with pytest.raises(RequestError, match="300,000"):
+            standard.prepare("long.txt", data)
+        metadata = long.prepare("long.txt", data)
+        assert calls[-1][2] == DOCUMENT_PROFILES["long"]
+        assert metadata["context_chars"] == len(data) and "pages" not in metadata
+        assert metadata["source"]["page_count"] == 1
+        stored = long.documents[metadata["document_id"]]
+        assert stored["pages"] == (data.decode(),) and stored["text"] == data.decode()
+        with pytest.raises(RequestError, match="2,000,000"):
+            long.prepare("too-long.txt", b"x" * 2_000_001)
+    finally:
+        standard.close()
+        long.close()
+    with pytest.raises(ValueError, match="document_profile"):
+        CompanionState(tmp_path, document_profile="unknown")
+
+
 def test_real_bounded_worker_extracts_without_writing_uploaded_files():
     assert bounded_worker("extract", ("example.txt", b"hello"))["text"] == "hello"
+    result = bounded_worker("extract", ("long.txt", b"x" * 300_001, DOCUMENT_PROFILES["long"]))
+    assert len(result["text"]) == 300_001
     with pytest.raises(RequestError):
         bounded_worker("extract", ("example.txt", b"\xff"))
 
@@ -292,8 +342,8 @@ def finished_comparison():
 
 
 @contextmanager
-def running_server(tmp_path, capture=None):
-    state = CompanionState(tmp_path, capture=capture)
+def running_server(tmp_path, capture=None, document_profile="standard"):
+    state = CompanionState(tmp_path, capture=capture, document_profile=document_profile)
     server = CompanionServer(0, state)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
@@ -372,6 +422,25 @@ def test_loopback_auth_host_origin_and_pna(tmp_path):
         assert len(request(server, "GET", "/presets")[2]["presets"]) == 3
     with pytest.raises(ValueError):
         _origin("http://evil.example")
+
+
+def test_health_reports_selected_profile_and_upload_uses_it(tmp_path):
+    with running_server(tmp_path, document_profile="long") as (server, state):
+        health = request(server, "GET", "/health")[2]
+        assert health["document_profile"] == "long"
+        assert health["limits"]["text_chars"] == 2_000_000
+        status, _, metadata = request(
+            server,
+            "POST",
+            "/documents",
+            {
+                "filename": "long.txt",
+                "content_base64": base64.b64encode(b"x" * 300_001).decode(),
+            },
+        )
+        assert status == 201 and metadata["context_chars"] == 300_001
+        assert "pages" not in metadata and "text" not in metadata
+        assert state.documents[metadata["document_id"]]["pages"] == ("x" * 300_001,)
 
 
 def test_upload_run_progress_single_active_and_cancel(tmp_path):

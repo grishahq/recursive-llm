@@ -1,0 +1,203 @@
+{
+  "dataset_version": "deep-documents-v2",
+  "grader_version": "deep-document-fields-v1",
+  "task": "cloud-retention-terms",
+  "mode": "python",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "Give the dollar-based net retention rates for the three months ended December 31, 2024 and 2023, plus the minimum and maximum typical contracted-customer subscription/support term in years. Use retention_2024_pct, retention_2023_pct, contract_min_years, contract_max_years. Give numbers without percent signs.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: retention_2024_pct, retention_2023_pct, contract_min_years, contract_max_years. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 26.917421,
+  "raw_answer": "{\"answer\":\"retention_2024_pct: 111\\nretention_2023_pct: 115\\ncontract_min_years: 1\\ncontract_max_years: 3\",\"claims\":[{\"claim\":\"retention_2024_pct: 111\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":81,\"start\":1448,\"end\":2098,\"quote\":\"\\nupgrade to a paid subscription between the prior and current periods, even though this is an important source of incremental growth. We believe\\nthis provides a more meaningful representation of our ability to add incremental business from existing paying customers as they renew and\\nexpand their contracts. Our dollar-based net retention rates for the three months ended December 31, 2024, 2023, and 2022 were 111%, 115%,\\nand 122%, respectively.\\nComponents of Our Results of Operations\\nRevenue\\nWe generate revenue primarily from sales to our customers of subscriptions to access our network and products, together with related support\\nservices. Arra\"}]},{\"claim\":\"retention_2023_pct: 115\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":81,\"start\":1448,\"end\":2098,\"quote\":\"\\nupgrade to a paid subscription between the prior and current periods, even though this is an important source of incremental growth. We believe\\nthis provides a more meaningful representation of our ability to add incremental business from existing paying customers as they renew and\\nexpand their contracts. Our dollar-based net retention rates for the three months ended December 31, 2024, 2023, and 2022 were 111%, 115%,\\nand 122%, respectively.\\nComponents of Our Results of Operations\\nRevenue\\nWe generate revenue primarily from sales to our customers of subscriptions to access our network and products, together with related support\\nservices. Arra\"}]},{\"claim\":\"contract_min_years: 1\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":74,\"start\":3303,\"end\":3653,\"quote\":\"onality.\\n\u2022 Contracted customers. Our contracted customers, which consist of customers that enter into contracts for our Enterprise subscription\\nplan, have contracts that typically range from one to three years and are typically billed on a monthly or annual basis. Our agreements\\nwith contracted customers are tailored and priced to meet their varyin\"}]},{\"claim\":\"contract_max_years: 3\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":74,\"start\":3303,\"end\":3653,\"quote\":\"onality.\\n\u2022 Contracted customers. Our contracted customers, which consist of customers that enter into contracts for our Enterprise subscription\\nplan, have contracts that typically range from one to three years and are typically billed on a monthly or annual basis. Our agreements\\nwith contracted customers are tailored and priced to meet their varyin\"}]}],\"unknowns\":[]}",
+  "started_at": "2026-11-02T10:10:58.317964+00:00",
+  "repeat": 2,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "6d2cf8593bde895c839544921f5dd935ecb2b21b92ab28a7ed427fe7719e5333",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "cloudflare-2024",
+      "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+      "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+      "page_count": 157,
+      "character_count": 591696
+    }
+  ],
+  "config": {
+    "max_depth": 0,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 10,
+    "max_total_tokens": 150000,
+    "max_elapsed_seconds": 240,
+    "call_timeout": 150,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 3,
+    "root_calls": 3,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 3,
+    "max_depth_reached": 0,
+    "prompt_tokens": 20310,
+    "completion_tokens": 810,
+    "total_tokens": 21120,
+    "cached_tokens": 5376,
+    "usage_calls": 3,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 3,
+    "depth": 0,
+    "budget": {
+      "max_calls": 10,
+      "max_tokens": 150000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 240,
+      "reserved_calls": 3,
+      "observed_tokens": 21120,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 26.916786
+    },
+    "by_model": {
+      "gpt-6.1-sol": {
+        "retry_calls": 0,
+        "prompt_tokens": 20310,
+        "completion_tokens": 810,
+        "total_tokens": 21120,
+        "cached_tokens": 5376,
+        "usage_calls": 3,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 3
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 3,
+    "prompt_tokens": 20310,
+    "completion_tokens": 810,
+    "total_tokens": 21120,
+    "cached_tokens": 5376,
+    "usage_calls": 3,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription",
+    "unknown_usage_calls": 0,
+    "failed_calls_with_known_usage": 0
+  },
+  "grade": {
+    "passed": true,
+    "grader_version": "deep-document-fields-v1",
+    "field_contract_passed": true,
+    "citation_structure_passed": true,
+    "evidence_coverage_passed": true,
+    "supported_fields": 4,
+    "required_fields": 4,
+    "failures": []
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.472275,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5736,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 25,
+      "response_sha256": "028143aa5afe93c6f7d68c8b20aee97244b18ef9ad8d7f1de574d77e709f3b7d"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 6.122299,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5851,
+        "cached_input_tokens": 2688,
+        "output_tokens": 36
+      },
+      "usage_known": true,
+      "response_chars": 129,
+      "response_sha256": "82965f265b89584c5d8d892188385bef4409954c4664c32dd82df089c0d09683"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 13.937478,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 8723,
+        "cached_input_tokens": 0,
+        "output_tokens": 766
+      },
+      "usage_known": true,
+      "response_chars": 2998,
+      "response_sha256": "83d9d6e63ac0b5207defa59d1651eb998c087c64008d44a657909c5aa8c33cae"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 3,
+    "known_usage_calls": 3,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 21120,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 17,
+    "event_counts": {
+      "final_answer": 1,
+      "final_answer_validated": 1,
+      "model_call_end": 3,
+      "model_call_start": 3,
+      "repl_step": 2,
+      "rlm_end": 1,
+      "rlm_start": 1,
+      "run_end": 1,
+      "run_start": 1,
+      "source_search": 2,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "final_answer": 1,
+        "final_answer_validated": 1,
+        "model_call_end": 3,
+        "model_call_start": 3,
+        "repl_step": 2,
+        "rlm_end": 1,
+        "rlm_start": 1,
+        "run_end": 1,
+        "run_start": 1,
+        "source_search": 2,
+        "sources_available": 1
+      }
+    },
+    "source_reads": []
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "captured_at": "2026-11-02T09:25:45.042767+00:00",
+  "note": "Captured before launching the benchmark interpreter; keep runtime source stable.",
+  "files": {
+    "src/rlm/run_state.py": "8a5674f21ad52f77651e113e0d296fc336d2b700952d05fc994dd1fc91544cc3",
+    "src/rlm/codex.py": "81634775f97b10ad7d628455b8ac02443789d1d4531dc59722e6c784f570b7ea",
+    "src/rlm/results.py": "03c635474b4a75021e52c349de2926da88edb21429d7506805f69a7f37d68ceb",
+    "src/rlm/budget.py": "0c38224c559b9cec3e4777f1825ba8872d7c12b393f06876a505e8205ad14d15",
+    "src/rlm/repl.py": "8ee0f7c13be1a6d0328678023f53131be69f8d8397cf223c0c26fe2715b84d32",
+    "src/rlm/__init__.py": "9e3bb4e0bc33190b9298f6520a7e79ef289cc685ce4eae01ecfd556e5f1c5965",
+    "src/rlm/core.py": "b55264cbdfc82e4ed670c39fdc688441008244159c4e73932a0cb209cbbef0d5",
+    "src/rlm/types.py": "971e5c79d8504f3f1e7278e804970b3aeec2cb0dd14d05e5ee69c84190da4609",
+    "src/rlm/prompts.py": "2d7286431ea48df986b4554f941bb88be60a7a25acd9f4b91eed4d49ea7307e1",
+    "src/rlm/parser.py": "51c518c450c298ecd5572e51dee9e21eb6821136fa5d5a4d0026b9ddfe240944",
+    "src/rlm/sources.py": "706a9124aa42ae1486a6fc3ed0286249dc0da0698e865a318c301033f7460844",
+    "src/rlm/stats.py": "fc9de7c36704bcf321925885156dfcf44e5484e8dc6a644c9e174255e636a44f",
+    "src/rlm/errors.py": "fd9ccab151f4d93c92b7639e1a4e33f5e344c4d78b92311649a5383b3b24c110",
+    "src/rlm/document_io.py": "a5e6e4f41fff9f5e5ff84d8b3b8c3b4c0e21a6371d7dd368ed191ee4f7868d62",
+    "benchmarks/grounded_documents.py": "4506fc2b2c5f99c831c4db6d04f3c0277baa59c8994e4464588defbbfa41452e",
+    "benchmarks/compare_same_model.py": "aa782c3f387bd4d9054ca196a37b5cb1e5a7eed5802f7606b18a4ce1365bfcf2"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "captured_at": "2026-11-02T10:00:37.319267+00:00",
+  "note": "Before benchmark interpreter launch, after coordinator runtime freeze.",
+  "files": {
+    "src/rlm/run_state.py": "8a5674f21ad52f77651e113e0d296fc336d2b700952d05fc994dd1fc91544cc3",
+    "src/rlm/codex.py": "6ea76d0da9543daf378e1516690ad29ce97f43793593405dd463a6eeeb15d142",
+    "src/rlm/results.py": "03c635474b4a75021e52c349de2926da88edb21429d7506805f69a7f37d68ceb",
+    "src/rlm/budget.py": "0c38224c559b9cec3e4777f1825ba8872d7c12b393f06876a505e8205ad14d15",
+    "src/rlm/repl.py": "8ee0f7c13be1a6d0328678023f53131be69f8d8397cf223c0c26fe2715b84d32",
+    "src/rlm/__init__.py": "df71df1265e1b97d67677a869279a1a26347d5939172e35d9de52d3937849026",
+    "src/rlm/core.py": "d225a7611e0efeed0bcc42704a836c5043fe8df4fc5b591ce5050753a5f53891",
+    "src/rlm/types.py": "971e5c79d8504f3f1e7278e804970b3aeec2cb0dd14d05e5ee69c84190da4609",
+    "src/rlm/prompts.py": "9ecdbd10af60418b5704c75d1785d0b25fb125678ece5bce1c16201f1680bc93",
+    "src/rlm/parser.py": "51c518c450c298ecd5572e51dee9e21eb6821136fa5d5a4d0026b9ddfe240944",
+    "src/rlm/sources.py": "706a9124aa42ae1486a6fc3ed0286249dc0da0698e865a318c301033f7460844",
+    "src/rlm/stats.py": "fc9de7c36704bcf321925885156dfcf44e5484e8dc6a644c9e174255e636a44f",
+    "src/rlm/errors.py": "fd9ccab151f4d93c92b7639e1a4e33f5e344c4d78b92311649a5383b3b24c110",
+    "src/rlm/document_io.py": "542a66f0568b7cd0bb86978fcdc725612b1dfd706ca1b0f10eaac63c880ada37",
+    "benchmarks/deep_document_validation.py": "dee6caa531b10436384b4d2d7bfaf7128500e6b917b005b4cc33b6c768dc8dad",
+    "benchmarks/grounded_documents.py": "4158b0547d651aefe6335ea8bda096c1bca979903402258fec3512bf389145da",
+    "benchmarks/compare_same_model.py": "aa782c3f387bd4d9054ca196a37b5cb1e5a7eed5802f7606b18a4ce1365bfcf2",
+    "examples/serve_codex_comparison.py": "ab817f88a859a75194e9b9c6941733717a0b57467fb11681023f9553855453f4"
+  }
+}

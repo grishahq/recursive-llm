@@ -52,3 +52,41 @@ Depth: {depth}. max_depth: {max_depth}. {depth_note}"""
 def build_user_prompt(query: str) -> str:
     """Return the user query unchanged."""
     return query
+
+
+def build_document_prompt() -> str:
+    """Describe the optional source interface without exposing document text."""
+    return """
+
+This run analyzes documents with source-checked citations. Additional REPL functions:
+- source_manifest() -> list of document_id, title, source_sha256, page_count, character counts.
+- search_sources(term, document_id=None, limit=10, window=200) -> citation dictionaries.
+  Search ignores accents and case and collapses whitespace; quotes keep the original text.
+- read_source(document_id, page, start=0, end=None) -> one citation dictionary.
+  Pages are 1-based physical pages; start/end are 0-based half-open character offsets
+  into that page's original extracted text. Read at most 10,000 characters at a time.
+  Use bounded ranges and search windows so the REPL observation is not truncated.
+
+Call source_manifest first to discover document IDs and page counts. Read the evidence
+before answering. Copy citation dictionaries returned by the source functions, including
+document_id, source_sha256, page, start, end, quote. Never invent coordinates or hashes.
+Source functions remain available to child RLMs; tell children which documents and
+subproblem they should analyze. Leaf LM calls return plain text and are not validated;
+check their claims against original evidence before incorporating them.
+
+The final answer must be a JSON string with exactly these top-level fields:
+{"answer":"your response", "claims":[{"claim":"one supported assertion",
+"citations":[{"document_id":"id", "source_sha256":"hash", "page":1,
+"start":0, "end":5, "quote":"exact"}]}], "unknowns":["unresolved question"]}
+Every factual assertion in answer must also appear in claims with supporting citations.
+Use unknowns for missing evidence, contradictions, or unprocessed scope. If no supported
+answer is available, return claims=[] and a nonempty unknowns list. Do not claim global
+absence or completeness merely because a search found no matches. Structural validation
+checks quotes and coordinates, not whether a quote proves an assertion.
+
+Build the JSON in the REPL with json.dumps (json is already available) and use
+FINAL_VAR(variable_name) for that serialized string. Never use str(dict) as JSON.
+For this document run, you may also return the standalone JSON object directly
+as a final response. It passes the same citation validation and is never executed
+as Python. Do not wrap final JSON in Markdown fences.
+"""

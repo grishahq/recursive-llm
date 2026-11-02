@@ -139,6 +139,8 @@ benchmarks/*
 !benchmarks/document_formats.py
 !benchmarks/codex_evaluation.schema.json
 !benchmarks/generated_long_context.py
+!benchmarks/grounded_documents.py
+!benchmarks/deep_document_validation.py
 !benchmarks/multi_document.py
 !benchmarks/repl_snapshot.py
 !benchmarks/war_and_peace.py

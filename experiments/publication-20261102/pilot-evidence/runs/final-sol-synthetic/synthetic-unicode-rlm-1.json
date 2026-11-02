@@ -1,0 +1,226 @@
+{
+  "dataset_version": "grounded-documents-v1",
+  "grader_version": "grounded-document-fields-v1",
+  "task": "synthetic-unicode",
+  "mode": "rlm",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "Find Petya, the review owner for Aurora, and give the full name with the original spelling. Do not confuse Aurora with Borealis.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: review_owner. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 26.462149,
+  "raw_answer": "{\"answer\": \"review_owner: P\u00e9tya Sokolova\", \"claims\": [{\"claim\": \"review_owner: P\u00e9tya Sokolova\", \"citations\": [{\"document_id\": \"aurora-policy\", \"source_sha256\": \"08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d\", \"page\": 17, \"start\": 1854, \"end\": 2204, \"quote\": \"on is pending.\\nArchive entry 17-19: warehouse zone 5; inventory reference AUR-1719; reconciliation is pending.\\nArchive entry 17-20: warehouse zone 6; inventory reference AUR-1720; reconciliation is pending.\\nArchive entry 17-21: warehouse zone 0; inventory reference AUR-1721; reconciliation is pending.\\nThe review owner for Aurora is P\u00e9tya Sokolova.\\n\"}]}], \"unknowns\": []}",
+  "started_at": "2026-11-02T09:22:28.712036+00:00",
+  "repeat": 1,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "ab424cdc396cc77bf48ec96e3e10d373ccf696833da0bfb111258c1c16556cbe",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "aurora-policy",
+      "title": "Aurora fictional application policy",
+      "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+      "page_count": 24,
+      "character_count": 52310
+    },
+    {
+      "document_id": "borealis-policy",
+      "title": "Borealis policy, a different program",
+      "source_sha256": "54430077260753df96c8f7d47dccd42dd62c2af6d812307f53e306a24fb79692",
+      "page_count": 1,
+      "character_count": 128
+    }
+  ],
+  "config": {
+    "max_depth": 2,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 16,
+    "max_total_tokens": 350000,
+    "max_elapsed_seconds": 300.0,
+    "call_timeout": 180.0,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 4,
+    "root_calls": 4,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 4,
+    "max_depth_reached": 0,
+    "prompt_tokens": 24056,
+    "completion_tokens": 271,
+    "total_tokens": 24327,
+    "cached_tokens": 10752,
+    "usage_calls": 4,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 4,
+    "depth": 0,
+    "budget": {
+      "max_calls": 16,
+      "max_tokens": 350000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 300.0,
+      "reserved_calls": 4,
+      "observed_tokens": 24327,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 26.462038
+    },
+    "by_model": {
+      "gpt-6.1-sol": {
+        "retry_calls": 0,
+        "prompt_tokens": 24056,
+        "completion_tokens": 271,
+        "total_tokens": 24327,
+        "cached_tokens": 10752,
+        "usage_calls": 4,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 4
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 4,
+    "prompt_tokens": 24056,
+    "completion_tokens": 271,
+    "total_tokens": 24327,
+    "cached_tokens": 10752,
+    "usage_calls": 4,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription"
+  },
+  "grade": {
+    "passed": true,
+    "factual_passed": true,
+    "provenance_passed": true,
+    "supported_gold_fields": 1,
+    "required_gold_fields": 1,
+    "grader_version": "grounded-document-fields-v1",
+    "failures": [],
+    "answer_grade": {
+      "passed": true,
+      "failures": []
+    }
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.185981,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5645,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 25,
+      "response_sha256": "028143aa5afe93c6f7d68c8b20aee97244b18ef9ad8d7f1de574d77e709f3b7d"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.65157,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5829,
+        "cached_input_tokens": 2688,
+        "output_tokens": 26
+      },
+      "usage_known": true,
+      "response_chars": 82,
+      "response_sha256": "335523b8571fada6a181a0344f4f9c7d4fbd00ca0b56fc23c27cfadf717cd1ce"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 8.44353,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6052,
+        "cached_input_tokens": 2688,
+        "output_tokens": 229
+      },
+      "usage_known": true,
+      "response_chars": 710,
+      "response_sha256": "f34e97f12dda8d6ea008f0d3645c1b10873404fb05ac303d293e81a26eec27b8"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.040445,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6530,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 17,
+      "response_sha256": "b69e4bf58f5516f161a7d35449ad5a095ab879dfb43dd80b93a3102b42c1d309"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 4,
+    "known_usage_calls": 4,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 24327,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 19,
+    "event_counts": {
+      "final_answer": 1,
+      "final_answer_validated": 1,
+      "model_call_end": 4,
+      "model_call_start": 4,
+      "repl_step": 3,
+      "rlm_end": 1,
+      "rlm_start": 1,
+      "run_end": 1,
+      "run_start": 1,
+      "source_search": 1,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "final_answer": 1,
+        "final_answer_validated": 1,
+        "model_call_end": 4,
+        "model_call_start": 4,
+        "repl_step": 3,
+        "rlm_end": 1,
+        "rlm_start": 1,
+        "run_end": 1,
+        "run_start": 1,
+        "source_search": 1,
+        "sources_available": 1
+      }
+    },
+    "source_reads": []
+  }
+}

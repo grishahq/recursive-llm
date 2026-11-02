@@ -110,11 +110,13 @@ def parse_events(events: Sequence[Dict[str, Any]]) -> Dict[str, Any]:
         if event.get("type") == "item.completed":
             item = event.get("item", {})
             if item.get("type") == "agent_message":
-                messages.append(item.get("text", ""))
+                messages.append(item.get("text"))
     if len(completed) != 1:
         raise CodexError("Expected exactly one completed Codex turn")
-    if len(messages) != 1 or not isinstance(messages[0], str) or not messages[0].strip():
-        raise CodexError("Expected exactly one nonempty final Codex message")
+    if len(messages) != 1 or not isinstance(messages[0], str):
+        raise CodexError("Expected exactly one text final Codex message")
+    # A completed empty text response still has real usage. Let RLM's bounded
+    # empty-response repair path handle it, just as it does for API providers.
     usage = completed[0].get("usage")
     if not isinstance(usage, dict):
         raise CodexError("Codex did not report usage")

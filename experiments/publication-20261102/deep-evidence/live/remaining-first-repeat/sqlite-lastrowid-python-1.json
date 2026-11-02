@@ -1,0 +1,203 @@
+{
+  "dataset_version": "deep-documents-v2",
+  "grader_version": "deep-document-fields-v1",
+  "task": "sqlite-lastrowid",
+  "mode": "python",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "For Cursor.lastrowid, give its initial value, the method that updates it after successful INSERT or REPLACE, and whether executemany updates it. Use initial_lastrowid, updating_method, executemany_updates. Use None, the bare method name, and yes/no respectively.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: initial_lastrowid, updating_method, executemany_updates. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 29.058613,
+  "raw_answer": "{\"answer\":\"initial_lastrowid: None\\nupdating_method: execute\\nexecutemany_updates: no\",\"claims\":[{\"claim\":\"initial_lastrowid: None\",\"citations\":[{\"document_id\":\"python-sqlite-3.12\",\"source_sha256\":\"adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d\",\"page\":1,\"start\":58427,\"end\":59627,\"quote\":\"e last query. To\\n      remain compatible with the Python DB API, it returns a 7-tuple for each\\n      column where the last six items of each tuple are ``None``.\\n\\n      It is set for ``SELECT`` statements without any matching rows as well.\\n\\n   .. attribute:: lastrowid\\n\\n      Read-only attribute that provides the row id of the last inserted row. It\\n      is only updated after successful ``INSERT`` or ``REPLACE`` statements\\n      using the :meth:`execute` method.  For other statements, after\\n      :meth:`executemany` or :meth:`executescript`, or if the insertion failed,\\n      the value of ``lastrowid`` is left unchanged.  The initial value of\\n      ``lastrowid`` is ``None``.\\n\\n      .. note::\\n         Inserts into ``WITHOUT ROWID`` tables are not recorded.\\n\\n      .. versionchanged:: 3.6\\n         Added support for the ``REPLACE`` statement.\\n\\n   .. attribute:: rowcount\\n\\n      Read-only attribute that provides the number of modified rows for\\n      ``INSERT``, ``UPDATE``, ``DELETE``, and ``REPLACE`` statements;\\n      is ``-1`` for other statements,\\n      including :abbr:`CTE (Common Table Expression)` queries.\\n      It is only updated by the :meth:`execute` and :meth:`executemany` methods,\"}]},{\"claim\":\"updating_method: execute\",\"citations\":[{\"document_id\":\"python-sqlite-3.12\",\"source_sha256\":\"adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d\",\"page\":1,\"start\":58427,\"end\":59627,\"quote\":\"e last query. To\\n      remain compatible with the Python DB API, it returns a 7-tuple for each\\n      column where the last six items of each tuple are ``None``.\\n\\n      It is set for ``SELECT`` statements without any matching rows as well.\\n\\n   .. attribute:: lastrowid\\n\\n      Read-only attribute that provides the row id of the last inserted row. It\\n      is only updated after successful ``INSERT`` or ``REPLACE`` statements\\n      using the :meth:`execute` method.  For other statements, after\\n      :meth:`executemany` or :meth:`executescript`, or if the insertion failed,\\n      the value of ``lastrowid`` is left unchanged.  The initial value of\\n      ``lastrowid`` is ``None``.\\n\\n      .. note::\\n         Inserts into ``WITHOUT ROWID`` tables are not recorded.\\n\\n      .. versionchanged:: 3.6\\n         Added support for the ``REPLACE`` statement.\\n\\n   .. attribute:: rowcount\\n\\n      Read-only attribute that provides the number of modified rows for\\n      ``INSERT``, ``UPDATE``, ``DELETE``, and ``REPLACE`` statements;\\n      is ``-1`` for other statements,\\n      including :abbr:`CTE (Common Table Expression)` queries.\\n      It is only updated by the :meth:`execute` and :meth:`executemany` methods,\"}]},{\"claim\":\"executemany_updates: no\",\"citations\":[{\"document_id\":\"python-sqlite-3.12\",\"source_sha256\":\"adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d\",\"page\":1,\"start\":58427,\"end\":59627,\"quote\":\"e last query. To\\n      remain compatible with the Python DB API, it returns a 7-tuple for each\\n      column where the last six items of each tuple are ``None``.\\n\\n      It is set for ``SELECT`` statements without any matching rows as well.\\n\\n   .. attribute:: lastrowid\\n\\n      Read-only attribute that provides the row id of the last inserted row. It\\n      is only updated after successful ``INSERT`` or ``REPLACE`` statements\\n      using the :meth:`execute` method.  For other statements, after\\n      :meth:`executemany` or :meth:`executescript`, or if the insertion failed,\\n      the value of ``lastrowid`` is left unchanged.  The initial value of\\n      ``lastrowid`` is ``None``.\\n\\n      .. note::\\n         Inserts into ``WITHOUT ROWID`` tables are not recorded.\\n\\n      .. versionchanged:: 3.6\\n         Added support for the ``REPLACE`` statement.\\n\\n   .. attribute:: rowcount\\n\\n      Read-only attribute that provides the number of modified rows for\\n      ``INSERT``, ``UPDATE``, ``DELETE``, and ``REPLACE`` statements;\\n      is ``-1`` for other statements,\\n      including :abbr:`CTE (Common Table Expression)` queries.\\n      It is only updated by the :meth:`execute` and :meth:`executemany` methods,\"}]}],\"unknowns\":[]}",
+  "started_at": "2026-11-02T10:07:36.891300+00:00",
+  "repeat": 1,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "62b310af4d1b348a21471f9ced3ff37f8be6e72512ca15cc46496962773fbcf3",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "python-sqlite-3.12",
+      "title": "Python 3.12.0 sqlite3 documentation source",
+      "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+      "page_count": 1,
+      "character_count": 92179
+    }
+  ],
+  "config": {
+    "max_depth": 0,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 10,
+    "max_total_tokens": 150000,
+    "max_elapsed_seconds": 240,
+    "call_timeout": 150,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 3,
+    "root_calls": 3,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 3,
+    "max_depth_reached": 0,
+    "prompt_tokens": 18684,
+    "completion_tokens": 1247,
+    "total_tokens": 19931,
+    "cached_tokens": 8064,
+    "usage_calls": 3,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 3,
+    "depth": 0,
+    "budget": {
+      "max_calls": 10,
+      "max_tokens": 150000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 240,
+      "reserved_calls": 3,
+      "observed_tokens": 19931,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 29.058473
+    },
+    "by_model": {
+      "gpt-6.1-sol": {
+        "retry_calls": 0,
+        "prompt_tokens": 18684,
+        "completion_tokens": 1247,
+        "total_tokens": 19931,
+        "cached_tokens": 8064,
+        "usage_calls": 3,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 3
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 3,
+    "prompt_tokens": 18684,
+    "completion_tokens": 1247,
+    "total_tokens": 19931,
+    "cached_tokens": 8064,
+    "usage_calls": 3,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription",
+    "unknown_usage_calls": 0,
+    "failed_calls_with_known_usage": 0
+  },
+  "grade": {
+    "passed": true,
+    "grader_version": "deep-document-fields-v1",
+    "field_contract_passed": true,
+    "citation_structure_passed": true,
+    "evidence_coverage_passed": true,
+    "supported_fields": 3,
+    "required_fields": 3,
+    "failures": []
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.785595,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5717,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 25,
+      "response_sha256": "028143aa5afe93c6f7d68c8b20aee97244b18ef9ad8d7f1de574d77e709f3b7d"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.60557,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5834,
+        "cached_input_tokens": 2688,
+        "output_tokens": 29
+      },
+      "usage_known": true,
+      "response_chars": 82,
+      "response_sha256": "849fc3d7a34827498ecc62995dff120da326f16d7f4ba826a13898c7e6229564"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 17.822211,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 7133,
+        "cached_input_tokens": 2688,
+        "output_tokens": 1210
+      },
+      "usage_known": true,
+      "response_chars": 4442,
+      "response_sha256": "02df40805e61b740da82d73f708ff8ffa4510f0bc90806e55d848c399dd470ab"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 3,
+    "known_usage_calls": 3,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 19931,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 16,
+    "event_counts": {
+      "final_answer": 1,
+      "final_answer_validated": 1,
+      "model_call_end": 3,
+      "model_call_start": 3,
+      "repl_step": 2,
+      "rlm_end": 1,
+      "rlm_start": 1,
+      "run_end": 1,
+      "run_start": 1,
+      "source_search": 1,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "final_answer": 1,
+        "final_answer_validated": 1,
+        "model_call_end": 3,
+        "model_call_start": 3,
+        "repl_step": 2,
+        "rlm_end": 1,
+        "rlm_start": 1,
+        "run_end": 1,
+        "run_start": 1,
+        "source_search": 1,
+        "sources_available": 1
+      }
+    },
+    "source_reads": []
+  }
+}

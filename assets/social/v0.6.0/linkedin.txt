@@ -1,0 +1,16 @@
+An answer with a citation can still point to text that is not there.
+
+recursive-llm v0.6.0 adds a document API that checks each quoted passage against unchanged source text: source ID, content hash, physical page and exact character span.
+
+The use case is concrete: questions across a long report, or rules and exceptions spread over PDF pages. Search handles accents and whitespace while returning the original quotation and offsets. Answers can also record what remains unknown.
+
+I tested the workflow on a complete 157-page report, official Python documentation and synthetic calculation rules. The deeper real-document run completed 48 attempts: all 48 passed structural citation checks, and 46 passed the frozen field-and-evidence criteria. The two strict misses are retained with manual review notes.
+
+Fixed-response controls also check altered quotations, hashes and coordinates. Corrected replies were supplied in those controls. The earlier API could use a custom validator; the new document API integrates that contract.
+
+The limit matters: a real quote can accompany a wrong claim. These checks do not prove meaning or completeness, and the live runs used no child calls, so they do not establish a recursion advantage.
+
+Release, reproducible checks and failure cases:
+https://github.com/grishahq/recursive-llm/releases/tag/v0.6.0
+
+Try it on a report with known answers and inspect the passages before relying on the result.

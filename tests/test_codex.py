@@ -73,7 +73,12 @@ def test_rejects_every_non_text_item(item_type):
     [
         [],
         events() + events(),
-        events(answer=""),
+        events(answer=None),
+        [event for event in events() if event["type"] != "item.completed"],
+        [
+            {"type": "item.completed", "item": {"type": "agent_message"}},
+            events()[-1],
+        ],
         [{"type": "turn.failed", "error": {"message": "failed"}}],
         events(usage={"input_tokens": 1, "cached_input_tokens": 5, "output_tokens": 1}),
         events(usage={"input_tokens": "100", "cached_input_tokens": 0, "output_tokens": 1}),
@@ -82,6 +87,27 @@ def test_rejects_every_non_text_item(item_type):
 def test_rejects_missing_or_invalid_completion(trace):
     with pytest.raises(CodexError):
         parse_events(trace)
+
+
+@pytest.mark.parametrize("text", ["", " \n"])
+def test_empty_text_is_preserved_with_its_reported_usage(text):
+    response = parse_events(events(answer=text))
+    assert response["choices"][0]["message"]["content"] == text
+    assert response["usage"]["total_tokens"] == 112
+
+
+@pytest.mark.asyncio
+async def test_empty_cli_text_uses_the_bounded_runtime_repair_path():
+    handler = AsyncMock(
+        side_effect=[parse_events(events("")), parse_events(events('FINAL("recovered")'))]
+    )
+    result = await RLM(
+        model="mock", completion_handler=handler, max_total_calls=2
+    ).acomplete_result("query", "source")
+    assert result.answer == "recovered"
+    assert result.stats["llm_calls"] == 2 and result.stats["total_tokens"] == 224
+    final_messages = handler.call_args.kwargs["messages"]
+    assert "Your response was empty" in final_messages[-1]["content"]
 
 
 @pytest.mark.parametrize(

@@ -1,0 +1,219 @@
+{
+  "dataset_version": "grounded-documents-v1",
+  "grader_version": "grounded-document-fields-v1",
+  "task": "cloudflare-gateway",
+  "mode": "rlm",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "List the four AI Gateway features named in the Developer-based Solutions AI product description. Use a comma-separated list in the report's order, without 'and' or trailing punctuation.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: ai_gateway_features. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 27.442913,
+  "raw_answer": "{\"answer\": \"ai_gateway_features: observability, caching, security, routing\", \"claims\": [{\"claim\": \"ai_gateway_features: observability, caching, security, routing\", \"citations\": [{\"document_id\": \"cloudflare-2024\", \"source_sha256\": \"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\", \"page\": 12, \"start\": 580, \"end\": 1580, \"quote\": \"s to deliver more performant applications that have global scale, all while improving\\ntheir productivity. Our primary developer-based solutions include products categorized for AI, compute, storage & databases, and media.\\nAI\\n\\u2022 Workers AI: Enables developers to run machine learning models, powered by serverless GPUs, on our global network.\\n\\u2022 Vectorize: Allows developers to easily store and query embeddings, representations of values or objects commonly consumed by\\nmachine learning models.\\n\\u2022 AI Gateway: Provides observability, caching, security, and routing features for AI applications.\\nCompute\\n\\u2022 Cloudflare Workers: Allows developers to augment existing applications or create entirely new ones through a lightweight execution\\nenvironment without configuring or maintaining infrastructure.\\n\\u2022 Cloudflare Pages: Allows front-end developers to quickly and easily build, collaborate on, and deploy websites.\\nStorage & Databases\\n\\u2022 R2 Object Storage: Provides global object storage without egress fre\"}]}], \"unknowns\": []}",
+  "started_at": "2026-11-02T09:22:41.792872+00:00",
+  "repeat": 1,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "edb4d06e757a2737959957923d3f85ae4e7067c33035808ead1d94dd206505b5",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "cloudflare-2024",
+      "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+      "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+      "page_count": 157,
+      "character_count": 591696
+    }
+  ],
+  "config": {
+    "max_depth": 2,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 16,
+    "max_total_tokens": 350000,
+    "max_elapsed_seconds": 300.0,
+    "call_timeout": 180.0,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 4,
+    "root_calls": 4,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 4,
+    "max_depth_reached": 0,
+    "prompt_tokens": 23962,
+    "completion_tokens": 365,
+    "total_tokens": 24327,
+    "cached_tokens": 5376,
+    "usage_calls": 4,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 4,
+    "depth": 0,
+    "budget": {
+      "max_calls": 16,
+      "max_tokens": 350000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 300.0,
+      "reserved_calls": 4,
+      "observed_tokens": 24327,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 27.442563
+    },
+    "by_model": {
+      "gpt-6.1-sol": {
+        "retry_calls": 0,
+        "prompt_tokens": 23962,
+        "completion_tokens": 365,
+        "total_tokens": 24327,
+        "cached_tokens": 5376,
+        "usage_calls": 4,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 4
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 4,
+    "prompt_tokens": 23962,
+    "completion_tokens": 365,
+    "total_tokens": 24327,
+    "cached_tokens": 5376,
+    "usage_calls": 4,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription"
+  },
+  "grade": {
+    "passed": true,
+    "factual_passed": true,
+    "provenance_passed": true,
+    "supported_gold_fields": 1,
+    "required_gold_fields": 1,
+    "grader_version": "grounded-document-fields-v1",
+    "failures": [],
+    "answer_grade": {
+      "passed": true,
+      "failures": []
+    }
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.27228,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5653,
+        "cached_input_tokens": 0,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 25,
+      "response_sha256": "028143aa5afe93c6f7d68c8b20aee97244b18ef9ad8d7f1de574d77e709f3b7d"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.3877,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5768,
+        "cached_input_tokens": 2688,
+        "output_tokens": 29
+      },
+      "usage_known": true,
+      "response_chars": 90,
+      "response_sha256": "32be30d5ac1e60974a697cc3cac6ecbc36515fb7a1af3b9ccd9fbdba8a10c730"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 8.383482,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6091,
+        "cached_input_tokens": 0,
+        "output_tokens": 320
+      },
+      "usage_known": true,
+      "response_chars": 1402,
+      "response_sha256": "0855b5557a65217137af9c4cc8e940170c853b40c15f04c8b3671f55d88f297d"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.337087,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6450,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 17,
+      "response_sha256": "b69e4bf58f5516f161a7d35449ad5a095ab879dfb43dd80b93a3102b42c1d309"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 4,
+    "known_usage_calls": 4,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 24327,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 19,
+    "event_counts": {
+      "final_answer": 1,
+      "final_answer_validated": 1,
+      "model_call_end": 4,
+      "model_call_start": 4,
+      "repl_step": 3,
+      "rlm_end": 1,
+      "rlm_start": 1,
+      "run_end": 1,
+      "run_start": 1,
+      "source_search": 1,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "final_answer": 1,
+        "final_answer_validated": 1,
+        "model_call_end": 4,
+        "model_call_start": 4,
+        "repl_step": 3,
+        "rlm_end": 1,
+        "rlm_start": 1,
+        "run_end": 1,
+        "run_start": 1,
+        "source_search": 1,
+        "sources_available": 1
+      }
+    },
+    "source_reads": []
+  }
+}

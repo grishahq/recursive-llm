@@ -1,0 +1,135 @@
+{
+  "dataset_version": "grounded-documents-v1",
+  "grader_version": "grounded-document-fields-v1",
+  "task": "synthetic-code",
+  "mode": "direct",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "Compile the distributed Aurora application-fee and review-time rules into a reusable Python function. It must handle normal and expedited applications from approved nonprofits and other applicants. Account for every fee rule and the review-time override.\nThe answer string must contain only a Python function named application_quote(application_count, approved_nonprofit, expedited), without Markdown fences or imports. Return a tuple (total_fee_eur, review_business_days). application_count is a positive integer; the other inputs are booleans. The total fee is the per-application fee multiplied by application_count. Use only the policy rules and respect its exception. Create exactly one cited factual claim for each of these source facts, using 'field: value' claim strings: standard_fee_eur, nonprofit_fee_percent, standard_review_days, expedited_review_days, nonprofit_review_days. Use numeric values, preserve exact source citations, and return the required JSON object with answer, claims and unknowns.",
+  "status": "completed",
+  "elapsed_seconds": 21.864558,
+  "raw_answer": "{\"answer\":\"def application_quote(application_count, approved_nonprofit, expedited):\\n    per_application_fee = 120\\n    if approved_nonprofit:\\n        per_application_fee = per_application_fee * 25 // 100\\n        review_business_days = 14\\n    else:\\n        review_business_days = 5 if expedited else 20\\n    return (per_application_fee * application_count, review_business_days)\",\"claims\":[{\"claim\":\"standard_fee_eur: 120\",\"citations\":[{\"document_id\":\"aurora-policy\",\"source_sha256\":\"08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d\",\"page\":3,\"start\":2156,\"end\":2206,\"quote\":\"Rule F1. The standard application fee is EUR 120.\\n\"}]},{\"claim\":\"nonprofit_fee_percent: 25\",\"citations\":[{\"document_id\":\"aurora-policy\",\"source_sha256\":\"08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d\",\"page\":14,\"start\":2157,\"end\":2236,\"quote\":\"Rule F2. An approved nonprofit pays 25% of the standard application fee in F1.\\n\"}]},{\"claim\":\"standard_review_days: 20\",\"citations\":[{\"document_id\":\"aurora-policy\",\"source_sha256\":\"08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d\",\"page\":5,\"start\":2156,\"end\":2280,\"quote\":\"Rule T0. Standard review takes 20 business days.\\nRule T1. An expedited application is normally reviewed in 5 business days.\\n\"}]},{\"claim\":\"expedited_review_days: 5\",\"citations\":[{\"document_id\":\"aurora-policy\",\"source_sha256\":\"08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d\",\"page\":5,\"start\":2156,\"end\":2280,\"quote\":\"Rule T0. Standard review takes 20 business days.\\nRule T1. An expedited application is normally reviewed in 5 business days.\\n\"}]},{\"claim\":\"nonprofit_review_days: 14\",\"citations\":[{\"document_id\":\"aurora-policy\",\"source_sha256\":\"08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d\",\"page\":22,\"start\":2157,\"end\":2279,\"quote\":\"Exception T2. Approved nonprofit applications take 14 business days, including expedited applications; this overrides T1.\\n\"}]}],\"unknowns\":[]}",
+  "started_at": "2026-11-02T09:19:01.422391+00:00",
+  "repeat": 1,
+  "direct_input_format": "complete original pages in exact 1200-character segments",
+  "public_schema_version": 1,
+  "raw_capture_sha256": "c78f79192d4840f0eb9d2e7df3a983116da014d19aaa47d6baf453f54d73590b",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "aurora-policy",
+      "title": "Aurora fictional application policy",
+      "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+      "page_count": 24,
+      "character_count": 52310
+    },
+    {
+      "document_id": "borealis-policy",
+      "title": "Borealis policy, a different program",
+      "source_sha256": "54430077260753df96c8f7d47dccd42dd62c2af6d812307f53e306a24fb79692",
+      "page_count": 1,
+      "character_count": 128
+    }
+  ],
+  "config": {
+    "max_depth": null,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 1,
+    "max_total_tokens": 350000,
+    "max_elapsed_seconds": 300.0,
+    "call_timeout": 180.0,
+    "token_budget_enforcement": "not available through text-only CLI; usage observed after the single call"
+  },
+  "runtime_stats": null,
+  "transport_usage": {
+    "llm_calls": 1,
+    "prompt_tokens": 20577,
+    "completion_tokens": 835,
+    "total_tokens": 21412,
+    "cached_tokens": 0,
+    "usage_calls": 1,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription"
+  },
+  "grade": {
+    "passed": true,
+    "factual_passed": true,
+    "provenance_passed": true,
+    "supported_gold_fields": 5,
+    "required_gold_fields": 5,
+    "grader_version": "grounded-document-fields-v1",
+    "failures": [],
+    "answer_grade": {
+      "passed": true,
+      "tested_inputs": 4,
+      "failures": [],
+      "observed_outputs": [
+        [
+          120,
+          20
+        ],
+        [
+          360,
+          5
+        ],
+        [
+          210,
+          14
+        ],
+        [
+          390,
+          14
+        ]
+      ]
+    }
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 21.863981,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 20577,
+        "cached_input_tokens": 0,
+        "output_tokens": 835
+      },
+      "usage_known": true,
+      "response_chars": 1966,
+      "response_sha256": "449b1f75592d884d79df2f6883db29279f3705d2b91c8ed78dc467c1dc207598"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 1,
+    "known_usage_calls": 1,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 21412,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 0,
+    "event_counts": {},
+    "event_counts_by_depth": {},
+    "source_reads": []
+  }
+}

@@ -1,0 +1,234 @@
+{
+  "dataset_version": "deep-documents-v2",
+  "grader_version": "deep-document-fields-v1",
+  "task": "cloud-free-cash-flow",
+  "mode": "rlm",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "For 2024, give net cash provided by operating activities, purchases of property and equipment, capitalized internal-use software, and free cash flow. Check the stated subtraction. Use operating_cash, capex, software, free_cash_flow. Report USD thousands as nonnegative integers without commas; capex and software are magnitudes of the amounts subtracted.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: operating_cash, capex, software, free_cash_flow. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 68.013122,
+  "raw_answer": "{\"answer\":\"operating_cash: 380429\\ncapex: 185037\\nsoftware: 28477\\nfree_cash_flow: 166915\",\"claims\":[{\"claim\":\"operating_cash: 380429\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":80,\"start\":0,\"end\":3500,\"quote\":\"Table of contents\\nthat they do not reflect our future contractual commitments. Additionally, free cash flow does not represent the total increase or decrease in our\\ncash balance for a given period.\\nYear Ended December 31,\\n2024 2023 2022\\n(dollars in thousands)\\nNet cash provided by operating activities $ 380,429 $ 254,406 $ 123,595 \\nLess: Purchases of property and equipment (185,037) (114,396) (143,606)\\nLess: Capitalized internal-use software (28,477) (20,546) (19,758)\\nFree cash flow $ 166,915 $ 119,464 $ (39,769)\\nNet cash used in investing activities $ (330,224) $ (186,201) $ (235,696)\\nNet cash provided by (used in) financing activities $ 12,785 $ (192,185) $ 6,347 \\nNet cash provided by operating activities (as a percentage of revenue) 23 % 20 % 13 %\\nLess: Purchases of property and equipment (as a percentage of revenue) (11)% (9)% (15)%\\nLess: Capitalized internal-use software (as a percentage of revenue) (2)% (2)% (2)%\\nFree cash flow margin 10 % 9 % (4)%\\nKey Business Metrics\\nIn addition to our results determined in accordance with U.S. GAAP and the non-GAAP measures discussed above, we also review the key\\nbusiness metrics discussed below to assist us in evaluating our business, measuring performance, identifying trends, formulating business\\nplans, and making strategic decisions. There are a number of limitations associated with the use of key business metrics as analytical tools,\\nhowever, and we do not rely upon any single key business metric to evaluate our business. In addition, other companies, including companies in\\nour industry, may calculate similarly-titled business metrics differently or may use other measures to evaluate their performance, all of which\\ncould reduce the usefulness of these business metrics as tools for comparison to such companies.\\nPaying Customers\\nWe believe our ability to grow the number of paying customers on our network provides a key indicator of growth of our business and our future\\nbusiness opportunities. We define a paying customer at the end of the quarter as a person or entity who has generated revenue and has an\\nactive contract with us or one of our partners during such quarter, excluding (i) customers that were not acquired through ordinary sales\\nchannels, (ii) customers using only our registrar product, and (iii) customers using our consumer applications, such as 1.1.1.1 and WARP, which\\nagreements and customers together represent an insignificant amount of our revenue. An entity is defined as a company, a government\\ninstitution, a non-profit organization, or a distinct business unit of a large company. An active contract is defined as a customer relationship for\\nwhich we have provided services during the quarter. The number of paying customers was 237,714, 189,791, and 162,086 as of December 31,\\n2024, 2023, and 2022, respectively.\\nPaying Customers (> $100,000 Annualized Revenue)\\nWhile we continue to grow customers across all sizes, over time, our large customers have contributed an increasing share of our revenue. We\\nview the number of customers with Annualized Revenue greater than $100,000 as indicative of our penetration within large enterprise accounts.\\nTo measure Annualized Revenue at the end of a quarter, we take the sum of revenue for each customer in the quarter and multiply that amount\\nby four. For example, if we signed a new customer that generated $1,800 of revenue in a quarter, that customer would account for $7,200 of\\nAnnualized Revenue for that year. Our Annualized Revenue calculation ex\"}]},{\"claim\":\"capex: 185037\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":80,\"start\":0,\"end\":3500,\"quote\":\"Table of contents\\nthat they do not reflect our future contractual commitments. Additionally, free cash flow does not represent the total increase or decrease in our\\ncash balance for a given period.\\nYear Ended December 31,\\n2024 2023 2022\\n(dollars in thousands)\\nNet cash provided by operating activities $ 380,429 $ 254,406 $ 123,595 \\nLess: Purchases of property and equipment (185,037) (114,396) (143,606)\\nLess: Capitalized internal-use software (28,477) (20,546) (19,758)\\nFree cash flow $ 166,915 $ 119,464 $ (39,769)\\nNet cash used in investing activities $ (330,224) $ (186,201) $ (235,696)\\nNet cash provided by (used in) financing activities $ 12,785 $ (192,185) $ 6,347 \\nNet cash provided by operating activities (as a percentage of revenue) 23 % 20 % 13 %\\nLess: Purchases of property and equipment (as a percentage of revenue) (11)% (9)% (15)%\\nLess: Capitalized internal-use software (as a percentage of revenue) (2)% (2)% (2)%\\nFree cash flow margin 10 % 9 % (4)%\\nKey Business Metrics\\nIn addition to our results determined in accordance with U.S. GAAP and the non-GAAP measures discussed above, we also review the key\\nbusiness metrics discussed below to assist us in evaluating our business, measuring performance, identifying trends, formulating business\\nplans, and making strategic decisions. There are a number of limitations associated with the use of key business metrics as analytical tools,\\nhowever, and we do not rely upon any single key business metric to evaluate our business. In addition, other companies, including companies in\\nour industry, may calculate similarly-titled business metrics differently or may use other measures to evaluate their performance, all of which\\ncould reduce the usefulness of these business metrics as tools for comparison to such companies.\\nPaying Customers\\nWe believe our ability to grow the number of paying customers on our network provides a key indicator of growth of our business and our future\\nbusiness opportunities. We define a paying customer at the end of the quarter as a person or entity who has generated revenue and has an\\nactive contract with us or one of our partners during such quarter, excluding (i) customers that were not acquired through ordinary sales\\nchannels, (ii) customers using only our registrar product, and (iii) customers using our consumer applications, such as 1.1.1.1 and WARP, which\\nagreements and customers together represent an insignificant amount of our revenue. An entity is defined as a company, a government\\ninstitution, a non-profit organization, or a distinct business unit of a large company. An active contract is defined as a customer relationship for\\nwhich we have provided services during the quarter. The number of paying customers was 237,714, 189,791, and 162,086 as of December 31,\\n2024, 2023, and 2022, respectively.\\nPaying Customers (> $100,000 Annualized Revenue)\\nWhile we continue to grow customers across all sizes, over time, our large customers have contributed an increasing share of our revenue. We\\nview the number of customers with Annualized Revenue greater than $100,000 as indicative of our penetration within large enterprise accounts.\\nTo measure Annualized Revenue at the end of a quarter, we take the sum of revenue for each customer in the quarter and multiply that amount\\nby four. For example, if we signed a new customer that generated $1,800 of revenue in a quarter, that customer would account for $7,200 of\\nAnnualized Revenue for that year. Our Annualized Revenue calculation ex\"}]},{\"claim\":\"software: 28477\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":80,\"start\":0,\"end\":3500,\"quote\":\"Table of contents\\nthat they do not reflect our future contractual commitments. Additionally, free cash flow does not represent the total increase or decrease in our\\ncash balance for a given period.\\nYear Ended December 31,\\n2024 2023 2022\\n(dollars in thousands)\\nNet cash provided by operating activities $ 380,429 $ 254,406 $ 123,595 \\nLess: Purchases of property and equipment (185,037) (114,396) (143,606)\\nLess: Capitalized internal-use software (28,477) (20,546) (19,758)\\nFree cash flow $ 166,915 $ 119,464 $ (39,769)\\nNet cash used in investing activities $ (330,224) $ (186,201) $ (235,696)\\nNet cash provided by (used in) financing activities $ 12,785 $ (192,185) $ 6,347 \\nNet cash provided by operating activities (as a percentage of revenue) 23 % 20 % 13 %\\nLess: Purchases of property and equipment (as a percentage of revenue) (11)% (9)% (15)%\\nLess: Capitalized internal-use software (as a percentage of revenue) (2)% (2)% (2)%\\nFree cash flow margin 10 % 9 % (4)%\\nKey Business Metrics\\nIn addition to our results determined in accordance with U.S. GAAP and the non-GAAP measures discussed above, we also review the key\\nbusiness metrics discussed below to assist us in evaluating our business, measuring performance, identifying trends, formulating business\\nplans, and making strategic decisions. There are a number of limitations associated with the use of key business metrics as analytical tools,\\nhowever, and we do not rely upon any single key business metric to evaluate our business. In addition, other companies, including companies in\\nour industry, may calculate similarly-titled business metrics differently or may use other measures to evaluate their performance, all of which\\ncould reduce the usefulness of these business metrics as tools for comparison to such companies.\\nPaying Customers\\nWe believe our ability to grow the number of paying customers on our network provides a key indicator of growth of our business and our future\\nbusiness opportunities. We define a paying customer at the end of the quarter as a person or entity who has generated revenue and has an\\nactive contract with us or one of our partners during such quarter, excluding (i) customers that were not acquired through ordinary sales\\nchannels, (ii) customers using only our registrar product, and (iii) customers using our consumer applications, such as 1.1.1.1 and WARP, which\\nagreements and customers together represent an insignificant amount of our revenue. An entity is defined as a company, a government\\ninstitution, a non-profit organization, or a distinct business unit of a large company. An active contract is defined as a customer relationship for\\nwhich we have provided services during the quarter. The number of paying customers was 237,714, 189,791, and 162,086 as of December 31,\\n2024, 2023, and 2022, respectively.\\nPaying Customers (> $100,000 Annualized Revenue)\\nWhile we continue to grow customers across all sizes, over time, our large customers have contributed an increasing share of our revenue. We\\nview the number of customers with Annualized Revenue greater than $100,000 as indicative of our penetration within large enterprise accounts.\\nTo measure Annualized Revenue at the end of a quarter, we take the sum of revenue for each customer in the quarter and multiply that amount\\nby four. For example, if we signed a new customer that generated $1,800 of revenue in a quarter, that customer would account for $7,200 of\\nAnnualized Revenue for that year. Our Annualized Revenue calculation ex\"}]},{\"claim\":\"free_cash_flow: 166915\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":80,\"start\":0,\"end\":3500,\"quote\":\"Table of contents\\nthat they do not reflect our future contractual commitments. Additionally, free cash flow does not represent the total increase or decrease in our\\ncash balance for a given period.\\nYear Ended December 31,\\n2024 2023 2022\\n(dollars in thousands)\\nNet cash provided by operating activities $ 380,429 $ 254,406 $ 123,595 \\nLess: Purchases of property and equipment (185,037) (114,396) (143,606)\\nLess: Capitalized internal-use software (28,477) (20,546) (19,758)\\nFree cash flow $ 166,915 $ 119,464 $ (39,769)\\nNet cash used in investing activities $ (330,224) $ (186,201) $ (235,696)\\nNet cash provided by (used in) financing activities $ 12,785 $ (192,185) $ 6,347 \\nNet cash provided by operating activities (as a percentage of revenue) 23 % 20 % 13 %\\nLess: Purchases of property and equipment (as a percentage of revenue) (11)% (9)% (15)%\\nLess: Capitalized internal-use software (as a percentage of revenue) (2)% (2)% (2)%\\nFree cash flow margin 10 % 9 % (4)%\\nKey Business Metrics\\nIn addition to our results determined in accordance with U.S. GAAP and the non-GAAP measures discussed above, we also review the key\\nbusiness metrics discussed below to assist us in evaluating our business, measuring performance, identifying trends, formulating business\\nplans, and making strategic decisions. There are a number of limitations associated with the use of key business metrics as analytical tools,\\nhowever, and we do not rely upon any single key business metric to evaluate our business. In addition, other companies, including companies in\\nour industry, may calculate similarly-titled business metrics differently or may use other measures to evaluate their performance, all of which\\ncould reduce the usefulness of these business metrics as tools for comparison to such companies.\\nPaying Customers\\nWe believe our ability to grow the number of paying customers on our network provides a key indicator of growth of our business and our future\\nbusiness opportunities. We define a paying customer at the end of the quarter as a person or entity who has generated revenue and has an\\nactive contract with us or one of our partners during such quarter, excluding (i) customers that were not acquired through ordinary sales\\nchannels, (ii) customers using only our registrar product, and (iii) customers using our consumer applications, such as 1.1.1.1 and WARP, which\\nagreements and customers together represent an insignificant amount of our revenue. An entity is defined as a company, a government\\ninstitution, a non-profit organization, or a distinct business unit of a large company. An active contract is defined as a customer relationship for\\nwhich we have provided services during the quarter. The number of paying customers was 237,714, 189,791, and 162,086 as of December 31,\\n2024, 2023, and 2022, respectively.\\nPaying Customers (> $100,000 Annualized Revenue)\\nWhile we continue to grow customers across all sizes, over time, our large customers have contributed an increasing share of our revenue. We\\nview the number of customers with Annualized Revenue greater than $100,000 as indicative of our penetration within large enterprise accounts.\\nTo measure Annualized Revenue at the end of a quarter, we take the sum of revenue for each customer in the quarter and multiply that amount\\nby four. For example, if we signed a new customer that generated $1,800 of revenue in a quarter, that customer would account for $7,200 of\\nAnnualized Revenue for that year. Our Annualized Revenue calculation ex\"}]}],\"unknowns\":[]}",
+  "started_at": "2026-11-02T10:09:34.603972+00:00",
+  "repeat": 2,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "4ecb0173a218327fe1e2c2935e7d25b727db11119d9900044b7b447862557b1b",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "cloudflare-2024",
+      "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+      "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+      "page_count": 157,
+      "character_count": 591696
+    }
+  ],
+  "config": {
+    "max_depth": 2,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 10,
+    "max_total_tokens": 150000,
+    "max_elapsed_seconds": 240,
+    "call_timeout": 150,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 4,
+    "root_calls": 4,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 4,
+    "max_depth_reached": 0,
+    "prompt_tokens": 31432,
+    "completion_tokens": 3680,
+    "total_tokens": 35112,
+    "cached_tokens": 10752,
+    "usage_calls": 4,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 4,
+    "depth": 0,
+    "budget": {
+      "max_calls": 10,
+      "max_tokens": 150000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 240,
+      "reserved_calls": 4,
+      "observed_tokens": 35112,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 68.012716
+    },
+    "by_model": {
+      "gpt-6.1-sol": {
+        "retry_calls": 0,
+        "prompt_tokens": 31432,
+        "completion_tokens": 3680,
+        "total_tokens": 35112,
+        "cached_tokens": 10752,
+        "usage_calls": 4,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 4
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 4,
+    "prompt_tokens": 31432,
+    "completion_tokens": 3680,
+    "total_tokens": 35112,
+    "cached_tokens": 10752,
+    "usage_calls": 4,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription",
+    "unknown_usage_calls": 0,
+    "failed_calls_with_known_usage": 0
+  },
+  "grade": {
+    "passed": true,
+    "grader_version": "deep-document-fields-v1",
+    "field_contract_passed": true,
+    "citation_structure_passed": true,
+    "evidence_coverage_passed": true,
+    "supported_fields": 4,
+    "required_fields": 4,
+    "failures": []
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 6.983387,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5741,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 25,
+      "response_sha256": "028143aa5afe93c6f7d68c8b20aee97244b18ef9ad8d7f1de574d77e709f3b7d"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 8.439469,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5856,
+        "cached_input_tokens": 2688,
+        "output_tokens": 30
+      },
+      "usage_known": true,
+      "response_chars": 93,
+      "response_sha256": "ac19d695cf2a99b999ebb0dec30c8e932577950c26ae0b63c9aa007c24f6a129"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.37434,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 9434,
+        "cached_input_tokens": 2688,
+        "output_tokens": 26
+      },
+      "usage_known": true,
+      "response_chars": 61,
+      "response_sha256": "bf584c828f8c372d637fea8826fc71770f7df99c0743e6c05e833d81eebdc20c"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 46.419318,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 10401,
+        "cached_input_tokens": 2688,
+        "output_tokens": 3616
+      },
+      "usage_known": true,
+      "response_chars": 15080,
+      "response_sha256": "4030ace75e97f2a79b9bbf429b37831b4b8c124a32966eef56f62cbadc6930b4"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 4,
+    "known_usage_calls": 4,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 35112,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 20,
+    "event_counts": {
+      "final_answer": 1,
+      "final_answer_validated": 1,
+      "model_call_end": 4,
+      "model_call_start": 4,
+      "repl_step": 3,
+      "rlm_end": 1,
+      "rlm_start": 1,
+      "run_end": 1,
+      "run_start": 1,
+      "source_read": 1,
+      "source_search": 1,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "final_answer": 1,
+        "final_answer_validated": 1,
+        "model_call_end": 4,
+        "model_call_start": 4,
+        "repl_step": 3,
+        "rlm_end": 1,
+        "rlm_start": 1,
+        "run_end": 1,
+        "run_start": 1,
+        "source_read": 1,
+        "source_search": 1,
+        "sources_available": 1
+      }
+    },
+    "source_reads": [
+      {
+        "sequence": 13,
+        "depth": 0,
+        "node_id": "rlm-1",
+        "parent_id": "",
+        "elapsed_seconds": 21.386456,
+        "document_id": "cloudflare-2024",
+        "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+        "page": 80,
+        "start": 0,
+        "end": 3500,
+        "quote_chars": 3500
+      }
+    ]
+  }
+}

@@ -1,0 +1,1655 @@
+{
+  "dataset_version": "deep-documents-v2",
+  "grader_version": "deep-document-fields-v1",
+  "groups": {
+    "python": {
+      "attempts": 24,
+      "completed": 24,
+      "strict_passes": 22,
+      "field_contract_passes": 24,
+      "citation_structure_passes": 24,
+      "evidence_coverage_passes": 22,
+      "model_calls": 84,
+      "recursive_model_calls": 0,
+      "total_tokens": 591852,
+      "unknown_usage_calls": 0,
+      "elapsed_seconds_sum": 665.381598,
+      "elapsed_seconds_median": 27.1332175,
+      "elapsed_seconds_min": 20.503778,
+      "elapsed_seconds_max": 37.269922
+    },
+    "rlm": {
+      "attempts": 24,
+      "completed": 24,
+      "strict_passes": 24,
+      "field_contract_passes": 24,
+      "citation_structure_passes": 24,
+      "evidence_coverage_passes": 24,
+      "model_calls": 80,
+      "recursive_model_calls": 0,
+      "total_tokens": 558921,
+      "unknown_usage_calls": 0,
+      "elapsed_seconds_sum": 698.227539,
+      "elapsed_seconds_median": 26.230206,
+      "elapsed_seconds_min": 20.165881,
+      "elapsed_seconds_max": 68.013122
+    }
+  },
+  "attempts": [
+    {
+      "artifact": "deep-evidence/live/pilot4/cloud-workforce-python-1.json",
+      "raw_capture_sha256": "4bd3e4e972634ecd9f8e7a63f9579fd3b1d54ed54df2ed909d23c00f7f53f0d1",
+      "task": "cloud-workforce",
+      "mode": "python",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 17574,
+      "completion_tokens": 539,
+      "cached_tokens": 5376,
+      "total_tokens": 18113,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 21.066239
+    },
+    {
+      "artifact": "deep-evidence/live/pilot4/cloud-workforce-rlm-1.json",
+      "raw_capture_sha256": "448d0423bde56956d4b72263f19fdbc43edff5fad0de8f9cc1587848ae6f2e26",
+      "task": "cloud-workforce",
+      "mode": "rlm",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 17646,
+      "completion_tokens": 636,
+      "cached_tokens": 0,
+      "total_tokens": 18282,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 26.211709
+    },
+    {
+      "artifact": "deep-evidence/live/pilot4/sqlite-thread-contract-python-1.json",
+      "raw_capture_sha256": "7be0229986bb16c804339dac2cd8042ada24091b6016c87f59891bd553846c02",
+      "task": "sqlite-thread-contract",
+      "mode": "python",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 2,
+        "required_fields": 2,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 17926,
+      "completion_tokens": 560,
+      "cached_tokens": 8064,
+      "total_tokens": 18486,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 28.324012
+    },
+    {
+      "artifact": "deep-evidence/live/pilot4/sqlite-thread-contract-rlm-1.json",
+      "raw_capture_sha256": "73cc6543fda3b37849066e2af0eb904bde90ccb0df2d7f4dd6bc1ff689b628ce",
+      "task": "sqlite-thread-contract",
+      "mode": "rlm",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 2,
+        "required_fields": 2,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 17933,
+      "completion_tokens": 532,
+      "cached_tokens": 2688,
+      "total_tokens": 18465,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 25.249652
+    },
+    {
+      "artifact": "deep-evidence/live/remaining-first-repeat/cloud-concentration-python-1.json",
+      "raw_capture_sha256": "0d6f2512ddd972d65fd43249aefaaed6798bd615ee12f3ad2a78a08c7f871656",
+      "task": "cloud-concentration",
+      "mode": "python",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 2,
+        "required_fields": 2,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 18271,
+      "completion_tokens": 361,
+      "cached_tokens": 5376,
+      "total_tokens": 18632,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 21.817983
+    },
+    {
+      "artifact": "deep-evidence/live/remaining-first-repeat/cloud-concentration-rlm-1.json",
+      "raw_capture_sha256": "e6f4defaafd12301adf2b502375cd98a081e3ff7c77a5146b5f85701b2e5887f",
+      "task": "cloud-concentration",
+      "mode": "rlm",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 2,
+        "required_fields": 2,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 18316,
+      "completion_tokens": 370,
+      "cached_tokens": 8064,
+      "total_tokens": 18686,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 23.112222
+    },
+    {
+      "artifact": "deep-evidence/live/remaining-first-repeat/cloud-customer-counts-python-1.json",
+      "raw_capture_sha256": "cb21bcb7c655247ae9c411dba33879d09e16e65ed65d0f6db010d8c85c668233",
+      "task": "cloud-customer-counts",
+      "mode": "python",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 4,
+      "prompt_tokens": 29251,
+      "completion_tokens": 1030,
+      "cached_tokens": 8064,
+      "total_tokens": 30281,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 30.634574
+    },
+    {
+      "artifact": "deep-evidence/live/remaining-first-repeat/cloud-customer-counts-rlm-1.json",
+      "raw_capture_sha256": "e1e618c362dc239121f3485fd3b524eb8dae792d44e2fb90bdc14871321617da",
+      "task": "cloud-customer-counts",
+      "mode": "rlm",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 4,
+      "prompt_tokens": 29299,
+      "completion_tokens": 1030,
+      "cached_tokens": 5376,
+      "total_tokens": 30329,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 32.619939
+    },
+    {
+      "artifact": "deep-evidence/live/remaining-first-repeat/cloud-distributed-profile-python-1.json",
+      "raw_capture_sha256": "6978deac4f54a3cff5814b8b1b5740c0b93a2be6a3520a206c6cc5b66108a262",
+      "task": "cloud-distributed-profile",
+      "mode": "python",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 5,
+      "prompt_tokens": 43098,
+      "completion_tokens": 622,
+      "cached_tokens": 10752,
+      "total_tokens": 43720,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 35.212125
+    },
+    {
+      "artifact": "deep-evidence/live/remaining-first-repeat/cloud-distributed-profile-rlm-1.json",
+      "raw_capture_sha256": "671a905db5a55ba093e6d3f9faa721a4be322da70963fd27de8d1ad20d4ae56f",
+      "task": "cloud-distributed-profile",
+      "mode": "rlm",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 4,
+      "prompt_tokens": 29095,
+      "completion_tokens": 585,
+      "cached_tokens": 8064,
+      "total_tokens": 29680,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 30.026596
+    },
+    {
+      "artifact": "deep-evidence/live/remaining-first-repeat/cloud-free-cash-flow-python-1.json",
+      "raw_capture_sha256": "dca6890fa689f1c8c085bc97e539c3246aa2989d3a052e57eef61aadb5ad7fa1",
+      "task": "cloud-free-cash-flow",
+      "mode": "python",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 3,
+        "required_fields": 4,
+        "failures": [
+          "Gold source evidence not covered for free_cash_flow"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 5,
+      "prompt_tokens": 40995,
+      "completion_tokens": 208,
+      "cached_tokens": 10752,
+      "total_tokens": 41203,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 28.604546
+    },
+    {
+      "artifact": "deep-evidence/live/remaining-first-repeat/cloud-free-cash-flow-rlm-1.json",
+      "raw_capture_sha256": "1a319d3d15e12fd8dfb4b60ca2cd9036bd74945aacbbab5b361d95d76f1c394a",
+      "task": "cloud-free-cash-flow",
+      "mode": "rlm",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 6,
+      "prompt_tokens": 52671,
+      "completion_tokens": 214,
+      "cached_tokens": 8064,
+      "total_tokens": 52885,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 35.72512
+    },
+    {
+      "artifact": "deep-evidence/live/remaining-first-repeat/cloud-patents-python-1.json",
+      "raw_capture_sha256": "653ba5ca1dc80c89bc0aacb74268a9a1dcbf2b7e796754733c588d6481bd7766",
+      "task": "cloud-patents",
+      "mode": "python",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 18693,
+      "completion_tokens": 718,
+      "cached_tokens": 8064,
+      "total_tokens": 19411,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 23.41005
+    },
+    {
+      "artifact": "deep-evidence/live/remaining-first-repeat/cloud-patents-rlm-1.json",
+      "raw_capture_sha256": "9d27a15422eac948e09e09b3f7b22431d5fd86a3d2571ee0c66c0f47fb2b47b7",
+      "task": "cloud-patents",
+      "mode": "rlm",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 18709,
+      "completion_tokens": 806,
+      "cached_tokens": 8064,
+      "total_tokens": 19515,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 26.125338
+    },
+    {
+      "artifact": "deep-evidence/live/remaining-first-repeat/cloud-regional-revenue-python-1.json",
+      "raw_capture_sha256": "e20441a37f06b6dbd068c2e400e90b1df0ccef4dbc4070682f11299cdecd0379",
+      "task": "cloud-regional-revenue",
+      "mode": "python",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 4,
+      "prompt_tokens": 25266,
+      "completion_tokens": 1420,
+      "cached_tokens": 11008,
+      "total_tokens": 26686,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 36.777145
+    },
+    {
+      "artifact": "deep-evidence/live/remaining-first-repeat/cloud-regional-revenue-rlm-1.json",
+      "raw_capture_sha256": "913481018d2fa2198a067cdf767cdad94dfff1a9329c7215af7cede824671c84",
+      "task": "cloud-regional-revenue",
+      "mode": "rlm",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 18498,
+      "completion_tokens": 1321,
+      "cached_tokens": 5376,
+      "total_tokens": 19819,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 40.001493
+    },
+    {
+      "artifact": "deep-evidence/live/remaining-first-repeat/cloud-retention-terms-python-1.json",
+      "raw_capture_sha256": "3486df84255ee6613d257d9d857bc3985612950d3f71ecec75b900e9c775c60a",
+      "task": "cloud-retention-terms",
+      "mode": "python",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 4,
+      "prompt_tokens": 29331,
+      "completion_tokens": 747,
+      "cached_tokens": 8064,
+      "total_tokens": 30078,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 29.187855
+    },
+    {
+      "artifact": "deep-evidence/live/remaining-first-repeat/cloud-retention-terms-rlm-1.json",
+      "raw_capture_sha256": "7052bc465a7dd493c2c628ff8d678ce2bd528138ee1250bc0737784868f492bc",
+      "task": "cloud-retention-terms",
+      "mode": "rlm",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 20172,
+      "completion_tokens": 846,
+      "cached_tokens": 5376,
+      "total_tokens": 21018,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 24.846644
+    },
+    {
+      "artifact": "deep-evidence/live/remaining-first-repeat/sqlite-lastrowid-python-1.json",
+      "raw_capture_sha256": "62b310af4d1b348a21471f9ced3ff37f8be6e72512ca15cc46496962773fbcf3",
+      "task": "sqlite-lastrowid",
+      "mode": "python",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 18684,
+      "completion_tokens": 1247,
+      "cached_tokens": 8064,
+      "total_tokens": 19931,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 29.058613
+    },
+    {
+      "artifact": "deep-evidence/live/remaining-first-repeat/sqlite-lastrowid-rlm-1.json",
+      "raw_capture_sha256": "866eaccf04302a30ec280a9ad39c34707bafc2ccc2beaf083d6416a3ba7571d6",
+      "task": "sqlite-lastrowid",
+      "mode": "rlm",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 18871,
+      "completion_tokens": 1376,
+      "cached_tokens": 5376,
+      "total_tokens": 20247,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 30.51167
+    },
+    {
+      "artifact": "deep-evidence/live/remaining-first-repeat/sqlite-parameter-containers-python-1.json",
+      "raw_capture_sha256": "b39bbc69e4c02566beddb789f9d0b6e07a6dd1197c31e1020c217a300bd1c4df",
+      "task": "sqlite-parameter-containers",
+      "mode": "python",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 18404,
+      "completion_tokens": 712,
+      "cached_tokens": 8064,
+      "total_tokens": 19116,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 24.911237
+    },
+    {
+      "artifact": "deep-evidence/live/remaining-first-repeat/sqlite-parameter-containers-rlm-1.json",
+      "raw_capture_sha256": "cf6d201e4cb7ca5a97e6ee9b85f2f056f532f3351fac985d1de927eb0c8a82e8",
+      "task": "sqlite-parameter-containers",
+      "mode": "rlm",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 18545,
+      "completion_tokens": 772,
+      "cached_tokens": 5376,
+      "total_tokens": 19317,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 23.630132
+    },
+    {
+      "artifact": "deep-evidence/live/remaining-first-repeat/sqlite-row-factory-python-1.json",
+      "raw_capture_sha256": "2dd51c30d506f927d34f51e88de9ac5a52c8d40e74bb9b24f706700ffef0ef85",
+      "task": "sqlite-row-factory",
+      "mode": "python",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 19938,
+      "completion_tokens": 664,
+      "cached_tokens": 2688,
+      "total_tokens": 20602,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 36.218521
+    },
+    {
+      "artifact": "deep-evidence/live/remaining-first-repeat/sqlite-row-factory-rlm-1.json",
+      "raw_capture_sha256": "f281ed8b318634bf770b603fa3d683de87cec1d7e4fc22c1adb87a15ba3ace37",
+      "task": "sqlite-row-factory",
+      "mode": "rlm",
+      "repeat": 1,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 20152,
+      "completion_tokens": 702,
+      "cached_tokens": 5376,
+      "total_tokens": 20854,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 22.281364
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/cloud-concentration-python-2.json",
+      "raw_capture_sha256": "e9346cd29150f5157171d22fc63b5ff57ce718f0080e575b3147a4de70a78ed2",
+      "task": "cloud-concentration",
+      "mode": "python",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 2,
+        "required_fields": 2,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 18429,
+      "completion_tokens": 413,
+      "cached_tokens": 8064,
+      "total_tokens": 18842,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 21.706201
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/cloud-concentration-rlm-2.json",
+      "raw_capture_sha256": "fbf6b4d8ffbb36b988d972be0622c97d33375f4738a37093041a7e8e942ab026",
+      "task": "cloud-concentration",
+      "mode": "rlm",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 2,
+        "required_fields": 2,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 18316,
+      "completion_tokens": 370,
+      "cached_tokens": 5376,
+      "total_tokens": 18686,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 22.175544
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/cloud-customer-counts-python-2.json",
+      "raw_capture_sha256": "efb031c42e3c079447ff7bf276f28e385cab52f18072a6bde74febf7af6fcdab",
+      "task": "cloud-customer-counts",
+      "mode": "python",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 2,
+        "required_fields": 4,
+        "failures": [
+          "Gold source evidence not covered for paying_2024",
+          "Gold source evidence not covered for paying_2023"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 4,
+      "prompt_tokens": 29969,
+      "completion_tokens": 1078,
+      "cached_tokens": 8064,
+      "total_tokens": 31047,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 37.269922
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/cloud-customer-counts-rlm-2.json",
+      "raw_capture_sha256": "17bc37b0f6b75dbdfcec7c54dfbbd11ccc5e4d6276c973895377a7495d342aaf",
+      "task": "cloud-customer-counts",
+      "mode": "rlm",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 4,
+      "prompt_tokens": 28217,
+      "completion_tokens": 956,
+      "cached_tokens": 10752,
+      "total_tokens": 29173,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 32.438745
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/cloud-distributed-profile-python-2.json",
+      "raw_capture_sha256": "f76e62c5d0913bd98234585bd1ae0aa51193ba6a944ccf67a9375bd6838434ac",
+      "task": "cloud-distributed-profile",
+      "mode": "python",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 4,
+      "prompt_tokens": 28604,
+      "completion_tokens": 595,
+      "cached_tokens": 10752,
+      "total_tokens": 29199,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 27.349014
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/cloud-distributed-profile-rlm-2.json",
+      "raw_capture_sha256": "8beb999483345f055116d56352d7a78b18fa89f123598b7b70a7cd56cb688a98",
+      "task": "cloud-distributed-profile",
+      "mode": "rlm",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 4,
+      "prompt_tokens": 30148,
+      "completion_tokens": 612,
+      "cached_tokens": 8064,
+      "total_tokens": 30760,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 28.056178
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/cloud-free-cash-flow-python-2.json",
+      "raw_capture_sha256": "bc835eece1faf0853108cf5c38427dd5da126429da548b65b5fdd6daf79e25d1",
+      "task": "cloud-free-cash-flow",
+      "mode": "python",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 5,
+      "prompt_tokens": 41208,
+      "completion_tokens": 189,
+      "cached_tokens": 16256,
+      "total_tokens": 41397,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 32.757075
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/cloud-free-cash-flow-rlm-2.json",
+      "raw_capture_sha256": "4ecb0173a218327fe1e2c2935e7d25b727db11119d9900044b7b447862557b1b",
+      "task": "cloud-free-cash-flow",
+      "mode": "rlm",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 4,
+      "prompt_tokens": 31432,
+      "completion_tokens": 3680,
+      "cached_tokens": 10752,
+      "total_tokens": 35112,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 68.013122
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/cloud-patents-python-2.json",
+      "raw_capture_sha256": "02628f62512308d5e1fbc8691f405d73d705c2093d6d2458316a709a38d35e59",
+      "task": "cloud-patents",
+      "mode": "python",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 18673,
+      "completion_tokens": 806,
+      "cached_tokens": 2688,
+      "total_tokens": 19479,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 24.087102
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/cloud-patents-rlm-2.json",
+      "raw_capture_sha256": "9ab86ec8771f819fce464a7d0c4c401fa8d8699240370b598bf5d1b3d88f3648",
+      "task": "cloud-patents",
+      "mode": "rlm",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 18107,
+      "completion_tokens": 918,
+      "cached_tokens": 5376,
+      "total_tokens": 19025,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 26.248703
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/cloud-regional-revenue-python-2.json",
+      "raw_capture_sha256": "9be209ced618a4b429b91a48c4444d65518377119ac0b0df98cd279568bb6049",
+      "task": "cloud-regional-revenue",
+      "mode": "python",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 4,
+      "prompt_tokens": 25268,
+      "completion_tokens": 1422,
+      "cached_tokens": 14592,
+      "total_tokens": 26690,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 35.710074
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/cloud-regional-revenue-rlm-2.json",
+      "raw_capture_sha256": "541ff09f739761966e7e790e08bde491e76aeedba5ab6e958c4ec65379aef4c6",
+      "task": "cloud-regional-revenue",
+      "mode": "rlm",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 18386,
+      "completion_tokens": 1229,
+      "cached_tokens": 5376,
+      "total_tokens": 19615,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 30.260908
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/cloud-retention-terms-python-2.json",
+      "raw_capture_sha256": "6d2cf8593bde895c839544921f5dd935ecb2b21b92ab28a7ed427fe7719e5333",
+      "task": "cloud-retention-terms",
+      "mode": "python",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 20310,
+      "completion_tokens": 810,
+      "cached_tokens": 5376,
+      "total_tokens": 21120,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 26.917421
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/cloud-retention-terms-rlm-2.json",
+      "raw_capture_sha256": "4200ee1df79213966069bce2546dd0ef7f6292e8161e021558c8b57cd290d62b",
+      "task": "cloud-retention-terms",
+      "mode": "rlm",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 19992,
+      "completion_tokens": 778,
+      "cached_tokens": 2688,
+      "total_tokens": 20770,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 23.203165
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/cloud-workforce-python-2.json",
+      "raw_capture_sha256": "06ef7d391ea5e21d7c742908a5c4e39a5c2dff5649dd69fdbf2cd3f9d3db99f7",
+      "task": "cloud-workforce",
+      "mode": "python",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 17575,
+      "completion_tokens": 540,
+      "cached_tokens": 0,
+      "total_tokens": 18115,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 20.503778
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/cloud-workforce-rlm-2.json",
+      "raw_capture_sha256": "d789d497cec28948b01d1efa5d26bb55e4a995af64562e1014816c9bb21bcb52",
+      "task": "cloud-workforce",
+      "mode": "rlm",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 17646,
+      "completion_tokens": 636,
+      "cached_tokens": 5376,
+      "total_tokens": 18282,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 24.826884
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/sqlite-lastrowid-python-2.json",
+      "raw_capture_sha256": "b56d1796faa0010018d72ac52ffc7b0dd2bdbe5506286e9baae985b384ab07fa",
+      "task": "sqlite-lastrowid",
+      "mode": "python",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 18606,
+      "completion_tokens": 1175,
+      "cached_tokens": 2688,
+      "total_tokens": 19781,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 21.604746
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/sqlite-lastrowid-rlm-2.json",
+      "raw_capture_sha256": "3d4008c56f4050debbed3212b8b1a32b6adf4545d727835aa5b1006fb7a6eb7b",
+      "task": "sqlite-lastrowid",
+      "mode": "rlm",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 18867,
+      "completion_tokens": 1372,
+      "cached_tokens": 5376,
+      "total_tokens": 20239,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 31.601647
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/sqlite-parameter-containers-python-2.json",
+      "raw_capture_sha256": "f24de3a8fc8d139105becd81ced90deeda8574413ed5bba1622cd7a96bd60747",
+      "task": "sqlite-parameter-containers",
+      "mode": "python",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 18404,
+      "completion_tokens": 712,
+      "cached_tokens": 5376,
+      "total_tokens": 19116,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 24.566021
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/sqlite-parameter-containers-rlm-2.json",
+      "raw_capture_sha256": "02a5661f40173eb55d3c9c5e88e640842b263c19f14efc40f3195790ab43d7c6",
+      "task": "sqlite-parameter-containers",
+      "mode": "rlm",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 18612,
+      "completion_tokens": 805,
+      "cached_tokens": 8064,
+      "total_tokens": 19417,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 20.165881
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/sqlite-row-factory-python-2.json",
+      "raw_capture_sha256": "cadf3a3ccaf2df9e184df3af1dabd578a95a13269c13de896c20004d31b4f9a4",
+      "task": "sqlite-row-factory",
+      "mode": "python",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 21547,
+      "completion_tokens": 831,
+      "cached_tokens": 8064,
+      "total_tokens": 22378,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 25.465913
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/sqlite-row-factory-rlm-2.json",
+      "raw_capture_sha256": "a229717667412fb043085f21a792b22012f25f3bd481a655b910d3b9147bc3e6",
+      "task": "sqlite-row-factory",
+      "mode": "rlm",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 19808,
+      "completion_tokens": 627,
+      "cached_tokens": 8064,
+      "total_tokens": 20435,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 22.162724
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/sqlite-thread-contract-python-2.json",
+      "raw_capture_sha256": "caff35748672688b496a54e8d198fd62a2ba550dc0ca6056862d6dabc1ba254d",
+      "task": "sqlite-thread-contract",
+      "mode": "python",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 2,
+        "required_fields": 2,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 17897,
+      "completion_tokens": 532,
+      "cached_tokens": 8064,
+      "total_tokens": 18429,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 22.221431
+    },
+    {
+      "artifact": "deep-evidence/live/all-second-repeat/sqlite-thread-contract-rlm-2.json",
+      "raw_capture_sha256": "885f5aef5e358144fa95e50aadbabaadee442e6c694c904e443f75514b435db1",
+      "task": "sqlite-thread-contract",
+      "mode": "rlm",
+      "repeat": 2,
+      "status": "completed",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 2,
+        "required_fields": 2,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "calls": 3,
+      "prompt_tokens": 17854,
+      "completion_tokens": 456,
+      "cached_tokens": 2688,
+      "total_tokens": 18310,
+      "unknown_usage_calls": 0,
+      "recursive_model_calls": 0,
+      "elapsed_seconds": 28.732159
+    }
+  ],
+  "limitations": [
+    "Current depth-zero versus depth-two workflow comparison, not old-versus-new LLM quality.",
+    "Two repeated attempts per question do not establish tail reliability or p99 latency.",
+    "Question facts overlap; these are not independent population samples.",
+    "Strict field aliases can reject a correct expanded phrase; inspect failures before making factual-error claims.",
+    "Citation validity and gold-anchor coverage do not prove arbitrary claim entailment.",
+    "CLI tokens measure observed model usage, not subscription credits or dollar savings."
+  ],
+  "planned_attempts": 48,
+  "pilot_reused": true,
+  "complete_matrix": true,
+  "kind": "LIVE_DEEP_DOCUMENT_SUMMARY",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "projection": "Full messages, CLI streams, commands and complete source contexts omitted; selected answers and citations are available in linked public attempt projections.",
+  "gold_sha256": "29c1cfff1f5b1c260b5e1ab3312adb7d753807576ae0e79728003de5118acec3",
+  "original_summary_sha256": "e5af1e0197550c3b88539432edb9a70f1ecc0a8a61e39cf8da65368470597ef3",
+  "limits": {
+    "max_parallel": 2,
+    "max_calls": 10,
+    "max_iterations": 10,
+    "max_reported_tokens": 150000,
+    "max_elapsed_seconds": 240,
+    "per_cli_timeout_seconds": 150
+  },
+  "totals": {
+    "attempts": 48,
+    "completed": 48,
+    "strict_passes": 46,
+    "field_contract_passes": 48,
+    "citation_structure_passes": 48,
+    "evidence_coverage_passes": 46,
+    "model_calls": 164,
+    "prompt_tokens": 1111213,
+    "completion_tokens": 39560,
+    "cached_tokens": 329472,
+    "total_tokens": 1150773,
+    "unknown_usage_calls": 0,
+    "recursive_model_calls": 0,
+    "elapsed_seconds_sum": 1363.609137
+  },
+  "task_results": [
+    {
+      "task": "cloud-workforce",
+      "python": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/pilot4/cloud-workforce-python-1.json",
+          "deep-evidence/live/all-second-repeat/cloud-workforce-python-2.json"
+        ]
+      },
+      "rlm": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/pilot4/cloud-workforce-rlm-1.json",
+          "deep-evidence/live/all-second-repeat/cloud-workforce-rlm-2.json"
+        ]
+      }
+    },
+    {
+      "task": "cloud-patents",
+      "python": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/remaining-first-repeat/cloud-patents-python-1.json",
+          "deep-evidence/live/all-second-repeat/cloud-patents-python-2.json"
+        ]
+      },
+      "rlm": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/remaining-first-repeat/cloud-patents-rlm-1.json",
+          "deep-evidence/live/all-second-repeat/cloud-patents-rlm-2.json"
+        ]
+      }
+    },
+    {
+      "task": "cloud-customer-counts",
+      "python": {
+        "strict_passes": 1,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/remaining-first-repeat/cloud-customer-counts-python-1.json",
+          "deep-evidence/live/all-second-repeat/cloud-customer-counts-python-2.json"
+        ]
+      },
+      "rlm": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/remaining-first-repeat/cloud-customer-counts-rlm-1.json",
+          "deep-evidence/live/all-second-repeat/cloud-customer-counts-rlm-2.json"
+        ]
+      }
+    },
+    {
+      "task": "cloud-free-cash-flow",
+      "python": {
+        "strict_passes": 1,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/remaining-first-repeat/cloud-free-cash-flow-python-1.json",
+          "deep-evidence/live/all-second-repeat/cloud-free-cash-flow-python-2.json"
+        ]
+      },
+      "rlm": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/remaining-first-repeat/cloud-free-cash-flow-rlm-1.json",
+          "deep-evidence/live/all-second-repeat/cloud-free-cash-flow-rlm-2.json"
+        ]
+      }
+    },
+    {
+      "task": "cloud-concentration",
+      "python": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/remaining-first-repeat/cloud-concentration-python-1.json",
+          "deep-evidence/live/all-second-repeat/cloud-concentration-python-2.json"
+        ]
+      },
+      "rlm": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/remaining-first-repeat/cloud-concentration-rlm-1.json",
+          "deep-evidence/live/all-second-repeat/cloud-concentration-rlm-2.json"
+        ]
+      }
+    },
+    {
+      "task": "cloud-retention-terms",
+      "python": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/remaining-first-repeat/cloud-retention-terms-python-1.json",
+          "deep-evidence/live/all-second-repeat/cloud-retention-terms-python-2.json"
+        ]
+      },
+      "rlm": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/remaining-first-repeat/cloud-retention-terms-rlm-1.json",
+          "deep-evidence/live/all-second-repeat/cloud-retention-terms-rlm-2.json"
+        ]
+      }
+    },
+    {
+      "task": "cloud-regional-revenue",
+      "python": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/remaining-first-repeat/cloud-regional-revenue-python-1.json",
+          "deep-evidence/live/all-second-repeat/cloud-regional-revenue-python-2.json"
+        ]
+      },
+      "rlm": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/remaining-first-repeat/cloud-regional-revenue-rlm-1.json",
+          "deep-evidence/live/all-second-repeat/cloud-regional-revenue-rlm-2.json"
+        ]
+      }
+    },
+    {
+      "task": "cloud-distributed-profile",
+      "python": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/remaining-first-repeat/cloud-distributed-profile-python-1.json",
+          "deep-evidence/live/all-second-repeat/cloud-distributed-profile-python-2.json"
+        ]
+      },
+      "rlm": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/remaining-first-repeat/cloud-distributed-profile-rlm-1.json",
+          "deep-evidence/live/all-second-repeat/cloud-distributed-profile-rlm-2.json"
+        ]
+      }
+    },
+    {
+      "task": "sqlite-thread-contract",
+      "python": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/pilot4/sqlite-thread-contract-python-1.json",
+          "deep-evidence/live/all-second-repeat/sqlite-thread-contract-python-2.json"
+        ]
+      },
+      "rlm": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/pilot4/sqlite-thread-contract-rlm-1.json",
+          "deep-evidence/live/all-second-repeat/sqlite-thread-contract-rlm-2.json"
+        ]
+      }
+    },
+    {
+      "task": "sqlite-row-factory",
+      "python": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/remaining-first-repeat/sqlite-row-factory-python-1.json",
+          "deep-evidence/live/all-second-repeat/sqlite-row-factory-python-2.json"
+        ]
+      },
+      "rlm": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/remaining-first-repeat/sqlite-row-factory-rlm-1.json",
+          "deep-evidence/live/all-second-repeat/sqlite-row-factory-rlm-2.json"
+        ]
+      }
+    },
+    {
+      "task": "sqlite-parameter-containers",
+      "python": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/remaining-first-repeat/sqlite-parameter-containers-python-1.json",
+          "deep-evidence/live/all-second-repeat/sqlite-parameter-containers-python-2.json"
+        ]
+      },
+      "rlm": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/remaining-first-repeat/sqlite-parameter-containers-rlm-1.json",
+          "deep-evidence/live/all-second-repeat/sqlite-parameter-containers-rlm-2.json"
+        ]
+      }
+    },
+    {
+      "task": "sqlite-lastrowid",
+      "python": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/remaining-first-repeat/sqlite-lastrowid-python-1.json",
+          "deep-evidence/live/all-second-repeat/sqlite-lastrowid-python-2.json"
+        ]
+      },
+      "rlm": {
+        "strict_passes": 2,
+        "attempts": 2,
+        "artifacts": [
+          "deep-evidence/live/remaining-first-repeat/sqlite-lastrowid-rlm-1.json",
+          "deep-evidence/live/all-second-repeat/sqlite-lastrowid-rlm-2.json"
+        ]
+      }
+    }
+  ],
+  "manual_reviews": [
+    {
+      "original_artifact_sha256": "dca6890fa689f1c8c085bc97e539c3246aa2989d3a052e57eef61aadb5ad7fa1",
+      "kind": "derived_value_excerpt_boundary",
+      "automatic_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 3,
+        "required_fields": 4,
+        "failures": [
+          "Gold source evidence not covered for free_cash_flow"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "answer": "operating_cash: 380429\ncapex: 185037\nsoftware: 28477\nfree_cash_flow: 166915",
+      "selected_citation": {
+        "document_id": "cloudflare-2024",
+        "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+        "page": 80,
+        "start": 195,
+        "end": 494,
+        "quote": "d.\nYear Ended December 31,\n2024 2023 2022\n(dollars in thousands)\nNet cash provided by operating activities $ 380,429 $ 254,406 $ 123,595 \nLess: Purchases of property and equipment (185,037) (114,396) (143,606)\nLess: Capitalized internal-use software (28,477) (20,546) (19,758)\nFree cash flow $ 166,9"
+      },
+      "manual_checks": {
+        "arithmetic_matches": true,
+        "all_operands_in_citation": true,
+        "reported_result_line_cut": true
+      },
+      "manual_note": "The correct derived result is supported by all three operands and the year/unit header. The source excerpt cuts the separately reported result. Strict frozen gold failure is retained.",
+      "changes_to_gold_or_scores": false,
+      "artifact": "deep-evidence/live/remaining-first-repeat/cloud-free-cash-flow-python-1.json"
+    },
+    {
+      "original_artifact_sha256": "efb031c42e3c079447ff7bf276f28e385cab52f18072a6bde74febf7af6fcdab",
+      "kind": "literal_anchor_boundary",
+      "automatic_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 2,
+        "required_fields": 4,
+        "failures": [
+          "Gold source evidence not covered for paying_2024",
+          "Gold source evidence not covered for paying_2023"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "answer": "paying_2024: 237714\npaying_2023: 189791\nlarge_2024: 3497\nlarge_2023: 2756",
+      "selected_citation": {
+        "document_id": "cloudflare-2024",
+        "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+        "page": 80,
+        "start": 2701,
+        "end": 3401,
+        "quote": " number of paying customers was 237,714, 189,791, and 162,086 as of December 31,\n2024, 2023, and 2022, respectively.\nPaying Customers (> $100,000 Annualized Revenue)\nWhile we continue to grow customers across all sizes, over time, our large customers have contributed an increasing share of our revenue. We\nview the number of customers with Annualized Revenue greater than $100,000 as indicative of our penetration within large enterprise accounts.\nTo measure Annualized Revenue at the end of a quarter, we take the sum of revenue for each customer in the quarter and multiply that amount\nby four. For example, if we signed a new customer that generated $1,800 of revenue in a quarter, that customer "
+      },
+      "manual_checks": {
+        "both_counts_present": true,
+        "years_present": true,
+        "initial_The_cut": true
+      },
+      "manual_note": "The correct counts and corresponding years appear in the original excerpt. Its left edge omits the word The required by the frozen literal anchor. Strict frozen gold failures are retained.",
+      "changes_to_gold_or_scores": false,
+      "artifact": "deep-evidence/live/all-second-repeat/cloud-customer-counts-python-2.json"
+    }
+  ],
+  "visual_source_audit": {
+    "method": "Complete physical pages rendered with Poppler at 140 dpi and visually inspected; no gold edits.",
+    "source_raw_sha256": "ed58d484853f3a8da0dd2af65461fda3974f002cc3f609edeb749b93c22a6315",
+    "pages": [
+      {
+        "physical_page": 78,
+        "printed_page": 79,
+        "image_sha256": "d0ff1fe9e3be11e04ea48db8991fbd8a851207419444e84e78f6f16793d24b4b"
+      },
+      {
+        "physical_page": 80,
+        "printed_page": 81,
+        "image_sha256": "2a1e7361122c0d9a1ad3a9323b217a70107cb4b8b7746e41ddc40e14709a4373"
+      },
+      {
+        "physical_page": 112,
+        "printed_page": 113,
+        "image_sha256": "e05d003756b5b50054492460a27d8490a4c3ed3b011ce2f89cb0dbaa9ef8c5c5"
+      }
+    ],
+    "verified": "2024/2023 table columns, paying-customer counts, regional revenues and cash-flow inputs/result agree with frozen gold."
+  }
+}

@@ -1,0 +1,345 @@
+{
+  "grader_version": "grounded-document-fields-v2",
+  "model_feedback": false,
+  "tasks": [
+    {
+      "task": "synthetic-fee",
+      "expected_fields": {
+        "approved_nonprofit_fee_eur": [
+          "30"
+        ]
+      },
+      "answer_kind": "fields",
+      "unknowns": [],
+      "evidence": {
+        "approved_nonprofit_fee_eur": [
+          {
+            "document_id": "aurora-policy",
+            "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+            "page": 3,
+            "start": 2165,
+            "end": 2205,
+            "quote": "The standard application fee is EUR 120."
+          },
+          {
+            "document_id": "aurora-policy",
+            "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+            "page": 14,
+            "start": 2166,
+            "end": 2196,
+            "quote": "An approved nonprofit pays 25%"
+          }
+        ]
+      }
+    },
+    {
+      "task": "synthetic-exception",
+      "expected_fields": {
+        "expedited_nonprofit_review_business_days": [
+          "14"
+        ]
+      },
+      "answer_kind": "fields",
+      "unknowns": [],
+      "evidence": {
+        "expedited_nonprofit_review_business_days": [
+          {
+            "document_id": "aurora-policy",
+            "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+            "page": 22,
+            "start": 2171,
+            "end": 2224,
+            "quote": "Approved nonprofit applications take 14 business days"
+          },
+          {
+            "document_id": "aurora-policy",
+            "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+            "page": 22,
+            "start": 2260,
+            "end": 2277,
+            "quote": "this overrides T1"
+          }
+        ]
+      }
+    },
+    {
+      "task": "synthetic-unicode",
+      "expected_fields": {
+        "review_owner": [
+          "Pétya Sokolova"
+        ]
+      },
+      "answer_kind": "fields",
+      "unknowns": [],
+      "evidence": {
+        "review_owner": [
+          {
+            "document_id": "aurora-policy",
+            "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+            "page": 17,
+            "start": 2188,
+            "end": 2202,
+            "quote": "Pétya Sokolova"
+          }
+        ]
+      }
+    },
+    {
+      "task": "synthetic-absence",
+      "expected_fields": {
+        "renewal_fee_eur": [
+          "not specified"
+        ]
+      },
+      "answer_kind": "fields",
+      "unknowns": [
+        "renewal_fee_eur"
+      ],
+      "evidence": {}
+    },
+    {
+      "task": "synthetic-code",
+      "expected_fields": {
+        "standard_fee_eur": [
+          "120"
+        ],
+        "nonprofit_fee_percent": [
+          "25"
+        ],
+        "standard_review_days": [
+          "20"
+        ],
+        "expedited_review_days": [
+          "5"
+        ],
+        "nonprofit_review_days": [
+          "14"
+        ]
+      },
+      "answer_kind": "python",
+      "unknowns": [],
+      "evidence": {
+        "standard_fee_eur": [
+          {
+            "document_id": "aurora-policy",
+            "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+            "page": 3,
+            "start": 2165,
+            "end": 2205,
+            "quote": "The standard application fee is EUR 120."
+          }
+        ],
+        "nonprofit_fee_percent": [
+          {
+            "document_id": "aurora-policy",
+            "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+            "page": 14,
+            "start": 2166,
+            "end": 2196,
+            "quote": "An approved nonprofit pays 25%"
+          }
+        ],
+        "standard_review_days": [
+          {
+            "document_id": "aurora-policy",
+            "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+            "page": 5,
+            "start": 2165,
+            "end": 2204,
+            "quote": "Standard review takes 20 business days."
+          }
+        ],
+        "expedited_review_days": [
+          {
+            "document_id": "aurora-policy",
+            "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+            "page": 5,
+            "start": 2242,
+            "end": 2279,
+            "quote": "normally reviewed in 5 business days."
+          }
+        ],
+        "nonprofit_review_days": [
+          {
+            "document_id": "aurora-policy",
+            "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+            "page": 22,
+            "start": 2171,
+            "end": 2224,
+            "quote": "Approved nonprofit applications take 14 business days"
+          },
+          {
+            "document_id": "aurora-policy",
+            "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+            "page": 22,
+            "start": 2260,
+            "end": 2277,
+            "quote": "this overrides T1"
+          }
+        ]
+      }
+    },
+    {
+      "task": "cloudflare-year",
+      "expected_fields": {
+        "report_year": [
+          "2024"
+        ]
+      },
+      "answer_kind": "fields",
+      "unknowns": [],
+      "evidence": {
+        "report_year": [
+          {
+            "document_id": "cloudflare-2024",
+            "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+            "page": 1,
+            "start": 299,
+            "end": 342,
+            "quote": "For the fiscal year ended December 31, 2024"
+          }
+        ]
+      }
+    },
+    {
+      "task": "cloudflare-products",
+      "expected_fields": {
+        "workers_ai_compute": [
+          "serverless GPUs"
+        ],
+        "vectorize_data": [
+          "embeddings"
+        ]
+      },
+      "answer_kind": "fields",
+      "unknowns": [],
+      "evidence": {
+        "workers_ai_compute": [
+          {
+            "document_id": "cloudflare-2024",
+            "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+            "page": 12,
+            "start": 870,
+            "end": 896,
+            "quote": "powered by serverless GPUs"
+          }
+        ],
+        "vectorize_data": [
+          {
+            "document_id": "cloudflare-2024",
+            "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+            "page": 12,
+            "start": 962,
+            "end": 988,
+            "quote": "store and query embeddings"
+          }
+        ]
+      }
+    },
+    {
+      "task": "cloudflare-gateway",
+      "expected_fields": {
+        "ai_gateway_features": [
+          "observability, caching, security, routing"
+        ]
+      },
+      "answer_kind": "fields",
+      "unknowns": [],
+      "evidence": {
+        "ai_gateway_features": [
+          {
+            "document_id": "cloudflare-2024",
+            "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+            "page": 12,
+            "start": 1096,
+            "end": 1141,
+            "quote": "observability, caching, security, and routing"
+          }
+        ]
+      }
+    },
+    {
+      "task": "cloudflare-ai-product-and-risks",
+      "expected_fields": {
+        "workers_ai_compute": [
+          "serverless GPUs"
+        ],
+        "ai_attack_dimensions": [
+          "prevalence, intensity"
+        ],
+        "ai_information_exposure": [
+          "proprietary or other confidential information"
+        ]
+      },
+      "answer_kind": "fields",
+      "unknowns": [],
+      "evidence": {
+        "workers_ai_compute": [
+          {
+            "document_id": "cloudflare-2024",
+            "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+            "page": 12,
+            "start": 870,
+            "end": 896,
+            "quote": "powered by serverless GPUs"
+          }
+        ],
+        "ai_attack_dimensions": [
+          {
+            "document_id": "cloudflare-2024",
+            "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+            "page": 37,
+            "start": 1539,
+            "end": 1593,
+            "quote": "increase the prevalence or intensity of cyber attacks."
+          }
+        ],
+        "ai_information_exposure": [
+          {
+            "document_id": "cloudflare-2024",
+            "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+            "page": 59,
+            "start": 3512,
+            "end": 3583,
+            "quote": "proprietary or\nother confidential information being exposed externally."
+          }
+        ]
+      }
+    },
+    {
+      "task": "sqlite-defaults",
+      "expected_fields": {
+        "timeout_seconds": [
+          "5.0"
+        ],
+        "cached_statements": [
+          "128"
+        ]
+      },
+      "answer_kind": "fields",
+      "unknowns": [],
+      "evidence": {
+        "timeout_seconds": [
+          {
+            "document_id": "python-sqlite-3.12",
+            "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+            "page": 1,
+            "start": 8745,
+            "end": 8756,
+            "quote": "timeout=5.0"
+          }
+        ],
+        "cached_statements": [
+          {
+            "document_id": "python-sqlite-3.12",
+            "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+            "page": 1,
+            "start": 8902,
+            "end": 8923,
+            "quote": "cached_statements=128"
+          }
+        ]
+      }
+    }
+  ]
+}

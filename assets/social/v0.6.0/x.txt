@@ -1,0 +1,7 @@
+recursive-llm v0.6.0: quotes you can trace.
+
+The document API checks source hashes, pages and exact quoted spans. Tested on a 157-page report.
+
+A real quote does not prove the claim.
+
+https://github.com/grishahq/recursive-llm/releases/tag/v0.6.0
