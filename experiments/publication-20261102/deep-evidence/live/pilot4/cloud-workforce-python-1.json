@@ -1,0 +1,203 @@
+{
+  "dataset_version": "deep-documents-v2",
+  "grader_version": "deep-document-fields-v1",
+  "task": "cloud-workforce",
+  "mode": "python",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "At December 31, 2024, give Cloudflare's total full-time employee count, the count outside the United States, and compute the count inside the United States by subtraction. Use employees_total, employees_outside_us, employees_inside_us. Give integer counts without commas.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: employees_total, employees_outside_us, employees_inside_us. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 21.066239,
+  "raw_answer": "{\"answer\":\"employees_total: 4263\\nemployees_outside_us: 1896\\nemployees_inside_us: 2367\",\"claims\":[{\"claim\":\"employees_total: 4263\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":17,\"start\":0,\"end\":350,\"quote\":\"Table of contents\\nAs of December 31, 2024, we had 4,263 full-time employees, including 1,896 employees located outside of the United States. We also engage\\ncontractors and consultants. None of our employees in the United States are represented by a labor union, but some of our employees outside\\nof the United States are represented by works councils\"}]},{\"claim\":\"employees_outside_us: 1896\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":17,\"start\":0,\"end\":350,\"quote\":\"Table of contents\\nAs of December 31, 2024, we had 4,263 full-time employees, including 1,896 employees located outside of the United States. We also engage\\ncontractors and consultants. None of our employees in the United States are represented by a labor union, but some of our employees outside\\nof the United States are represented by works councils\"}]},{\"claim\":\"employees_inside_us: 2367\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":17,\"start\":0,\"end\":350,\"quote\":\"Table of contents\\nAs of December 31, 2024, we had 4,263 full-time employees, including 1,896 employees located outside of the United States. We also engage\\ncontractors and consultants. None of our employees in the United States are represented by a labor union, but some of our employees outside\\nof the United States are represented by works councils\"}]}],\"unknowns\":[]}",
+  "started_at": "2026-11-02T10:00:39.295925+00:00",
+  "repeat": 1,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "4bd3e4e972634ecd9f8e7a63f9579fd3b1d54ed54df2ed909d23c00f7f53f0d1",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "cloudflare-2024",
+      "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+      "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+      "page_count": 157,
+      "character_count": 591696
+    }
+  ],
+  "config": {
+    "max_depth": 0,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 10,
+    "max_total_tokens": 150000,
+    "max_elapsed_seconds": 240,
+    "call_timeout": 150,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 3,
+    "root_calls": 3,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 3,
+    "max_depth_reached": 0,
+    "prompt_tokens": 17574,
+    "completion_tokens": 539,
+    "total_tokens": 18113,
+    "cached_tokens": 5376,
+    "usage_calls": 3,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 3,
+    "depth": 0,
+    "budget": {
+      "max_calls": 10,
+      "max_tokens": 150000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 240,
+      "reserved_calls": 3,
+      "observed_tokens": 18113,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 21.065892
+    },
+    "by_model": {
+      "gpt-6.1-sol": {
+        "retry_calls": 0,
+        "prompt_tokens": 17574,
+        "completion_tokens": 539,
+        "total_tokens": 18113,
+        "cached_tokens": 5376,
+        "usage_calls": 3,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 3
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 3,
+    "prompt_tokens": 17574,
+    "completion_tokens": 539,
+    "total_tokens": 18113,
+    "cached_tokens": 5376,
+    "usage_calls": 3,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription",
+    "unknown_usage_calls": 0,
+    "failed_calls_with_known_usage": 0
+  },
+  "grade": {
+    "passed": true,
+    "grader_version": "deep-document-fields-v1",
+    "field_contract_passed": true,
+    "citation_structure_passed": true,
+    "evidence_coverage_passed": true,
+    "supported_fields": 3,
+    "required_fields": 3,
+    "failures": []
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.108655,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5714,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 25,
+      "response_sha256": "028143aa5afe93c6f7d68c8b20aee97244b18ef9ad8d7f1de574d77e709f3b7d"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.224698,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5829,
+        "cached_input_tokens": 0,
+        "output_tokens": 28
+      },
+      "usage_known": true,
+      "response_chars": 88,
+      "response_sha256": "7c72667a93ea567c2e94859b3910647d4fa99c9a40adb13d626a4268d5feeb1d"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 8.81653,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6031,
+        "cached_input_tokens": 2688,
+        "output_tokens": 503
+      },
+      "usage_known": true,
+      "response_chars": 1800,
+      "response_sha256": "0fcf9a7770162b21f95df0cc1cfaaa7c8057721b03d66ddbe34638405f902c10"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 3,
+    "known_usage_calls": 3,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 18113,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 16,
+    "event_counts": {
+      "final_answer": 1,
+      "final_answer_validated": 1,
+      "model_call_end": 3,
+      "model_call_start": 3,
+      "repl_step": 2,
+      "rlm_end": 1,
+      "rlm_start": 1,
+      "run_end": 1,
+      "run_start": 1,
+      "source_search": 1,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "final_answer": 1,
+        "final_answer_validated": 1,
+        "model_call_end": 3,
+        "model_call_start": 3,
+        "repl_step": 2,
+        "rlm_end": 1,
+        "rlm_start": 1,
+        "run_end": 1,
+        "run_start": 1,
+        "source_search": 1,
+        "sources_available": 1
+      }
+    },
+    "source_reads": []
+  }
+}

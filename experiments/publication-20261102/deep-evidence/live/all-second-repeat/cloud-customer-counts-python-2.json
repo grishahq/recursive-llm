@@ -1,0 +1,221 @@
+{
+  "dataset_version": "deep-documents-v2",
+  "grader_version": "deep-document-fields-v1",
+  "task": "cloud-customer-counts",
+  "mode": "python",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "Give total paying customers and customers above $100,000 Annualized Revenue at December 31 in 2024 and 2023. Use paying_2024, paying_2023, large_2024, large_2023. Use exact counts rather than the rounded overview, without commas.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: paying_2024, paying_2023, large_2024, large_2023. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 37.269922,
+  "raw_answer": "{\"answer\":\"paying_2024: 237714\\npaying_2023: 189791\\nlarge_2024: 3497\\nlarge_2023: 2756\",\"claims\":[{\"claim\":\"paying_2024: 237714\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":80,\"start\":2701,\"end\":3401,\"quote\":\" number of paying customers was 237,714, 189,791, and 162,086 as of December 31,\\n2024, 2023, and 2022, respectively.\\nPaying Customers (> $100,000 Annualized Revenue)\\nWhile we continue to grow customers across all sizes, over time, our large customers have contributed an increasing share of our revenue. We\\nview the number of customers with Annualized Revenue greater than $100,000 as indicative of our penetration within large enterprise accounts.\\nTo measure Annualized Revenue at the end of a quarter, we take the sum of revenue for each customer in the quarter and multiply that amount\\nby four. For example, if we signed a new customer that generated $1,800 of revenue in a quarter, that customer \"}]},{\"claim\":\"paying_2023: 189791\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":80,\"start\":2701,\"end\":3401,\"quote\":\" number of paying customers was 237,714, 189,791, and 162,086 as of December 31,\\n2024, 2023, and 2022, respectively.\\nPaying Customers (> $100,000 Annualized Revenue)\\nWhile we continue to grow customers across all sizes, over time, our large customers have contributed an increasing share of our revenue. We\\nview the number of customers with Annualized Revenue greater than $100,000 as indicative of our penetration within large enterprise accounts.\\nTo measure Annualized Revenue at the end of a quarter, we take the sum of revenue for each customer in the quarter and multiply that amount\\nby four. For example, if we signed a new customer that generated $1,800 of revenue in a quarter, that customer \"}]},{\"claim\":\"large_2024: 3497\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":81,\"start\":0,\"end\":700,\"quote\":\"Table of contents\\nmetric also includes any usage charges by a customer during a period, which represents a small portion of our total revenue and may not be\\nrecurring. As a result, Annualized Revenue may be higher than actual revenue over the course of the year. The number of paying customers with\\nAnnualized Revenue greater than $100,000 was 3,497, 2,756, and 2,042 as of December 31, 2024, 2023, and 2022, respectively.\\nDollar-Based Net Retention Rate\\nOur ability to maintain long-term revenue growth and achieve profitability is dependent on our ability to retain and grow revenue generated from\\nour existing paying customers. We believe that we will achieve these objectives by continuing to foc\"}]},{\"claim\":\"large_2023: 2756\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":81,\"start\":0,\"end\":700,\"quote\":\"Table of contents\\nmetric also includes any usage charges by a customer during a period, which represents a small portion of our total revenue and may not be\\nrecurring. As a result, Annualized Revenue may be higher than actual revenue over the course of the year. The number of paying customers with\\nAnnualized Revenue greater than $100,000 was 3,497, 2,756, and 2,042 as of December 31, 2024, 2023, and 2022, respectively.\\nDollar-Based Net Retention Rate\\nOur ability to maintain long-term revenue growth and achieve profitability is dependent on our ability to retain and grow revenue generated from\\nour existing paying customers. We believe that we will achieve these objectives by continuing to foc\"}]}],\"unknowns\":[]}",
+  "started_at": "2026-11-02T10:09:04.300642+00:00",
+  "repeat": 2,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "efb031c42e3c079447ff7bf276f28e385cab52f18072a6bde74febf7af6fcdab",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "cloudflare-2024",
+      "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+      "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+      "page_count": 157,
+      "character_count": 591696
+    }
+  ],
+  "config": {
+    "max_depth": 0,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 10,
+    "max_total_tokens": 150000,
+    "max_elapsed_seconds": 240,
+    "call_timeout": 150,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 4,
+    "root_calls": 4,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 4,
+    "max_depth_reached": 0,
+    "prompt_tokens": 29969,
+    "completion_tokens": 1078,
+    "total_tokens": 31047,
+    "cached_tokens": 8064,
+    "usage_calls": 4,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 4,
+    "depth": 0,
+    "budget": {
+      "max_calls": 10,
+      "max_tokens": 150000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 240,
+      "reserved_calls": 4,
+      "observed_tokens": 31047,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 37.269549
+    },
+    "by_model": {
+      "gpt-6.1-sol": {
+        "retry_calls": 0,
+        "prompt_tokens": 29969,
+        "completion_tokens": 1078,
+        "total_tokens": 31047,
+        "cached_tokens": 8064,
+        "usage_calls": 4,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 4
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 4,
+    "prompt_tokens": 29969,
+    "completion_tokens": 1078,
+    "total_tokens": 31047,
+    "cached_tokens": 8064,
+    "usage_calls": 4,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription",
+    "unknown_usage_calls": 0,
+    "failed_calls_with_known_usage": 0
+  },
+  "grade": {
+    "passed": false,
+    "grader_version": "deep-document-fields-v1",
+    "field_contract_passed": true,
+    "citation_structure_passed": true,
+    "evidence_coverage_passed": false,
+    "supported_fields": 2,
+    "required_fields": 4,
+    "failures": [
+      "Gold source evidence not covered for paying_2024",
+      "Gold source evidence not covered for paying_2023"
+    ]
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.518261,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5726,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 25,
+      "response_sha256": "028143aa5afe93c6f7d68c8b20aee97244b18ef9ad8d7f1de574d77e709f3b7d"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 6.359052,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5841,
+        "cached_input_tokens": 2688,
+        "output_tokens": 29
+      },
+      "usage_known": true,
+      "response_chars": 95,
+      "response_sha256": "a7b2bc5c2cba8ce257ff90a016278b34a54e216ab0c55b2231aeecbf8324c882"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.316536,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 7895,
+        "cached_input_tokens": 2688,
+        "output_tokens": 29
+      },
+      "usage_known": true,
+      "response_chars": 97,
+      "response_sha256": "4776d7a24d3f584ea01b66f8ffaf3df21746956a8aa62dcbdf01da93baadc9e2"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 18.210469,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 10507,
+        "cached_input_tokens": 0,
+        "output_tokens": 1012
+      },
+      "usage_known": true,
+      "response_chars": 3756,
+      "response_sha256": "3039a3df1feb35495f5468714cc56991017c0354d164c34a685864d4d93719f2"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 4,
+    "known_usage_calls": 4,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 31047,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 20,
+    "event_counts": {
+      "final_answer": 1,
+      "final_answer_validated": 1,
+      "model_call_end": 4,
+      "model_call_start": 4,
+      "repl_step": 3,
+      "rlm_end": 1,
+      "rlm_start": 1,
+      "run_end": 1,
+      "run_start": 1,
+      "source_search": 2,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "final_answer": 1,
+        "final_answer_validated": 1,
+        "model_call_end": 4,
+        "model_call_start": 4,
+        "repl_step": 3,
+        "rlm_end": 1,
+        "rlm_start": 1,
+        "run_end": 1,
+        "run_start": 1,
+        "source_search": 2,
+        "sources_available": 1
+      }
+    },
+    "source_reads": []
+  }
+}

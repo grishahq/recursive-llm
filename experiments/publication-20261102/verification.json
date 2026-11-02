@@ -1,0 +1,162 @@
+{
+  "verification_schema_version": 1,
+  "verified_at": "2026-11-02T10:18:10.927569+00:00",
+  "release_version": "0.6.0",
+  "status": "passed",
+  "host_python": "3.12.14",
+  "platform": "Darwin arm64",
+  "build": {
+    "command": "python -m build --outdir /tmp/rlm-release-v0.6.0",
+    "isolation": true,
+    "frontend_version": "1.5.1",
+    "build_dependencies": {
+      "setuptools": "84.2.1",
+      "wheel": "0.48.0"
+    },
+    "wheel_built_from_sdist": true
+  },
+  "artifacts": {
+    "wheel": {
+      "path": "/tmp/rlm-release-v0.6.0/recursive_llm-0.6.0-py3-none-any.whl",
+      "bytes": 54208,
+      "sha256": "ccd9364a5850d16afe211e39adf9b42b4ad5cc2710f7de079ff96fbce227aff8",
+      "metadata_version": "0.6.0",
+      "documents_extra": true,
+      "all_modules_match_checkout": true,
+      "requires_dist": [
+        "litellm<1.98.0,>=1.0.0",
+        "RestrictedPython>=6.0",
+        "python-dotenv>=1.0.0",
+        "pypdf<7,>=6.18.0; extra == \"documents\"",
+        "pypdf<7,>=6.18.0; extra == \"visualizer\"",
+        "build>=1.2.0; extra == \"dev\"",
+        "pytest>=7.0.0; extra == \"dev\"",
+        "pytest-asyncio>=0.24.0; extra == \"dev\"",
+        "pytest-cov>=7.0.0; extra == \"dev\"",
+        "coverage[toml]>=7.10.0; extra == \"dev\"",
+        "black==25.11.0; extra == \"dev\"",
+        "ruff==0.16.0; extra == \"dev\"",
+        "mypy<2.0.0,>=1.0.0; extra == \"dev\""
+      ]
+    },
+    "sdist": {
+      "path": "/tmp/rlm-release-v0.6.0/recursive_llm-0.6.0.tar.gz",
+      "bytes": 208036,
+      "sha256": "9f8c5797cd4c13f7afb55bf381292132bf9ae8fe4604d0dfbb696e0e203baaad",
+      "metadata_version": "0.6.0",
+      "required_content": [
+        "DOCUMENT_ANALYSIS.md",
+        "examples/analyze_documents.py",
+        "src/rlm/sources.py",
+        "src/rlm/document_io.py",
+        "experiments/publication-20261102/export_evidence.py",
+        "tests/test_public_evidence_export.py",
+        "pyproject.toml",
+        "MANIFEST.in"
+      ],
+      "required_content_sha256": {
+        "DOCUMENT_ANALYSIS.md": "533c732f781656679b85a7ef2054c7349df69b5b11bbb43b75aa92033c60f23b",
+        "examples/analyze_documents.py": "ea98cc21636ef89d6dab5906f4110376b2aaef31bb30fe68535ac4ba02cef0b7",
+        "src/rlm/sources.py": "706a9124aa42ae1486a6fc3ed0286249dc0da0698e865a318c301033f7460844",
+        "src/rlm/document_io.py": "542a66f0568b7cd0bb86978fcdc725612b1dfd706ca1b0f10eaac63c880ada37",
+        "experiments/publication-20261102/export_evidence.py": "9bde2d1f20481f120bf9dbaaa1099dcb06e11dd24b72700ee2fe5fd37259f90f",
+        "tests/test_public_evidence_export.py": "c29459762fe0179e30f53eb82bed1eadfce89773fd856b4981620046c9bfd48e",
+        "pyproject.toml": "a4ad532012d541961e896e7263dc7a0dee9ff02c40de70061c46205bada43c83",
+        "MANIFEST.in": "7597ee70dbdb8a7d20b52d0ec0f020932791d114b851554f66c4d3c90458ced1"
+      },
+      "raw_experiment_captures_absent": true
+    }
+  },
+  "isolated_install": {
+    "venv": "/tmp/rlm-release-install-v0.6.0",
+    "command": "python -m pip install '/tmp/rlm-release-v0.6.0/recursive_llm-0.6.0-py3-none-any.whl[documents]'",
+    "exact_final_wheel_reinstalled": true,
+    "pip_check_passed": true,
+    "smoke_command": "python -I /tmp/rlm-release-smoke-v0.6.0.py",
+    "outside_repository": true,
+    "results": {
+      "status": "passed",
+      "package_version": "0.6.0",
+      "module_version": "0.6.0",
+      "module_path": "/tmp/rlm-release-install-v0.6.0/lib/python3.12/site-packages/rlm/__init__.py",
+      "versions": {
+        "litellm": "1.97.0",
+        "RestrictedPython": "8.5",
+        "python-dotenv": "1.2.4",
+        "pypdf": "6.21.4"
+      },
+      "document_api": {
+        "passed": true,
+        "calls": 2,
+        "source_search_observed": true,
+        "validated_citations": 1
+      },
+      "pdf_ingestion": {
+        "passed": true,
+        "physical_pages": 3,
+        "blank_page_preserved": true,
+        "blank_password_opened": true,
+        "extraction_warning_observed": true
+      },
+      "real_cloudflare_ingestion": {
+        "passed": true,
+        "pages": 157,
+        "characters": 591696
+      }
+    }
+  },
+  "source_archive_test": {
+    "command": "python -m pytest -q tests/test_public_evidence_export.py --no-cov",
+    "cwd": "/tmp/rlm-release-sdist-check-v060/recursive_llm-0.6.0",
+    "passed": 14,
+    "elapsed_seconds": 0.09,
+    "exporter_included": true,
+    "tested_script_and_test_bytes_match_final_archive": true
+  },
+  "checkout_exporter_test": {
+    "command": "pytest -q tests/test_public_evidence_export.py --no-cov",
+    "passed": 14
+  },
+  "prior_full_suite_reported_by_root": {
+    "passed": 529,
+    "branch_aware_coverage_percent": 94.75,
+    "black_ruff_mypy": "passed",
+    "note": "Reported by root before one additional deep-grade preservation test. Current expected suite size is 530; this record does not claim a full 530-test run."
+  },
+  "package_integration_change": "MANIFEST.in now includes the evidence exporter required by packaged tests.",
+  "inference_calls": 0,
+  "publication_performed": false,
+  "final_checkout_suite": {
+    "command": ".venv/bin/python -m pytest -q",
+    "passed": 530,
+    "elapsed_seconds": 36.11,
+    "branch_aware_coverage_percent": 94.86,
+    "log_sha256": "131eb7bedb1e31e292d9a7ad890eac8e066186f0dcc6067783871d1fa3069d2d",
+    "black": "25.11.0 passed",
+    "ruff": "0.16.0 passed",
+    "mypy": "passed",
+    "git_diff_check": "passed"
+  },
+  "ci_quality_dependency_fix": {
+    "failed_run_id": 41428356347,
+    "failed_job_id": 125220394177,
+    "failed_head": "6c45447f8037e77a53387b75aaa9a513359821da",
+    "confirmed_failure": "mypy could not resolve pypdf, pypdf.errors, and pypdf.generic because the quality job installed only the dev extra.",
+    "change": "The Quality and package job now installs .[dev,documents], retaining optional PDF API type checking.",
+    "runtime_changed": false,
+    "package_contents_changed": false,
+    "artifact_sha256_rechecked": true,
+    "local_checks": {
+      "mypy_with_fresh_isolated_dependency_environment": "passed,14sourcefiles,pypdf6.21.4",
+      "ruff": "passed with project-pinned Ruff0.16.0",
+      "black": "passed with project-pinned Black25.11.0;63filesunchanged",
+      "workflow_yaml": "parsed; quality install has documents extra"
+    },
+    "remote_rerun_status": "not run by this verification task; requires committing and pushing the workflow fix.",
+    "pinned_quality_commands": [
+      "mypy --python-executable /tmp/rlm-release-install-v0.6.0/bin/python src",
+      "/tmp/rlm-release-install-v0.6.0/bin/ruff check src tests examples benchmarks",
+      "/tmp/rlm-release-install-v0.6.0/bin/black --check src tests examples benchmarks"
+    ]
+  }
+}

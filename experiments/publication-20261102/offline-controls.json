@@ -1,0 +1,4153 @@
+{
+  "kind": "OFFLINE_FIXED_RESPONSE_CONTROLS",
+  "live_model_calls": 0,
+  "baseline_commit": "3c255c070060837343e594f60523e02b5369b87d",
+  "projection": "Full calls, prompts and trajectory data omitted; fixed replies, answers, grades, event kinds and statistics retained.",
+  "original_sha256": "3abfc5b50e4ec2d0cfc2bd32cc7398470071b3ef59d8c824ac18020d71d6eef8",
+  "records": [
+    {
+      "variant": "head-default",
+      "fixture": "valid_directive",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "accepted",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 1,
+        "root_calls": 1,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 1,
+        "max_depth_reached": 0,
+        "prompt_tokens": 100,
+        "completion_tokens": 12,
+        "total_tokens": 112,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 1,
+            "retry_calls": 0,
+            "prompt_tokens": 100,
+            "completion_tokens": 12,
+            "total_tokens": 112,
+            "cached_tokens": 0,
+            "usage_calls": 1,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 1,
+        "depth": 0,
+        "budget": {
+          "max_calls": 1,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 1,
+          "observed_tokens": 112,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000761
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 6,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "head-with-source-validator",
+      "fixture": "valid_directive",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "accepted",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 1,
+        "root_calls": 1,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 1,
+        "max_depth_reached": 0,
+        "prompt_tokens": 100,
+        "completion_tokens": 12,
+        "total_tokens": 112,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 1,
+            "retry_calls": 0,
+            "prompt_tokens": 100,
+            "completion_tokens": 12,
+            "total_tokens": 112,
+            "cached_tokens": 0,
+            "usage_calls": 1,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 1,
+        "depth": 0,
+        "budget": {
+          "max_calls": 1,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 1,
+          "observed_tokens": 112,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000327
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "final_answer_validated",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 6,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 8,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "current-document-api",
+      "fixture": "valid_directive",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "accepted",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 1,
+        "root_calls": 1,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 1,
+        "max_depth_reached": 0,
+        "prompt_tokens": 100,
+        "completion_tokens": 12,
+        "total_tokens": 112,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 1,
+            "retry_calls": 0,
+            "prompt_tokens": 100,
+            "completion_tokens": 12,
+            "total_tokens": 112,
+            "cached_tokens": 0,
+            "usage_calls": 1,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 1,
+        "depth": 0,
+        "budget": {
+          "max_calls": 1,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 1,
+          "observed_tokens": 112,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000325
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "sources_available",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 6,
+          "kind": "final_answer_validated",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 8,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 9,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "head-default",
+      "fixture": "forged_quote",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 9\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 9\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": false,
+        "supported_fields": 0,
+        "required_fields": 1,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span",
+          "Gold source evidence not covered for value"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 1,
+        "root_calls": 1,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 1,
+        "max_depth_reached": 0,
+        "prompt_tokens": 100,
+        "completion_tokens": 12,
+        "total_tokens": 112,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 1,
+            "retry_calls": 0,
+            "prompt_tokens": 100,
+            "completion_tokens": 12,
+            "total_tokens": 112,
+            "cached_tokens": 0,
+            "usage_calls": 1,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 1,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 1,
+          "observed_tokens": 112,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000192
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 6,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "head-with-source-validator",
+      "fixture": "forged_quote",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 9\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 2,
+        "root_calls": 2,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 2,
+        "max_depth_reached": 0,
+        "prompt_tokens": 200,
+        "completion_tokens": 24,
+        "total_tokens": 224,
+        "cached_tokens": 0,
+        "usage_calls": 2,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 2,
+            "retry_calls": 0,
+            "prompt_tokens": 200,
+            "completion_tokens": 24,
+            "total_tokens": 224,
+            "cached_tokens": 0,
+            "usage_calls": 2,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 2,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 2,
+          "observed_tokens": 224,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000365
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "final_answer_rejected",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 6,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 7,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 8,
+          "kind": "final_answer_validated",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 9,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 10,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 11,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "current-document-api",
+      "fixture": "forged_quote",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 9\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 2,
+        "root_calls": 2,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 2,
+        "max_depth_reached": 0,
+        "prompt_tokens": 200,
+        "completion_tokens": 24,
+        "total_tokens": 224,
+        "cached_tokens": 0,
+        "usage_calls": 2,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 2,
+            "retry_calls": 0,
+            "prompt_tokens": 200,
+            "completion_tokens": 24,
+            "total_tokens": 224,
+            "cached_tokens": 0,
+            "usage_calls": 2,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 2,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 2,
+          "observed_tokens": 224,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000383
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "sources_available",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 6,
+          "kind": "final_answer_rejected",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 8,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 9,
+          "kind": "final_answer_validated",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 10,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 11,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 12,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "head-default",
+      "fixture": "forged_hash",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"0000000000000000000000000000000000000000000000000000000000000000\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"0000000000000000000000000000000000000000000000000000000000000000\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [
+          "claims[0].citations[0].source_sha256 does not match the source"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 1,
+        "root_calls": 1,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 1,
+        "max_depth_reached": 0,
+        "prompt_tokens": 100,
+        "completion_tokens": 12,
+        "total_tokens": 112,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 1,
+            "retry_calls": 0,
+            "prompt_tokens": 100,
+            "completion_tokens": 12,
+            "total_tokens": 112,
+            "cached_tokens": 0,
+            "usage_calls": 1,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 1,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 1,
+          "observed_tokens": 112,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000181
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 6,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "head-with-source-validator",
+      "fixture": "forged_hash",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"0000000000000000000000000000000000000000000000000000000000000000\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 2,
+        "root_calls": 2,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 2,
+        "max_depth_reached": 0,
+        "prompt_tokens": 200,
+        "completion_tokens": 24,
+        "total_tokens": 224,
+        "cached_tokens": 0,
+        "usage_calls": 2,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 2,
+            "retry_calls": 0,
+            "prompt_tokens": 200,
+            "completion_tokens": 24,
+            "total_tokens": 224,
+            "cached_tokens": 0,
+            "usage_calls": 2,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 2,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 2,
+          "observed_tokens": 224,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000452
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "final_answer_rejected",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 6,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 7,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 8,
+          "kind": "final_answer_validated",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 9,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 10,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 11,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "current-document-api",
+      "fixture": "forged_hash",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"0000000000000000000000000000000000000000000000000000000000000000\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 2,
+        "root_calls": 2,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 2,
+        "max_depth_reached": 0,
+        "prompt_tokens": 200,
+        "completion_tokens": 24,
+        "total_tokens": 224,
+        "cached_tokens": 0,
+        "usage_calls": 2,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 2,
+            "retry_calls": 0,
+            "prompt_tokens": 200,
+            "completion_tokens": 24,
+            "total_tokens": 224,
+            "cached_tokens": 0,
+            "usage_calls": 2,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 2,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 2,
+          "observed_tokens": 224,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.00054
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "sources_available",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 6,
+          "kind": "final_answer_rejected",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 8,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 9,
+          "kind": "final_answer_validated",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 10,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 11,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 12,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "head-default",
+      "fixture": "wrong_page",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 2, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 2, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": false,
+        "supported_fields": 0,
+        "required_fields": 1,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span",
+          "Gold source evidence not covered for value"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 1,
+        "root_calls": 1,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 1,
+        "max_depth_reached": 0,
+        "prompt_tokens": 100,
+        "completion_tokens": 12,
+        "total_tokens": 112,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 1,
+            "retry_calls": 0,
+            "prompt_tokens": 100,
+            "completion_tokens": 12,
+            "total_tokens": 112,
+            "cached_tokens": 0,
+            "usage_calls": 1,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 1,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 1,
+          "observed_tokens": 112,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000251
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 6,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "head-with-source-validator",
+      "fixture": "wrong_page",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 2, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 2,
+        "root_calls": 2,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 2,
+        "max_depth_reached": 0,
+        "prompt_tokens": 200,
+        "completion_tokens": 24,
+        "total_tokens": 224,
+        "cached_tokens": 0,
+        "usage_calls": 2,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 2,
+            "retry_calls": 0,
+            "prompt_tokens": 200,
+            "completion_tokens": 24,
+            "total_tokens": 224,
+            "cached_tokens": 0,
+            "usage_calls": 2,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 2,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 2,
+          "observed_tokens": 224,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000443
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "final_answer_rejected",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 6,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 7,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 8,
+          "kind": "final_answer_validated",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 9,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 10,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 11,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "current-document-api",
+      "fixture": "wrong_page",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 2, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 2,
+        "root_calls": 2,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 2,
+        "max_depth_reached": 0,
+        "prompt_tokens": 200,
+        "completion_tokens": 24,
+        "total_tokens": 224,
+        "cached_tokens": 0,
+        "usage_calls": 2,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 2,
+            "retry_calls": 0,
+            "prompt_tokens": 200,
+            "completion_tokens": 24,
+            "total_tokens": 224,
+            "cached_tokens": 0,
+            "usage_calls": 2,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 2,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 2,
+          "observed_tokens": 224,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000408
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "sources_available",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 6,
+          "kind": "final_answer_rejected",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 8,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 9,
+          "kind": "final_answer_validated",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 10,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 11,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 12,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "head-default",
+      "fixture": "shifted_offset",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 1, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 1, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 1,
+        "root_calls": 1,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 1,
+        "max_depth_reached": 0,
+        "prompt_tokens": 100,
+        "completion_tokens": 12,
+        "total_tokens": 112,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 1,
+            "retry_calls": 0,
+            "prompt_tokens": 100,
+            "completion_tokens": 12,
+            "total_tokens": 112,
+            "cached_tokens": 0,
+            "usage_calls": 1,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 1,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 1,
+          "observed_tokens": 112,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000224
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 6,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "head-with-source-validator",
+      "fixture": "shifted_offset",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 1, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 2,
+        "root_calls": 2,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 2,
+        "max_depth_reached": 0,
+        "prompt_tokens": 200,
+        "completion_tokens": 24,
+        "total_tokens": 224,
+        "cached_tokens": 0,
+        "usage_calls": 2,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 2,
+            "retry_calls": 0,
+            "prompt_tokens": 200,
+            "completion_tokens": 24,
+            "total_tokens": 224,
+            "cached_tokens": 0,
+            "usage_calls": 2,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 2,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 2,
+          "observed_tokens": 224,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.00045
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "final_answer_rejected",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 6,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 7,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 8,
+          "kind": "final_answer_validated",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 9,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 10,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 11,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "current-document-api",
+      "fixture": "shifted_offset",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 1, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 2,
+        "root_calls": 2,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 2,
+        "max_depth_reached": 0,
+        "prompt_tokens": 200,
+        "completion_tokens": 24,
+        "total_tokens": 224,
+        "cached_tokens": 0,
+        "usage_calls": 2,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 2,
+            "retry_calls": 0,
+            "prompt_tokens": 200,
+            "completion_tokens": 24,
+            "total_tokens": 224,
+            "cached_tokens": 0,
+            "usage_calls": 2,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 2,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 2,
+          "observed_tokens": 224,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000373
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "sources_available",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 6,
+          "kind": "final_answer_rejected",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 8,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 9,
+          "kind": "final_answer_validated",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 10,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 11,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 12,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "head-default",
+      "fixture": "boolean_page",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": true, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": true, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [
+          "claims[0].citations[0]: page must be an integer from 1 to 2"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 1,
+        "root_calls": 1,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 1,
+        "max_depth_reached": 0,
+        "prompt_tokens": 100,
+        "completion_tokens": 12,
+        "total_tokens": 112,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 1,
+            "retry_calls": 0,
+            "prompt_tokens": 100,
+            "completion_tokens": 12,
+            "total_tokens": 112,
+            "cached_tokens": 0,
+            "usage_calls": 1,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 1,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 1,
+          "observed_tokens": 112,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000181
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 6,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "head-with-source-validator",
+      "fixture": "boolean_page",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": true, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 2,
+        "root_calls": 2,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 2,
+        "max_depth_reached": 0,
+        "prompt_tokens": 200,
+        "completion_tokens": 24,
+        "total_tokens": 224,
+        "cached_tokens": 0,
+        "usage_calls": 2,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 2,
+            "retry_calls": 0,
+            "prompt_tokens": 200,
+            "completion_tokens": 24,
+            "total_tokens": 224,
+            "cached_tokens": 0,
+            "usage_calls": 2,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 2,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 2,
+          "observed_tokens": 224,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000353
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "final_answer_rejected",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 6,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 7,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 8,
+          "kind": "final_answer_validated",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 9,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 10,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 11,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "current-document-api",
+      "fixture": "boolean_page",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": true, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 2,
+        "root_calls": 2,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 2,
+        "max_depth_reached": 0,
+        "prompt_tokens": 200,
+        "completion_tokens": 24,
+        "total_tokens": 224,
+        "cached_tokens": 0,
+        "usage_calls": 2,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 2,
+            "retry_calls": 0,
+            "prompt_tokens": 200,
+            "completion_tokens": 24,
+            "total_tokens": 224,
+            "cached_tokens": 0,
+            "usage_calls": 2,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 2,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 2,
+          "observed_tokens": 224,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000408
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "sources_available",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 6,
+          "kind": "final_answer_rejected",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 8,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 9,
+          "kind": "final_answer_validated",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 10,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 11,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 12,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "head-default",
+      "fixture": "unknown_document",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"missing\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"missing\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": false,
+        "supported_fields": 0,
+        "required_fields": 1,
+        "failures": [
+          "claims[0].citations[0]: document_id is not present in this corpus",
+          "Gold source evidence not covered for value"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 1,
+        "root_calls": 1,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 1,
+        "max_depth_reached": 0,
+        "prompt_tokens": 100,
+        "completion_tokens": 12,
+        "total_tokens": 112,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 1,
+            "retry_calls": 0,
+            "prompt_tokens": 100,
+            "completion_tokens": 12,
+            "total_tokens": 112,
+            "cached_tokens": 0,
+            "usage_calls": 1,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 1,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 1,
+          "observed_tokens": 112,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000202
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 6,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "head-with-source-validator",
+      "fixture": "unknown_document",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"missing\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 2,
+        "root_calls": 2,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 2,
+        "max_depth_reached": 0,
+        "prompt_tokens": 200,
+        "completion_tokens": 24,
+        "total_tokens": 224,
+        "cached_tokens": 0,
+        "usage_calls": 2,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 2,
+            "retry_calls": 0,
+            "prompt_tokens": 200,
+            "completion_tokens": 24,
+            "total_tokens": 224,
+            "cached_tokens": 0,
+            "usage_calls": 2,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 2,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 2,
+          "observed_tokens": 224,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000373
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "final_answer_rejected",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 6,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 7,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 8,
+          "kind": "final_answer_validated",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 9,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 10,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 11,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "current-document-api",
+      "fixture": "unknown_document",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"missing\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 2,
+        "root_calls": 2,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 2,
+        "max_depth_reached": 0,
+        "prompt_tokens": 200,
+        "completion_tokens": 24,
+        "total_tokens": 224,
+        "cached_tokens": 0,
+        "usage_calls": 2,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 2,
+            "retry_calls": 0,
+            "prompt_tokens": 200,
+            "completion_tokens": 24,
+            "total_tokens": 224,
+            "cached_tokens": 0,
+            "usage_calls": 2,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 2,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 2,
+          "observed_tokens": 224,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000377
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "sources_available",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 6,
+          "kind": "final_answer_rejected",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 8,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 9,
+          "kind": "final_answer_validated",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 10,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 11,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 12,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "head-default",
+      "fixture": "stale_same_id",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"0270bd7b2109c34739949ef42a249ce8b3cc04db53a965e52b6a5a12351b33f1\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"0270bd7b2109c34739949ef42a249ce8b3cc04db53a965e52b6a5a12351b33f1\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [
+          "claims[0].citations[0].source_sha256 does not match the source"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 1,
+        "root_calls": 1,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 1,
+        "max_depth_reached": 0,
+        "prompt_tokens": 100,
+        "completion_tokens": 12,
+        "total_tokens": 112,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 1,
+            "retry_calls": 0,
+            "prompt_tokens": 100,
+            "completion_tokens": 12,
+            "total_tokens": 112,
+            "cached_tokens": 0,
+            "usage_calls": 1,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 1,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 1,
+          "observed_tokens": 112,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000244
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 6,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "head-with-source-validator",
+      "fixture": "stale_same_id",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"0270bd7b2109c34739949ef42a249ce8b3cc04db53a965e52b6a5a12351b33f1\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 2,
+        "root_calls": 2,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 2,
+        "max_depth_reached": 0,
+        "prompt_tokens": 200,
+        "completion_tokens": 24,
+        "total_tokens": 224,
+        "cached_tokens": 0,
+        "usage_calls": 2,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 2,
+            "retry_calls": 0,
+            "prompt_tokens": 200,
+            "completion_tokens": 24,
+            "total_tokens": 224,
+            "cached_tokens": 0,
+            "usage_calls": 2,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 2,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 2,
+          "observed_tokens": 224,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000413
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "final_answer_rejected",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 6,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 7,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 8,
+          "kind": "final_answer_validated",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 9,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 10,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 11,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "current-document-api",
+      "fixture": "stale_same_id",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"0270bd7b2109c34739949ef42a249ce8b3cc04db53a965e52b6a5a12351b33f1\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')",
+        "FINAL('{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "reject_then_repair",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 2,
+        "root_calls": 2,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 2,
+        "max_depth_reached": 0,
+        "prompt_tokens": 200,
+        "completion_tokens": 24,
+        "total_tokens": 224,
+        "cached_tokens": 0,
+        "usage_calls": 2,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 2,
+            "retry_calls": 0,
+            "prompt_tokens": 200,
+            "completion_tokens": 24,
+            "total_tokens": 224,
+            "cached_tokens": 0,
+            "usage_calls": 2,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 2,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 2,
+          "observed_tokens": 224,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000435
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "sources_available",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 6,
+          "kind": "final_answer_rejected",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 8,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-3",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 9,
+          "kind": "final_answer_validated",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 10,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 11,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 12,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "head-default",
+      "fixture": "native_json",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}"
+      ],
+      "expected_current": "accepted",
+      "status": "rejected_or_failed",
+      "runtime_stats": {
+        "llm_calls": 1,
+        "root_calls": 1,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 1,
+        "max_depth_reached": 0,
+        "prompt_tokens": 100,
+        "completion_tokens": 12,
+        "total_tokens": 112,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 1,
+            "retry_calls": 0,
+            "prompt_tokens": 100,
+            "completion_tokens": 12,
+            "total_tokens": 112,
+            "cached_tokens": 0,
+            "usage_calls": 1,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 1,
+        "depth": 0,
+        "budget": {
+          "max_calls": 1,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 1,
+          "observed_tokens": 112,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 1.547527
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "repl_step",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 6,
+          "kind": "rlm_error",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "run_error",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "head-with-source-validator",
+      "fixture": "native_json",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}"
+      ],
+      "expected_current": "accepted",
+      "status": "rejected_or_failed",
+      "runtime_stats": {
+        "llm_calls": 1,
+        "root_calls": 1,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 1,
+        "max_depth_reached": 0,
+        "prompt_tokens": 100,
+        "completion_tokens": 12,
+        "total_tokens": 112,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 1,
+            "retry_calls": 0,
+            "prompt_tokens": 100,
+            "completion_tokens": 12,
+            "total_tokens": 112,
+            "cached_tokens": 0,
+            "usage_calls": 1,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 1,
+        "depth": 0,
+        "budget": {
+          "max_calls": 1,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 1,
+          "observed_tokens": 112,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 2.037188
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "repl_step",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 6,
+          "kind": "rlm_error",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "run_error",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "current-document-api",
+      "fixture": "native_json",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}"
+      ],
+      "expected_current": "accepted",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 7\", \"claims\": [{\"claim\": \"value: 7\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 1,
+        "root_calls": 1,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 1,
+        "max_depth_reached": 0,
+        "prompt_tokens": 100,
+        "completion_tokens": 12,
+        "total_tokens": 112,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 1,
+            "retry_calls": 0,
+            "prompt_tokens": 100,
+            "completion_tokens": 12,
+            "total_tokens": 112,
+            "cached_tokens": 0,
+            "usage_calls": 1,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 1,
+        "depth": 0,
+        "budget": {
+          "max_calls": 1,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 1,
+          "observed_tokens": 112,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000811
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "sources_available",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 6,
+          "kind": "final_answer_validated",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 8,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 9,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "head-default",
+      "fixture": "wrong_claim_real_quote",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 9\", \"claims\": [{\"claim\": \"value: 9\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "accepted_but_semantically_wrong",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 9\", \"claims\": [{\"claim\": \"value: 9\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [
+          "incorrect or missing field 'value'",
+          "incorrect exact value for 'value'",
+          "Incorrect claim value for value"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 1,
+        "root_calls": 1,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 1,
+        "max_depth_reached": 0,
+        "prompt_tokens": 100,
+        "completion_tokens": 12,
+        "total_tokens": 112,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 1,
+            "retry_calls": 0,
+            "prompt_tokens": 100,
+            "completion_tokens": 12,
+            "total_tokens": 112,
+            "cached_tokens": 0,
+            "usage_calls": 1,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 1,
+        "depth": 0,
+        "budget": {
+          "max_calls": 1,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 1,
+          "observed_tokens": 112,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000392
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 6,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "head-with-source-validator",
+      "fixture": "wrong_claim_real_quote",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 9\", \"claims\": [{\"claim\": \"value: 9\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "accepted_but_semantically_wrong",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 9\", \"claims\": [{\"claim\": \"value: 9\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [
+          "incorrect or missing field 'value'",
+          "incorrect exact value for 'value'",
+          "Incorrect claim value for value"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 1,
+        "root_calls": 1,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 1,
+        "max_depth_reached": 0,
+        "prompt_tokens": 100,
+        "completion_tokens": 12,
+        "total_tokens": 112,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 1,
+            "retry_calls": 0,
+            "prompt_tokens": 100,
+            "completion_tokens": 12,
+            "total_tokens": 112,
+            "cached_tokens": 0,
+            "usage_calls": 1,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 1,
+        "depth": 0,
+        "budget": {
+          "max_calls": 1,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 1,
+          "observed_tokens": 112,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000399
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "final_answer_validated",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 6,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 8,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    },
+    {
+      "variant": "current-document-api",
+      "fixture": "wrong_claim_real_quote",
+      "live_model_calls": 0,
+      "fixed_replies": [
+        "FINAL('{\"answer\": \"value: 9\", \"claims\": [{\"claim\": \"value: 9\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}')"
+      ],
+      "expected_current": "accepted_but_semantically_wrong",
+      "status": "accepted",
+      "raw_answer": "{\"answer\": \"value: 9\", \"claims\": [{\"claim\": \"value: 9\", \"citations\": [{\"document_id\": \"fixture\", \"source_sha256\": \"7a15b768359f26a858a38ceb9efdefef6678d13bc025e5ae2e524be9b4ed84d9\", \"page\": 1, \"start\": 0, \"end\": 8, \"quote\": \"value: 7\"}]}], \"unknowns\": []}",
+      "grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [
+          "incorrect or missing field 'value'",
+          "incorrect exact value for 'value'",
+          "Incorrect claim value for value"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "runtime_stats": {
+        "llm_calls": 1,
+        "root_calls": 1,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 1,
+        "max_depth_reached": 0,
+        "prompt_tokens": 100,
+        "completion_tokens": 12,
+        "total_tokens": 112,
+        "cached_tokens": 0,
+        "usage_calls": 1,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 1,
+            "retry_calls": 0,
+            "prompt_tokens": 100,
+            "completion_tokens": 12,
+            "total_tokens": 112,
+            "cached_tokens": 0,
+            "usage_calls": 1,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 1,
+        "depth": 0,
+        "budget": {
+          "max_calls": 1,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 15,
+          "reserved_calls": 1,
+          "observed_tokens": 112,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000616
+        }
+      },
+      "trajectory": [
+        {
+          "sequence": 1,
+          "kind": "run_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 2,
+          "kind": "rlm_start",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 3,
+          "kind": "sources_available",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 4,
+          "kind": "model_call_start",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 5,
+          "kind": "model_call_end",
+          "depth": 0,
+          "node_id": "llm-2",
+          "parent_id": "rlm-1"
+        },
+        {
+          "sequence": 6,
+          "kind": "final_answer_validated",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 7,
+          "kind": "final_answer",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 8,
+          "kind": "rlm_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        },
+        {
+          "sequence": 9,
+          "kind": "run_end",
+          "depth": 0,
+          "node_id": "rlm-1",
+          "parent_id": ""
+        }
+      ]
+    }
+  ],
+  "empty_cli": [
+    {
+      "variant": "head",
+      "fixture": "empty_cli_then_valid",
+      "live_model_calls": 0,
+      "status": "rejected_or_failed",
+      "error": {
+        "type": "CodexError",
+        "message": "Expected exactly one nonempty final Codex message"
+      },
+      "runtime_stats": {
+        "llm_calls": 1,
+        "root_calls": 1,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 1,
+        "max_depth_reached": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0,
+        "cached_tokens": 0,
+        "usage_calls": 0,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 1,
+            "retry_calls": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "cached_tokens": 0,
+            "usage_calls": 0,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 1,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 10,
+          "reserved_calls": 1,
+          "observed_tokens": 0,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000245
+        }
+      }
+    },
+    {
+      "variant": "current",
+      "fixture": "empty_cli_then_valid",
+      "live_model_calls": 0,
+      "status": "accepted",
+      "answer": "recovered",
+      "runtime_stats": {
+        "llm_calls": 2,
+        "root_calls": 2,
+        "recursive_calls": 0,
+        "leaf_calls": 0,
+        "retry_calls": 0,
+        "total_iterations": 2,
+        "max_depth_reached": 0,
+        "prompt_tokens": 200,
+        "completion_tokens": 24,
+        "total_tokens": 224,
+        "cached_tokens": 0,
+        "usage_calls": 2,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "by_model": {
+          "fixed-fixture": {
+            "calls": 2,
+            "retry_calls": 0,
+            "prompt_tokens": 200,
+            "completion_tokens": 24,
+            "total_tokens": 224,
+            "cached_tokens": 0,
+            "usage_calls": 2,
+            "priced_calls": 0,
+            "estimated_cost_usd": null
+          }
+        },
+        "iterations": 2,
+        "depth": 0,
+        "budget": {
+          "max_calls": 2,
+          "max_tokens": null,
+          "max_cost_usd": null,
+          "max_elapsed_seconds": 10,
+          "reserved_calls": 2,
+          "observed_tokens": 224,
+          "observed_cost_usd": null,
+          "elapsed_seconds": 0.000303
+        }
+      }
+    }
+  ],
+  "loader": [
+    {
+      "variant": "head_companion_default",
+      "raw_sha256": "ed58d484853f3a8da0dd2af65461fda3974f002cc3f609edeb749b93c22a6315",
+      "note": "Profile capability and extraction checks, not LLM quality scores.",
+      "live_model_calls": 0,
+      "status": "rejected",
+      "error": {
+        "type": "RequestError",
+        "message": "Encrypted PDFs are unsupported"
+      },
+      "elapsed_seconds": 0.03736249999928987
+    },
+    {
+      "variant": "current_companion_standard",
+      "raw_sha256": "ed58d484853f3a8da0dd2af65461fda3974f002cc3f609edeb749b93c22a6315",
+      "note": "Profile capability and extraction checks, not LLM quality scores.",
+      "live_model_calls": 0,
+      "status": "rejected",
+      "error": {
+        "type": "RequestError",
+        "message": "Extracted PDF text exceeds 300,000 characters"
+      },
+      "elapsed_seconds": 4.47431491700263
+    },
+    {
+      "variant": "current_companion_long",
+      "raw_sha256": "ed58d484853f3a8da0dd2af65461fda3974f002cc3f609edeb749b93c22a6315",
+      "note": "Profile capability and extraction checks, not LLM quality scores.",
+      "live_model_calls": 0,
+      "status": "accepted",
+      "characters": 591696,
+      "page_count": 157,
+      "warnings": [],
+      "content_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+      "elapsed_seconds": 8.295418166002491
+    },
+    {
+      "variant": "current_library_default",
+      "raw_sha256": "ed58d484853f3a8da0dd2af65461fda3974f002cc3f609edeb749b93c22a6315",
+      "note": "Profile capability and extraction checks, not LLM quality scores.",
+      "live_model_calls": 0,
+      "status": "accepted",
+      "characters": 591696,
+      "page_count": 157,
+      "warnings": [
+        "PDF text extraction has no OCR; scanned images and complex tables may be incomplete. Page numbers identify physical PDF pages, starting at 1, not printed page labels."
+      ],
+      "content_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+      "elapsed_seconds": 8.139760040998226
+    }
+  ],
+  "search": [
+    {
+      "original": "Pétya",
+      "term": "Petya",
+      "head_literal_find": -1,
+      "current_matches": [
+        {
+          "document_id": "unicode",
+          "source_sha256": "59ba3f5a695760d401e8da003d55b34e1d5f0659fa1152fbd6e6c18e12f9c3a7",
+          "page": 1,
+          "start": 7,
+          "end": 12,
+          "quote": "Pétya"
+        }
+      ],
+      "correct_original_span": true,
+      "note": "Built-in helper versus literal search recipe. Legacy users could implement custom normalization."
+    },
+    {
+      "original": "Pétya",
+      "term": "PETYA",
+      "head_literal_find": -1,
+      "current_matches": [
+        {
+          "document_id": "unicode",
+          "source_sha256": "88d07cb7cdf6d30b1433a8cae4ddd4263bfd810e3d355d00612cf4a7d3bab7c0",
+          "page": 1,
+          "start": 7,
+          "end": 13,
+          "quote": "Pétya"
+        }
+      ],
+      "correct_original_span": true,
+      "note": "Built-in helper versus literal search recipe. Legacy users could implement custom normalization."
+    },
+    {
+      "original": "Straßé",
+      "term": "STRASSE",
+      "head_literal_find": -1,
+      "current_matches": [
+        {
+          "document_id": "unicode",
+          "source_sha256": "dfa28d804289b9b7dad66ec644e0e6df4362fab753208eabfb8753e4045173a1",
+          "page": 1,
+          "start": 7,
+          "end": 14,
+          "quote": "Straßé"
+        }
+      ],
+      "correct_original_span": true,
+      "note": "Built-in helper versus literal search recipe. Legacy users could implement custom normalization."
+    },
+    {
+      "original": "alpha\t\r\n beta",
+      "term": "ALPHA BETA",
+      "head_literal_find": -1,
+      "current_matches": [
+        {
+          "document_id": "unicode",
+          "source_sha256": "af5841beb87f28a59ad5ec2c05ebe8fa59dc37101551f1277406c280b931a86a",
+          "page": 1,
+          "start": 7,
+          "end": 20,
+          "quote": "alpha\t\r\n beta"
+        }
+      ],
+      "correct_original_span": true,
+      "note": "Built-in helper versus literal search recipe. Legacy users could implement custom normalization."
+    }
+  ],
+  "limitations": [
+    "Fixed response replay tests runtime behavior, not model quality.",
+    "The old release already supports a custom final validator; that control is included.",
+    "A valid real quotation can support a wrong claim; the negative control must remain visible.",
+    "Missing old APIs and different upload profiles are capability differences, not accuracy gains."
+  ]
+}

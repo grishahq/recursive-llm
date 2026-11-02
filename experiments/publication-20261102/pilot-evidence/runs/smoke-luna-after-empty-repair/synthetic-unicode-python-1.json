@@ -1,0 +1,284 @@
+{
+  "dataset_version": "grounded-documents-v1",
+  "grader_version": "grounded-document-fields-v2",
+  "task": "synthetic-unicode",
+  "mode": "python",
+  "model": "gpt-6-luna",
+  "reasoning_effort": "low",
+  "query": "Find Petya, the review owner for Aurora, and give the full name with the original spelling. Do not confuse Aurora with Borealis.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: review_owner. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "failed",
+  "elapsed_seconds": 41.636932,
+  "raw_answer": null,
+  "started_at": "2026-11-02T09:30:55.192918+00:00",
+  "repeat": 1,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "621e3a0f062a06d6d9bdcb638822d98bbdc4b52dd6b5e56e4366a6723f527c38",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "aurora-policy",
+      "title": "Aurora fictional application policy",
+      "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+      "page_count": 24,
+      "character_count": 52310
+    },
+    {
+      "document_id": "borealis-policy",
+      "title": "Borealis policy, a different program",
+      "source_sha256": "54430077260753df96c8f7d47dccd42dd62c2af6d812307f53e306a24fb79692",
+      "page_count": 1,
+      "character_count": 128
+    }
+  ],
+  "config": {
+    "max_depth": 0,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 12,
+    "max_total_tokens": 350000,
+    "max_elapsed_seconds": 300.0,
+    "call_timeout": 180.0,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 8,
+    "root_calls": 8,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 8,
+    "max_depth_reached": 0,
+    "prompt_tokens": 44324,
+    "completion_tokens": 856,
+    "total_tokens": 45180,
+    "cached_tokens": 5504,
+    "usage_calls": 7,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 8,
+    "depth": 0,
+    "budget": {
+      "max_calls": 12,
+      "max_tokens": 350000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 300.0,
+      "reserved_calls": 8,
+      "observed_tokens": 45180,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 41.636907
+    },
+    "by_model": {
+      "gpt-6-luna": {
+        "retry_calls": 0,
+        "prompt_tokens": 44324,
+        "completion_tokens": 856,
+        "total_tokens": 45180,
+        "cached_tokens": 5504,
+        "usage_calls": 7,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 8
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 8,
+    "prompt_tokens": 44324,
+    "completion_tokens": 856,
+    "total_tokens": 45180,
+    "cached_tokens": 5504,
+    "usage_calls": 7,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription",
+    "unknown_usage_calls": 1,
+    "failed_calls_with_known_usage": 0
+  },
+  "grade": {
+    "passed": false,
+    "factual_passed": false,
+    "provenance_passed": false,
+    "grader_version": "grounded-document-fields-v2",
+    "failures": [
+      "no completed answer"
+    ]
+  },
+  "error": {
+    "type": "CodexError",
+    "message": "Codex reported error: exceeded retry limit, last status: 429 Too Many Requests"
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.119801,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5633,
+        "cached_input_tokens": 0,
+        "output_tokens": 36
+      },
+      "usage_known": true,
+      "response_chars": 108,
+      "response_sha256": "acaf4821d3a62bcf6b18071487154f056e08f4e070bb45563bdea53c2375608b"
+    },
+    {
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.602081,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5705,
+        "cached_input_tokens": 0,
+        "output_tokens": 10
+      },
+      "usage_known": true,
+      "response_chars": 36,
+      "response_sha256": "75b1c5f2b248ee09c7968780aaffc8a7c05bdeae9c06d8cc13dbb28ed9793181"
+    },
+    {
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 3.641179,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5890,
+        "cached_input_tokens": 0,
+        "output_tokens": 26
+      },
+      "usage_known": true,
+      "response_chars": 81,
+      "response_sha256": "050b160e50ab66c43b9eb25c15b9d001b6c8645093941f5e3de91917d918f44d"
+    },
+    {
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 9.968414,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6096,
+        "cached_input_tokens": 0,
+        "output_tokens": 223
+      },
+      "usage_known": true,
+      "response_chars": 741,
+      "response_sha256": "e435198d040baa1fb1fd827af046cd8d8650d31d07291d45b41a9daa200d4d3f"
+    },
+    {
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.572489,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6583,
+        "cached_input_tokens": 0,
+        "output_tokens": 187
+      },
+      "usage_known": true,
+      "response_chars": 585,
+      "response_sha256": "3a7d67d0c903e84c47b9ed4975d59dfb285132126502d9b55524bc52ca8a1124"
+    },
+    {
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.292313,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 7000,
+        "cached_input_tokens": 5504,
+        "output_tokens": 187
+      },
+      "usage_known": true,
+      "response_chars": 585,
+      "response_sha256": "3a7d67d0c903e84c47b9ed4975d59dfb285132126502d9b55524bc52ca8a1124"
+    },
+    {
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.991815,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 7417,
+        "cached_input_tokens": 0,
+        "output_tokens": 187
+      },
+      "usage_known": true,
+      "response_chars": 585,
+      "response_sha256": "3a7d67d0c903e84c47b9ed4975d59dfb285132126502d9b55524bc52ca8a1124"
+    },
+    {
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low",
+      "status": "failed",
+      "elapsed_seconds": 2.087651,
+      "billing_mode": "subscription",
+      "usage": null,
+      "usage_known": false,
+      "response_chars": null,
+      "response_sha256": null
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 8,
+    "known_usage_calls": 7,
+    "unknown_usage_calls": 1,
+    "observed_total_tokens": 45180,
+    "usage_complete": false
+  },
+  "trace_summary": {
+    "event_count": 29,
+    "event_counts": {
+      "final_answer_rejected": 1,
+      "model_call_end": 7,
+      "model_call_error": 1,
+      "model_call_start": 8,
+      "repl_step": 6,
+      "rlm_error": 1,
+      "rlm_start": 1,
+      "run_error": 1,
+      "run_start": 1,
+      "source_search": 1,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "final_answer_rejected": 1,
+        "model_call_end": 7,
+        "model_call_error": 1,
+        "model_call_start": 8,
+        "repl_step": 6,
+        "rlm_error": 1,
+        "rlm_start": 1,
+        "run_error": 1,
+        "run_start": 1,
+        "source_search": 1,
+        "sources_available": 1
+      }
+    },
+    "source_reads": []
+  }
+}

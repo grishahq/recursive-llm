@@ -1,0 +1,1467 @@
+{
+  "dataset_version": "deep-documents-v2",
+  "grader_version": "deep-document-fields-v1",
+  "note": "Gold frozen before live inference; 12 questions, two source snapshots, overlapping facts are not independent samples.",
+  "tasks": [
+    {
+      "name": "cloud-workforce",
+      "query": "At December 31, 2024, give Cloudflare's total full-time employee count, the count outside the United States, and compute the count inside the United States by subtraction. Use employees_total, employees_outside_us, employees_inside_us. Give integer counts without commas.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: employees_total, employees_outside_us, employees_inside_us. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ],
+      "expected": {
+        "employees_total": [
+          "4263"
+        ],
+        "employees_outside_us": [
+          "1896"
+        ],
+        "employees_inside_us": [
+          "2367"
+        ]
+      },
+      "evidence_alternatives": {
+        "employees_total": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 17,
+              "text": "4,263 full-time employees"
+            }
+          ]
+        ],
+        "employees_outside_us": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 17,
+              "text": "1,896 employees located outside of the United States"
+            }
+          ]
+        ],
+        "employees_inside_us": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 17,
+              "text": "4,263 full-time employees"
+            },
+            {
+              "document_id": "cloudflare-2024",
+              "page": 17,
+              "text": "1,896 employees located outside of the United States"
+            }
+          ]
+        ]
+      },
+      "oracle": {
+        "answer": "employees_total: 4263\nemployees_outside_us: 1896\nemployees_inside_us: 2367",
+        "claims": [
+          {
+            "claim": "employees_total: 4263",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 17,
+                "start": 50,
+                "end": 75,
+                "quote": "4,263 full-time employees"
+              }
+            ]
+          },
+          {
+            "claim": "employees_outside_us: 1896",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 17,
+                "start": 87,
+                "end": 139,
+                "quote": "1,896 employees located outside of the United States"
+              }
+            ]
+          },
+          {
+            "claim": "employees_inside_us: 2367",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 17,
+                "start": 50,
+                "end": 75,
+                "quote": "4,263 full-time employees"
+              },
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 17,
+                "start": 87,
+                "end": 139,
+                "quote": "1,896 employees located outside of the United States"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      }
+    },
+    {
+      "name": "cloud-patents",
+      "query": "At December 31, 2024, how many issued patents and pending patent applications did Cloudflare have, and what first and last expiry years are stated for its issued patents? Use issued_patents, pending_patents, first_expiry_year, last_expiry_year. Give integers only.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: issued_patents, pending_patents, first_expiry_year, last_expiry_year. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ],
+      "expected": {
+        "issued_patents": [
+          "334"
+        ],
+        "pending_patents": [
+          "72"
+        ],
+        "first_expiry_year": [
+          "2030"
+        ],
+        "last_expiry_year": [
+          "2044"
+        ]
+      },
+      "evidence_alternatives": {
+        "issued_patents": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 18,
+              "text": "334 issued patents"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 59,
+              "text": "334 issued patents"
+            }
+          ]
+        ],
+        "pending_patents": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 18,
+              "text": "72 pending patent"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 59,
+              "text": "72 pending patent"
+            }
+          ]
+        ],
+        "first_expiry_year": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 18,
+              "text": "scheduled to expire between 2030 and 2044"
+            }
+          ]
+        ],
+        "last_expiry_year": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 18,
+              "text": "scheduled to expire between 2030 and 2044"
+            }
+          ]
+        ]
+      },
+      "oracle": {
+        "answer": "issued_patents: 334\npending_patents: 72\nfirst_expiry_year: 2030\nlast_expiry_year: 2044",
+        "claims": [
+          {
+            "claim": "issued_patents: 334",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 18,
+                "start": 122,
+                "end": 140,
+                "quote": "334 issued patents"
+              }
+            ]
+          },
+          {
+            "claim": "pending_patents: 72",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 18,
+                "start": 145,
+                "end": 162,
+                "quote": "72 pending patent"
+              }
+            ]
+          },
+          {
+            "claim": "first_expiry_year: 2030",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 18,
+                "start": 339,
+                "end": 380,
+                "quote": "scheduled to expire between 2030 and 2044"
+              }
+            ]
+          },
+          {
+            "claim": "last_expiry_year: 2044",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 18,
+                "start": 339,
+                "end": 380,
+                "quote": "scheduled to expire between 2030 and 2044"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      }
+    },
+    {
+      "name": "cloud-customer-counts",
+      "query": "Give total paying customers and customers above $100,000 Annualized Revenue at December 31 in 2024 and 2023. Use paying_2024, paying_2023, large_2024, large_2023. Use exact counts rather than the rounded overview, without commas.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: paying_2024, paying_2023, large_2024, large_2023. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ],
+      "expected": {
+        "paying_2024": [
+          "237714"
+        ],
+        "paying_2023": [
+          "189791"
+        ],
+        "large_2024": [
+          "3497"
+        ],
+        "large_2023": [
+          "2756"
+        ]
+      },
+      "evidence_alternatives": {
+        "paying_2024": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 78,
+              "text": "Paying customers 237,714 189,791 162,086"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 80,
+              "text": "The number of paying customers was 237,714, 189,791, and 162,086"
+            }
+          ]
+        ],
+        "paying_2023": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 78,
+              "text": "Paying customers 237,714 189,791 162,086"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 80,
+              "text": "The number of paying customers was 237,714, 189,791, and 162,086"
+            }
+          ]
+        ],
+        "large_2024": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 78,
+              "text": "Paying customers (> $100,000 Annualized Revenue) 3,497 2,756 2,042"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 81,
+              "text": "Annualized Revenue greater than $100,000 was 3,497, 2,756, and 2,042"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 13,
+              "text": "2,756 as of\nDecember 31, 2023 to 3,497 as of December 31, 2024"
+            }
+          ]
+        ],
+        "large_2023": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 78,
+              "text": "Paying customers (> $100,000 Annualized Revenue) 3,497 2,756 2,042"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 81,
+              "text": "Annualized Revenue greater than $100,000 was 3,497, 2,756, and 2,042"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 13,
+              "text": "2,756 as of\nDecember 31, 2023 to 3,497 as of December 31, 2024"
+            }
+          ]
+        ]
+      },
+      "oracle": {
+        "answer": "paying_2024: 237714\npaying_2023: 189791\nlarge_2024: 3497\nlarge_2023: 2756",
+        "claims": [
+          {
+            "claim": "paying_2024: 237714",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 78,
+                "start": 1057,
+                "end": 1097,
+                "quote": "Paying customers 237,714 189,791 162,086"
+              }
+            ]
+          },
+          {
+            "claim": "paying_2023: 189791",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 78,
+                "start": 1057,
+                "end": 1097,
+                "quote": "Paying customers 237,714 189,791 162,086"
+              }
+            ]
+          },
+          {
+            "claim": "large_2024: 3497",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 78,
+                "start": 1099,
+                "end": 1165,
+                "quote": "Paying customers (> $100,000 Annualized Revenue) 3,497 2,756 2,042"
+              }
+            ]
+          },
+          {
+            "claim": "large_2023: 2756",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 78,
+                "start": 1099,
+                "end": 1165,
+                "quote": "Paying customers (> $100,000 Annualized Revenue) 3,497 2,756 2,042"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      }
+    },
+    {
+      "name": "cloud-free-cash-flow",
+      "query": "For 2024, give net cash provided by operating activities, purchases of property and equipment, capitalized internal-use software, and free cash flow. Check the stated subtraction. Use operating_cash, capex, software, free_cash_flow. Report USD thousands as nonnegative integers without commas; capex and software are magnitudes of the amounts subtracted.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: operating_cash, capex, software, free_cash_flow. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ],
+      "expected": {
+        "operating_cash": [
+          "380429"
+        ],
+        "capex": [
+          "185037"
+        ],
+        "software": [
+          "28477"
+        ],
+        "free_cash_flow": [
+          "166915"
+        ]
+      },
+      "evidence_alternatives": {
+        "operating_cash": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 78,
+              "text": "Net cash provided by operating activities $ 380,429"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 80,
+              "text": "Net cash provided by operating activities $ 380,429"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 89,
+              "text": "Net cash provided by operating activities $ 380,429"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 101,
+              "text": "Net cash provided by operating activities 380,429"
+            }
+          ]
+        ],
+        "capex": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 80,
+              "text": "Purchases of property and equipment (185,037)"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 101,
+              "text": "Purchases of property and equipment (185,037)"
+            }
+          ]
+        ],
+        "software": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 80,
+              "text": "Capitalized internal-use software (28,477)"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 101,
+              "text": "Capitalized internal-use software (28,477)"
+            }
+          ]
+        ],
+        "free_cash_flow": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 78,
+              "text": "Free cash flow $ 166,915"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 80,
+              "text": "Free cash flow $ 166,915"
+            }
+          ]
+        ]
+      },
+      "oracle": {
+        "answer": "operating_cash: 380429\ncapex: 185037\nsoftware: 28477\nfree_cash_flow: 166915",
+        "claims": [
+          {
+            "claim": "operating_cash: 380429",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 78,
+                "start": 660,
+                "end": 711,
+                "quote": "Net cash provided by operating activities $ 380,429"
+              }
+            ]
+          },
+          {
+            "claim": "capex: 185037",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 80,
+                "start": 339,
+                "end": 384,
+                "quote": "Purchases of property and equipment (185,037)"
+              }
+            ]
+          },
+          {
+            "claim": "software: 28477",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 80,
+                "start": 411,
+                "end": 453,
+                "quote": "Capitalized internal-use software (28,477)"
+              }
+            ]
+          },
+          {
+            "claim": "free_cash_flow: 166915",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 78,
+                "start": 889,
+                "end": 913,
+                "quote": "Free cash flow $ 166,915"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      }
+    },
+    {
+      "name": "cloud-concentration",
+      "query": "For 2024, did any single customer account for more than 10% of revenue, and did any customer represent 10% or more of net accounts receivable? Use revenue_over_10pct and receivables_at_least_10pct, each exactly yes or no.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: revenue_over_10pct, receivables_at_least_10pct. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ],
+      "expected": {
+        "revenue_over_10pct": [
+          "no"
+        ],
+        "receivables_at_least_10pct": [
+          "no"
+        ]
+      },
+      "evidence_alternatives": {
+        "revenue_over_10pct": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 13,
+              "text": "No single customer accounted for more than 10% of our revenue"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 104,
+              "text": "no customer accounted for more than\n10% of the Company’s revenue"
+            }
+          ]
+        ],
+        "receivables_at_least_10pct": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 104,
+              "text": "No customer represented 10% or more of accounts receivable, net as of December 31, 2024 and 2023."
+            }
+          ]
+        ]
+      },
+      "oracle": {
+        "answer": "revenue_over_10pct: no\nreceivables_at_least_10pct: no",
+        "claims": [
+          {
+            "claim": "revenue_over_10pct: no",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 13,
+                "start": 1586,
+                "end": 1647,
+                "quote": "No single customer accounted for more than 10% of our revenue"
+              }
+            ]
+          },
+          {
+            "claim": "receivables_at_least_10pct: no",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 104,
+                "start": 895,
+                "end": 992,
+                "quote": "No customer represented 10% or more of accounts receivable, net as of December 31, 2024 and 2023."
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      }
+    },
+    {
+      "name": "cloud-retention-terms",
+      "query": "Give the dollar-based net retention rates for the three months ended December 31, 2024 and 2023, plus the minimum and maximum typical contracted-customer subscription/support term in years. Use retention_2024_pct, retention_2023_pct, contract_min_years, contract_max_years. Give numbers without percent signs.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: retention_2024_pct, retention_2023_pct, contract_min_years, contract_max_years. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ],
+      "expected": {
+        "retention_2024_pct": [
+          "111"
+        ],
+        "retention_2023_pct": [
+          "115"
+        ],
+        "contract_min_years": [
+          "1"
+        ],
+        "contract_max_years": [
+          "3"
+        ]
+      },
+      "evidence_alternatives": {
+        "retention_2024_pct": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 81,
+              "text": "2024, 2023, and 2022 were 111%, 115%"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 85,
+              "text": "dollar-based net retention rate of 111%"
+            }
+          ]
+        ],
+        "retention_2023_pct": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 81,
+              "text": "2024, 2023, and 2022 were 111%, 115%"
+            }
+          ]
+        ],
+        "contract_min_years": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 33,
+              "text": "typically range from one to three years"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 74,
+              "text": "typically range from one to three years"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 81,
+              "text": "typically range from one to three years"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 105,
+              "text": "typically range from one to three years"
+            }
+          ]
+        ],
+        "contract_max_years": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 33,
+              "text": "typically range from one to three years"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 74,
+              "text": "typically range from one to three years"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 81,
+              "text": "typically range from one to three years"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 105,
+              "text": "typically range from one to three years"
+            }
+          ]
+        ]
+      },
+      "oracle": {
+        "answer": "retention_2024_pct: 111\nretention_2023_pct: 115\ncontract_min_years: 1\ncontract_max_years: 3",
+        "claims": [
+          {
+            "claim": "retention_2024_pct: 111",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 81,
+                "start": 1833,
+                "end": 1869,
+                "quote": "2024, 2023, and 2022 were 111%, 115%"
+              }
+            ]
+          },
+          {
+            "claim": "retention_2023_pct: 115",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 81,
+                "start": 1833,
+                "end": 1869,
+                "quote": "2024, 2023, and 2022 were 111%, 115%"
+              }
+            ]
+          },
+          {
+            "claim": "contract_min_years: 1",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 33,
+                "start": 2838,
+                "end": 2877,
+                "quote": "typically range from one to three years"
+              }
+            ]
+          },
+          {
+            "claim": "contract_max_years: 3",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 33,
+                "start": 2838,
+                "end": 2877,
+                "quote": "typically range from one to three years"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      }
+    },
+    {
+      "name": "cloud-regional-revenue",
+      "query": "For 2024, give revenue from the United States, Europe Middle East and Africa, Asia Pacific, and Other, based on customer billing addresses. Use us_revenue, emea_revenue, apac_revenue, other_revenue. Report USD thousands as integers without commas.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: us_revenue, emea_revenue, apac_revenue, other_revenue. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ],
+      "expected": {
+        "us_revenue": [
+          "849500"
+        ],
+        "emea_revenue": [
+          "466499"
+        ],
+        "apac_revenue": [
+          "223234"
+        ],
+        "other_revenue": [
+          "130393"
+        ]
+      },
+      "evidence_alternatives": {
+        "us_revenue": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 78,
+              "text": "United States $ 849,500 51 %"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 112,
+              "text": "United States $ 849,500 51 %"
+            }
+          ]
+        ],
+        "emea_revenue": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 78,
+              "text": "Europe, Middle East, and Africa 466,499 28 %"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 112,
+              "text": "Europe, Middle East, and Africa 466,499 28 %"
+            }
+          ]
+        ],
+        "apac_revenue": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 78,
+              "text": "Asia Pacific 223,234 13 %"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 112,
+              "text": "Asia Pacific 223,234 13 %"
+            }
+          ]
+        ],
+        "other_revenue": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 78,
+              "text": "Other 130,393 8 %"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 112,
+              "text": "Other 130,393 8 %"
+            }
+          ]
+        ]
+      },
+      "oracle": {
+        "answer": "us_revenue: 849500\nemea_revenue: 466499\napac_revenue: 223234\nother_revenue: 130393",
+        "claims": [
+          {
+            "claim": "us_revenue: 849500",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 78,
+                "start": 1566,
+                "end": 1594,
+                "quote": "United States $ 849,500 51 %"
+              }
+            ]
+          },
+          {
+            "claim": "emea_revenue: 466499",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 78,
+                "start": 1625,
+                "end": 1669,
+                "quote": "Europe, Middle East, and Africa 466,499 28 %"
+              }
+            ]
+          },
+          {
+            "claim": "apac_revenue: 223234",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 78,
+                "start": 1696,
+                "end": 1721,
+                "quote": "Asia Pacific 223,234 13 %"
+              }
+            ]
+          },
+          {
+            "claim": "other_revenue: 130393",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 78,
+                "start": 1748,
+                "end": 1765,
+                "quote": "Other 130,393 8 %"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      }
+    },
+    {
+      "name": "cloud-distributed-profile",
+      "query": "Prepare a small Cloudflare profile combining its staff, voting structure, and advertising notes: employees located outside the United States at December 31, 2024; votes per Class B share; and advertising expense in 2024. Use employees_outside_us, class_b_votes, advertising_usd_millions. Give numbers only, with no commas or unit symbols.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: employees_outside_us, class_b_votes, advertising_usd_millions. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ],
+      "expected": {
+        "employees_outside_us": [
+          "1896"
+        ],
+        "class_b_votes": [
+          "10"
+        ],
+        "advertising_usd_millions": [
+          "78.6"
+        ]
+      },
+      "evidence_alternatives": {
+        "employees_outside_us": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 17,
+              "text": "1,896 employees located outside of the United States"
+            }
+          ]
+        ],
+        "class_b_votes": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 62,
+              "text": "Class B common stock has 10 votes per share"
+            }
+          ],
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 124,
+              "text": "entitled to 10 votes per share"
+            }
+          ]
+        ],
+        "advertising_usd_millions": [
+          [
+            {
+              "document_id": "cloudflare-2024",
+              "page": 106,
+              "text": "Advertising expense for\nthe years ended December 31, 2024, 2023, and 2022 was $78.6 million"
+            }
+          ]
+        ]
+      },
+      "oracle": {
+        "answer": "employees_outside_us: 1896\nclass_b_votes: 10\nadvertising_usd_millions: 78.6",
+        "claims": [
+          {
+            "claim": "employees_outside_us: 1896",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 17,
+                "start": 87,
+                "end": 139,
+                "quote": "1,896 employees located outside of the United States"
+              }
+            ]
+          },
+          {
+            "claim": "class_b_votes: 10",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 62,
+                "start": 287,
+                "end": 330,
+                "quote": "Class B common stock has 10 votes per share"
+              }
+            ]
+          },
+          {
+            "claim": "advertising_usd_millions: 78.6",
+            "citations": [
+              {
+                "document_id": "cloudflare-2024",
+                "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+                "page": 106,
+                "start": 486,
+                "end": 577,
+                "quote": "Advertising expense for\nthe years ended December 31, 2024, 2023, and 2022 was $78.6 million"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      }
+    },
+    {
+      "name": "sqlite-thread-contract",
+      "query": "In Python 3.12.0 sqlite3.connect, give the default check_same_thread value and the exception raised when that default connection is used from a different thread. Use check_same_thread and other_thread_exception. Use the Python boolean spelling and the bare exception class name.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: check_same_thread, other_thread_exception. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+      "sources": [
+        {
+          "document_id": "python-sqlite-3.12",
+          "title": "Python 3.12.0 sqlite3 documentation source",
+          "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+          "page_count": 1,
+          "character_count": 92179
+        }
+      ],
+      "expected": {
+        "check_same_thread": [
+          "True"
+        ],
+        "other_thread_exception": [
+          "ProgrammingError"
+        ]
+      },
+      "evidence_alternatives": {
+        "check_same_thread": [
+          [
+            {
+              "document_id": "python-sqlite-3.12",
+              "page": 1,
+              "text": "If ``True`` (default), :exc:`ProgrammingError` will be raised\n       if the database connection is used by a thread\n       other than the one that created it."
+            }
+          ],
+          [
+            {
+              "document_id": "python-sqlite-3.12",
+              "page": 1,
+              "text": "check_same_thread=True"
+            }
+          ]
+        ],
+        "other_thread_exception": [
+          [
+            {
+              "document_id": "python-sqlite-3.12",
+              "page": 1,
+              "text": "If ``True`` (default), :exc:`ProgrammingError` will be raised\n       if the database connection is used by a thread\n       other than the one that created it."
+            }
+          ]
+        ]
+      },
+      "oracle": {
+        "answer": "check_same_thread: True\nother_thread_exception: ProgrammingError",
+        "claims": [
+          {
+            "claim": "check_same_thread: True",
+            "citations": [
+              {
+                "document_id": "python-sqlite-3.12",
+                "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+                "page": 1,
+                "start": 10970,
+                "end": 11128,
+                "quote": "If ``True`` (default), :exc:`ProgrammingError` will be raised\n       if the database connection is used by a thread\n       other than the one that created it."
+              }
+            ]
+          },
+          {
+            "claim": "other_thread_exception: ProgrammingError",
+            "citations": [
+              {
+                "document_id": "python-sqlite-3.12",
+                "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+                "page": 1,
+                "start": 10970,
+                "end": 11128,
+                "quote": "If ``True`` (default), :exc:`ProgrammingError` will be raised\n       if the database connection is used by a thread\n       other than the one that created it."
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      }
+    },
+    {
+      "name": "sqlite-row-factory",
+      "query": "For Connection.row_factory, give its default value, the resulting Python row type, and whether assigning a new factory changes already-existing cursors. Use row_factory_default, row_type, affects_existing. Use None, the bare type name, and yes/no respectively.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: row_factory_default, row_type, affects_existing. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+      "sources": [
+        {
+          "document_id": "python-sqlite-3.12",
+          "title": "Python 3.12.0 sqlite3 documentation source",
+          "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+          "page_count": 1,
+          "character_count": 92179
+        }
+      ],
+      "expected": {
+        "row_factory_default": [
+          "None"
+        ],
+        "row_type": [
+          "tuple"
+        ],
+        "affects_existing": [
+          "no"
+        ]
+      },
+      "evidence_alternatives": {
+        "row_factory_default": [
+          [
+            {
+              "document_id": "python-sqlite-3.12",
+              "page": 1,
+              "text": "Is ``None`` by default"
+            }
+          ]
+        ],
+        "row_type": [
+          [
+            {
+              "document_id": "python-sqlite-3.12",
+              "page": 1,
+              "text": "meaning each row is returned as a :class:`tuple`"
+            }
+          ]
+        ],
+        "affects_existing": [
+          [
+            {
+              "document_id": "python-sqlite-3.12",
+              "page": 1,
+              "text": "Assigning to this attribute does not affect the :attr:`!row_factory`\n      of existing cursors"
+            }
+          ]
+        ]
+      },
+      "oracle": {
+        "answer": "row_factory_default: None\nrow_type: tuple\naffects_existing: no",
+        "claims": [
+          {
+            "claim": "row_factory_default: None",
+            "citations": [
+              {
+                "document_id": "python-sqlite-3.12",
+                "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+                "page": 1,
+                "start": 49420,
+                "end": 49442,
+                "quote": "Is ``None`` by default"
+              }
+            ]
+          },
+          {
+            "claim": "row_type: tuple",
+            "citations": [
+              {
+                "document_id": "python-sqlite-3.12",
+                "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+                "page": 1,
+                "start": 49450,
+                "end": 49498,
+                "quote": "meaning each row is returned as a :class:`tuple`"
+              }
+            ]
+          },
+          {
+            "claim": "affects_existing: no",
+            "citations": [
+              {
+                "document_id": "python-sqlite-3.12",
+                "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+                "page": 1,
+                "start": 49274,
+                "end": 49368,
+                "quote": "Assigning to this attribute does not affect the :attr:`!row_factory`\n      of existing cursors"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      }
+    },
+    {
+      "name": "sqlite-parameter-containers",
+      "query": "Which Python container type is required for qmark placeholders and which for named placeholders? What exception is raised when the qmark parameter count differs from the placeholder count? Use qmark_container, named_container, count_mismatch_exception. Use sequence, the bare concrete container type name, and the bare exception class name.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: qmark_container, named_container, count_mismatch_exception. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+      "sources": [
+        {
+          "document_id": "python-sqlite-3.12",
+          "title": "Python 3.12.0 sqlite3 documentation source",
+          "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+          "page_count": 1,
+          "character_count": 92179
+        }
+      ],
+      "expected": {
+        "qmark_container": [
+          "sequence"
+        ],
+        "named_container": [
+          "dict"
+        ],
+        "count_mismatch_exception": [
+          "ProgrammingError"
+        ]
+      },
+      "evidence_alternatives": {
+        "qmark_container": [
+          [
+            {
+              "document_id": "python-sqlite-3.12",
+              "page": 1,
+              "text": "For the qmark style, *parameters* must be a\n:term:`sequence`"
+            }
+          ]
+        ],
+        "named_container": [
+          [
+            {
+              "document_id": "python-sqlite-3.12",
+              "page": 1,
+              "text": "For the named style, *parameters* must be\nan instance of a :class:`dict`"
+            }
+          ]
+        ],
+        "count_mismatch_exception": [
+          [
+            {
+              "document_id": "python-sqlite-3.12",
+              "page": 1,
+              "text": "whose length must match the number of placeholders,\nor a :exc:`ProgrammingError` is raised"
+            }
+          ]
+        ]
+      },
+      "oracle": {
+        "answer": "qmark_container: sequence\nnamed_container: dict\ncount_mismatch_exception: ProgrammingError",
+        "claims": [
+          {
+            "claim": "qmark_container: sequence",
+            "citations": [
+              {
+                "document_id": "python-sqlite-3.12",
+                "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+                "page": 1,
+                "start": 72418,
+                "end": 72478,
+                "quote": "For the qmark style, *parameters* must be a\n:term:`sequence`"
+              }
+            ]
+          },
+          {
+            "claim": "named_container: dict",
+            "citations": [
+              {
+                "document_id": "python-sqlite-3.12",
+                "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+                "page": 1,
+                "start": 72571,
+                "end": 72643,
+                "quote": "For the named style, *parameters* must be\nan instance of a :class:`dict`"
+              }
+            ]
+          },
+          {
+            "claim": "count_mismatch_exception: ProgrammingError",
+            "citations": [
+              {
+                "document_id": "python-sqlite-3.12",
+                "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+                "page": 1,
+                "start": 72479,
+                "end": 72569,
+                "quote": "whose length must match the number of placeholders,\nor a :exc:`ProgrammingError` is raised"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      }
+    },
+    {
+      "name": "sqlite-lastrowid",
+      "query": "For Cursor.lastrowid, give its initial value, the method that updates it after successful INSERT or REPLACE, and whether executemany updates it. Use initial_lastrowid, updating_method, executemany_updates. Use None, the bare method name, and yes/no respectively.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: initial_lastrowid, updating_method, executemany_updates. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+      "sources": [
+        {
+          "document_id": "python-sqlite-3.12",
+          "title": "Python 3.12.0 sqlite3 documentation source",
+          "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+          "page_count": 1,
+          "character_count": 92179
+        }
+      ],
+      "expected": {
+        "initial_lastrowid": [
+          "None"
+        ],
+        "updating_method": [
+          "execute"
+        ],
+        "executemany_updates": [
+          "no"
+        ]
+      },
+      "evidence_alternatives": {
+        "initial_lastrowid": [
+          [
+            {
+              "document_id": "python-sqlite-3.12",
+              "page": 1,
+              "text": "The initial value of\n      ``lastrowid`` is ``None``"
+            }
+          ]
+        ],
+        "updating_method": [
+          [
+            {
+              "document_id": "python-sqlite-3.12",
+              "page": 1,
+              "text": "only updated after successful ``INSERT`` or ``REPLACE`` statements\n      using the :meth:`execute` method"
+            }
+          ]
+        ],
+        "executemany_updates": [
+          [
+            {
+              "document_id": "python-sqlite-3.12",
+              "page": 1,
+              "text": "after\n      :meth:`executemany` or :meth:`executescript`, or if the insertion failed,\n      the value of ``lastrowid`` is left unchanged"
+            }
+          ]
+        ]
+      },
+      "oracle": {
+        "answer": "initial_lastrowid: None\nupdating_method: execute\nexecutemany_updates: no",
+        "claims": [
+          {
+            "claim": "initial_lastrowid: None",
+            "citations": [
+              {
+                "document_id": "python-sqlite-3.12",
+                "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+                "page": 1,
+                "start": 59054,
+                "end": 59106,
+                "quote": "The initial value of\n      ``lastrowid`` is ``None``"
+              }
+            ]
+          },
+          {
+            "claim": "updating_method: execute",
+            "citations": [
+              {
+                "document_id": "python-sqlite-3.12",
+                "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+                "page": 1,
+                "start": 58785,
+                "end": 58890,
+                "quote": "only updated after successful ``INSERT`` or ``REPLACE`` statements\n      using the :meth:`execute` method"
+              }
+            ]
+          },
+          {
+            "claim": "executemany_updates: no",
+            "citations": [
+              {
+                "document_id": "python-sqlite-3.12",
+                "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+                "page": 1,
+                "start": 58915,
+                "end": 59051,
+                "quote": "after\n      :meth:`executemany` or :meth:`executescript`, or if the insertion failed,\n      the value of ``lastrowid`` is left unchanged"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      }
+    }
+  ]
+}

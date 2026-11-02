@@ -1,0 +1,247 @@
+{
+  "dataset_version": "deep-documents-v2",
+  "grader_version": "deep-document-fields-v1",
+  "task": "cloud-distributed-profile",
+  "mode": "rlm",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "Prepare a small Cloudflare profile combining its staff, voting structure, and advertising notes: employees located outside the United States at December 31, 2024; votes per Class B share; and advertising expense in 2024. Use employees_outside_us, class_b_votes, advertising_usd_millions. Give numbers only, with no commas or unit symbols.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: employees_outside_us, class_b_votes, advertising_usd_millions. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 30.026596,
+  "raw_answer": "{\"answer\":\"employees_outside_us: 1896\\nclass_b_votes: 10\\nadvertising_usd_millions: 78.6\",\"claims\":[{\"claim\":\"employees_outside_us: 1896\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":17,\"start\":0,\"end\":450,\"quote\":\"Table of contents\\nAs of December 31, 2024, we had 4,263 full-time employees, including 1,896 employees located outside of the United States. We also engage\\ncontractors and consultants. None of our employees in the United States are represented by a labor union, but some of our employees outside\\nof the United States are represented by works councils. We have not experienced any work stoppages, and we believe that our employee\\nrelations are strong.\"}]},{\"claim\":\"class_b_votes: 10\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":62,\"start\":280,\"end\":405,\"quote\":\"k.\\nOur Class B common stock has 10 votes per share and our Class A common stock has one vote per share. As of December 31, 20\"}]},{\"claim\":\"advertising_usd_millions: 78.6\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":106,\"start\":367,\"end\":650,\"quote\":\"Advertising costs are charged to sales and marketing expense in the consolidated statements of operations as incurred. Advertising expense for\\nthe years ended December 31, 2024, 2023, and 2022 was $78.6 million, $57.6 million, and $43.5 million, respectively.\\nStock-based Compensatio\"}]}],\"unknowns\":[]}",
+  "started_at": "2026-11-02T10:06:19.633238+00:00",
+  "repeat": 1,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "671a905db5a55ba093e6d3f9faa721a4be322da70963fd27de8d1ad20d4ae56f",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "cloudflare-2024",
+      "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+      "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+      "page_count": 157,
+      "character_count": 591696
+    }
+  ],
+  "config": {
+    "max_depth": 2,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 10,
+    "max_total_tokens": 150000,
+    "max_elapsed_seconds": 240,
+    "call_timeout": 150,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 4,
+    "root_calls": 4,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 4,
+    "max_depth_reached": 0,
+    "prompt_tokens": 29095,
+    "completion_tokens": 585,
+    "total_tokens": 29680,
+    "cached_tokens": 8064,
+    "usage_calls": 4,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 4,
+    "depth": 0,
+    "budget": {
+      "max_calls": 10,
+      "max_tokens": 150000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 240,
+      "reserved_calls": 4,
+      "observed_tokens": 29680,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 30.026276
+    },
+    "by_model": {
+      "gpt-6.1-sol": {
+        "retry_calls": 0,
+        "prompt_tokens": 29095,
+        "completion_tokens": 585,
+        "total_tokens": 29680,
+        "cached_tokens": 8064,
+        "usage_calls": 4,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 4
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 4,
+    "prompt_tokens": 29095,
+    "completion_tokens": 585,
+    "total_tokens": 29680,
+    "cached_tokens": 8064,
+    "usage_calls": 4,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription",
+    "unknown_usage_calls": 0,
+    "failed_calls_with_known_usage": 0
+  },
+  "grade": {
+    "passed": true,
+    "grader_version": "deep-document-fields-v1",
+    "field_contract_passed": true,
+    "citation_structure_passed": true,
+    "evidence_coverage_passed": true,
+    "supported_fields": 3,
+    "required_fields": 3,
+    "failures": []
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.328422,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5748,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 25,
+      "response_sha256": "028143aa5afe93c6f7d68c8b20aee97244b18ef9ad8d7f1de574d77e709f3b7d"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 6.484166,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5863,
+        "cached_input_tokens": 2688,
+        "output_tokens": 38
+      },
+      "usage_known": true,
+      "response_chars": 136,
+      "response_sha256": "f3f99d11d778a647ce4a540f5781c29b3184efad4f8b6b0125512c59cb9d6785"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.94161,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 7345,
+        "cached_input_tokens": 2688,
+        "output_tokens": 56
+      },
+      "usage_known": true,
+      "response_chars": 162,
+      "response_sha256": "50756fd61ed09f514ba6a98ca50428bf12c642b88e26d17677fd2d736fa208e3"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 9.673363,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 10139,
+        "cached_input_tokens": 0,
+        "output_tokens": 483
+      },
+      "usage_known": true,
+      "response_chars": 1613,
+      "response_sha256": "022c5c0f58ebfa5c526aad455a1400eb8f041f6ec470d707ab4e719582d477cc"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 4,
+    "known_usage_calls": 4,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 29680,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 24,
+    "event_counts": {
+      "final_answer": 1,
+      "final_answer_validated": 1,
+      "model_call_end": 4,
+      "model_call_start": 4,
+      "repl_step": 3,
+      "rlm_end": 1,
+      "rlm_start": 1,
+      "run_end": 1,
+      "run_start": 1,
+      "source_read": 2,
+      "source_search": 4,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "final_answer": 1,
+        "final_answer_validated": 1,
+        "model_call_end": 4,
+        "model_call_start": 4,
+        "repl_step": 3,
+        "rlm_end": 1,
+        "rlm_start": 1,
+        "run_end": 1,
+        "run_start": 1,
+        "source_read": 2,
+        "source_search": 4,
+        "sources_available": 1
+      }
+    },
+    "source_reads": [
+      {
+        "sequence": 16,
+        "depth": 0,
+        "node_id": "rlm-1",
+        "parent_id": "",
+        "elapsed_seconds": 20.14598,
+        "document_id": "cloudflare-2024",
+        "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+        "page": 106,
+        "start": 367,
+        "end": 650,
+        "quote_chars": 283
+      },
+      {
+        "sequence": 17,
+        "depth": 0,
+        "node_id": "rlm-1",
+        "parent_id": "",
+        "elapsed_seconds": 20.146018,
+        "document_id": "cloudflare-2024",
+        "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+        "page": 62,
+        "start": 280,
+        "end": 405,
+        "quote_chars": 125
+      }
+    ]
+  }
+}

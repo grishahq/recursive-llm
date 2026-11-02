@@ -1,0 +1,4 @@
+{
+  "recursive-llm-source-citations.png": "AI-generated conceptual illustration for recursive-llm. A blue thread connects a highlighted passage in a stack of paper to a quotation card. Text: recursive-llm. Quotes you can trace. Page. Span. Source hash. A conceptual illustration, not a software screenshot or measured accuracy result.",
+  "recursive-llm-control-evidence.png": "Figure derived from recorded fixed-response controls comparing v0.5.0 defaults with v0.6.0. Seven altered source references are accepted unchecked by the old default and rejected by the new document API; supplied valid retries are accepted. The old API with a custom source validator also rejects all seven. Other rows cover standalone JSON, empty CLI response recovery and opt-in loading of a 157-page PDF. Both versions accept a wrong claim with a real quote. No live model calls in these controls; quote matching does not prove the claim."
+}

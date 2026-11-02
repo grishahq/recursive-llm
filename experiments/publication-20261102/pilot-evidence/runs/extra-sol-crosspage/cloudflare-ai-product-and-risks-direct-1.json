@@ -1,0 +1,109 @@
+{
+  "dataset_version": "grounded-documents-v1",
+  "grader_version": "grounded-document-fields-v2",
+  "task": "cloudflare-ai-product-and-risks",
+  "mode": "direct",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "Across Cloudflare's Developer-based Solutions and its risk factors, identify the compute powering Workers AI; the two dimensions of cyber attacks that artificial intelligence or machine learning may increase; and the information that employee or contractor errors using AI or machine learning could expose externally. For workers_ai_compute use the short noun phrase. For ai_attack_dimensions use comma-separated nouns in source order, without 'and' or punctuation. For ai_information_exposure use the complete noun phrase describing the exposed information.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: workers_ai_compute, ai_attack_dimensions, ai_information_exposure. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 18.328189,
+  "raw_answer": "{\"answer\":\"workers_ai_compute: serverless GPUs\\nai_attack_dimensions: prevalence, intensity\\nai_information_exposure: proprietary or other confidential information\",\"claims\":[{\"claim\":\"workers_ai_compute: serverless GPUs\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":12,\"start\":0,\"end\":1180,\"quote\":\"Table of contents\\n\u2022 Cloud Email Security: Protects users of a corporate network from phishing, business email compromise, and email supply chain\\nattacks.\\n\u2022 Data Loss Prevention: Inspects HTTP/S traffic for sensitive data like personally identifiable information (PII) and prevents exfiltration of\\ncustomer information with allow or block policies.\\nDeveloper-based Solutions\\nBy leveraging our serverless platform, developers can build serverless applications on our network that scale without needing to spend time and\\neffort on infrastructure or operations. This enables developers to deliver more performant applications that have global scale, all while improving\\ntheir productivity. Our primary developer-based solutions include products categorized for AI, compute, storage & databases, and media.\\nAI\\n\u2022 Workers AI: Enables developers to run machine learning models, powered by serverless GPUs, on our global network.\\n\u2022 Vectorize: Allows developers to easily store and query embeddings, representations of values or objects commonly consumed by\\nmachine learning models.\\n\u2022 AI Gateway: Provides observability, caching, security, and routing features for AI applications.\\nCompute\\n\"}]},{\"claim\":\"ai_attack_dimensions: prevalence, intensity\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":37,\"start\":1159,\"end\":2313,\"quote\":\"products increases, particularly our customers that are involved in particularly sensitive industries or activities, such as banking and finance\\ncompanies and governmental entities or in relation to elections in the United States or elsewhere. Additionally, artificial intelligence and machine\\nlearning may increase cybersecurity risks we face through, for example, being used to increase the prevalence or intensity of cyber attacks.\\nWhile we have implemented security measures internally and have integrated security measures into our network and products, these measures\\nhave not always functioned as expected and have not always detected or prevented all unauthorized activity, prevented all security breaches or\\nincidents, mitigated all security breaches or incidents, or protected against all attacks or incidents and these types of security failures could occur\\nagain in the future. For example, we have experienced multiple social engineering attacks where third parties have attempted, and in limited\\ncases succeeded, in breaching our network perimeter security. While these attacks did not effectively get beyond our network perimeter security\\n\"}]},{\"claim\":\"ai_information_exposure: proprietary or other confidential information\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":59,\"start\":3372,\"end\":4543,\"quote\":\"or contractors in utilizing artificial intelligence or machine learning in our products or in the operation of our business could result in proprietary or\\nother confidential information being exposed externally. In addition, others may independently discover our trade secrets or develop similar\\ntechnologies and processes, in which case we would not be able to assert trade secret rights against them. Laws in certain jurisdictions may\\nafford little or no trade secret protection, and any changes in, or unexpected interpretations of, the intellectual property laws in any country in\\nwhich we operate may compromise our ability to enforce our intellectual property rights. We may not be effective in policing unauthorized use of\\nour intellectual property rights, and even if we do detect violations, costly and time-consuming litigation could be necessary to enforce and\\ndetermine the scope of our proprietary rights, and any such litigation could be unsuccessful, lead to the invalidation of our proprietary rights, or\\nlead to counterclaims by other parties against us. If the protection of our proprietary rights is inadequate to prevent use or appropriation by third\\n\"}]}],\"unknowns\":[]}",
+  "started_at": "2026-11-02T09:25:46.887719+00:00",
+  "repeat": 1,
+  "direct_input_format": "complete original pages in exact 1200-character segments",
+  "public_schema_version": 1,
+  "raw_capture_sha256": "9b90175b00efe4fe70f4cae76ae37baa1a1405dac22ef3b75577bef69b074fe4",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "cloudflare-2024",
+      "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+      "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+      "page_count": 157,
+      "character_count": 591696
+    }
+  ],
+  "config": {
+    "max_depth": null,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 1,
+    "max_total_tokens": 350000,
+    "max_elapsed_seconds": 300.0,
+    "call_timeout": 180.0,
+    "token_budget_enforcement": "not available through text-only CLI; usage observed after the single call"
+  },
+  "runtime_stats": null,
+  "transport_usage": {
+    "llm_calls": 1,
+    "prompt_tokens": 145899,
+    "completion_tokens": 907,
+    "total_tokens": 146806,
+    "cached_tokens": 0,
+    "usage_calls": 1,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription"
+  },
+  "grade": {
+    "passed": true,
+    "factual_passed": true,
+    "provenance_passed": true,
+    "supported_gold_fields": 3,
+    "required_gold_fields": 3,
+    "grader_version": "grounded-document-fields-v2",
+    "failures": [],
+    "answer_grade": {
+      "passed": true,
+      "failures": []
+    }
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 18.323855,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 145899,
+        "cached_input_tokens": 0,
+        "output_tokens": 907
+      },
+      "usage_known": true,
+      "response_chars": 4438,
+      "response_sha256": "55fca55d3f7ce6a6ee436d175521bcfc65697cd503f9ad560784fb000691b75c"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 1,
+    "known_usage_calls": 1,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 146806,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 0,
+    "event_counts": {},
+    "event_counts_by_depth": {},
+    "source_reads": []
+  }
+}

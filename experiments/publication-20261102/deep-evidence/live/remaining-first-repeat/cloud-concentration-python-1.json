@@ -1,0 +1,203 @@
+{
+  "dataset_version": "deep-documents-v2",
+  "grader_version": "deep-document-fields-v1",
+  "task": "cloud-concentration",
+  "mode": "python",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "For 2024, did any single customer account for more than 10% of revenue, and did any customer represent 10% or more of net accounts receivable? Use revenue_over_10pct and receivables_at_least_10pct, each exactly yes or no.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: revenue_over_10pct, receivables_at_least_10pct. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 21.817983,
+  "raw_answer": "{\"answer\":\"revenue_over_10pct: no\\nreceivables_at_least_10pct: no\",\"claims\":[{\"claim\":\"revenue_over_10pct: no\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":104,\"start\":742,\"end\":992,\"quote\":\" the normal course of business. For the years ended December 31, 2024, 2023, and 2022, no customer accounted for more than\\n10% of the Company\u2019s revenue. No customer represented 10% or more of accounts receivable, net as of December 31, 2024 and 2023.\"}]},{\"claim\":\"receivables_at_least_10pct: no\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":104,\"start\":742,\"end\":992,\"quote\":\" the normal course of business. For the years ended December 31, 2024, 2023, and 2022, no customer accounted for more than\\n10% of the Company\u2019s revenue. No customer represented 10% or more of accounts receivable, net as of December 31, 2024 and 2023.\"}]}],\"unknowns\":[]}",
+  "started_at": "2026-11-02T10:04:39.822363+00:00",
+  "repeat": 1,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "0d6f2512ddd972d65fd43249aefaaed6798bd615ee12f3ad2a78a08c7f871656",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "cloudflare-2024",
+      "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+      "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+      "page_count": 157,
+      "character_count": 591696
+    }
+  ],
+  "config": {
+    "max_depth": 0,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 10,
+    "max_total_tokens": 150000,
+    "max_elapsed_seconds": 240,
+    "call_timeout": 150,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 3,
+    "root_calls": 3,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 3,
+    "max_depth_reached": 0,
+    "prompt_tokens": 18271,
+    "completion_tokens": 361,
+    "total_tokens": 18632,
+    "cached_tokens": 5376,
+    "usage_calls": 3,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 3,
+    "depth": 0,
+    "budget": {
+      "max_calls": 10,
+      "max_tokens": 150000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 240,
+      "reserved_calls": 3,
+      "observed_tokens": 18632,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 21.817778
+    },
+    "by_model": {
+      "gpt-6.1-sol": {
+        "retry_calls": 0,
+        "prompt_tokens": 18271,
+        "completion_tokens": 361,
+        "total_tokens": 18632,
+        "cached_tokens": 5376,
+        "usage_calls": 3,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 3
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 3,
+    "prompt_tokens": 18271,
+    "completion_tokens": 361,
+    "total_tokens": 18632,
+    "cached_tokens": 5376,
+    "usage_calls": 3,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription",
+    "unknown_usage_calls": 0,
+    "failed_calls_with_known_usage": 0
+  },
+  "grade": {
+    "passed": true,
+    "grader_version": "deep-document-fields-v1",
+    "field_contract_passed": true,
+    "citation_structure_passed": true,
+    "evidence_coverage_passed": true,
+    "supported_fields": 2,
+    "required_fields": 2,
+    "failures": []
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.417984,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5720,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 25,
+      "response_sha256": "028143aa5afe93c6f7d68c8b20aee97244b18ef9ad8d7f1de574d77e709f3b7d"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.54821,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5835,
+        "cached_input_tokens": 0,
+        "output_tokens": 18
+      },
+      "usage_known": true,
+      "response_chars": 51,
+      "response_sha256": "6e1263c9103f644a51a407f562a694e276792703d2f7f8ebbc8255c816ee1efc"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 9.708414,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6716,
+        "cached_input_tokens": 2688,
+        "output_tokens": 335
+      },
+      "usage_known": true,
+      "response_chars": 1022,
+      "response_sha256": "63af424ef348e0b922051438251945ea3e9d841fbc3b013132471efda052d029"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 3,
+    "known_usage_calls": 3,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 18632,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 16,
+    "event_counts": {
+      "final_answer": 1,
+      "final_answer_validated": 1,
+      "model_call_end": 3,
+      "model_call_start": 3,
+      "repl_step": 2,
+      "rlm_end": 1,
+      "rlm_start": 1,
+      "run_end": 1,
+      "run_start": 1,
+      "source_search": 1,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "final_answer": 1,
+        "final_answer_validated": 1,
+        "model_call_end": 3,
+        "model_call_start": 3,
+        "repl_step": 2,
+        "rlm_end": 1,
+        "rlm_start": 1,
+        "run_end": 1,
+        "run_start": 1,
+        "source_search": 1,
+        "sources_available": 1
+      }
+    },
+    "source_reads": []
+  }
+}

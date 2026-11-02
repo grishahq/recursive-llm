@@ -1,0 +1,196 @@
+{
+  "dataset_version": "grounded-documents-v1",
+  "grader_version": "grounded-document-fields-v2",
+  "task": "sqlite-defaults",
+  "mode": "python",
+  "model": "gpt-6-luna",
+  "reasoning_effort": "low",
+  "query": "In the Python 3.12.0 sqlite3.connect signature, what are the default timeout in seconds and cached_statements count? Use timeout_seconds and cached_statements.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: timeout_seconds, cached_statements. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "failed",
+  "elapsed_seconds": 13.401809,
+  "raw_answer": null,
+  "started_at": "2026-11-02T09:27:48.549438+00:00",
+  "repeat": 1,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "02e6dde4b91fa49498a68580bed3defd9ad07a144373bc847882fbb0561c6a4e",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "python-sqlite-3.12",
+      "title": "Python 3.12.0 sqlite3 documentation source",
+      "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+      "page_count": 1,
+      "character_count": 92179
+    }
+  ],
+  "config": {
+    "max_depth": 0,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 10,
+    "max_total_tokens": 350000,
+    "max_elapsed_seconds": 180.0,
+    "call_timeout": 120.0,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 3,
+    "root_calls": 3,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 3,
+    "max_depth_reached": 0,
+    "prompt_tokens": 17080,
+    "completion_tokens": 77,
+    "total_tokens": 17157,
+    "cached_tokens": 8192,
+    "usage_calls": 2,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 3,
+    "depth": 0,
+    "budget": {
+      "max_calls": 10,
+      "max_tokens": 350000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 180.0,
+      "reserved_calls": 3,
+      "observed_tokens": 17157,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 13.401744
+    },
+    "by_model": {
+      "gpt-6-luna": {
+        "retry_calls": 0,
+        "prompt_tokens": 17080,
+        "completion_tokens": 77,
+        "total_tokens": 17157,
+        "cached_tokens": 8192,
+        "usage_calls": 2,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 3
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 3,
+    "prompt_tokens": 17080,
+    "completion_tokens": 77,
+    "total_tokens": 17157,
+    "cached_tokens": 8192,
+    "usage_calls": 2,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription"
+  },
+  "grade": {
+    "passed": false,
+    "factual_passed": false,
+    "provenance_passed": false,
+    "grader_version": "grounded-document-fields-v2",
+    "failures": [
+      "no completed answer"
+    ]
+  },
+  "error": {
+    "type": "CodexError",
+    "message": "Codex reported error: exceeded retry limit, last status: 429 Too Many Requests"
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.730404,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 11360,
+        "cached_input_tokens": 8192,
+        "output_tokens": 69
+      },
+      "usage_known": true,
+      "response_chars": 159,
+      "response_sha256": "f8ba6da7d30634bd489ba676cd208d2ca43ff241e6b6186492b5ecc40dab235e"
+    },
+    {
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.223373,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5720,
+        "cached_input_tokens": 0,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 25,
+      "response_sha256": "028143aa5afe93c6f7d68c8b20aee97244b18ef9ad8d7f1de574d77e709f3b7d"
+    },
+    {
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low",
+      "status": "failed",
+      "elapsed_seconds": 1.925294,
+      "billing_mode": "subscription",
+      "usage": null,
+      "usage_known": false,
+      "response_chars": null,
+      "response_sha256": null
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 3,
+    "known_usage_calls": 2,
+    "unknown_usage_calls": 1,
+    "observed_total_tokens": 17157,
+    "usage_complete": false
+  },
+  "trace_summary": {
+    "event_count": 13,
+    "event_counts": {
+      "model_call_end": 2,
+      "model_call_error": 1,
+      "model_call_start": 3,
+      "repl_step": 2,
+      "rlm_error": 1,
+      "rlm_start": 1,
+      "run_error": 1,
+      "run_start": 1,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "model_call_end": 2,
+        "model_call_error": 1,
+        "model_call_start": 3,
+        "repl_step": 2,
+        "rlm_error": 1,
+        "rlm_start": 1,
+        "run_error": 1,
+        "run_start": 1,
+        "sources_available": 1
+      }
+    },
+    "source_reads": []
+  }
+}

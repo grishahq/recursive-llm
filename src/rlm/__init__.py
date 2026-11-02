@@ -3,6 +3,7 @@
 from typing import TYPE_CHECKING, Any
 
 from .budget import RunBudget
+from .document_io import DocumentLimits, DocumentLoadError, load_document
 from .errors import (
     BudgetExceededError,
     MaxDepthError,
@@ -11,7 +12,14 @@ from .errors import (
     RLMError,
 )
 from .repl import REPLError, REPLTimeoutError, WorkerResourceLimits
-from .results import CompletionResult, FailedCompletionResult, RunResult, TrajectoryEvent
+from .results import (
+    CompletionResult,
+    DocumentResult,
+    FailedCompletionResult,
+    RunResult,
+    TrajectoryEvent,
+)
+from .sources import SourceCorpus, SourceDocument
 
 if TYPE_CHECKING:
     from .core import RLM as RLM
@@ -31,7 +39,7 @@ def __dir__() -> list[str]:
     return sorted(set(globals()) | set(__all__))
 
 
-__version__ = "0.5.0"
+__version__ = "0.6.0"
 
 __all__ = [
     "RLM",
@@ -42,6 +50,12 @@ __all__ = [
     "ProviderResponseError",
     "RunBudget",
     "CompletionResult",
+    "DocumentResult",
+    "SourceDocument",
+    "SourceCorpus",
+    "DocumentLimits",
+    "DocumentLoadError",
+    "load_document",
     "FailedCompletionResult",
     "RunResult",
     "TrajectoryEvent",

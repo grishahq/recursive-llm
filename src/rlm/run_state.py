@@ -11,6 +11,7 @@ from typing import Any, Callable, Coroutine, Dict, Optional, Tuple, TypeVar
 
 from .budget import RunBudget
 from .results import TrajectoryEvent
+from .sources import SourceCorpus
 from .stats import UsageTracker
 
 T = TypeVar("T")
@@ -28,6 +29,7 @@ class RunState:
     ) -> None:
         self.usage = usage
         self.budget = budget
+        self.sources: Optional[SourceCorpus] = None
         self._loop = loop
         self._iterations_by_depth: Dict[int, int] = {}
         self._started_at = time.monotonic()

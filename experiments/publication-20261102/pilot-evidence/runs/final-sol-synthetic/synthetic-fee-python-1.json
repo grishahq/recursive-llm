@@ -1,0 +1,226 @@
+{
+  "dataset_version": "grounded-documents-v1",
+  "grader_version": "grounded-document-fields-v1",
+  "task": "synthetic-fee",
+  "mode": "python",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "Under the Aurora policy, what application fee in EUR does an approved nonprofit pay? Compute it from the stated standard fee and nonprofit rule.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: approved_nonprofit_fee_eur. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 36.577944,
+  "raw_answer": "{\"answer\": \"approved_nonprofit_fee_eur: 30\", \"claims\": [{\"claim\": \"approved_nonprofit_fee_eur: 30\", \"citations\": [{\"document_id\": \"aurora-policy\", \"source_sha256\": \"08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d\", \"page\": 3, \"start\": 1906, \"end\": 2206, \"quote\": \" inventory reference AUR-0319; reconciliation is pending.\\nArchive entry 03-20: warehouse zone 6; inventory reference AUR-0320; reconciliation is pending.\\nArchive entry 03-21: warehouse zone 0; inventory reference AUR-0321; reconciliation is pending.\\nRule F1. The standard application fee is EUR 120.\\n\"}, {\"document_id\": \"aurora-policy\", \"source_sha256\": \"08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d\", \"page\": 14, \"start\": 1936, \"end\": 2236, \"quote\": \"; reconciliation is pending.\\nArchive entry 14-20: warehouse zone 6; inventory reference AUR-1420; reconciliation is pending.\\nArchive entry 14-21: warehouse zone 0; inventory reference AUR-1421; reconciliation is pending.\\nRule F2. An approved nonprofit pays 25% of the standard application fee in F1.\\n\"}]}], \"unknowns\": []}",
+  "started_at": "2026-11-02T09:19:19.098316+00:00",
+  "repeat": 1,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "e908099f156c3e94c93361615e57c168b2608d3dfa7273d5ac3ca2b91c679c78",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "aurora-policy",
+      "title": "Aurora fictional application policy",
+      "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+      "page_count": 24,
+      "character_count": 52310
+    },
+    {
+      "document_id": "borealis-policy",
+      "title": "Borealis policy, a different program",
+      "source_sha256": "54430077260753df96c8f7d47dccd42dd62c2af6d812307f53e306a24fb79692",
+      "page_count": 1,
+      "character_count": 128
+    }
+  ],
+  "config": {
+    "max_depth": 0,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 16,
+    "max_total_tokens": 350000,
+    "max_elapsed_seconds": 300.0,
+    "call_timeout": 180.0,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 4,
+    "root_calls": 4,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 4,
+    "max_depth_reached": 0,
+    "prompt_tokens": 24878,
+    "completion_tokens": 408,
+    "total_tokens": 25286,
+    "cached_tokens": 5376,
+    "usage_calls": 4,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 4,
+    "depth": 0,
+    "budget": {
+      "max_calls": 16,
+      "max_tokens": 350000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 300.0,
+      "reserved_calls": 4,
+      "observed_tokens": 25286,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 36.577619
+    },
+    "by_model": {
+      "gpt-6.1-sol": {
+        "retry_calls": 0,
+        "prompt_tokens": 24878,
+        "completion_tokens": 408,
+        "total_tokens": 25286,
+        "cached_tokens": 5376,
+        "usage_calls": 4,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 4
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 4,
+    "prompt_tokens": 24878,
+    "completion_tokens": 408,
+    "total_tokens": 25286,
+    "cached_tokens": 5376,
+    "usage_calls": 4,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription"
+  },
+  "grade": {
+    "passed": true,
+    "factual_passed": true,
+    "provenance_passed": true,
+    "supported_gold_fields": 1,
+    "required_gold_fields": 1,
+    "grader_version": "grounded-document-fields-v1",
+    "failures": [],
+    "answer_grade": {
+      "passed": true,
+      "failures": []
+    }
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.816004,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5636,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 25,
+      "response_sha256": "028143aa5afe93c6f7d68c8b20aee97244b18ef9ad8d7f1de574d77e709f3b7d"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 10.289285,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5820,
+        "cached_input_tokens": 0,
+        "output_tokens": 25
+      },
+      "usage_known": true,
+      "response_chars": 80,
+      "response_sha256": "dfb344abd185ad191a1ab4a41ee0b7921c0261935dfe09f615783a4ae4d483fd"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 7.917373,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6329,
+        "cached_input_tokens": 2688,
+        "output_tokens": 366
+      },
+      "usage_known": true,
+      "response_chars": 1142,
+      "response_sha256": "e97f9722613ed7bfa51fa8f32b0029be08f78dcc40ba3f2cb6e1a5ab7566cf1f"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 10.99997,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 7093,
+        "cached_input_tokens": 0,
+        "output_tokens": 9
+      },
+      "usage_known": true,
+      "response_chars": 21,
+      "response_sha256": "b1f749773a97d68d75586a561faf1469bd8d5176d4e067d14cddcc27f68c4140"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 4,
+    "known_usage_calls": 4,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 25286,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 19,
+    "event_counts": {
+      "final_answer": 1,
+      "final_answer_validated": 1,
+      "model_call_end": 4,
+      "model_call_start": 4,
+      "repl_step": 3,
+      "rlm_end": 1,
+      "rlm_start": 1,
+      "run_end": 1,
+      "run_start": 1,
+      "source_search": 1,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "final_answer": 1,
+        "final_answer_validated": 1,
+        "model_call_end": 4,
+        "model_call_start": 4,
+        "repl_step": 3,
+        "rlm_end": 1,
+        "rlm_start": 1,
+        "run_end": 1,
+        "run_start": 1,
+        "source_search": 1,
+        "sources_available": 1
+      }
+    },
+    "source_reads": []
+  }
+}

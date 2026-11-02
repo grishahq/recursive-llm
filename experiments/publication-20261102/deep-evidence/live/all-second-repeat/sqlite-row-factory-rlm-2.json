@@ -1,0 +1,203 @@
+{
+  "dataset_version": "deep-documents-v2",
+  "grader_version": "deep-document-fields-v1",
+  "task": "sqlite-row-factory",
+  "mode": "rlm",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "For Connection.row_factory, give its default value, the resulting Python row type, and whether assigning a new factory changes already-existing cursors. Use row_factory_default, row_type, affects_existing. Use None, the bare type name, and yes/no respectively.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: row_factory_default, row_type, affects_existing. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 22.162724,
+  "raw_answer": "{\"answer\":\"row_factory_default: None\\nrow_type: tuple\\naffects_existing: no\",\"claims\":[{\"claim\":\"row_factory_default: None\",\"citations\":[{\"document_id\":\"python-sqlite-3.12\",\"source_sha256\":\"adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d\",\"page\":1,\"start\":49136,\"end\":49536,\"quote\":\"ribute:: row_factory\\n\\n      The initial :attr:`~Cursor.row_factory`\\n      for :class:`Cursor` objects created from this connection.\\n      Assigning to this attribute does not affect the :attr:`!row_factory`\\n      of existing cursors belonging to this connection, only new ones.\\n      Is ``None`` by default,\\n      meaning each row is returned as a :class:`tuple`.\\n\\n      See :ref:`sqlite3-howto-row-f\"}]},{\"claim\":\"row_type: tuple\",\"citations\":[{\"document_id\":\"python-sqlite-3.12\",\"source_sha256\":\"adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d\",\"page\":1,\"start\":49136,\"end\":49536,\"quote\":\"ribute:: row_factory\\n\\n      The initial :attr:`~Cursor.row_factory`\\n      for :class:`Cursor` objects created from this connection.\\n      Assigning to this attribute does not affect the :attr:`!row_factory`\\n      of existing cursors belonging to this connection, only new ones.\\n      Is ``None`` by default,\\n      meaning each row is returned as a :class:`tuple`.\\n\\n      See :ref:`sqlite3-howto-row-f\"}]},{\"claim\":\"affects_existing: no\",\"citations\":[{\"document_id\":\"python-sqlite-3.12\",\"source_sha256\":\"adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d\",\"page\":1,\"start\":49136,\"end\":49536,\"quote\":\"ribute:: row_factory\\n\\n      The initial :attr:`~Cursor.row_factory`\\n      for :class:`Cursor` objects created from this connection.\\n      Assigning to this attribute does not affect the :attr:`!row_factory`\\n      of existing cursors belonging to this connection, only new ones.\\n      Is ``None`` by default,\\n      meaning each row is returned as a :class:`tuple`.\\n\\n      See :ref:`sqlite3-howto-row-f\"}]}],\"unknowns\":[]}",
+  "started_at": "2026-11-02T10:12:32.959132+00:00",
+  "repeat": 2,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "a229717667412fb043085f21a792b22012f25f3bd481a655b910d3b9147bc3e6",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "python-sqlite-3.12",
+      "title": "Python 3.12.0 sqlite3 documentation source",
+      "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+      "page_count": 1,
+      "character_count": 92179
+    }
+  ],
+  "config": {
+    "max_depth": 2,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 10,
+    "max_total_tokens": 150000,
+    "max_elapsed_seconds": 240,
+    "call_timeout": 150,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 3,
+    "root_calls": 3,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 3,
+    "max_depth_reached": 0,
+    "prompt_tokens": 19808,
+    "completion_tokens": 627,
+    "total_tokens": 20435,
+    "cached_tokens": 8064,
+    "usage_calls": 3,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 3,
+    "depth": 0,
+    "budget": {
+      "max_calls": 10,
+      "max_tokens": 150000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 240,
+      "reserved_calls": 3,
+      "observed_tokens": 20435,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 22.162598
+    },
+    "by_model": {
+      "gpt-6.1-sol": {
+        "retry_calls": 0,
+        "prompt_tokens": 19808,
+        "completion_tokens": 627,
+        "total_tokens": 20435,
+        "cached_tokens": 8064,
+        "usage_calls": 3,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 3
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 3,
+    "prompt_tokens": 19808,
+    "completion_tokens": 627,
+    "total_tokens": 20435,
+    "cached_tokens": 8064,
+    "usage_calls": 3,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription",
+    "unknown_usage_calls": 0,
+    "failed_calls_with_known_usage": 0
+  },
+  "grade": {
+    "passed": true,
+    "grader_version": "deep-document-fields-v1",
+    "field_contract_passed": true,
+    "citation_structure_passed": true,
+    "evidence_coverage_passed": true,
+    "supported_fields": 3,
+    "required_fields": 3,
+    "failures": []
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.783126,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5720,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 25,
+      "response_sha256": "028143aa5afe93c6f7d68c8b20aee97244b18ef9ad8d7f1de574d77e709f3b7d"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.98836,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5837,
+        "cached_input_tokens": 2688,
+        "output_tokens": 31
+      },
+      "usage_known": true,
+      "response_chars": 93,
+      "response_sha256": "4c9a99190c6599890ea22be5f8c9b39c5e22855bcafdf05010d4a7a32abd634e"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 10.734563,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 8251,
+        "cached_input_tokens": 2688,
+        "output_tokens": 588
+      },
+      "usage_known": true,
+      "response_chars": 1968,
+      "response_sha256": "316b10376cdc41d62ae9621f7ab3777c9425317ca3a07a25ba830ef9eee7414a"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 3,
+    "known_usage_calls": 3,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 20435,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 16,
+    "event_counts": {
+      "final_answer": 1,
+      "final_answer_validated": 1,
+      "model_call_end": 3,
+      "model_call_start": 3,
+      "repl_step": 2,
+      "rlm_end": 1,
+      "rlm_start": 1,
+      "run_end": 1,
+      "run_start": 1,
+      "source_search": 1,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "final_answer": 1,
+        "final_answer_validated": 1,
+        "model_call_end": 3,
+        "model_call_start": 3,
+        "repl_step": 2,
+        "rlm_end": 1,
+        "rlm_start": 1,
+        "run_end": 1,
+        "run_start": 1,
+        "source_search": 1,
+        "sources_available": 1
+      }
+    },
+    "source_reads": []
+  }
+}

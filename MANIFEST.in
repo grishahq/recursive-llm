@@ -2,6 +2,8 @@ include CHANGELOG.md
 include SECURITY.md
 include BENCHMARK_RESULTS.md
 include DOCUMENT_EVALUATION.md
+include DOCUMENT_ANALYSIS.md
+include experiments/publication-20261102/export_evidence.py
 include CODEX_COMPARISON.md
 include examples/document_presets.json
 include benchmarks/codex_evaluation.schema.json

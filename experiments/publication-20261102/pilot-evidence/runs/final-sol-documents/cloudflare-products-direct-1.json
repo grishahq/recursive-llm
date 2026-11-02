@@ -1,0 +1,109 @@
+{
+  "dataset_version": "grounded-documents-v1",
+  "grader_version": "grounded-document-fields-v1",
+  "task": "cloudflare-products",
+  "mode": "direct",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "According to the Developer-based Solutions AI product descriptions, what compute powers Workers AI and what data does Vectorize store and query? Use short noun phrases for workers_ai_compute and vectorize_data.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: workers_ai_compute, vectorize_data. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 12.527597,
+  "raw_answer": "{\"answer\":\"workers_ai_compute: serverless GPUs\\nvectorize_data: embeddings\",\"claims\":[{\"claim\":\"workers_ai_compute: serverless GPUs\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":12,\"start\":0,\"end\":1180,\"quote\":\"Table of contents\\n\u2022 Cloud Email Security: Protects users of a corporate network from phishing, business email compromise, and email supply chain\\nattacks.\\n\u2022 Data Loss Prevention: Inspects HTTP/S traffic for sensitive data like personally identifiable information (PII) and prevents exfiltration of\\ncustomer information with allow or block policies.\\nDeveloper-based Solutions\\nBy leveraging our serverless platform, developers can build serverless applications on our network that scale without needing to spend time and\\neffort on infrastructure or operations. This enables developers to deliver more performant applications that have global scale, all while improving\\ntheir productivity. Our primary developer-based solutions include products categorized for AI, compute, storage & databases, and media.\\nAI\\n\u2022 Workers AI: Enables developers to run machine learning models, powered by serverless GPUs, on our global network.\\n\u2022 Vectorize: Allows developers to easily store and query embeddings, representations of values or objects commonly consumed by\\nmachine learning models.\\n\u2022 AI Gateway: Provides observability, caching, security, and routing features for AI applications.\\nCompute\\n\"}]},{\"claim\":\"vectorize_data: embeddings\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":12,\"start\":0,\"end\":1180,\"quote\":\"Table of contents\\n\u2022 Cloud Email Security: Protects users of a corporate network from phishing, business email compromise, and email supply chain\\nattacks.\\n\u2022 Data Loss Prevention: Inspects HTTP/S traffic for sensitive data like personally identifiable information (PII) and prevents exfiltration of\\ncustomer information with allow or block policies.\\nDeveloper-based Solutions\\nBy leveraging our serverless platform, developers can build serverless applications on our network that scale without needing to spend time and\\neffort on infrastructure or operations. This enables developers to deliver more performant applications that have global scale, all while improving\\ntheir productivity. Our primary developer-based solutions include products categorized for AI, compute, storage & databases, and media.\\nAI\\n\u2022 Workers AI: Enables developers to run machine learning models, powered by serverless GPUs, on our global network.\\n\u2022 Vectorize: Allows developers to easily store and query embeddings, representations of values or objects commonly consumed by\\nmachine learning models.\\n\u2022 AI Gateway: Provides observability, caching, security, and routing features for AI applications.\\nCompute\\n\"}]}],\"unknowns\":[]}",
+  "started_at": "2026-11-02T09:20:39.119786+00:00",
+  "repeat": 1,
+  "direct_input_format": "complete original pages in exact 1200-character segments",
+  "public_schema_version": 1,
+  "raw_capture_sha256": "cb258823c39ff4b58ea73b8556f6159589c8b33ecda0e14635776b8756156a24",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "cloudflare-2024",
+      "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+      "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+      "page_count": 157,
+      "character_count": 591696
+    }
+  ],
+  "config": {
+    "max_depth": null,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 1,
+    "max_total_tokens": 350000,
+    "max_elapsed_seconds": 300.0,
+    "call_timeout": 180.0,
+    "token_budget_enforcement": "not available through text-only CLI; usage observed after the single call"
+  },
+  "runtime_stats": null,
+  "transport_usage": {
+    "llm_calls": 1,
+    "prompt_tokens": 145837,
+    "completion_tokens": 632,
+    "total_tokens": 146469,
+    "cached_tokens": 2688,
+    "usage_calls": 1,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription"
+  },
+  "grade": {
+    "passed": true,
+    "factual_passed": true,
+    "provenance_passed": true,
+    "supported_gold_fields": 2,
+    "required_gold_fields": 2,
+    "grader_version": "grounded-document-fields-v1",
+    "failures": [],
+    "answer_grade": {
+      "passed": true,
+      "failures": []
+    }
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 12.522438,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 145837,
+        "cached_input_tokens": 2688,
+        "output_tokens": 632
+      },
+      "usage_known": true,
+      "response_chars": 2924,
+      "response_sha256": "56eedf97ed8708af63e9f0fd2fcf2c73f252e74de4057d4fb2ec684f8eebf4fa"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 1,
+    "known_usage_calls": 1,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 146469,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 0,
+    "event_counts": {},
+    "event_counts_by_depth": {},
+    "source_reads": []
+  }
+}

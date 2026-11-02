@@ -1,0 +1,116 @@
+{
+  "dataset_version": "grounded-documents-v1",
+  "grader_version": "grounded-document-fields-v1",
+  "task": "synthetic-exception",
+  "mode": "direct",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "How many business days does Aurora require to review an expedited application from an approved nonprofit? Account for the exception.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: expedited_nonprofit_review_business_days. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 8.850451,
+  "raw_answer": "{\"answer\":\"expedited_nonprofit_review_business_days: 14\",\"claims\":[{\"claim\":\"expedited_nonprofit_review_business_days: 14\",\"citations\":[{\"document_id\":\"aurora-policy\",\"source_sha256\":\"08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d\",\"page\":22,\"start\":2157,\"end\":2279,\"quote\":\"Exception T2. Approved nonprofit applications take 14 business days, including expedited applications; this overrides T1.\\n\"}]}],\"unknowns\":[]}",
+  "started_at": "2026-11-02T09:20:27.201216+00:00",
+  "repeat": 1,
+  "direct_input_format": "complete original pages in exact 1200-character segments",
+  "public_schema_version": 1,
+  "raw_capture_sha256": "ccc0d09167c02aa5e5cd16162f8808f2f7888dcd833f86598e48f97ab3b4c72f",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "aurora-policy",
+      "title": "Aurora fictional application policy",
+      "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+      "page_count": 24,
+      "character_count": 52310
+    },
+    {
+      "document_id": "borealis-policy",
+      "title": "Borealis policy, a different program",
+      "source_sha256": "54430077260753df96c8f7d47dccd42dd62c2af6d812307f53e306a24fb79692",
+      "page_count": 1,
+      "character_count": 128
+    }
+  ],
+  "config": {
+    "max_depth": null,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 1,
+    "max_total_tokens": 350000,
+    "max_elapsed_seconds": 300.0,
+    "call_timeout": 180.0,
+    "token_budget_enforcement": "not available through text-only CLI; usage observed after the single call"
+  },
+  "runtime_stats": null,
+  "transport_usage": {
+    "llm_calls": 1,
+    "prompt_tokens": 20538,
+    "completion_tokens": 132,
+    "total_tokens": 20670,
+    "cached_tokens": 0,
+    "usage_calls": 1,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription"
+  },
+  "grade": {
+    "passed": true,
+    "factual_passed": true,
+    "provenance_passed": true,
+    "supported_gold_fields": 1,
+    "required_gold_fields": 1,
+    "grader_version": "grounded-document-fields-v1",
+    "failures": [],
+    "answer_grade": {
+      "passed": true,
+      "failures": []
+    }
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 8.850049,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 20538,
+        "cached_input_tokens": 0,
+        "output_tokens": 132
+      },
+      "usage_known": true,
+      "response_chars": 436,
+      "response_sha256": "234aa800f8d776177e87df4b3f9e80747145916b5c9740b3212c20b693b5e1de"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 1,
+    "known_usage_calls": 1,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 20670,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 0,
+    "event_counts": {},
+    "event_counts_by_depth": {},
+    "source_reads": []
+  }
+}

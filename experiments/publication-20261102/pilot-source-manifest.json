@@ -1,0 +1,46 @@
+[
+  {
+    "filename": "cloudflare-10k.pdf",
+    "pages_filename": "cloudflare-10k.pages.json",
+    "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+    "url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0001477333/2c5ce18c-bb02-4031-89cb-59ff64f22eaf.pdf",
+    "raw_sha256": "ed58d484853f3a8da0dd2af65461fda3974f002cc3f609edeb749b93c22a6315",
+    "content_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+    "extraction": "pypdf==6.18.0, extract_text() plain; physical PDF pages, blank password",
+    "document_id": "cloudflare-2024",
+    "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+    "page_count": 157,
+    "character_count": 591696,
+    "raw_bytes": 1327940
+  },
+  {
+    "filename": "python-sqlite3-v3.12.0.rst",
+    "pages_filename": "python-sqlite3-v3.12.0.pages.json",
+    "title": "Python 3.12.0 sqlite3 documentation source",
+    "url": "https://raw.githubusercontent.com/python/cpython/v3.12.0/Doc/library/sqlite3.rst",
+    "raw_sha256": "84b20c22a0201ccaa0ff584a224d743cc1eb6d0dc0409210ab8f11b910ea51ca",
+    "content_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+    "extraction": "UTF-8 decode, one text page, no normalization",
+    "document_id": "python-sqlite-3.12",
+    "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+    "page_count": 1,
+    "character_count": 92179,
+    "raw_bytes": 92190
+  },
+  {
+    "document_id": "aurora-policy",
+    "title": "Aurora fictional application policy",
+    "source_sha256": "08491cac1c2729b3d30ff1709cd4029f4253b39724b5b92a381bcaed6419934d",
+    "page_count": 24,
+    "character_count": 52310,
+    "generator": "grounded-documents-v1"
+  },
+  {
+    "document_id": "borealis-policy",
+    "title": "Borealis policy, a different program",
+    "source_sha256": "54430077260753df96c8f7d47dccd42dd62c2af6d812307f53e306a24fb79692",
+    "page_count": 1,
+    "character_count": 128,
+    "generator": "grounded-documents-v1"
+  }
+]

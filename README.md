@@ -21,6 +21,12 @@ complete run trajectories.
 [Security](https://github.com/grishahq/recursive-llm/blob/main/SECURITY.md) |
 [Original implementation](https://github.com/alexzhang13/rlm)
 
+Version 0.6.0 adds [document analysis with source-checked citations](DOCUMENT_ANALYSIS.md):
+physical PDF pages, exact quoted spans, Unicode-aware search, and validated root/child outputs.
+Use `complete_documents` or the document CLI; citation checks verify source text and coordinates,
+while semantic correctness and completeness still require evaluation. Install this version from
+the GitHub tag or release assets; PyPI currently provides v0.5.0.
+
 ## Why use this implementation?
 
 | Capability | What it provides |
@@ -115,6 +121,12 @@ variable. REPL state persists across iterations. The model can inspect small reg
 computation, call a plain LM, or create a child RLM when the configured depth permits it.
 
 ## Installation
+
+For the v0.6.0 document APIs, install the tagged GitHub source with optional PDF support:
+
+```bash
+pip install "recursive-llm[documents] @ git+https://github.com/grishahq/recursive-llm.git@v0.6.0"
+```
 
 Use a fresh virtual environment (recommended), then install the latest release from PyPI:
 

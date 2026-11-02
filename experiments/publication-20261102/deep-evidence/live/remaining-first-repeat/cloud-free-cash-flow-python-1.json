@@ -1,0 +1,264 @@
+{
+  "dataset_version": "deep-documents-v2",
+  "grader_version": "deep-document-fields-v1",
+  "task": "cloud-free-cash-flow",
+  "mode": "python",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "For 2024, give net cash provided by operating activities, purchases of property and equipment, capitalized internal-use software, and free cash flow. Check the stated subtraction. Use operating_cash, capex, software, free_cash_flow. Report USD thousands as nonnegative integers without commas; capex and software are magnitudes of the amounts subtracted.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: operating_cash, capex, software, free_cash_flow. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 28.604546,
+  "raw_answer": "{\"answer\": \"operating_cash: 380429\\ncapex: 185037\\nsoftware: 28477\\nfree_cash_flow: 166915\", \"claims\": [{\"claim\": \"operating_cash: 380429\", \"citations\": [{\"document_id\": \"cloudflare-2024\", \"source_sha256\": \"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\", \"page\": 80, \"start\": 195, \"end\": 494, \"quote\": \"d.\\nYear Ended December 31,\\n2024 2023 2022\\n(dollars in thousands)\\nNet cash provided by operating activities $ 380,429 $ 254,406 $ 123,595 \\nLess: Purchases of property and equipment (185,037) (114,396) (143,606)\\nLess: Capitalized internal-use software (28,477) (20,546) (19,758)\\nFree cash flow $ 166,9\"}]}, {\"claim\": \"capex: 185037\", \"citations\": [{\"document_id\": \"cloudflare-2024\", \"source_sha256\": \"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\", \"page\": 80, \"start\": 195, \"end\": 494, \"quote\": \"d.\\nYear Ended December 31,\\n2024 2023 2022\\n(dollars in thousands)\\nNet cash provided by operating activities $ 380,429 $ 254,406 $ 123,595 \\nLess: Purchases of property and equipment (185,037) (114,396) (143,606)\\nLess: Capitalized internal-use software (28,477) (20,546) (19,758)\\nFree cash flow $ 166,9\"}]}, {\"claim\": \"software: 28477\", \"citations\": [{\"document_id\": \"cloudflare-2024\", \"source_sha256\": \"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\", \"page\": 80, \"start\": 195, \"end\": 494, \"quote\": \"d.\\nYear Ended December 31,\\n2024 2023 2022\\n(dollars in thousands)\\nNet cash provided by operating activities $ 380,429 $ 254,406 $ 123,595 \\nLess: Purchases of property and equipment (185,037) (114,396) (143,606)\\nLess: Capitalized internal-use software (28,477) (20,546) (19,758)\\nFree cash flow $ 166,9\"}]}, {\"claim\": \"free_cash_flow: 166915\", \"citations\": [{\"document_id\": \"cloudflare-2024\", \"source_sha256\": \"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\", \"page\": 80, \"start\": 195, \"end\": 494, \"quote\": \"d.\\nYear Ended December 31,\\n2024 2023 2022\\n(dollars in thousands)\\nNet cash provided by operating activities $ 380,429 $ 254,406 $ 123,595 \\nLess: Purchases of property and equipment (185,037) (114,396) (143,606)\\nLess: Capitalized internal-use software (28,477) (20,546) (19,758)\\nFree cash flow $ 166,9\"}]}], \"unknowns\": []}",
+  "started_at": "2026-11-02T10:04:11.182618+00:00",
+  "repeat": 1,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "dca6890fa689f1c8c085bc97e539c3246aa2989d3a052e57eef61aadb5ad7fa1",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "cloudflare-2024",
+      "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+      "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+      "page_count": 157,
+      "character_count": 591696
+    }
+  ],
+  "config": {
+    "max_depth": 0,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 10,
+    "max_total_tokens": 150000,
+    "max_elapsed_seconds": 240,
+    "call_timeout": 150,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 5,
+    "root_calls": 5,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 5,
+    "max_depth_reached": 0,
+    "prompt_tokens": 40995,
+    "completion_tokens": 208,
+    "total_tokens": 41203,
+    "cached_tokens": 10752,
+    "usage_calls": 5,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 5,
+    "depth": 0,
+    "budget": {
+      "max_calls": 10,
+      "max_tokens": 150000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 240,
+      "reserved_calls": 5,
+      "observed_tokens": 41203,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 28.604229
+    },
+    "by_model": {
+      "gpt-6.1-sol": {
+        "retry_calls": 0,
+        "prompt_tokens": 40995,
+        "completion_tokens": 208,
+        "total_tokens": 41203,
+        "cached_tokens": 10752,
+        "usage_calls": 5,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 5
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 5,
+    "prompt_tokens": 40995,
+    "completion_tokens": 208,
+    "total_tokens": 41203,
+    "cached_tokens": 10752,
+    "usage_calls": 5,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription",
+    "unknown_usage_calls": 0,
+    "failed_calls_with_known_usage": 0
+  },
+  "grade": {
+    "passed": false,
+    "grader_version": "deep-document-fields-v1",
+    "field_contract_passed": true,
+    "citation_structure_passed": true,
+    "evidence_coverage_passed": false,
+    "supported_fields": 3,
+    "required_fields": 4,
+    "failures": [
+      "Gold source evidence not covered for free_cash_flow"
+    ]
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.944587,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5729,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 25,
+      "response_sha256": "028143aa5afe93c6f7d68c8b20aee97244b18ef9ad8d7f1de574d77e709f3b7d"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.041409,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5844,
+        "cached_input_tokens": 2688,
+        "output_tokens": 30
+      },
+      "usage_known": true,
+      "response_chars": 93,
+      "response_sha256": "aaf5f8d0605b610c57c151ab81fb901f95b9d9c87e6e066a4a498c7b84456dd8"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.640858,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 9199,
+        "cached_input_tokens": 2688,
+        "output_tokens": 24
+      },
+      "usage_known": true,
+      "response_chars": 51,
+      "response_sha256": "4b1dad8813e7d3622faf0db57e4424f46f71f4e6a35aa382a0a584f1bdb053ae"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 6.549207,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 9934,
+        "cached_input_tokens": 2688,
+        "output_tokens": 138
+      },
+      "usage_known": true,
+      "response_chars": 388,
+      "response_sha256": "5f0f7197034c8ba4f3d03c6c25056f867f6a0ca30abed551728458f994f8ccf5"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.305875,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 10289,
+        "cached_input_tokens": 0,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 17,
+      "response_sha256": "b69e4bf58f5516f161a7d35449ad5a095ab879dfb43dd80b93a3102b42c1d309"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 5,
+    "known_usage_calls": 5,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 41203,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 24,
+    "event_counts": {
+      "final_answer": 1,
+      "final_answer_validated": 1,
+      "model_call_end": 5,
+      "model_call_start": 5,
+      "repl_step": 4,
+      "rlm_end": 1,
+      "rlm_start": 1,
+      "run_end": 1,
+      "run_start": 1,
+      "source_read": 2,
+      "source_search": 1,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "final_answer": 1,
+        "final_answer_validated": 1,
+        "model_call_end": 5,
+        "model_call_start": 5,
+        "repl_step": 4,
+        "rlm_end": 1,
+        "rlm_start": 1,
+        "run_end": 1,
+        "run_start": 1,
+        "source_read": 2,
+        "source_search": 1,
+        "sources_available": 1
+      }
+    },
+    "source_reads": [
+      {
+        "sequence": 13,
+        "depth": 0,
+        "node_id": "rlm-1",
+        "parent_id": "",
+        "elapsed_seconds": 17.537541,
+        "document_id": "cloudflare-2024",
+        "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+        "page": 80,
+        "start": 0,
+        "end": 2500,
+        "quote_chars": 2500
+      },
+      {
+        "sequence": 17,
+        "depth": 0,
+        "node_id": "rlm-1",
+        "parent_id": "",
+        "elapsed_seconds": 24.090484,
+        "document_id": "cloudflare-2024",
+        "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+        "page": 80,
+        "start": 195,
+        "end": 494,
+        "quote_chars": 299
+      }
+    ]
+  }
+}

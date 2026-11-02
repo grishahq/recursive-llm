@@ -1,0 +1,47 @@
+{
+  "groups": {
+    "direct": {
+      "attempts": 1,
+      "completed": 1,
+      "exact_passes": 1,
+      "factual_passes": 1,
+      "provenance_passes": 1,
+      "total_tokens": 146806,
+      "elapsed_seconds": 18.328189,
+      "calls": 1
+    },
+    "python": {
+      "attempts": 1,
+      "completed": 1,
+      "exact_passes": 1,
+      "factual_passes": 1,
+      "provenance_passes": 1,
+      "total_tokens": 45349,
+      "elapsed_seconds": 35.683209,
+      "calls": 6
+    },
+    "rlm": {
+      "attempts": 1,
+      "completed": 1,
+      "exact_passes": 1,
+      "factual_passes": 1,
+      "provenance_passes": 1,
+      "total_tokens": 28579,
+      "elapsed_seconds": 31.38935,
+      "calls": 4
+    }
+  },
+  "attempt_count": 3,
+  "limitations": [
+    "Small engineering pilot, not a population estimate or paper reproduction.",
+    "Codex subscription token usage is not subscription credits or a dollar price.",
+    "Failed calls without usage can make observed tokens a lower bound.",
+    "Direct input includes exact source segments to avoid manual offset arithmetic.",
+    "No tail-latency estimate is made from a small number of repetitions.",
+    "RLM mode permits children; a trajectory must confirm whether children were used."
+  ],
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "dataset_version": "grounded-documents-v1",
+  "grader_version": "grounded-document-fields-v2"
+}

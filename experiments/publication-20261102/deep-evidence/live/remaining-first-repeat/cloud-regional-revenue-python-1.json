@@ -1,0 +1,234 @@
+{
+  "dataset_version": "deep-documents-v2",
+  "grader_version": "deep-document-fields-v1",
+  "task": "cloud-regional-revenue",
+  "mode": "python",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "For 2024, give revenue from the United States, Europe Middle East and Africa, Asia Pacific, and Other, based on customer billing addresses. Use us_revenue, emea_revenue, apac_revenue, other_revenue. Report USD thousands as integers without commas.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: us_revenue, emea_revenue, apac_revenue, other_revenue. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 36.777145,
+  "raw_answer": "{\"answer\":\"us_revenue: 849500\\nemea_revenue: 466499\\napac_revenue: 223234\\nother_revenue: 130393\",\"claims\":[{\"claim\":\"us_revenue: 849500\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":112,\"start\":0,\"end\":750,\"quote\":\"Table of contents\\nThe following table summarizes the revenue by region based on the billing address of customers who have contracted to use the Company\u2019s\\nglobal network and products:\\nYear Ended December 31,\\n2024 2023 2022\\n(dollars in thousands)\\nAmount\\nPercentage\\nof Revenue Amount\\nPercentage\\nof Revenue Amount\\nPercentage\\nof Revenue\\nUnited States $ 849,500 51 % $ 678,184 52 % $ 515,722 53 %\\nEurope, Middle East, and Africa 466,499 28 % 356,569 28 % 258,291 26 %\\nAsia Pacific 223,234 13 % 168,826 13 % 133,353 14 %\\nOther 130,393 8 % 93,166 7 % 67,875 7 %\\nTotal $ 1,669,626 100 % $ 1,296,745 100 % $ 975,241 100 %\\nThe following table summarizes the revenue from contracts by type of customer:\\nYear Ended December 31,\\n2024 2023 2022\\n(dollars in thousand\"}]},{\"claim\":\"emea_revenue: 466499\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":112,\"start\":0,\"end\":750,\"quote\":\"Table of contents\\nThe following table summarizes the revenue by region based on the billing address of customers who have contracted to use the Company\u2019s\\nglobal network and products:\\nYear Ended December 31,\\n2024 2023 2022\\n(dollars in thousands)\\nAmount\\nPercentage\\nof Revenue Amount\\nPercentage\\nof Revenue Amount\\nPercentage\\nof Revenue\\nUnited States $ 849,500 51 % $ 678,184 52 % $ 515,722 53 %\\nEurope, Middle East, and Africa 466,499 28 % 356,569 28 % 258,291 26 %\\nAsia Pacific 223,234 13 % 168,826 13 % 133,353 14 %\\nOther 130,393 8 % 93,166 7 % 67,875 7 %\\nTotal $ 1,669,626 100 % $ 1,296,745 100 % $ 975,241 100 %\\nThe following table summarizes the revenue from contracts by type of customer:\\nYear Ended December 31,\\n2024 2023 2022\\n(dollars in thousand\"}]},{\"claim\":\"apac_revenue: 223234\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":112,\"start\":0,\"end\":750,\"quote\":\"Table of contents\\nThe following table summarizes the revenue by region based on the billing address of customers who have contracted to use the Company\u2019s\\nglobal network and products:\\nYear Ended December 31,\\n2024 2023 2022\\n(dollars in thousands)\\nAmount\\nPercentage\\nof Revenue Amount\\nPercentage\\nof Revenue Amount\\nPercentage\\nof Revenue\\nUnited States $ 849,500 51 % $ 678,184 52 % $ 515,722 53 %\\nEurope, Middle East, and Africa 466,499 28 % 356,569 28 % 258,291 26 %\\nAsia Pacific 223,234 13 % 168,826 13 % 133,353 14 %\\nOther 130,393 8 % 93,166 7 % 67,875 7 %\\nTotal $ 1,669,626 100 % $ 1,296,745 100 % $ 975,241 100 %\\nThe following table summarizes the revenue from contracts by type of customer:\\nYear Ended December 31,\\n2024 2023 2022\\n(dollars in thousand\"}]},{\"claim\":\"other_revenue: 130393\",\"citations\":[{\"document_id\":\"cloudflare-2024\",\"source_sha256\":\"a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12\",\"page\":112,\"start\":0,\"end\":750,\"quote\":\"Table of contents\\nThe following table summarizes the revenue by region based on the billing address of customers who have contracted to use the Company\u2019s\\nglobal network and products:\\nYear Ended December 31,\\n2024 2023 2022\\n(dollars in thousands)\\nAmount\\nPercentage\\nof Revenue Amount\\nPercentage\\nof Revenue Amount\\nPercentage\\nof Revenue\\nUnited States $ 849,500 51 % $ 678,184 52 % $ 515,722 53 %\\nEurope, Middle East, and Africa 466,499 28 % 356,569 28 % 258,291 26 %\\nAsia Pacific 223,234 13 % 168,826 13 % 133,353 14 %\\nOther 130,393 8 % 93,166 7 % 67,875 7 %\\nTotal $ 1,669,626 100 % $ 1,296,745 100 % $ 975,241 100 %\\nThe following table summarizes the revenue from contracts by type of customer:\\nYear Ended December 31,\\n2024 2023 2022\\n(dollars in thousand\"}]}],\"unknowns\":[]}",
+  "started_at": "2026-11-02T10:05:31.029652+00:00",
+  "repeat": 1,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "e20441a37f06b6dbd068c2e400e90b1df0ccef4dbc4070682f11299cdecd0379",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "cloudflare-2024",
+      "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+      "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+      "page_count": 157,
+      "character_count": 591696
+    }
+  ],
+  "config": {
+    "max_depth": 0,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 10,
+    "max_total_tokens": 150000,
+    "max_elapsed_seconds": 240,
+    "call_timeout": 150,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 4,
+    "root_calls": 4,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 4,
+    "max_depth_reached": 0,
+    "prompt_tokens": 25266,
+    "completion_tokens": 1420,
+    "total_tokens": 26686,
+    "cached_tokens": 11008,
+    "usage_calls": 4,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 4,
+    "depth": 0,
+    "budget": {
+      "max_calls": 10,
+      "max_tokens": 150000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 240,
+      "reserved_calls": 4,
+      "observed_tokens": 26686,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 36.776835
+    },
+    "by_model": {
+      "gpt-6.1-sol": {
+        "retry_calls": 0,
+        "prompt_tokens": 25266,
+        "completion_tokens": 1420,
+        "total_tokens": 26686,
+        "cached_tokens": 11008,
+        "usage_calls": 4,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 4
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 4,
+    "prompt_tokens": 25266,
+    "completion_tokens": 1420,
+    "total_tokens": 26686,
+    "cached_tokens": 11008,
+    "usage_calls": 4,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription",
+    "unknown_usage_calls": 0,
+    "failed_calls_with_known_usage": 0
+  },
+  "grade": {
+    "passed": true,
+    "grader_version": "deep-document-fields-v1",
+    "field_contract_passed": true,
+    "citation_structure_passed": true,
+    "evidence_coverage_passed": true,
+    "supported_fields": 4,
+    "required_fields": 4,
+    "failures": []
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.180557,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5721,
+        "cached_input_tokens": 0,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 25,
+      "response_sha256": "028143aa5afe93c6f7d68c8b20aee97244b18ef9ad8d7f1de574d77e709f3b7d"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.958954,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5836,
+        "cached_input_tokens": 2688,
+        "output_tokens": 27
+      },
+      "usage_known": true,
+      "response_chars": 86,
+      "response_sha256": "804842bb81580a6d6a3e55d57f4b295e9ee0c4047350ac56341fa5d2135fcecd"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.290819,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6666,
+        "cached_input_tokens": 5632,
+        "output_tokens": 23
+      },
+      "usage_known": true,
+      "response_chars": 51,
+      "response_sha256": "a7c8662e6033df531721b230676a5fb50640e691a3eafcaaa7537689c840d6ba"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 16.95056,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 7043,
+        "cached_input_tokens": 2688,
+        "output_tokens": 1362
+      },
+      "usage_known": true,
+      "response_chars": 4030,
+      "response_sha256": "de9bb359baa4ca745849c0a2d37719c9ca753286e78f7ca713eb204906a94f33"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 4,
+    "known_usage_calls": 4,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 26686,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 20,
+    "event_counts": {
+      "final_answer": 1,
+      "final_answer_validated": 1,
+      "model_call_end": 4,
+      "model_call_start": 4,
+      "repl_step": 3,
+      "rlm_end": 1,
+      "rlm_start": 1,
+      "run_end": 1,
+      "run_start": 1,
+      "source_read": 1,
+      "source_search": 1,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "final_answer": 1,
+        "final_answer_validated": 1,
+        "model_call_end": 4,
+        "model_call_start": 4,
+        "repl_step": 3,
+        "rlm_end": 1,
+        "rlm_start": 1,
+        "run_end": 1,
+        "run_start": 1,
+        "source_read": 1,
+        "source_search": 1,
+        "sources_available": 1
+      }
+    },
+    "source_reads": [
+      {
+        "sequence": 13,
+        "depth": 0,
+        "node_id": "rlm-1",
+        "parent_id": "",
+        "elapsed_seconds": 19.618597,
+        "document_id": "cloudflare-2024",
+        "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+        "page": 112,
+        "start": 0,
+        "end": 750,
+        "quote_chars": 750
+      }
+    ]
+  }
+}

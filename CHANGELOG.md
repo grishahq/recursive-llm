@@ -4,6 +4,30 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-11-02
+
+### Added
+
+- Source-aware document completions with immutable page text, content identity, normalized search
+  mapped to original offsets, and exact citation validation in root and child RLMs.
+- `DocumentResult` with claims, unknowns, source metadata and JSONL export; synchronous and async
+  document APIs and a bounded local document CLI with optional Codex transport.
+- Optional `documents` PDF dependency and local text/PDF loading with physical page boundaries,
+  explicit extraction limits, and support for PDFs readable with an empty user password.
+- An explicit long-document companion profile that permits 2M extracted characters and retains
+  compact source metadata without duplicating page text in frontend responses.
+
+### Fixed
+
+- Applied effective context-local PDF decompression limits and counted nonempty content streams
+  even when the PDF reader's stream object is falsey.
+- Enforced the aggregate decoded-stream limit across referenced non-image content and resources,
+  including nested Forms and font mappings, while counting shared resources once.
+- Preserved completed empty Codex CLI responses and their usage so the existing bounded runtime
+  repair path can recover instead of treating empty text as a transport failure.
+- Accepted standalone document JSON finals through the same source and custom validators as
+  explicit final directives, avoiding unnecessary execution-format repair for valid structured data.
+
 ## [0.5.0] - 2026-10-02
 
 ### Added
@@ -137,7 +161,8 @@ All notable changes to this project are documented in this file.
 
 - Initial public release.
 
-[Unreleased]: https://github.com/grishahq/recursive-llm/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/grishahq/recursive-llm/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/grishahq/recursive-llm/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/grishahq/recursive-llm/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/grishahq/recursive-llm/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/grishahq/recursive-llm/compare/v0.3.0...v0.3.1

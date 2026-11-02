@@ -1,0 +1,250 @@
+{
+  "dataset_version": "grounded-documents-v1",
+  "grader_version": "grounded-document-fields-v2",
+  "task": "sqlite-defaults",
+  "mode": "python",
+  "model": "gpt-6.1-terra",
+  "reasoning_effort": "low",
+  "query": "In the Python 3.12.0 sqlite3.connect signature, what are the default timeout in seconds and cached_statements count? Use timeout_seconds and cached_statements.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: timeout_seconds, cached_statements. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 25.518401,
+  "raw_answer": "{\"answer\": \"timeout_seconds: 5.0\\ncached_statements: 128\", \"claims\": [{\"claim\": \"timeout_seconds: 5.0\", \"citations\": [{\"document_id\": \"python-sqlite-3.12\", \"source_sha256\": \"adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d\", \"page\": 1, \"start\": 8500, \"end\": 9000, \"quote\": \" _sqlite3-reference:\\n\\nReference\\n---------\\n\\n.. We keep the old sqlite3-module-contents ref to prevent breaking links.\\n.. _sqlite3-module-contents:\\n\\n.. _sqlite3-module-functions:\\n\\nModule functions\\n^^^^^^^^^^^^^^^^\\n\\n.. function:: connect(database, timeout=5.0, detect_types=0, \\\\\\n                      isolation_level=\\\"DEFERRED\\\", check_same_thread=True, \\\\\\n                      factory=sqlite3.Connection, cached_statements=128, \\\\\\n                      uri=False, *, \\\\\\n                      autocommit=sq\"}]}, {\"claim\": \"cached_statements: 128\", \"citations\": [{\"document_id\": \"python-sqlite-3.12\", \"source_sha256\": \"adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d\", \"page\": 1, \"start\": 8500, \"end\": 9000, \"quote\": \" _sqlite3-reference:\\n\\nReference\\n---------\\n\\n.. We keep the old sqlite3-module-contents ref to prevent breaking links.\\n.. _sqlite3-module-contents:\\n\\n.. _sqlite3-module-functions:\\n\\nModule functions\\n^^^^^^^^^^^^^^^^\\n\\n.. function:: connect(database, timeout=5.0, detect_types=0, \\\\\\n                      isolation_level=\\\"DEFERRED\\\", check_same_thread=True, \\\\\\n                      factory=sqlite3.Connection, cached_statements=128, \\\\\\n                      uri=False, *, \\\\\\n                      autocommit=sq\"}]}], \"unknowns\": []}",
+  "started_at": "2026-11-02T09:28:02.790676+00:00",
+  "repeat": 1,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "db919c26282a78e47406ebc85579517501bc2ddb1e015a80fbee263fce77e473",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "python-sqlite-3.12",
+      "title": "Python 3.12.0 sqlite3 documentation source",
+      "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+      "page_count": 1,
+      "character_count": 92179
+    }
+  ],
+  "config": {
+    "max_depth": 0,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 10,
+    "max_total_tokens": 350000,
+    "max_elapsed_seconds": 180.0,
+    "call_timeout": 120.0,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 5,
+    "root_calls": 5,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 5,
+    "max_depth_reached": 0,
+    "prompt_tokens": 31146,
+    "completion_tokens": 360,
+    "total_tokens": 31506,
+    "cached_tokens": 11008,
+    "usage_calls": 5,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 5,
+    "depth": 0,
+    "budget": {
+      "max_calls": 10,
+      "max_tokens": 350000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 180.0,
+      "reserved_calls": 5,
+      "observed_tokens": 31506,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 25.51831
+    },
+    "by_model": {
+      "gpt-6.1-terra": {
+        "retry_calls": 0,
+        "prompt_tokens": 31146,
+        "completion_tokens": 360,
+        "total_tokens": 31506,
+        "cached_tokens": 11008,
+        "usage_calls": 5,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 5
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 5,
+    "prompt_tokens": 31146,
+    "completion_tokens": 360,
+    "total_tokens": 31506,
+    "cached_tokens": 11008,
+    "usage_calls": 5,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription"
+  },
+  "grade": {
+    "passed": true,
+    "factual_passed": true,
+    "provenance_passed": true,
+    "supported_gold_fields": 2,
+    "required_gold_fields": 2,
+    "grader_version": "grounded-document-fields-v2",
+    "failures": [],
+    "answer_grade": {
+      "passed": true,
+      "failures": []
+    }
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-terra",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.005717,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5644,
+        "cached_input_tokens": 0,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 25,
+      "response_sha256": "028143aa5afe93c6f7d68c8b20aee97244b18ef9ad8d7f1de574d77e709f3b7d"
+    },
+    {
+      "model": "gpt-6.1-terra",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.100277,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5761,
+        "cached_input_tokens": 0,
+        "output_tokens": 32
+      },
+      "usage_known": true,
+      "response_chars": 99,
+      "response_sha256": "63654343d4943cd4a48e06affa8cc5d544b8382b0b1c69de274923fb0db70a41"
+    },
+    {
+      "model": "gpt-6.1-terra",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.407528,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6127,
+        "cached_input_tokens": 2688,
+        "output_tokens": 28
+      },
+      "usage_known": true,
+      "response_chars": 56,
+      "response_sha256": "a73a62507cc4adf539152f4152eccd89247b6ee3df7fce60ba8e069b4fd0eef4"
+    },
+    {
+      "model": "gpt-6.1-terra",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 7.131239,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6392,
+        "cached_input_tokens": 5632,
+        "output_tokens": 284
+      },
+      "usage_known": true,
+      "response_chars": 950,
+      "response_sha256": "0d77890d377dce73b59cee1b0f12af0512bd6502259901e62fd9758c6edc3d36"
+    },
+    {
+      "model": "gpt-6.1-terra",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 4.459353,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 7222,
+        "cached_input_tokens": 2688,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 17,
+      "response_sha256": "b69e4bf58f5516f161a7d35449ad5a095ab879dfb43dd80b93a3102b42c1d309"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 5,
+    "known_usage_calls": 5,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 31506,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 23,
+    "event_counts": {
+      "final_answer": 1,
+      "final_answer_validated": 1,
+      "model_call_end": 5,
+      "model_call_start": 5,
+      "repl_step": 4,
+      "rlm_end": 1,
+      "rlm_start": 1,
+      "run_end": 1,
+      "run_start": 1,
+      "source_read": 1,
+      "source_search": 1,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "final_answer": 1,
+        "final_answer_validated": 1,
+        "model_call_end": 5,
+        "model_call_start": 5,
+        "repl_step": 4,
+        "rlm_end": 1,
+        "rlm_start": 1,
+        "run_end": 1,
+        "run_start": 1,
+        "source_read": 1,
+        "source_search": 1,
+        "sources_available": 1
+      }
+    },
+    "source_reads": [
+      {
+        "sequence": 13,
+        "depth": 0,
+        "node_id": "rlm-1",
+        "parent_id": "",
+        "elapsed_seconds": 13.711731,
+        "document_id": "python-sqlite-3.12",
+        "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+        "page": 1,
+        "start": 8500,
+        "end": 9000,
+        "quote_chars": 500
+      }
+    ]
+  }
+}

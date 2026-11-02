@@ -1,0 +1,203 @@
+{
+  "dataset_version": "deep-documents-v2",
+  "grader_version": "deep-document-fields-v1",
+  "task": "sqlite-thread-contract",
+  "mode": "rlm",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "query": "In Python 3.12.0 sqlite3.connect, give the default check_same_thread value and the exception raised when that default connection is used from a different thread. Use check_same_thread and other_thread_exception. Use the Python boolean spelling and the bare exception class name.\nFor deterministic evaluation, put only these labeled fields in the answer string, one field per line: check_same_thread, other_thread_exception. Use 'field: value'. For each supported field, create exactly one claim whose claim text is the identical 'field: value' line and cite the evidence needed for that value. For an unsupported requested value, use 'not specified' in its answer field, do not create a factual claim for it, and put the field name in unknowns. Do not infer an absent fee to be zero. Preserve names and accents from the source. Do not use outside knowledge. Return the required JSON object.",
+  "status": "completed",
+  "elapsed_seconds": 25.249652,
+  "raw_answer": "{\"answer\":\"check_same_thread: True\\nother_thread_exception: ProgrammingError\",\"claims\":[{\"claim\":\"check_same_thread: True\",\"citations\":[{\"document_id\":\"python-sqlite-3.12\",\"source_sha256\":\"adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d\",\"page\":1,\"start\":10653,\"end\":11253,\"quote\":\"t), ``\\\"EXCLUSIVE\\\"`` or ``\\\"IMMEDIATE\\\"``;\\n       or ``None`` to disable opening transactions implicitly.\\n       Has no effect unless :attr:`Connection.autocommit` is set to\\n       :const:`~sqlite3.LEGACY_TRANSACTION_CONTROL` (the default).\\n   :type isolation_level: str | None\\n\\n   :param bool check_same_thread:\\n       If ``True`` (default), :exc:`ProgrammingError` will be raised\\n       if the database connection is used by a thread\\n       other than the one that created it.\\n       If ``False``, the connection may be accessed in multiple threads;\\n       write operations may need to be serialized b\"}]},{\"claim\":\"other_thread_exception: ProgrammingError\",\"citations\":[{\"document_id\":\"python-sqlite-3.12\",\"source_sha256\":\"adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d\",\"page\":1,\"start\":10653,\"end\":11253,\"quote\":\"t), ``\\\"EXCLUSIVE\\\"`` or ``\\\"IMMEDIATE\\\"``;\\n       or ``None`` to disable opening transactions implicitly.\\n       Has no effect unless :attr:`Connection.autocommit` is set to\\n       :const:`~sqlite3.LEGACY_TRANSACTION_CONTROL` (the default).\\n   :type isolation_level: str | None\\n\\n   :param bool check_same_thread:\\n       If ``True`` (default), :exc:`ProgrammingError` will be raised\\n       if the database connection is used by a thread\\n       other than the one that created it.\\n       If ``False``, the connection may be accessed in multiple threads;\\n       write operations may need to be serialized b\"}]}],\"unknowns\":[]}",
+  "started_at": "2026-11-02T10:01:05.519820+00:00",
+  "repeat": 1,
+  "public_schema_version": 1,
+  "raw_capture_sha256": "73cc6543fda3b37849066e2af0eb904bde90ccb0df2d7f4dd6bc1ff689b628ce",
+  "redaction": {
+    "method": "explicit field whitelists",
+    "omitted": [
+      "full messages",
+      "full source contexts",
+      "CLI stdout and stderr",
+      "commands",
+      "raw trajectory payloads",
+      "unlisted fields"
+    ],
+    "retained_content": [
+      "query",
+      "raw_answer including selected citations",
+      "grade failure messages",
+      "error type and message",
+      "source metadata"
+    ],
+    "usage": "Per-call usage requires exactly one valid turn.completed event; unknown usage remains null. Aggregate recorded statistics are retained without invented zero values."
+  },
+  "sources": [
+    {
+      "document_id": "python-sqlite-3.12",
+      "title": "Python 3.12.0 sqlite3 documentation source",
+      "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+      "page_count": 1,
+      "character_count": 92179
+    }
+  ],
+  "config": {
+    "max_depth": 2,
+    "max_iterations": 10,
+    "max_output_chars": 16000,
+    "max_total_calls": 10,
+    "max_total_tokens": 150000,
+    "max_elapsed_seconds": 240,
+    "call_timeout": 150,
+    "token_budget_enforcement": "tree-wide reported usage budget"
+  },
+  "runtime_stats": {
+    "llm_calls": 3,
+    "root_calls": 3,
+    "recursive_calls": 0,
+    "leaf_calls": 0,
+    "retry_calls": 0,
+    "total_iterations": 3,
+    "max_depth_reached": 0,
+    "prompt_tokens": 17933,
+    "completion_tokens": 532,
+    "total_tokens": 18465,
+    "cached_tokens": 2688,
+    "usage_calls": 3,
+    "priced_calls": 0,
+    "estimated_cost_usd": null,
+    "iterations": 3,
+    "depth": 0,
+    "budget": {
+      "max_calls": 10,
+      "max_tokens": 150000,
+      "max_cost_usd": null,
+      "max_elapsed_seconds": 240,
+      "reserved_calls": 3,
+      "observed_tokens": 18465,
+      "observed_cost_usd": null,
+      "elapsed_seconds": 25.249556
+    },
+    "by_model": {
+      "gpt-6.1-sol": {
+        "retry_calls": 0,
+        "prompt_tokens": 17933,
+        "completion_tokens": 532,
+        "total_tokens": 18465,
+        "cached_tokens": 2688,
+        "usage_calls": 3,
+        "priced_calls": 0,
+        "estimated_cost_usd": null,
+        "calls": 3
+      }
+    }
+  },
+  "transport_usage": {
+    "llm_calls": 3,
+    "prompt_tokens": 17933,
+    "completion_tokens": 532,
+    "total_tokens": 18465,
+    "cached_tokens": 2688,
+    "usage_calls": 3,
+    "estimated_cost_usd": null,
+    "billing_mode": "subscription",
+    "unknown_usage_calls": 0,
+    "failed_calls_with_known_usage": 0
+  },
+  "grade": {
+    "passed": true,
+    "grader_version": "deep-document-fields-v1",
+    "field_contract_passed": true,
+    "citation_structure_passed": true,
+    "evidence_coverage_passed": true,
+    "supported_fields": 2,
+    "required_fields": 2,
+    "failures": []
+  },
+  "transport_calls": [
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 6.893037,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5721,
+        "cached_input_tokens": 0,
+        "output_tokens": 8
+      },
+      "usage_known": true,
+      "response_chars": 25,
+      "response_sha256": "028143aa5afe93c6f7d68c8b20aee97244b18ef9ad8d7f1de574d77e709f3b7d"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 5.858581,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 5838,
+        "cached_input_tokens": 2688,
+        "output_tokens": 32
+      },
+      "usage_known": true,
+      "response_chars": 98,
+      "response_sha256": "197e36937852ee2f0798caf302e1e9966b93032040bb654c0f1a33688ac50acc"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "status": "completed",
+      "elapsed_seconds": 10.616441,
+      "billing_mode": "subscription",
+      "usage": {
+        "input_tokens": 6374,
+        "cached_input_tokens": 0,
+        "output_tokens": 492
+      },
+      "usage_known": true,
+      "response_chars": 1782,
+      "response_sha256": "fa7115f5cf7135dcd01f4ce53993b7eb16954ad71a367ba3ba9ef3370b6c2eb0"
+    }
+  ],
+  "call_summary": {
+    "observed_calls": 3,
+    "known_usage_calls": 3,
+    "unknown_usage_calls": 0,
+    "observed_total_tokens": 18465,
+    "usage_complete": true
+  },
+  "trace_summary": {
+    "event_count": 16,
+    "event_counts": {
+      "final_answer": 1,
+      "final_answer_validated": 1,
+      "model_call_end": 3,
+      "model_call_start": 3,
+      "repl_step": 2,
+      "rlm_end": 1,
+      "rlm_start": 1,
+      "run_end": 1,
+      "run_start": 1,
+      "source_search": 1,
+      "sources_available": 1
+    },
+    "event_counts_by_depth": {
+      "0": {
+        "final_answer": 1,
+        "final_answer_validated": 1,
+        "model_call_end": 3,
+        "model_call_start": 3,
+        "repl_step": 2,
+        "rlm_end": 1,
+        "rlm_start": 1,
+        "run_end": 1,
+        "run_start": 1,
+        "source_search": 1,
+        "sources_available": 1
+      }
+    },
+    "source_reads": []
+  }
+}

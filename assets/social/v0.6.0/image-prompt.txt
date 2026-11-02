@@ -1,0 +1,10 @@
+Use case: ads-marketing.
+Asset type: polished square social announcement illustration for LinkedIn and X, 1536 by 1536 pixels, readable on a phone.
+Primary request: Create an accurate editorial visual for the open-source Python project recursive-llm. The single takeaway is that quoted evidence can be traced to original document pages and exact text spans. This is a conceptual illustration, not a software screenshot or measured chart.
+Composition: Warm off-white paper background, spacious Swiss editorial typography. Large dark project name near the upper left. Beneath it, the main headline in very large beautiful dark navy type. In the lower half, a sculptural stack of clean document pages, one blue highlighted text strip lifted from a page and connected by a precise cobalt thread to a small floating quotation card. A subtle page-number tab and bracket motif imply original coordinates. Sophisticated tactile paper, restrained blue accents, soft shadows, no clutter. High contrast and generous margins. A few delicate text-line marks on papers can be abstract and unreadable; do not invent technical values.
+Text, exactly and only:
+"recursive-llm"
+"Quotes you can trace."
+"Page. Span. Source hash."
+"Conceptual illustration"
+The first two lines must be large and unmistakably readable. Spell recursive-llm exactly in lowercase with one hyphen. The third line is a readable supporting caption. The fourth is a small but legible bottom caption. No version or benchmark numbers so the artwork cannot suggest measured accuracy. No logos from other companies, no fake UI, no checkmarks implying truth, no charts, no robot or brain icons, no em dash character. The image should feel like a distinctive engineering publication, not a generic logo card.

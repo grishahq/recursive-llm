@@ -1,0 +1,3320 @@
+{
+  "kind": "COMPACT_ZERO_MODEL_CONTROL_SUMMARY",
+  "live_model_calls": 0,
+  "baseline_commit": "3c255c070060837343e594f60523e02b5369b87d",
+  "fixed_response_control_count": 30,
+  "real_source_control_count": 48,
+  "projection": "Full requests, messages and source contexts omitted. Fixed replies are available in offline-controls.json; this file retains outcomes, rejection counts, source identities and original local artifact hashes.",
+  "fixed_response_evidence": "offline-controls.json",
+  "fixed_response_controls": [
+    {
+      "fixture": "valid_directive",
+      "variant": "head-default",
+      "status": "accepted",
+      "fixed_calls": 1,
+      "rejections": 0,
+      "final_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "b42712ba632b0cb99c3b07537bb331ed86988027c787287ee9c16381ca6e508e",
+      "fixed_reply_sha256": [
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "valid_directive",
+      "variant": "head-with-source-validator",
+      "status": "accepted",
+      "fixed_calls": 1,
+      "rejections": 0,
+      "final_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "3f99a42a5ac16c1a53ddb35c8c8bbde4c534d7ea08429f6b926645e8eefb6688",
+      "fixed_reply_sha256": [
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "valid_directive",
+      "variant": "current-document-api",
+      "status": "accepted",
+      "fixed_calls": 1,
+      "rejections": 0,
+      "final_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "d906fd72d92659e17e38b02bd73ef2c8c03bbc2091468d70eecfe90af5144911",
+      "fixed_reply_sha256": [
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "forged_quote",
+      "variant": "head-default",
+      "status": "accepted",
+      "fixed_calls": 1,
+      "rejections": 0,
+      "final_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": false,
+        "supported_fields": 0,
+        "required_fields": 1,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span",
+          "Gold source evidence not covered for value"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "cf73ab2b4f47b36364fc77ee313be5d8fea09366422e613589afab41e39225d6",
+      "fixed_reply_sha256": [
+        "5014e2ba5b989394b952d25636f04eea1cb4cac89ae463dce62cee750cc6ecce",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "forged_quote",
+      "variant": "head-with-source-validator",
+      "status": "accepted",
+      "fixed_calls": 2,
+      "rejections": 1,
+      "final_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "0f153582a89eb688c91a4bd5d1fe1e3ea871443be60bb69e1563edba879bca72",
+      "fixed_reply_sha256": [
+        "5014e2ba5b989394b952d25636f04eea1cb4cac89ae463dce62cee750cc6ecce",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "forged_quote",
+      "variant": "current-document-api",
+      "status": "accepted",
+      "fixed_calls": 2,
+      "rejections": 1,
+      "final_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "5152ff4a5e0edd4a8b07b20bf2cd5702e041832908a610754c47c936a2063bce",
+      "fixed_reply_sha256": [
+        "5014e2ba5b989394b952d25636f04eea1cb4cac89ae463dce62cee750cc6ecce",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "forged_hash",
+      "variant": "head-default",
+      "status": "accepted",
+      "fixed_calls": 1,
+      "rejections": 0,
+      "final_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [
+          "claims[0].citations[0].source_sha256 does not match the source"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "74af583ca73593702a85275a92d7df7ccd7f568499183994625309c91ea17965",
+      "fixed_reply_sha256": [
+        "03c44dbe479c2f1fe5d7efda4dad475414984a72fc19b2f591b5dab86fa754a2",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "forged_hash",
+      "variant": "head-with-source-validator",
+      "status": "accepted",
+      "fixed_calls": 2,
+      "rejections": 1,
+      "final_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "4b5e719ef708abe09b61cb752f047bfbfcdafd7653bb318d5f1c804e6226778c",
+      "fixed_reply_sha256": [
+        "03c44dbe479c2f1fe5d7efda4dad475414984a72fc19b2f591b5dab86fa754a2",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "forged_hash",
+      "variant": "current-document-api",
+      "status": "accepted",
+      "fixed_calls": 2,
+      "rejections": 1,
+      "final_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "1551fa10a5d1e0ebb94e43ec854570a529c25a095d24c14e073645ed7a1fb0dc",
+      "fixed_reply_sha256": [
+        "03c44dbe479c2f1fe5d7efda4dad475414984a72fc19b2f591b5dab86fa754a2",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "wrong_page",
+      "variant": "head-default",
+      "status": "accepted",
+      "fixed_calls": 1,
+      "rejections": 0,
+      "final_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": false,
+        "supported_fields": 0,
+        "required_fields": 1,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span",
+          "Gold source evidence not covered for value"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "f4bd45c2bb0443a670e94bd6e13053848aca285441c87e299a35ce8026854cee",
+      "fixed_reply_sha256": [
+        "67d577596568e94a6d7823f0630023e85cb02ec31de0871021b519703fd04a23",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "wrong_page",
+      "variant": "head-with-source-validator",
+      "status": "accepted",
+      "fixed_calls": 2,
+      "rejections": 1,
+      "final_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "e9e64a253e09a3eacea32e8d5a629ac356a9607a4a41ba6d81a7c532cf5e4d22",
+      "fixed_reply_sha256": [
+        "67d577596568e94a6d7823f0630023e85cb02ec31de0871021b519703fd04a23",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "wrong_page",
+      "variant": "current-document-api",
+      "status": "accepted",
+      "fixed_calls": 2,
+      "rejections": 1,
+      "final_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "5e08fecc0d0298ca5095996b2a7aeed9597bcd09d94355f7296b83cce0ac78ef",
+      "fixed_reply_sha256": [
+        "67d577596568e94a6d7823f0630023e85cb02ec31de0871021b519703fd04a23",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "shifted_offset",
+      "variant": "head-default",
+      "status": "accepted",
+      "fixed_calls": 1,
+      "rejections": 0,
+      "final_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "59bd2241ff23c53575932ca5ea29506516a78c3ef8498223add19bee0250a44c",
+      "fixed_reply_sha256": [
+        "1b22810d6dfb8c191d9d7503d246dbf7f70df6f8483a5406190d8012bb79bddf",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "shifted_offset",
+      "variant": "head-with-source-validator",
+      "status": "accepted",
+      "fixed_calls": 2,
+      "rejections": 1,
+      "final_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "4a0ece5e329a51dbe1bd22d9ed405fff195b025c02d99b830f469a308567a738",
+      "fixed_reply_sha256": [
+        "1b22810d6dfb8c191d9d7503d246dbf7f70df6f8483a5406190d8012bb79bddf",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "shifted_offset",
+      "variant": "current-document-api",
+      "status": "accepted",
+      "fixed_calls": 2,
+      "rejections": 1,
+      "final_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "4bc7afdf2762cb4dc5bac682aad6f5379bf6a6de8b5cc6555b6272f138b79073",
+      "fixed_reply_sha256": [
+        "1b22810d6dfb8c191d9d7503d246dbf7f70df6f8483a5406190d8012bb79bddf",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "boolean_page",
+      "variant": "head-default",
+      "status": "accepted",
+      "fixed_calls": 1,
+      "rejections": 0,
+      "final_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [
+          "claims[0].citations[0]: page must be an integer from 1 to 2"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "c816386ed0d763770f7d223f94cf380f3b34b34e445fd97c5bbd99fe8e9cc7a9",
+      "fixed_reply_sha256": [
+        "79d49895cb3711eb63819746cca4e3ec6c8b92c9364a0d21cd47b38e4e79765d",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "boolean_page",
+      "variant": "head-with-source-validator",
+      "status": "accepted",
+      "fixed_calls": 2,
+      "rejections": 1,
+      "final_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "17c56fb6f9efc980c3d5e4b094eba1152339864dfdf1f5e5df78e950321a8b18",
+      "fixed_reply_sha256": [
+        "79d49895cb3711eb63819746cca4e3ec6c8b92c9364a0d21cd47b38e4e79765d",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "boolean_page",
+      "variant": "current-document-api",
+      "status": "accepted",
+      "fixed_calls": 2,
+      "rejections": 1,
+      "final_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "263c2dafdd1b96844dcabd9e33514e10ea51065fe37bfacfbe0d36e821c25b51",
+      "fixed_reply_sha256": [
+        "79d49895cb3711eb63819746cca4e3ec6c8b92c9364a0d21cd47b38e4e79765d",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "unknown_document",
+      "variant": "head-default",
+      "status": "accepted",
+      "fixed_calls": 1,
+      "rejections": 0,
+      "final_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": false,
+        "supported_fields": 0,
+        "required_fields": 1,
+        "failures": [
+          "claims[0].citations[0]: document_id is not present in this corpus",
+          "Gold source evidence not covered for value"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "87d075c3f6627dd6f7d440e6bfddafb282e31198c3f5b3abd97b736c73e1f810",
+      "fixed_reply_sha256": [
+        "335087d2ed48c4c3e4d32e0cf7f66c106fe97ced87400eed200649d4cdf3a3b0",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "unknown_document",
+      "variant": "head-with-source-validator",
+      "status": "accepted",
+      "fixed_calls": 2,
+      "rejections": 1,
+      "final_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "dc2f0035518d2877ba4dacc631875266bd5d1e1848e82747ddab830ab7a523f0",
+      "fixed_reply_sha256": [
+        "335087d2ed48c4c3e4d32e0cf7f66c106fe97ced87400eed200649d4cdf3a3b0",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "unknown_document",
+      "variant": "current-document-api",
+      "status": "accepted",
+      "fixed_calls": 2,
+      "rejections": 1,
+      "final_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "59dc8aa05154e0e8b5823f5b3cb2b768211d341015f05534fc6483b149f8e833",
+      "fixed_reply_sha256": [
+        "335087d2ed48c4c3e4d32e0cf7f66c106fe97ced87400eed200649d4cdf3a3b0",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "stale_same_id",
+      "variant": "head-default",
+      "status": "accepted",
+      "fixed_calls": 1,
+      "rejections": 0,
+      "final_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [
+          "claims[0].citations[0].source_sha256 does not match the source"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "a6ca947165c93f251a721b76ad4a1723571f90de94e3447a20868e35fbc4a561",
+      "fixed_reply_sha256": [
+        "d25d6f59324a8d7b6fcb71e615a98cd5cced0c6474aeaa34033f01cc77b4c69e",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "stale_same_id",
+      "variant": "head-with-source-validator",
+      "status": "accepted",
+      "fixed_calls": 2,
+      "rejections": 1,
+      "final_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "d187e8fccd06d9b4461528aaf38bab9b9fe2fef865782593587d84cdcdc08930",
+      "fixed_reply_sha256": [
+        "d25d6f59324a8d7b6fcb71e615a98cd5cced0c6474aeaa34033f01cc77b4c69e",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "stale_same_id",
+      "variant": "current-document-api",
+      "status": "accepted",
+      "fixed_calls": 2,
+      "rejections": 1,
+      "final_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "d5ef80b91f616d05e175af31488dcfb18a1255e6dfba0a89d0a95892e3fef14d",
+      "fixed_reply_sha256": [
+        "d25d6f59324a8d7b6fcb71e615a98cd5cced0c6474aeaa34033f01cc77b4c69e",
+        "4efbc78e21659460222f1b58c77414eae911d147b46ba20146901368d78c27ff"
+      ]
+    },
+    {
+      "fixture": "native_json",
+      "variant": "head-default",
+      "status": "rejected_or_failed",
+      "fixed_calls": 1,
+      "rejections": 0,
+      "final_grade": null,
+      "error": {
+        "type": "MaxIterationsError",
+        "message": "Max iterations (1) exceeded without a final answer"
+      },
+      "original_artifact_sha256": "660c6358c240ce72996dd8f7b105cdd25d797e84bd421e54a84fd5a2a83ae4de",
+      "fixed_reply_sha256": [
+        "b13a4ce23e7d4db32a2d9e06f9c506747e862515cf30030dbb8cb4b2061a0817"
+      ]
+    },
+    {
+      "fixture": "native_json",
+      "variant": "head-with-source-validator",
+      "status": "rejected_or_failed",
+      "fixed_calls": 1,
+      "rejections": 0,
+      "final_grade": null,
+      "error": {
+        "type": "MaxIterationsError",
+        "message": "Max iterations (1) exceeded without a final answer"
+      },
+      "original_artifact_sha256": "7df3272c84e3ad1f824e0940e50d4459268013f1853e28a513c2ee679c997ba1",
+      "fixed_reply_sha256": [
+        "b13a4ce23e7d4db32a2d9e06f9c506747e862515cf30030dbb8cb4b2061a0817"
+      ]
+    },
+    {
+      "fixture": "native_json",
+      "variant": "current-document-api",
+      "status": "accepted",
+      "fixed_calls": 1,
+      "rejections": 0,
+      "final_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "4538354d5b3aa502159131fdfcb073b34e46db170c0033c1e80cf3284dbbd386",
+      "fixed_reply_sha256": [
+        "b13a4ce23e7d4db32a2d9e06f9c506747e862515cf30030dbb8cb4b2061a0817"
+      ]
+    },
+    {
+      "fixture": "wrong_claim_real_quote",
+      "variant": "head-default",
+      "status": "accepted",
+      "fixed_calls": 1,
+      "rejections": 0,
+      "final_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [
+          "incorrect or missing field 'value'",
+          "incorrect exact value for 'value'",
+          "Incorrect claim value for value"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "fd9fc365e02c0fbebb85b6c1f1d0628f9ecb34bb34c4c5e14c4cbfebef83558d",
+      "fixed_reply_sha256": [
+        "45dece2f7bcc24b410d1347424c4f35cf87e963a2e573020f194afbad403b115"
+      ]
+    },
+    {
+      "fixture": "wrong_claim_real_quote",
+      "variant": "head-with-source-validator",
+      "status": "accepted",
+      "fixed_calls": 1,
+      "rejections": 0,
+      "final_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [
+          "incorrect or missing field 'value'",
+          "incorrect exact value for 'value'",
+          "Incorrect claim value for value"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "5fdc3edf9aec9d43ea0d1f3193c5c9f22b55a301985cb0edf985951bf48d1423",
+      "fixed_reply_sha256": [
+        "45dece2f7bcc24b410d1347424c4f35cf87e963a2e573020f194afbad403b115"
+      ]
+    },
+    {
+      "fixture": "wrong_claim_real_quote",
+      "variant": "current-document-api",
+      "status": "accepted",
+      "fixed_calls": 1,
+      "rejections": 0,
+      "final_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 1,
+        "required_fields": 1,
+        "failures": [
+          "incorrect or missing field 'value'",
+          "incorrect exact value for 'value'",
+          "Incorrect claim value for value"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "error": null,
+      "original_artifact_sha256": "73816c78ac9c9319c4a06a54d58a28c9f7ce6c16353502c1c24a8045a3a268b4",
+      "fixed_reply_sha256": [
+        "45dece2f7bcc24b410d1347424c4f35cf87e963a2e573020f194afbad403b115"
+      ]
+    }
+  ],
+  "real_source_controls": [
+    {
+      "task": "cloud-workforce",
+      "variant": "head-default",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "c0d294c5cd4c7a0392d8ab3ad5afc016317d4c8956058e44e70fe60958bab73a",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-workforce",
+      "variant": "current",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": true,
+      "fixed_calls": 2,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 1,
+      "original_artifact_sha256": "cddde4f6edf803ebdbbfbadd607c0e22d9b8b87b9d7e12344d903eb01cac24eb",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-workforce",
+      "variant": "current",
+      "mutation": "unrelated_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 2,
+        "required_fields": 3,
+        "failures": [
+          "Gold source evidence not covered for employees_total"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 2,
+        "required_fields": 3,
+        "failures": [
+          "Gold source evidence not covered for employees_total"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "3a850fa1289ecbf52fc51e68edfae7c12eec92567b04691f29f79383e4bde0cc",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-workforce",
+      "variant": "current",
+      "mutation": "wrong_claim_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "incorrect or missing field 'employees_total'",
+          "incorrect exact value for 'employees_total'",
+          "Incorrect claim value for employees_total"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "incorrect or missing field 'employees_total'",
+          "incorrect exact value for 'employees_total'",
+          "Incorrect claim value for employees_total"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "b18836ad6fbe80154ce1e09ccac8bc9aa3b154ec7c5a08c81bcb3efaf9745d5b",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-patents",
+      "variant": "head-default",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "1d72e24a3ab6f22eb245ef9866b7d92cec9e2495de4f35c29aa1df26458adbb6",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-patents",
+      "variant": "current",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": true,
+      "fixed_calls": 2,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 1,
+      "original_artifact_sha256": "92fd4f4da08682d45958eaa9fe8506e34a1a1f9b0a63b786127ddeb363374293",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-patents",
+      "variant": "current",
+      "mutation": "unrelated_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 3,
+        "required_fields": 4,
+        "failures": [
+          "Gold source evidence not covered for issued_patents"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 3,
+        "required_fields": 4,
+        "failures": [
+          "Gold source evidence not covered for issued_patents"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "2e0c55318a25d7b3baf5a86fd6cb95e64dfd812c85d9a92db4bffe5b89a69d12",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-patents",
+      "variant": "current",
+      "mutation": "wrong_claim_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "incorrect or missing field 'issued_patents'",
+          "incorrect exact value for 'issued_patents'",
+          "Incorrect claim value for issued_patents"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "incorrect or missing field 'issued_patents'",
+          "incorrect exact value for 'issued_patents'",
+          "Incorrect claim value for issued_patents"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "3bbf2eb81ce3593b516fe2542a98c6124016cf3f37871b356d1aa510f5b2966b",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-customer-counts",
+      "variant": "head-default",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "b8a2080b208a77ed2fc946f16a9d69e691a340f4a09de21a9220ec5eeac99bd8",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-customer-counts",
+      "variant": "current",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": true,
+      "fixed_calls": 2,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 1,
+      "original_artifact_sha256": "55e1970a3bc1f08f26476a1d0b360914d442d97b206a663ff3bdc05dc9087d32",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-customer-counts",
+      "variant": "current",
+      "mutation": "unrelated_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 3,
+        "required_fields": 4,
+        "failures": [
+          "Gold source evidence not covered for paying_2024"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 3,
+        "required_fields": 4,
+        "failures": [
+          "Gold source evidence not covered for paying_2024"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "6ead4adb5921796087b67910af00c6ec8e6541e9ecf56136c4056fc09065d318",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-customer-counts",
+      "variant": "current",
+      "mutation": "wrong_claim_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "incorrect or missing field 'paying_2024'",
+          "incorrect exact value for 'paying_2024'",
+          "Incorrect claim value for paying_2024"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "incorrect or missing field 'paying_2024'",
+          "incorrect exact value for 'paying_2024'",
+          "Incorrect claim value for paying_2024"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "15982b40cd35f88760fea3ea40f328df9ddf3320fce67cd9e85a6df62d209876",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-free-cash-flow",
+      "variant": "head-default",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "f59956c894677584b7bd999a1f1145f5dc7be7c311897154d4c727e0bf66aa17",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-free-cash-flow",
+      "variant": "current",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": true,
+      "fixed_calls": 2,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 1,
+      "original_artifact_sha256": "76fcd418cb33f2d40e8ec08b8f495e587ea07f981de442f298fc36ff95372cd6",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-free-cash-flow",
+      "variant": "current",
+      "mutation": "unrelated_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 3,
+        "required_fields": 4,
+        "failures": [
+          "Gold source evidence not covered for operating_cash"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 3,
+        "required_fields": 4,
+        "failures": [
+          "Gold source evidence not covered for operating_cash"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "9544c36683d49628d4754451c26baf862adc2a064f30ae03b2ad58960b48e410",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-free-cash-flow",
+      "variant": "current",
+      "mutation": "wrong_claim_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "incorrect or missing field 'operating_cash'",
+          "incorrect exact value for 'operating_cash'",
+          "Incorrect claim value for operating_cash"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "incorrect or missing field 'operating_cash'",
+          "incorrect exact value for 'operating_cash'",
+          "Incorrect claim value for operating_cash"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "607ddce179ad5ecdb38d53889d9bd55b9911affcdd2901dc80d77c9dd34617f6",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-concentration",
+      "variant": "head-default",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 2,
+        "required_fields": 2,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 2,
+        "required_fields": 2,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "ab856f88399e0d6b59a1cca6a796f9c1d3a1f89cb8827668f9d65f14eb113a26",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-concentration",
+      "variant": "current",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": true,
+      "fixed_calls": 2,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 2,
+        "required_fields": 2,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 2,
+        "required_fields": 2,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 1,
+      "original_artifact_sha256": "86cf3e75803352a92734ec75f8b579bfa281a6c0cfb114e74232eb35eedea9ac",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-concentration",
+      "variant": "current",
+      "mutation": "unrelated_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 1,
+        "required_fields": 2,
+        "failures": [
+          "Gold source evidence not covered for revenue_over_10pct"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 1,
+        "required_fields": 2,
+        "failures": [
+          "Gold source evidence not covered for revenue_over_10pct"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "9eef2436951bca9c9bb5153d25811c762bd6ba0438fc022d737be4a772ed0e83",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-concentration",
+      "variant": "current",
+      "mutation": "wrong_claim_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 2,
+        "required_fields": 2,
+        "failures": [
+          "incorrect or missing field 'revenue_over_10pct'",
+          "incorrect exact value for 'revenue_over_10pct'",
+          "Incorrect claim value for revenue_over_10pct"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 2,
+        "required_fields": 2,
+        "failures": [
+          "incorrect or missing field 'revenue_over_10pct'",
+          "incorrect exact value for 'revenue_over_10pct'",
+          "Incorrect claim value for revenue_over_10pct"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "352115fbb70a1196dc27b04f749b001aa10f12b671a26ee65987463e8182feba",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-retention-terms",
+      "variant": "head-default",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "870a64a4ef0000dd1dec30469161a9a93726125078b301e20653ec315903961d",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-retention-terms",
+      "variant": "current",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": true,
+      "fixed_calls": 2,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 1,
+      "original_artifact_sha256": "a14021ce9cc2fe5625450a203e1b15c0d654b4969075bdb5b9031828c832172e",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-retention-terms",
+      "variant": "current",
+      "mutation": "unrelated_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 3,
+        "required_fields": 4,
+        "failures": [
+          "Gold source evidence not covered for retention_2024_pct"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 3,
+        "required_fields": 4,
+        "failures": [
+          "Gold source evidence not covered for retention_2024_pct"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "6e7fea20b6411b96a63ac1f92fa26757df81cf66540f74a78ecfd46526b14066",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-retention-terms",
+      "variant": "current",
+      "mutation": "wrong_claim_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "incorrect or missing field 'retention_2024_pct'",
+          "incorrect exact value for 'retention_2024_pct'",
+          "Incorrect claim value for retention_2024_pct"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "incorrect or missing field 'retention_2024_pct'",
+          "incorrect exact value for 'retention_2024_pct'",
+          "Incorrect claim value for retention_2024_pct"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "446b0a8646fc76e2bc96c696645b66d8a2e222eff9f5ecbe341ece867c5db413",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-regional-revenue",
+      "variant": "head-default",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "7baf2c67937e069dd46d8dbbf1b78ea82fa30753bcea1131d05909f4d8c3b8b9",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-regional-revenue",
+      "variant": "current",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": true,
+      "fixed_calls": 2,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 1,
+      "original_artifact_sha256": "e48f4fb4089a9d0f8f8b4c96f3aca7851d222d6f7f948d425ec5198f0b197af0",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-regional-revenue",
+      "variant": "current",
+      "mutation": "unrelated_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 3,
+        "required_fields": 4,
+        "failures": [
+          "Gold source evidence not covered for us_revenue"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 3,
+        "required_fields": 4,
+        "failures": [
+          "Gold source evidence not covered for us_revenue"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "2ed2391f3ac98d8bc514d0bbbd332ff8f809a4dd182ca0386234d37f0313384c",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-regional-revenue",
+      "variant": "current",
+      "mutation": "wrong_claim_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "incorrect or missing field 'us_revenue'",
+          "incorrect exact value for 'us_revenue'",
+          "Incorrect claim value for us_revenue"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 4,
+        "required_fields": 4,
+        "failures": [
+          "incorrect or missing field 'us_revenue'",
+          "incorrect exact value for 'us_revenue'",
+          "Incorrect claim value for us_revenue"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "52faf1cb64ec1c28ca286e135bcffe506c657995ee0a563459b8f7d4f5577e51",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-distributed-profile",
+      "variant": "head-default",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "40f51220d5e8ccef89867767dd97f8a6f6c6304bad323aaffec0a53955dfee6d",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-distributed-profile",
+      "variant": "current",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": true,
+      "fixed_calls": 2,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 1,
+      "original_artifact_sha256": "0f57adf95fd40db9409daea0d7b9c0d3e7d2c4a767908a6a2279c2a0541e6ce7",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-distributed-profile",
+      "variant": "current",
+      "mutation": "unrelated_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 2,
+        "required_fields": 3,
+        "failures": [
+          "Gold source evidence not covered for employees_outside_us"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 2,
+        "required_fields": 3,
+        "failures": [
+          "Gold source evidence not covered for employees_outside_us"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "6402ba93f80c6cf214dbe68e8a2099675d696d0a3f3e9eb489f7b3c04519c9d6",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "cloud-distributed-profile",
+      "variant": "current",
+      "mutation": "wrong_claim_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "incorrect or missing field 'employees_outside_us'",
+          "incorrect exact value for 'employees_outside_us'",
+          "Incorrect claim value for employees_outside_us"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "incorrect or missing field 'employees_outside_us'",
+          "incorrect exact value for 'employees_outside_us'",
+          "Incorrect claim value for employees_outside_us"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "c76d9bc3f153413fa70ce664774f4284a11e95e049546f7377f0128ab7e0b148",
+      "sources": [
+        {
+          "document_id": "cloudflare-2024",
+          "title": "Cloudflare 2024 Form 10-K, complete 157-page report",
+          "source_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+          "page_count": 157,
+          "character_count": 591696
+        }
+      ]
+    },
+    {
+      "task": "sqlite-thread-contract",
+      "variant": "head-default",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 2,
+        "required_fields": 2,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 2,
+        "required_fields": 2,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "5aebb2a4ccb2bf931439e164913e602dec45fa2306d7d598e83051183f3b3887",
+      "sources": [
+        {
+          "document_id": "python-sqlite-3.12",
+          "title": "Python 3.12.0 sqlite3 documentation source",
+          "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+          "page_count": 1,
+          "character_count": 92179
+        }
+      ]
+    },
+    {
+      "task": "sqlite-thread-contract",
+      "variant": "current",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": true,
+      "fixed_calls": 2,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 2,
+        "required_fields": 2,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 2,
+        "required_fields": 2,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 1,
+      "original_artifact_sha256": "061d00638e9be09909cee031042b9171a210eb079b53c2efe02d84869cf6018f",
+      "sources": [
+        {
+          "document_id": "python-sqlite-3.12",
+          "title": "Python 3.12.0 sqlite3 documentation source",
+          "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+          "page_count": 1,
+          "character_count": 92179
+        }
+      ]
+    },
+    {
+      "task": "sqlite-thread-contract",
+      "variant": "current",
+      "mutation": "unrelated_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 1,
+        "required_fields": 2,
+        "failures": [
+          "Gold source evidence not covered for check_same_thread"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 1,
+        "required_fields": 2,
+        "failures": [
+          "Gold source evidence not covered for check_same_thread"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "fe3a6e3d7c250d3680606b5853fe0801a2a4aebb62649c80ad3c5d1a351250be",
+      "sources": [
+        {
+          "document_id": "python-sqlite-3.12",
+          "title": "Python 3.12.0 sqlite3 documentation source",
+          "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+          "page_count": 1,
+          "character_count": 92179
+        }
+      ]
+    },
+    {
+      "task": "sqlite-thread-contract",
+      "variant": "current",
+      "mutation": "wrong_claim_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 2,
+        "required_fields": 2,
+        "failures": [
+          "incorrect or missing field 'check_same_thread'",
+          "incorrect exact value for 'check_same_thread'",
+          "Incorrect claim value for check_same_thread"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 2,
+        "required_fields": 2,
+        "failures": [
+          "incorrect or missing field 'check_same_thread'",
+          "incorrect exact value for 'check_same_thread'",
+          "Incorrect claim value for check_same_thread"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "9d1e00063ea66079742762dc084794bf4ee8f1021fbb0affb7b6558cf708db32",
+      "sources": [
+        {
+          "document_id": "python-sqlite-3.12",
+          "title": "Python 3.12.0 sqlite3 documentation source",
+          "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+          "page_count": 1,
+          "character_count": 92179
+        }
+      ]
+    },
+    {
+      "task": "sqlite-row-factory",
+      "variant": "head-default",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "62acf7dca258617ccbd3c532b5880a3670490645b3cbf71bc092b63c2ac0b4d2",
+      "sources": [
+        {
+          "document_id": "python-sqlite-3.12",
+          "title": "Python 3.12.0 sqlite3 documentation source",
+          "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+          "page_count": 1,
+          "character_count": 92179
+        }
+      ]
+    },
+    {
+      "task": "sqlite-row-factory",
+      "variant": "current",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": true,
+      "fixed_calls": 2,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 1,
+      "original_artifact_sha256": "f51f455a9708f4bdca42b3e935f66cd5debce7fcdf1c80c1fbbd49fc3ae6c92b",
+      "sources": [
+        {
+          "document_id": "python-sqlite-3.12",
+          "title": "Python 3.12.0 sqlite3 documentation source",
+          "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+          "page_count": 1,
+          "character_count": 92179
+        }
+      ]
+    },
+    {
+      "task": "sqlite-row-factory",
+      "variant": "current",
+      "mutation": "unrelated_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 2,
+        "required_fields": 3,
+        "failures": [
+          "Gold source evidence not covered for row_factory_default"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 2,
+        "required_fields": 3,
+        "failures": [
+          "Gold source evidence not covered for row_factory_default"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "235760d881b54dfe70f31168ed24ead1b85d9c629118f7190563ab696fd37d1a",
+      "sources": [
+        {
+          "document_id": "python-sqlite-3.12",
+          "title": "Python 3.12.0 sqlite3 documentation source",
+          "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+          "page_count": 1,
+          "character_count": 92179
+        }
+      ]
+    },
+    {
+      "task": "sqlite-row-factory",
+      "variant": "current",
+      "mutation": "wrong_claim_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "incorrect or missing field 'row_factory_default'",
+          "incorrect exact value for 'row_factory_default'",
+          "Incorrect claim value for row_factory_default"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "incorrect or missing field 'row_factory_default'",
+          "incorrect exact value for 'row_factory_default'",
+          "Incorrect claim value for row_factory_default"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "0a032aa5207028a14b1dc2985b62901ac75afc0de024e7e287899b7910140527",
+      "sources": [
+        {
+          "document_id": "python-sqlite-3.12",
+          "title": "Python 3.12.0 sqlite3 documentation source",
+          "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+          "page_count": 1,
+          "character_count": 92179
+        }
+      ]
+    },
+    {
+      "task": "sqlite-parameter-containers",
+      "variant": "head-default",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "d4ac16d385538d279f1207b86b0b36743a842570e6c98a4bc412c11fb2d20ae8",
+      "sources": [
+        {
+          "document_id": "python-sqlite-3.12",
+          "title": "Python 3.12.0 sqlite3 documentation source",
+          "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+          "page_count": 1,
+          "character_count": 92179
+        }
+      ]
+    },
+    {
+      "task": "sqlite-parameter-containers",
+      "variant": "current",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": true,
+      "fixed_calls": 2,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 1,
+      "original_artifact_sha256": "426ea91510c5922b4773e88d336b32f90eacbe692af35c0c6b74cabc3bd565ba",
+      "sources": [
+        {
+          "document_id": "python-sqlite-3.12",
+          "title": "Python 3.12.0 sqlite3 documentation source",
+          "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+          "page_count": 1,
+          "character_count": 92179
+        }
+      ]
+    },
+    {
+      "task": "sqlite-parameter-containers",
+      "variant": "current",
+      "mutation": "unrelated_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 2,
+        "required_fields": 3,
+        "failures": [
+          "Gold source evidence not covered for qmark_container"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 2,
+        "required_fields": 3,
+        "failures": [
+          "Gold source evidence not covered for qmark_container"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "c62d86b30e6d0de2c357ce328bf4bb52fe56853c10604d9185718200715cf8a7",
+      "sources": [
+        {
+          "document_id": "python-sqlite-3.12",
+          "title": "Python 3.12.0 sqlite3 documentation source",
+          "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+          "page_count": 1,
+          "character_count": 92179
+        }
+      ]
+    },
+    {
+      "task": "sqlite-parameter-containers",
+      "variant": "current",
+      "mutation": "wrong_claim_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "incorrect or missing field 'qmark_container'",
+          "incorrect exact value for 'qmark_container'",
+          "Incorrect claim value for qmark_container"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "incorrect or missing field 'qmark_container'",
+          "incorrect exact value for 'qmark_container'",
+          "Incorrect claim value for qmark_container"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "b4210d661363303ff8457c3facc7219efa6a7bbcde1e391145239d357ddc3d6d",
+      "sources": [
+        {
+          "document_id": "python-sqlite-3.12",
+          "title": "Python 3.12.0 sqlite3 documentation source",
+          "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+          "page_count": 1,
+          "character_count": 92179
+        }
+      ]
+    },
+    {
+      "task": "sqlite-lastrowid",
+      "variant": "head-default",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "7a2a868b6cbbe2d32a9d2c52f08c5713f14a11a072d159e591f3baf2851c3aba",
+      "sources": [
+        {
+          "document_id": "python-sqlite-3.12",
+          "title": "Python 3.12.0 sqlite3 documentation source",
+          "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+          "page_count": 1,
+          "character_count": 92179
+        }
+      ]
+    },
+    {
+      "task": "sqlite-lastrowid",
+      "variant": "current",
+      "mutation": "altered_quote",
+      "status": "accepted",
+      "initial_source_valid": false,
+      "final_passed": true,
+      "fixed_calls": 2,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": false,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "claims[0].citations[0].quote does not match the source span"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": true,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 1,
+      "original_artifact_sha256": "884a229f79fe558d3d22e1f8add5995e44671ef020e2ce04e8793f3e80b42072",
+      "sources": [
+        {
+          "document_id": "python-sqlite-3.12",
+          "title": "Python 3.12.0 sqlite3 documentation source",
+          "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+          "page_count": 1,
+          "character_count": 92179
+        }
+      ]
+    },
+    {
+      "task": "sqlite-lastrowid",
+      "variant": "current",
+      "mutation": "unrelated_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 2,
+        "required_fields": 3,
+        "failures": [
+          "Gold source evidence not covered for initial_lastrowid"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": true,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": false,
+        "supported_fields": 2,
+        "required_fields": 3,
+        "failures": [
+          "Gold source evidence not covered for initial_lastrowid"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "1df2a686135d74bcd91d82049fb4f5a3b7b2a72d7ef98c868f4205fd43ec8776",
+      "sources": [
+        {
+          "document_id": "python-sqlite-3.12",
+          "title": "Python 3.12.0 sqlite3 documentation source",
+          "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+          "page_count": 1,
+          "character_count": 92179
+        }
+      ]
+    },
+    {
+      "task": "sqlite-lastrowid",
+      "variant": "current",
+      "mutation": "wrong_claim_real_quote",
+      "status": "accepted",
+      "initial_source_valid": true,
+      "final_passed": false,
+      "fixed_calls": 1,
+      "initial_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "incorrect or missing field 'initial_lastrowid'",
+          "incorrect exact value for 'initial_lastrowid'",
+          "Incorrect claim value for initial_lastrowid"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "final_gold_grade": {
+        "passed": false,
+        "field_contract_passed": false,
+        "citation_structure_passed": true,
+        "evidence_coverage_passed": true,
+        "supported_fields": 3,
+        "required_fields": 3,
+        "failures": [
+          "incorrect or missing field 'initial_lastrowid'",
+          "incorrect exact value for 'initial_lastrowid'",
+          "Incorrect claim value for initial_lastrowid"
+        ],
+        "grader_version": "deep-document-fields-v1"
+      },
+      "rejections": 0,
+      "original_artifact_sha256": "4e659f922bec01d363c72f1ddeab4419d381d0ba298a5e3ac984ede7a04de267",
+      "sources": [
+        {
+          "document_id": "python-sqlite-3.12",
+          "title": "Python 3.12.0 sqlite3 documentation source",
+          "source_sha256": "adbfbad0c922070862984f00ba4e1011bc9c0c343767cbcf8575fb5b6a2d900d",
+          "page_count": 1,
+          "character_count": 92179
+        }
+      ]
+    }
+  ],
+  "real_source_group_results": [
+    {
+      "mutation": "altered_quote",
+      "variant": "current",
+      "attempts": 12,
+      "final_gold_passes": 12,
+      "total_fixed_calls": 24
+    },
+    {
+      "mutation": "altered_quote",
+      "variant": "head-default",
+      "attempts": 12,
+      "final_gold_passes": 0,
+      "total_fixed_calls": 12
+    },
+    {
+      "mutation": "unrelated_real_quote",
+      "variant": "current",
+      "attempts": 12,
+      "final_gold_passes": 0,
+      "total_fixed_calls": 12
+    },
+    {
+      "mutation": "wrong_claim_real_quote",
+      "variant": "current",
+      "attempts": 12,
+      "final_gold_passes": 0,
+      "total_fixed_calls": 12
+    }
+  ],
+  "empty_cli_controls": [
+    {
+      "variant": "head",
+      "status": "rejected_or_failed",
+      "answer": null,
+      "error": {
+        "type": "CodexError",
+        "message": "Expected exactly one nonempty final Codex message"
+      },
+      "fixed_calls": 1,
+      "reported_fixture_usage": 0,
+      "note": "Fixed event usage metadata, not live consumption."
+    },
+    {
+      "variant": "current",
+      "status": "accepted",
+      "answer": "recovered",
+      "error": null,
+      "fixed_calls": 2,
+      "reported_fixture_usage": 224,
+      "note": "Fixed event usage metadata, not live consumption."
+    }
+  ],
+  "pdf_loader_controls": [
+    {
+      "variant": "head_companion_default",
+      "raw_sha256": "ed58d484853f3a8da0dd2af65461fda3974f002cc3f609edeb749b93c22a6315",
+      "note": "Profile capability and extraction checks, not LLM quality scores.",
+      "live_model_calls": 0,
+      "status": "rejected",
+      "error": {
+        "type": "RequestError",
+        "message": "Encrypted PDFs are unsupported"
+      },
+      "elapsed_seconds": 0.03736249999928987
+    },
+    {
+      "variant": "current_companion_standard",
+      "raw_sha256": "ed58d484853f3a8da0dd2af65461fda3974f002cc3f609edeb749b93c22a6315",
+      "note": "Profile capability and extraction checks, not LLM quality scores.",
+      "live_model_calls": 0,
+      "status": "rejected",
+      "error": {
+        "type": "RequestError",
+        "message": "Extracted PDF text exceeds 300,000 characters"
+      },
+      "elapsed_seconds": 4.47431491700263
+    },
+    {
+      "variant": "current_companion_long",
+      "raw_sha256": "ed58d484853f3a8da0dd2af65461fda3974f002cc3f609edeb749b93c22a6315",
+      "note": "Profile capability and extraction checks, not LLM quality scores.",
+      "live_model_calls": 0,
+      "status": "accepted",
+      "characters": 591696,
+      "page_count": 157,
+      "warnings": [],
+      "content_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+      "elapsed_seconds": 8.295418166002491
+    },
+    {
+      "variant": "current_library_default",
+      "raw_sha256": "ed58d484853f3a8da0dd2af65461fda3974f002cc3f609edeb749b93c22a6315",
+      "note": "Profile capability and extraction checks, not LLM quality scores.",
+      "live_model_calls": 0,
+      "status": "accepted",
+      "characters": 591696,
+      "page_count": 157,
+      "warnings": [
+        "PDF text extraction has no OCR; scanned images and complex tables may be incomplete. Page numbers identify physical PDF pages, starting at 1, not printed page labels."
+      ],
+      "content_sha256": "a28227ea404cb6df0463ee62717e01be3281623a400329a115248cf2d6e02b12",
+      "elapsed_seconds": 8.139760040998226
+    }
+  ],
+  "normalized_search_controls": [
+    {
+      "original": "Pétya",
+      "term": "Petya",
+      "literal_find": -1,
+      "correct_original_span": true,
+      "matches": [
+        {
+          "document_id": "unicode",
+          "source_sha256": "59ba3f5a695760d401e8da003d55b34e1d5f0659fa1152fbd6e6c18e12f9c3a7",
+          "page": 1,
+          "start": 7,
+          "end": 12,
+          "quote": "Pétya"
+        }
+      ]
+    },
+    {
+      "original": "Pétya",
+      "term": "PETYA",
+      "literal_find": -1,
+      "correct_original_span": true,
+      "matches": [
+        {
+          "document_id": "unicode",
+          "source_sha256": "88d07cb7cdf6d30b1433a8cae4ddd4263bfd810e3d355d00612cf4a7d3bab7c0",
+          "page": 1,
+          "start": 7,
+          "end": 13,
+          "quote": "Pétya"
+        }
+      ]
+    },
+    {
+      "original": "Straßé",
+      "term": "STRASSE",
+      "literal_find": -1,
+      "correct_original_span": true,
+      "matches": [
+        {
+          "document_id": "unicode",
+          "source_sha256": "dfa28d804289b9b7dad66ec644e0e6df4362fab753208eabfb8753e4045173a1",
+          "page": 1,
+          "start": 7,
+          "end": 14,
+          "quote": "Straßé"
+        }
+      ]
+    },
+    {
+      "original": "alpha\t\r\n beta",
+      "term": "ALPHA BETA",
+      "literal_find": -1,
+      "correct_original_span": true,
+      "matches": [
+        {
+          "document_id": "unicode",
+          "source_sha256": "af5841beb87f28a59ad5ec2c05ebe8fa59dc37101551f1277406c280b931a86a",
+          "page": 1,
+          "start": 7,
+          "end": 20,
+          "quote": "alpha\t\r\n beta"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Fixed response replay tests runtime behavior, not model quality.",
+    "The old release already supports a custom final validator; that control is included.",
+    "A valid real quotation can support a wrong claim; the negative control must remain visible.",
+    "Missing old APIs and different upload profiles are capability differences, not accuracy gains.",
+    "Fixed responses test code paths, not model-generated quality.",
+    "The citation checker validates identity, boundaries and exact text, not entailment.",
+    "Negative controls deliberately retain accepted wrong claims and unrelated real quotes."
+  ],
+  "trace_redaction": {
+    "scope": "Fixed zero-model controls only; paid captures unchanged.",
+    "files": [
+      {
+        "file": "cloud-retention-terms-altered_quote-head-default.json",
+        "original_artifact_sha256": "10972fea68203fcdeb48331a15eb42e9721268449a116c7863cb9f0491771074",
+        "redacted_artifact_sha256": "870a64a4ef0000dd1dec30469161a9a93726125078b301e20653ec315903961d",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "sqlite-thread-contract-altered_quote-head-default.json",
+        "original_artifact_sha256": "208ee7ef73e49214e2b53410024cef8c36d8046a0f75df24f564920d9023eaa1",
+        "redacted_artifact_sha256": "5aebb2a4ccb2bf931439e164913e602dec45fa2306d7d598e83051183f3b3887",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "sqlite-row-factory-altered_quote-head-default.json",
+        "original_artifact_sha256": "0ab824e29a0a0ead06286640b901eab6696b3c0114252a91da587c708696dd7c",
+        "redacted_artifact_sha256": "62acf7dca258617ccbd3c532b5880a3670490645b3cbf71bc092b63c2ac0b4d2",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "sqlite-parameter-containers-altered_quote-head-default.json",
+        "original_artifact_sha256": "bb708278f7d3c6ad4a1dab4e35f1367c67e46f43871878165d63d71fcfb0b991",
+        "redacted_artifact_sha256": "d4ac16d385538d279f1207b86b0b36743a842570e6c98a4bc412c11fb2d20ae8",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "sqlite-thread-contract-wrong_claim_real_quote-current.json",
+        "original_artifact_sha256": "df27e30fc1fb69b0c6643428ab8d723ec150dbea577c22ab4fd90d4703743853",
+        "redacted_artifact_sha256": "9d1e00063ea66079742762dc084794bf4ee8f1021fbb0affb7b6558cf708db32",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-customer-counts-altered_quote-current.json",
+        "original_artifact_sha256": "84759e8b349a3db10321459f734368583e4d2a742532cef5708f47878161aa00",
+        "redacted_artifact_sha256": "55e1970a3bc1f08f26476a1d0b360914d442d97b206a663ff3bdc05dc9087d32",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "sqlite-thread-contract-unrelated_real_quote-current.json",
+        "original_artifact_sha256": "af750cd9ec87ea65a4c7804981720db275ce48fcc6a67c0bb5cfb6123d2ef684",
+        "redacted_artifact_sha256": "fe3a6e3d7c250d3680606b5853fe0801a2a4aebb62649c80ad3c5d1a351250be",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-concentration-altered_quote-current.json",
+        "original_artifact_sha256": "ef0e7081d0037e6b66f9f4d7ea6fc13ca67c9bb329aa044df0bdc75c4584f081",
+        "redacted_artifact_sha256": "86cf3e75803352a92734ec75f8b579bfa281a6c0cfb114e74232eb35eedea9ac",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-patents-unrelated_real_quote-current.json",
+        "original_artifact_sha256": "ef2043870d626d0ae08f36333b8bb546a6a4abdce49c47fb7e60806f2d589e91",
+        "redacted_artifact_sha256": "2e0c55318a25d7b3baf5a86fd6cb95e64dfd812c85d9a92db4bffe5b89a69d12",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-free-cash-flow-unrelated_real_quote-current.json",
+        "original_artifact_sha256": "d17a065fd0bf3481eb937edaf76b655f7c20c99c4159a877cea397c1731641b3",
+        "redacted_artifact_sha256": "9544c36683d49628d4754451c26baf862adc2a064f30ae03b2ad58960b48e410",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-workforce-altered_quote-head-default.json",
+        "original_artifact_sha256": "66a1ca79157c2dbb92bf4870b4f3ef1b86e7a13b69ecb0803c3b887bbc57271a",
+        "redacted_artifact_sha256": "c0d294c5cd4c7a0392d8ab3ad5afc016317d4c8956058e44e70fe60958bab73a",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-free-cash-flow-altered_quote-current.json",
+        "original_artifact_sha256": "bb5627a0dd0f8759b6c88353702646db06ae1d6a2de83e055c6cd7b6ba78a9e4",
+        "redacted_artifact_sha256": "76fcd418cb33f2d40e8ec08b8f495e587ea07f981de442f298fc36ff95372cd6",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-distributed-profile-wrong_claim_real_quote-current.json",
+        "original_artifact_sha256": "a9d745e16237ee87f5fa5f40b6bede77b04b78682acfd7928d0c528540ebb560",
+        "redacted_artifact_sha256": "c76d9bc3f153413fa70ce664774f4284a11e95e049546f7377f0128ab7e0b148",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-retention-terms-altered_quote-current.json",
+        "original_artifact_sha256": "b2be53fca62097876d1123d6843d4330538ad7eebb9f92d29c6a11bcef23e767",
+        "redacted_artifact_sha256": "a14021ce9cc2fe5625450a203e1b15c0d654b4969075bdb5b9031828c832172e",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-workforce-unrelated_real_quote-current.json",
+        "original_artifact_sha256": "67b7b9e005f8a615ccc79d908c1e2d3aa417a23eadc113d23a251f7100742bdb",
+        "redacted_artifact_sha256": "3a850fa1289ecbf52fc51e68edfae7c12eec92567b04691f29f79383e4bde0cc",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-customer-counts-altered_quote-head-default.json",
+        "original_artifact_sha256": "d87db2032453f55d1cddf7d4a43d62dfbb7353ac88939a6317cae4f7b2806160",
+        "redacted_artifact_sha256": "b8a2080b208a77ed2fc946f16a9d69e691a340f4a09de21a9220ec5eeac99bd8",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-retention-terms-wrong_claim_real_quote-current.json",
+        "original_artifact_sha256": "1f4e1c5b36ac85c3f611e3b152b2716a3ef9730a321247757521fd9417fd59ab",
+        "redacted_artifact_sha256": "446b0a8646fc76e2bc96c696645b66d8a2e222eff9f5ecbe341ece867c5db413",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "sqlite-parameter-containers-wrong_claim_real_quote-current.json",
+        "original_artifact_sha256": "6192a743e6e57e9566eee37c020dbdeb77a0c4d2d0584d5b0d4902b799742e71",
+        "redacted_artifact_sha256": "b4210d661363303ff8457c3facc7219efa6a7bbcde1e391145239d357ddc3d6d",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "sqlite-thread-contract-altered_quote-current.json",
+        "original_artifact_sha256": "9c74cefe11c7a4adc69e22e8f64271f3e7d861ae964c9647829c52bb9c489c39",
+        "redacted_artifact_sha256": "061d00638e9be09909cee031042b9171a210eb079b53c2efe02d84869cf6018f",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-concentration-unrelated_real_quote-current.json",
+        "original_artifact_sha256": "3d99572cbec5aded1d057bb549dfce909a58ff46dc6836f05d14548a0e1267bf",
+        "redacted_artifact_sha256": "9eef2436951bca9c9bb5153d25811c762bd6ba0438fc022d737be4a772ed0e83",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-workforce-altered_quote-current.json",
+        "original_artifact_sha256": "bc85c5a4b279b045595df53c7ca12b283d83e49538c6f7afe102e4b2afc9d451",
+        "redacted_artifact_sha256": "cddde4f6edf803ebdbbfbadd607c0e22d9b8b87b9d7e12344d903eb01cac24eb",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-distributed-profile-unrelated_real_quote-current.json",
+        "original_artifact_sha256": "3962b3ffa6b0e6702fbeff538e59e26c85bb682a0eaa8271f3cf1d6599b0f507",
+        "redacted_artifact_sha256": "6402ba93f80c6cf214dbe68e8a2099675d696d0a3f3e9eb489f7b3c04519c9d6",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-concentration-wrong_claim_real_quote-current.json",
+        "original_artifact_sha256": "e24e4772c7e3f74b116ccc8c21532aaadc4f2f0d556a8d383e5291e501014df4",
+        "redacted_artifact_sha256": "352115fbb70a1196dc27b04f749b001aa10f12b671a26ee65987463e8182feba",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-regional-revenue-altered_quote-current.json",
+        "original_artifact_sha256": "26291de9d392519d9412584185b8412b129859f8ee5faa3eb9a4fab327fb59e4",
+        "redacted_artifact_sha256": "e48f4fb4089a9d0f8f8b4c96f3aca7851d222d6f7f948d425ec5198f0b197af0",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-regional-revenue-wrong_claim_real_quote-current.json",
+        "original_artifact_sha256": "b8081b3c30a795e564eeff1459306bc37ee5d42dca354aa4407c97d1bb803797",
+        "redacted_artifact_sha256": "52faf1cb64ec1c28ca286e135bcffe506c657995ee0a563459b8f7d4f5577e51",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "sqlite-lastrowid-unrelated_real_quote-current.json",
+        "original_artifact_sha256": "fd6aa7617182fb44461c3e0737e6058acd7e4d4486437701f3b4a034074131d7",
+        "redacted_artifact_sha256": "1df2a686135d74bcd91d82049fb4f5a3b7b2a72d7ef98c868f4205fd43ec8776",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "sqlite-lastrowid-altered_quote-current.json",
+        "original_artifact_sha256": "fd4d6c3a5ab1a30f7c21849ea4759c898db6e5995808f5ac022bdec8013ac08d",
+        "redacted_artifact_sha256": "884a229f79fe558d3d22e1f8add5995e44671ef020e2ce04e8793f3e80b42072",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "sqlite-lastrowid-wrong_claim_real_quote-current.json",
+        "original_artifact_sha256": "cf603de4d7f7baa6f7f12e1075f3527c16a7696d4be2ef0e97baba04c9d4397f",
+        "redacted_artifact_sha256": "4e659f922bec01d363c72f1ddeab4419d381d0ba298a5e3ac984ede7a04de267",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-regional-revenue-altered_quote-head-default.json",
+        "original_artifact_sha256": "25838ea002306b1cfcfa69757e09177058dc96edd4d0d56d7ac9627ba137ad9c",
+        "redacted_artifact_sha256": "7baf2c67937e069dd46d8dbbf1b78ea82fa30753bcea1131d05909f4d8c3b8b9",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-distributed-profile-altered_quote-current.json",
+        "original_artifact_sha256": "f3cda7f7ab2913d4521164f2160a38b23d89a3c67e853ca4afc4091ca0a569d1",
+        "redacted_artifact_sha256": "0f57adf95fd40db9409daea0d7b9c0d3e7d2c4a767908a6a2279c2a0541e6ce7",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "sqlite-parameter-containers-altered_quote-current.json",
+        "original_artifact_sha256": "c78dc65485dc3c8bdc4e7708fce17508a5fbe03bea017baaddfd9865f215b674",
+        "redacted_artifact_sha256": "426ea91510c5922b4773e88d336b32f90eacbe692af35c0c6b74cabc3bd565ba",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "sqlite-row-factory-wrong_claim_real_quote-current.json",
+        "original_artifact_sha256": "99ce86985ec0a7b4863d5cf2df4ab53a5a523e7b77b92b227e9a8bace80e207b",
+        "redacted_artifact_sha256": "0a032aa5207028a14b1dc2985b62901ac75afc0de024e7e287899b7910140527",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-free-cash-flow-altered_quote-head-default.json",
+        "original_artifact_sha256": "cb3010504e1a29ee757b9e0bedca1d2fcd1346f92dcc2f72bbf45871722b6084",
+        "redacted_artifact_sha256": "f59956c894677584b7bd999a1f1145f5dc7be7c311897154d4c727e0bf66aa17",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "sqlite-row-factory-unrelated_real_quote-current.json",
+        "original_artifact_sha256": "bc43dc2e76e8e07eb30c62f714382f15c5a8694b518d6809465e0e40eb1566ce",
+        "redacted_artifact_sha256": "235760d881b54dfe70f31168ed24ead1b85d9c629118f7190563ab696fd37d1a",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-customer-counts-unrelated_real_quote-current.json",
+        "original_artifact_sha256": "ec10679f91f7b64246c653f70ba6ae14f2e97ed9e56925c075d48ea85844efbb",
+        "redacted_artifact_sha256": "6ead4adb5921796087b67910af00c6ec8e6541e9ecf56136c4056fc09065d318",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-regional-revenue-unrelated_real_quote-current.json",
+        "original_artifact_sha256": "bcc3ad9155da03ee3aa82a399ff0c912543872a4da52372e1d4766944c6bdf8b",
+        "redacted_artifact_sha256": "2ed2391f3ac98d8bc514d0bbbd332ff8f809a4dd182ca0386234d37f0313384c",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "sqlite-parameter-containers-unrelated_real_quote-current.json",
+        "original_artifact_sha256": "e66ccd7766b2d2a5fde77001595083478d57a3ad55b3757161f7f56314e8606c",
+        "redacted_artifact_sha256": "c62d86b30e6d0de2c357ce328bf4bb52fe56853c10604d9185718200715cf8a7",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-distributed-profile-altered_quote-head-default.json",
+        "original_artifact_sha256": "21377ca29082865d70913d7816421a4ef0e41b1a886b79ce5e8f1de50ca5d93e",
+        "redacted_artifact_sha256": "40f51220d5e8ccef89867767dd97f8a6f6c6304bad323aaffec0a53955dfee6d",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-patents-altered_quote-current.json",
+        "original_artifact_sha256": "16a31f4e846ba41d5d85c77e8e3207d03cd07be998a6fea52ea89ece5065141a",
+        "redacted_artifact_sha256": "92fd4f4da08682d45958eaa9fe8506e34a1a1f9b0a63b786127ddeb363374293",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "sqlite-lastrowid-altered_quote-head-default.json",
+        "original_artifact_sha256": "4a97ee837ce02ddbfe4b3e3658b12614864999b79b597d85d40d2cbe08960c11",
+        "redacted_artifact_sha256": "7a2a868b6cbbe2d32a9d2c52f08c5713f14a11a072d159e591f3baf2851c3aba",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-concentration-altered_quote-head-default.json",
+        "original_artifact_sha256": "d9d3c586385f472e196ca720709052be66f43742a8ceff60418f7343bfb26cd9",
+        "redacted_artifact_sha256": "ab856f88399e0d6b59a1cca6a796f9c1d3a1f89cb8827668f9d65f14eb113a26",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-retention-terms-unrelated_real_quote-current.json",
+        "original_artifact_sha256": "5297b68947fed4fc1a3cad7723a79c58d55d4c5e713701623a74f066b6de57a0",
+        "redacted_artifact_sha256": "6e7fea20b6411b96a63ac1f92fa26757df81cf66540f74a78ecfd46526b14066",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-patents-wrong_claim_real_quote-current.json",
+        "original_artifact_sha256": "fbee86ae578377f05cb97378d5df790c3a70156a8ca71934aa20e36fa039ccae",
+        "redacted_artifact_sha256": "3bbf2eb81ce3593b516fe2542a98c6124016cf3f37871b356d1aa510f5b2966b",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-free-cash-flow-wrong_claim_real_quote-current.json",
+        "original_artifact_sha256": "2df211308861d49c0aafebbee9959eb03a5be9fa3477d98e60d00b2491684db8",
+        "redacted_artifact_sha256": "607ddce179ad5ecdb38d53889d9bd55b9911affcdd2901dc80d77c9dd34617f6",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-workforce-wrong_claim_real_quote-current.json",
+        "original_artifact_sha256": "8a7dc4f9114507de30c05f05f2cd0483ff4907a7426cb254dde8175b22b2cb36",
+        "redacted_artifact_sha256": "b18836ad6fbe80154ce1e09ccac8bc9aa3b154ec7c5a08c81bcb3efaf9745d5b",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "sqlite-row-factory-altered_quote-current.json",
+        "original_artifact_sha256": "6bbe296c5c0f0f0958c178ce541f7c90b2c0bf76d251c12bc649e051a8728dec",
+        "redacted_artifact_sha256": "f51f455a9708f4bdca42b3e935f66cd5debce7fcdf1c80c1fbbd49fc3ae6c92b",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-patents-altered_quote-head-default.json",
+        "original_artifact_sha256": "35aca9bebf82b557948f07d86b51f1a0d8a27b87d13affa051c1db9da1bc8e83",
+        "redacted_artifact_sha256": "1d72e24a3ab6f22eb245ef9866b7d92cec9e2495de4f35c29aa1df26458adbb6",
+        "contexts_redacted": 2
+      },
+      {
+        "file": "cloud-customer-counts-wrong_claim_real_quote-current.json",
+        "original_artifact_sha256": "26edc475f37934a5ceac9e8067e5f8b647dd7d6f22923c0f0f91107c98db0abd",
+        "redacted_artifact_sha256": "15982b40cd35f88760fea3ea40f328df9ddf3320fce67cd9e85a6df62d209876",
+        "contexts_redacted": 2
+      }
+    ]
+  }
+}

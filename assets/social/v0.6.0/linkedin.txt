@@ -1,0 +1,21 @@
+You ask an AI to read a 157-page report.
+It gives you a clean answer with page numbers.
+
+Then you open the PDF and start searching.
+
+Was that number really on this page? Where is the exception? Does the quoted sentence exist in this version of the document?
+
+That second job is what I wanted to make easier in recursive-llm v0.6.0.
+
+Each quoted claim can now carry its way back to the evidence: the original passage, physical page, exact text location and a fingerprint of the source text. The document API checks that they match. Changed quotes, wrong locations and stale source references are rejected before a final answer is accepted.
+
+This matters when an answer joins facts from distant pages, or turns scattered rules and exceptions into calculation code. You need to inspect the passages behind the result. You also need to see what the system could not resolve.
+
+I tested it on a complete 157-page report, official Python documentation and synthetic rules. In the deeper live check, all 48 attempts passed structural citation checks; 46 met the frozen field-and-evidence criteria. Both strict misses are published with the review notes.
+
+There is still a human job here: a quotation can be real and the conclusion can be wrong. These checks establish where the words came from. They do not prove the interpretation or that every exception was found.
+
+Try it on a report whose answers you already know. Inspect the evidence, then inspect the conclusion.
+
+Release, checks and failure cases:
+https://github.com/grishahq/recursive-llm/releases/tag/v0.6.0

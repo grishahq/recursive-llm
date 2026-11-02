@@ -123,4 +123,61 @@ class FailedCompletionResult:
         _write_jsonl_record(self.to_dict(), path, append=append)
 
 
+@dataclass(frozen=True)
+class DocumentResult:
+    """A document answer with source-checked citations and full run diagnostics.
+
+    Citation validation establishes source identity and exact text coordinates.
+    It does not establish semantic entailment, completeness, or factual truth.
+    The answer and quoted evidence are content-bearing even when the underlying
+    trajectory is redacted. Export only to a destination allowed to contain them.
+    """
+
+    answer: str
+    claims: Tuple[Dict[str, Any], ...]
+    unknowns: Tuple[str, ...]
+    sources: Tuple[Dict[str, Any], ...]
+    completion: CompletionResult
+
+    @property
+    def succeeded(self) -> bool:
+        """The run completed and its citations passed structural validation."""
+        return True
+
+    @property
+    def stats(self) -> Dict[str, Any]:
+        """Return detached per-run usage."""
+        return deepcopy(self.completion.stats)
+
+    @property
+    def trajectory(self) -> Tuple[TrajectoryEvent, ...]:
+        """Return the underlying run's ordered events."""
+        return self.completion.trajectory
+
+    @property
+    def config(self) -> Dict[str, Any]:
+        """Return detached runtime settings."""
+        return deepcopy(self.completion.config)
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Return a versioned record including content and raw model answer."""
+        return {
+            "document_schema_version": 1,
+            "answer": self.answer,
+            "claims": deepcopy(list(self.claims)),
+            "unknowns": list(self.unknowns),
+            "sources": deepcopy(list(self.sources)),
+            "run": self.completion.to_dict(),
+        }
+
+    def write_jsonl(
+        self,
+        path: Union[str, PathLike[str]],
+        *,
+        append: bool = True,
+    ) -> None:
+        """Persist source-checked answers, evidence, and diagnostics as JSONL."""
+        _write_jsonl_record(self.to_dict(), path, append=append)
+
+
 RunResult = Union[CompletionResult, FailedCompletionResult]

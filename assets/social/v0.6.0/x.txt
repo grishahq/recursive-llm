@@ -1,0 +1,8 @@
+The AI gave you an answer. Now find the quote in 157 pages.
+
+That second job is why recursive-llm v0.6.0 checks quotes against the original page and rejects mismatches.
+
+Read the passage. Judge the conclusion.
+
+Try it on a report you know:
+https://github.com/grishahq/recursive-llm/releases/tag/v0.6.0
